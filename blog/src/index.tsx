@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import styled from "styled-components";
-import { Header } from "./components/Header";
 import Theme from "./components/Theme";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { Home } from "./screens/Home";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,9 +18,7 @@ root.render(
   <React.StrictMode>
     <Theme>
       <Wrapper>
-        {/* <Flex align="center" justify="center"> */}
-        <Header />
-        {/* </Flex> */}
+        <Home></Home>
       </Wrapper>
     </Theme>
   </React.StrictMode>

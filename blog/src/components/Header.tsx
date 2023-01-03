@@ -1,8 +1,8 @@
 import { faGithub, faWeixin } from "@fortawesome/free-brands-svg-icons";
 import { faEllipsis, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { darken } from "polished";
 import styled from "styled-components";
+import { A } from "./A";
 import Flex from "./Flex";
 import { Icon } from "./Icon";
 import Text from "./Text";
@@ -26,19 +26,13 @@ const ContextWrapper = styled(Flex)`
   flex: 1;
 `;
 
-const Title = styled.a<{ padding?: string }>`
+const Title = styled(A)`
   color: ${(props) => props.theme.text_reverse};
   font-size: initial;
   font-weight: 600;
   padding: ${(props) => (props.padding ? props.padding : "initial")};
-  cursor: pointer;
-  white-space: nowrap;
   justify-content: center;
   align-items: center;
-
-  &:hover {
-    color: ${(props) => darken(0.25, props.theme.text_reverse)};
-  }
 `;
 
 export const Header: React.FC = () => {

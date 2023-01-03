@@ -14,7 +14,7 @@ export const light = {
     ...base,
     main: colors.blue,
     main_light: colors.marine,
-    shadow: colors.black10,
+    shadow: colors.black,
     important: colors.red,
     background: colors.white,
     background_second: colors.white90,

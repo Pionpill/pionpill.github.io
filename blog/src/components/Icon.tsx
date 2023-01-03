@@ -15,5 +15,4 @@ export const Icon = styled.img<Props>`
       ? "10%"
       : "0%"};
   white-space: nowrap;
-  display: inline;
 `;
