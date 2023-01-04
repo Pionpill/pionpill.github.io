@@ -1,0 +1,16 @@
+export const WechatLink: string = "https://u.wechat.com/MMfF8uSEl8MVihJmf3_5r9g"
+export const GithubLink = "https://github.com/Pionpill"
+
+export const QQ = {
+    id: "673486837",
+    icon: `http://q2.qlogo.cn/headimg_dl?dst_uin=673486387&spec=100`,
+    qr: "https://qm.qq.com/cgi-bin/qm/qr?k=8XRx97ISM1ZGoJBXA7rgYjQYjZz-Twv6&noverify=0&personal_qrcode_source=4",
+    email: "673486387@qq.com",
+    name: "小鸡炖蘑菇",
+}
+
+export const Weixin = {
+    id: "wxid_ako3myhp30ye22",
+    qr: "https://u.wechat.com/MMfF8uSEl8MVihJmf3_5r9g",
+    name: "小葱拌豆腐"
+}

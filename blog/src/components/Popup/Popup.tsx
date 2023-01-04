@@ -1,10 +1,11 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lighten } from "polished";
+import { useRef } from "react";
 import styled from "styled-components";
-import { A } from "./A";
-import Flex from "./Flex";
-import Text from "./Text";
+import { A } from "../A";
+import Flex from "../Flex";
+import P from "../Text";
 type FixedProps = {
   width?: string;
   height?: string;
@@ -17,6 +18,7 @@ const Fixed = styled(Flex)<FixedProps>`
   border-radius: 0.5em;
   background-color: ${(props) => props.theme.background};
   box-shadow: 0 0 5px 3px ${(props) => props.theme.shadow};
+  flex-direction: column;
   margin: auto;
   left: 0;
   right: 0;
@@ -39,16 +41,23 @@ const Header = styled(Flex)`
   justify-content: center;
   font-weight: 600;
   border-radius: 6px 6px 0px 0px;
-  padding: 0 1em;
 `;
 
-const Title = styled(Text)`
-  margin-left: auto;
+const Title = styled(P)`
+  margin: auto;
 `;
 
 const CloseIcon = styled(A)`
+  position: absolute;
+  top: 4px;
+  right: 0px;
   color: ${(props) => props.theme.text_reverse};
   margin-left: auto;
+  padding-right: 1em;
+`;
+
+const Wrapper = styled.div`
+  /* display: none; */
 `;
 
 type Props = {
@@ -56,21 +65,38 @@ type Props = {
   children?: any;
 };
 
+const ContextWrapper = styled(Flex)`
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 1em;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+`;
+
 export const Popup: React.FC<Props> = ({ title, children, ...rest }) => {
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  const onClosePopup = () => {
+    if (popupRef.current) {
+      popupRef.current.style.display = "none";
+    }
+  };
+
   return (
-    <>
+    <Wrapper ref={popupRef}>
       <Curtain {...rest} />
-      <Fixed>
+      <Fixed align="center" gap=".5em">
         <Header>
           <Title type="reverse" weight="bold">
             {title}
           </Title>
-          <CloseIcon>
-            <FontAwesomeIcon icon={faXmark} />
-          </CloseIcon>
         </Header>
-        {children}
+        <CloseIcon onClick={onClosePopup}>
+          <FontAwesomeIcon icon={faXmark} />
+        </CloseIcon>
+        <ContextWrapper>{children}</ContextWrapper>
       </Fixed>
-    </>
+    </Wrapper>
   );
 };

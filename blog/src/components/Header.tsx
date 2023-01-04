@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { A } from "./A";
 import Flex from "./Flex";
 import { Icon } from "./Icon";
-import Text from "./Text";
+import P from "./Text";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -37,43 +37,45 @@ const Title = styled(A)`
 
 export const Header: React.FC = () => {
   return (
-    <HeaderWrapper>
-      <ContextWrapper>
-        <Icon
-          border="circle"
-          size="24px"
-          src="https://avatars.githubusercontent.com/u/70939356?s=16&v=4"
-        />
-        <Title>
-          <Text weight="bold" type="reverse" size="large" wrap={false}>
-            Pionpill / gitpage
-          </Text>
-        </Title>
-      </ContextWrapper>
-      <ContextWrapper gap="2em">
-        <Title padding="0 .5em">Home</Title>
-        <Title padding="0 .5em">Article</Title>
-        <Title padding="0 .5em">Project</Title>
-        <Title padding="0 .5em">Works</Title>
-        <Title padding="0 .5em">Other</Title>
-      </ContextWrapper>
-      <ContextWrapper>
-        <Text type="reverse" weight="thin">
-          Concat me:
-        </Text>
-        <Title>
-          <FontAwesomeIcon icon={faEnvelope} />
-        </Title>
-        <Title href="https://github.com/Pionpill">
-          <FontAwesomeIcon icon={faGithub} />
-        </Title>
-        <Title>
-          <FontAwesomeIcon icon={faWeixin} />
-        </Title>
-        <Title>
-          <FontAwesomeIcon icon={faEllipsis} />
-        </Title>
-      </ContextWrapper>
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper>
+        <ContextWrapper>
+          <Icon
+            border="circle"
+            size="24px"
+            src="https://avatars.githubusercontent.com/u/70939356?s=16&v=4"
+          />
+          <Title>
+            <P weight="bold" type="reverse" size="large">
+              Pionpill / gitpage
+            </P>
+          </Title>
+        </ContextWrapper>
+        <ContextWrapper gap="2em">
+          <Title padding="0 .5em">Home</Title>
+          <Title padding="0 .5em">Article</Title>
+          <Title padding="0 .5em">Project</Title>
+          <Title padding="0 .5em">Works</Title>
+          <Title padding="0 .5em">Other</Title>
+        </ContextWrapper>
+        <ContextWrapper>
+          <P type="reverse" weight="thin">
+            Concat me:
+          </P>
+          <Title>
+            <FontAwesomeIcon icon={faEnvelope} />
+          </Title>
+          <Title href="https://github.com/Pionpill">
+            <FontAwesomeIcon icon={faGithub} />
+          </Title>
+          <Title>
+            <FontAwesomeIcon icon={faWeixin} />
+          </Title>
+          <Title>
+            <FontAwesomeIcon icon={faEllipsis} />
+          </Title>
+        </ContextWrapper>
+      </HeaderWrapper>
+    </>
   );
 };

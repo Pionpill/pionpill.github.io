@@ -1,11 +1,11 @@
 import { Header } from "../../components/Header";
-import { Popup } from "../../components/Popup";
+import { WeixinPopup } from "../../components/Popup/WeixinPopup";
 
 export const Home: React.FC = () => {
   return (
     <>
       <Header></Header>
-      <Popup title="123"></Popup>
+      <WeixinPopup />
     </>
   );
 };
