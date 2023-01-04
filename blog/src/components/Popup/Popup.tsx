@@ -1,8 +1,9 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lighten } from "polished";
-import { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
+import { togglePopup } from "../../utils/toggle";
 import { A } from "../A";
 import Flex from "../Flex";
 import P from "../Text";
@@ -57,13 +58,8 @@ const CloseIcon = styled(A)`
 `;
 
 const Wrapper = styled.div`
-  /* display: none; */
+  display: none;
 `;
-
-type Props = {
-  title: string;
-  children?: any;
-};
 
 const ContextWrapper = styled(Flex)`
   flex-direction: column;
@@ -74,29 +70,28 @@ const ContextWrapper = styled(Flex)`
   justify-content: space-around;
 `;
 
-export const Popup: React.FC<Props> = ({ title, children, ...rest }) => {
-  const popupRef = useRef<HTMLDivElement>(null);
-
-  const onClosePopup = () => {
-    if (popupRef.current) {
-      popupRef.current.style.display = "none";
-    }
-  };
-
-  return (
-    <Wrapper ref={popupRef}>
-      <Curtain {...rest} />
-      <Fixed align="center" gap=".5em">
-        <Header>
-          <Title type="reverse" weight="bold">
-            {title}
-          </Title>
-        </Header>
-        <CloseIcon onClick={onClosePopup}>
-          <FontAwesomeIcon icon={faXmark} />
-        </CloseIcon>
-        <ContextWrapper>{children}</ContextWrapper>
-      </Fixed>
-    </Wrapper>
-  );
+type Props = {
+  title: string;
+  children?: any;
 };
+
+export const Popup = React.forwardRef(
+  ({ title, children, ...rest }: Props, ref: any) => {
+    return (
+      <Wrapper ref={ref}>
+        <Curtain {...rest} />
+        <Fixed align="center" gap=".5em">
+          <Header>
+            <Title type="reverse" weight="bold">
+              {title}
+            </Title>
+          </Header>
+          <CloseIcon onClick={() => togglePopup(ref)}>
+            <FontAwesomeIcon icon={faXmark} />
+          </CloseIcon>
+          <ContextWrapper>{children}</ContextWrapper>
+        </Fixed>
+      </Wrapper>
+    );
+  }
+);

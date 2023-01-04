@@ -43,9 +43,9 @@ export const QRCode: React.FC<Props> = ({ url, icon }) => {
   return (
     <Flex align="center" justify="center">
       <QRCodeSVG value={url} size={192} />
-      <IconWrapper size="48px" type="reverse">
-        <IconWrapper size="36px" border="round">
-          <FontAwesomeIcon icon={icon} color={base.white} size="xl" />
+      <IconWrapper size="38px" type="reverse">
+        <IconWrapper size="30px" border="round">
+          <FontAwesomeIcon icon={icon} color={base.white} size="lg" />
         </IconWrapper>
       </IconWrapper>
     </Flex>

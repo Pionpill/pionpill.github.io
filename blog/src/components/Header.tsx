@@ -1,10 +1,15 @@
 import { faGithub, faWeixin } from "@fortawesome/free-brands-svg-icons";
 import { faEllipsis, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
 import styled from "styled-components";
+import { Github } from "../shared/info";
+import { togglePopup } from "../utils/toggle";
 import { A } from "./A";
 import Flex from "./Flex";
 import { Icon } from "./Icon";
+import { EmailPopup } from "./Popup/EmailPopup";
+import { WeixinPopup } from "./Popup/WeixinPopup";
 import P from "./Text";
 
 const HeaderWrapper = styled.header`
@@ -15,6 +20,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   top: 0;
   padding: 0 1em;
+  z-index: 800;
 `;
 
 const ContextWrapper = styled(Flex)`
@@ -36,15 +42,14 @@ const Title = styled(A)`
 `;
 
 export const Header: React.FC = () => {
+  const emailPopupRef = useRef(null);
+  const weixinPopupRef = useRef(null);
+
   return (
     <>
       <HeaderWrapper>
         <ContextWrapper>
-          <Icon
-            border="circle"
-            size="24px"
-            src="https://avatars.githubusercontent.com/u/70939356?s=16&v=4"
-          />
+          <Icon border="circle" size="24px" src={Github.icon} />
           <Title>
             <P weight="bold" type="reverse" size="large">
               Pionpill / gitpage
@@ -62,20 +67,25 @@ export const Header: React.FC = () => {
           <P type="reverse" weight="thin">
             Concat me:
           </P>
-          <Title>
-            <FontAwesomeIcon icon={faEnvelope} />
-          </Title>
-          <Title href="https://github.com/Pionpill">
+          <Title href={Github.link}>
             <FontAwesomeIcon icon={faGithub} />
           </Title>
           <Title>
-            <FontAwesomeIcon icon={faWeixin} />
+            <FontAwesomeIcon
+              icon={faWeixin}
+              onClick={() => togglePopup(weixinPopupRef)}
+            />
+          </Title>
+          <Title onClick={() => togglePopup(emailPopupRef)}>
+            <FontAwesomeIcon icon={faEnvelope} />
           </Title>
           <Title>
             <FontAwesomeIcon icon={faEllipsis} />
           </Title>
         </ContextWrapper>
       </HeaderWrapper>
+      <EmailPopup ref={emailPopupRef} />
+      <WeixinPopup ref={weixinPopupRef} />
     </>
   );
 };

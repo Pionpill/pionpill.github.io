@@ -1,6 +1,3 @@
-export const WechatLink: string = "https://u.wechat.com/MMfF8uSEl8MVihJmf3_5r9g"
-export const GithubLink = "https://github.com/Pionpill"
-
 export const QQ = {
     id: "673486837",
     icon: `http://q2.qlogo.cn/headimg_dl?dst_uin=673486387&spec=100`,
@@ -13,4 +10,9 @@ export const Weixin = {
     id: "wxid_ako3myhp30ye22",
     qr: "https://u.wechat.com/MMfF8uSEl8MVihJmf3_5r9g",
     name: "小葱拌豆腐"
+}
+
+export const Github = {
+    icon: "https://avatars.githubusercontent.com/u/70939356?s=16&v=4",
+    link: "https://github.com/Pionpill"
 }

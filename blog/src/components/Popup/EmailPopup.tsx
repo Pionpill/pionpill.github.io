@@ -2,7 +2,7 @@ import { faQq } from "@fortawesome/free-brands-svg-icons";
 import { faCopy, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lighten } from "polished";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { QQ } from "../../shared/info";
 import { A } from "../A";
@@ -24,7 +24,7 @@ const Wrapper = styled.div<{ link?: boolean }>`
   }
 `;
 
-export const EmailPopup: React.FC = () => {
+export const EmailPopup = React.forwardRef(({}, ref: any) => {
   const emailRef = useRef<HTMLDivElement>(null);
 
   const copyContext = () => {
@@ -36,7 +36,7 @@ export const EmailPopup: React.FC = () => {
   };
 
   return (
-    <Popup title="Email(QQ)">
+    <Popup title="Email(QQ)" ref={ref}>
       <Icon size="64px" src={QQ.icon} border="circle" />
       <P size="large"> {QQ.name} </P>
       <QRCode url={QQ.qr} icon={faQq} />
@@ -60,4 +60,4 @@ export const EmailPopup: React.FC = () => {
       </Flex>
     </Popup>
   );
-};
+});

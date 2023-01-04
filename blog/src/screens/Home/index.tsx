@@ -1,11 +1,14 @@
+import Flex from "../../components/Flex";
 import { Header } from "../../components/Header";
-import { WeixinPopup } from "../../components/Popup/WeixinPopup";
+import { Info } from "./Info";
 
 export const Home: React.FC = () => {
   return (
     <>
       <Header></Header>
-      <WeixinPopup />
+      <Flex>
+        <Info />
+      </Flex>
     </>
   );
 };
