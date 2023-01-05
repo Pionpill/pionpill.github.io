@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 type Props = {
   type?: "second" | "third" | "danger" | "reverse";
-  size?: "large" | "small" | "xsmall";
+  size?: "huge" | "large" | "small" | "xsmall" | "2x" | "3x";
   weight?: "bold" | "thin" | "heavy";
   wrap?: boolean;
 };
@@ -28,7 +28,13 @@ const P = styled.p<Props>`
       : props.size === "small"
       ? "14px"
       : props.size === "xsmall"
-      ? "13px"
+      ? "12px"
+      : props.size === "huge"
+      ? "24px"
+      : props.size === "2x"
+      ? "2em"
+      : props.size === "3x"
+      ? "3em"
       : "inherit"};
   font-weight: ${(props) =>
     props.weight === "bold"

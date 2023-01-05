@@ -8,7 +8,7 @@ import { QQ } from "../../shared/info";
 import { A } from "../A";
 import Flex from "../Flex";
 import { Icon } from "../Icon";
-import P from "../Text";
+import P from "../P";
 import { Popup } from "./Popup";
 import { QRCode } from "./QRCode";
 

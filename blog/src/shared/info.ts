@@ -13,6 +13,6 @@ export const Weixin = {
 }
 
 export const Github = {
-    icon: "https://avatars.githubusercontent.com/u/70939356?s=16&v=4",
+    icon: "https://avatars.githubusercontent.com/u/70939356?s=128&v=4",
     link: "https://github.com/Pionpill"
 }

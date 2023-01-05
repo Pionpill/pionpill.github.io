@@ -2,7 +2,7 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
 import { QQ, Weixin } from "../../shared/info";
 import { Icon } from "../Icon";
-import P from "../Text";
+import P from "../P";
 import { Popup } from "./Popup";
 import { QRCode } from "./QRCode";
 

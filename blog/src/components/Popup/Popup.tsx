@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { togglePopup } from "../../utils/toggle";
 import { A } from "../A";
 import Flex from "../Flex";
-import P from "../Text";
+import P from "../P";
 type FixedProps = {
   width?: string;
   height?: string;

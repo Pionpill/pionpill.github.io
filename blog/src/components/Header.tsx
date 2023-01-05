@@ -8,9 +8,9 @@ import { togglePopup } from "../utils/toggle";
 import { A } from "./A";
 import Flex from "./Flex";
 import { Icon } from "./Icon";
+import P from "./P";
 import { EmailPopup } from "./Popup/EmailPopup";
 import { WeixinPopup } from "./Popup/WeixinPopup";
-import P from "./Text";
 
 const HeaderWrapper = styled.header`
   display: flex;
