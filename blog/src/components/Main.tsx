@@ -4,9 +4,19 @@ export const Main = styled.main<{
   align?: string;
   justify?: string;
   gap?: string;
+  column?: boolean;
+  reverse?: boolean;
 }>`
   display: flex;
   align-items: ${({ align }) => align};
   justify-content: ${({ justify }) => justify};
   gap: ${({ gap }) => (gap ? gap : "initial")};
+  flex-direction: ${({ column, reverse }) =>
+    reverse
+      ? column
+        ? "column-reverse"
+        : "row-reverse"
+      : column
+      ? "column"
+      : "row"};
 `;

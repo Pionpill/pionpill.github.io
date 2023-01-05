@@ -44,6 +44,7 @@ export const A = styled.a<Props>`
   text-align: ${(props) => props.align};
   &:hover {
     color: ${(props) => props.theme.blue};
+    transition: all 0.5s;
   }
   display: inline;
 `;

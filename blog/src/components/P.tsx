@@ -11,7 +11,7 @@ type Props = {
  * Use this component for all interface text that should not be selectable
  * by the user, this is the majority of UI text explainers, notes, headings.
  */
-const P = styled.p<Props>`
+export const P = styled.p<Props>`
   color: ${(props) =>
     props.type === "second"
       ? props.theme.text_second

@@ -12,7 +12,7 @@ export const base = {
 
 export const light = {
     ...base,
-    main: colors.blue,
+    pointer: colors.blue,
     main_light: colors.marine,
     shadow: colors.black,
     important: colors.red,
@@ -20,6 +20,8 @@ export const light = {
     background_second: colors.white90,
     background_third: colors.white75,
     header: colors.github_black,
+    main: colors.as_black,
+    assist: colors.as_black_second,
     text: colors.black90,
     text_second: colors.black75,
     text_third: colors.black50,

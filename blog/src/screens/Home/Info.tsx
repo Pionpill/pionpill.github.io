@@ -40,7 +40,7 @@ const InfoWrapper = styled(Flex)`
 
 const BaseInfo: React.FC = () => {
   return (
-    <InfoWrapper>
+    <>
       <Icon size="128px" border="circle" src={Github.icon}></Icon>
       <Flex align="baseline">
         <P type="reverse" size="2x" weight="bold" title="外婆家一条河谐音">
@@ -60,57 +60,67 @@ const BaseInfo: React.FC = () => {
         无锡 &nbsp;&nbsp;
         <FontAwesomeIcon icon={faHouseChimney} title="老家" /> &nbsp; 湖北 天门
       </P>
-      <Flex align="center" gap="6px">
-        <FontAwesomeIcon icon={faCamera} color="#fff" title="摄影" />
-        <SiAdobephotoshop
-          color="#fff"
-          title="Lightroom: Adobe 旗下专业图像处理与创作软件"
-        />
-        <SiAdobeillustrator
-          color="#fff"
-          title="Lightroom: Adobe 旗下矢量图绘制软件"
-        />
-        <SiAdobepremierepro
-          color="#fff"
-          title="Lightroom: Adobe 旗下影像处理(剪辑)软件"
-        />
-        <Brand type="reverse" size="xsmall" color="red">
-          Java
-        </Brand>
-        <Brand type="reverse" size="xsmall" color="red">
-          SpringBoot
-        </Brand>
-        <Brand type="reverse" size="xsmall" color="green">
-          TypeScript
-        </Brand>
-        <Brand type="reverse" size="xsmall" color="green">
-          React
-        </Brand>
-        <Brand type="reverse" size="xsmall">
-          Python
-        </Brand>
-        <Brand type="reverse" size="xsmall">
-          LaTex
-        </Brand>
-        <SiAdobelightroom
-          color="#fff"
-          title="Lightroom: Adobe 旗下专业raw格式图像处理软件"
-        />
-        <SiAdobeindesign
-          color="#fff"
-          title="InDesign: Adobe 旗下书籍/杂志设计与排版软件"
-        />
-        <SiBlender color="#fff" title="blender: 一款开源的三维建模与渲染软件" />
-        <FontAwesomeIcon
-          icon={faMountainSun}
-          color="#fff"
-          title="地形绘制 Gaea/WorldMachine"
-        />
-      </Flex>
-    </InfoWrapper>
+    </>
+  );
+};
+
+const BrandInfo: React.FC = () => {
+  return (
+    <Flex align="center" gap="6px">
+      <FontAwesomeIcon icon={faCamera} color="#fff" title="摄影" />
+      <SiAdobephotoshop
+        color="#fff"
+        title="Lightroom: Adobe 旗下专业图像处理与创作软件"
+      />
+      <SiAdobeillustrator
+        color="#fff"
+        title="Lightroom: Adobe 旗下矢量图绘制软件"
+      />
+      <SiAdobepremierepro
+        color="#fff"
+        title="Lightroom: Adobe 旗下影像处理(剪辑)软件"
+      />
+      <Brand type="reverse" size="xsmall" color="red">
+        Java
+      </Brand>
+      <Brand type="reverse" size="xsmall" color="red">
+        SpringBoot
+      </Brand>
+      <Brand type="reverse" size="xsmall" color="green">
+        TypeScript
+      </Brand>
+      <Brand type="reverse" size="xsmall" color="green">
+        React
+      </Brand>
+      <Brand type="reverse" size="xsmall">
+        Python
+      </Brand>
+      <Brand type="reverse" size="xsmall">
+        LaTex
+      </Brand>
+      <SiAdobelightroom
+        color="#fff"
+        title="Lightroom: Adobe 旗下专业raw格式图像处理软件"
+      />
+      <SiAdobeindesign
+        color="#fff"
+        title="InDesign: Adobe 旗下书籍/杂志设计与排版软件"
+      />
+      <SiBlender color="#fff" title="blender: 一款开源的三维建模与渲染软件" />
+      <FontAwesomeIcon
+        icon={faMountainSun}
+        color="#fff"
+        title="地形绘制 Gaea/WorldMachine"
+      />
+    </Flex>
   );
 };
 
 export const Info: React.FC = () => {
-  return <BaseInfo />;
+  return (
+    <InfoWrapper>
+      <BaseInfo />
+      <BrandInfo />
+    </InfoWrapper>
+  );
 };

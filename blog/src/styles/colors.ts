@@ -13,6 +13,8 @@ export const colors = {
   black75: "rgba(0, 0, 0, 0.75)",
   black90: "rgba(0, 0, 0, 0.90)",
   github_black: "#24292f",
+  as_black_second: "#222222",
+  as_black: "#151515",
 
   important: "#e63672",
   warning: "#f08a24",
