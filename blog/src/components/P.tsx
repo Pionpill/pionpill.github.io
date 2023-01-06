@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 type Props = {
-  type?: "second" | "third" | "danger" | "reverse";
+  type?: "second" | "third" | "danger" | "reverse" | "reverse-second";
   size?: "huge" | "large" | "small" | "xsmall" | "2x" | "3x";
   weight?: "bold" | "thin" | "heavy";
+  space?: "small" | "large" | "huge";
+  indent?: boolean;
   wrap?: boolean;
 };
 
@@ -21,6 +23,8 @@ export const P = styled.p<Props>`
       ? props.theme.danger
       : props.type === "reverse"
       ? props.theme.text_reverse
+      : props.type === "reverse-second"
+      ? props.theme.text_reverse_second
       : props.theme.text};
   font-size: ${(props) =>
     props.size === "large"
@@ -48,6 +52,15 @@ export const P = styled.p<Props>`
   white-space: ${(props) => (props.wrap ? "normal" : "nowrap")};
   margin: 0.25em;
   flex-shrink: 1;
+  letter-spacing: ${(props) =>
+    props.space === "small"
+      ? "0.1em"
+      : props.space === "large"
+      ? "0.2em"
+      : props.space === "huge"
+      ? "0.3em"
+      : "inherit"};
+  text-indent: ${(props) => (props.indent ? "2em" : "initial")};
 `;
 
 export default P;

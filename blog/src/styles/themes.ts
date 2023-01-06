@@ -26,6 +26,7 @@ export const light = {
     text_second: colors.black75,
     text_third: colors.black50,
     text_reverse: colors.white,
+    text_reverse_second: colors.white50,
     button: colors.blue,
     button_second: colors.orange,
     button_third: colors.green,

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type Props = {
-  type?: "second" | "third" | "danger" | "reverse";
+  type?: "second" | "third" | "danger" | "reverse" | "reverse-second";
   size?: "large" | "small" | "xsmall";
   weight?: "bold" | "thin" | "heavy";
   padding?: string;
@@ -19,6 +19,8 @@ export const A = styled.a<Props>`
       ? props.theme.danger
       : props.type === "reverse"
       ? props.theme.text_reverse
+      : props.type === "reverse-second"
+      ? props.theme.text_reverse_second
       : props.theme.text};
   font-size: ${(props) =>
     props.size === "large"
@@ -42,9 +44,11 @@ export const A = styled.a<Props>`
   justify-content: center;
   align-items: center;
   text-align: ${(props) => props.align};
+  text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.blue};
-    transition: all 0.5s;
+    text-decoration: underline;
+    /* transition: all 0.5s; */
   }
   display: inline;
 `;

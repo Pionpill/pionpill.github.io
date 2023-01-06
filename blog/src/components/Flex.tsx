@@ -11,8 +11,11 @@ const Flex = styled.div<{
   align?: AlignValues;
   justify?: JustifyValues;
   shrink?: boolean;
+  grow?: number;
   reverse?: boolean;
   gap?: string;
+  width?: string;
+  wrap?: boolean;
 }>`
   display: flex;
   flex: ${({ auto }) => (auto ? "1 1 auto" : "initial")};
@@ -27,9 +30,12 @@ const Flex = styled.div<{
   align-items: ${({ align }) => align};
   justify-content: ${({ justify }) => justify};
   flex-shrink: ${({ shrink }) => (shrink ? 1 : "initial")};
+  flex-grow: ${({ grow }) => grow};
+  flex-wrap: ${(props) => (props.wrap ? "wrap" : "nowrap")};
   gap: ${({ gap }) => (gap ? gap : "initial")};
   min-height: 0;
   min-width: 0;
+  width: ${({ width }) => width};
 `;
 
 export default Flex;

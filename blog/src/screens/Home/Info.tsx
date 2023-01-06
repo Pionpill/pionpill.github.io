@@ -98,6 +98,9 @@ const BrandInfo: React.FC = () => {
       <Brand type="reverse" size="xsmall">
         LaTex
       </Brand>
+      <Brand type="reverse" size="xsmall" color="purple">
+        Minecraft
+      </Brand>
       <SiAdobelightroom
         color="#fff"
         title="Lightroom: Adobe 旗下专业raw格式图像处理软件"

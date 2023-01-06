@@ -53,7 +53,7 @@ export const EmailPopup = React.forwardRef(({}, ref: any) => {
           <FontAwesomeIcon icon={faCopy} title="复制邮箱" />
         </Wrapper>
         <Wrapper link={true}>
-          <A type="reverse" href="https://mail.qq.com/">
+          <A type="reverse" href="mailto:673486387@qq.com">
             <FontAwesomeIcon icon={faEnvelopeOpen} title="QQ邮箱" />
           </A>
         </Wrapper>
