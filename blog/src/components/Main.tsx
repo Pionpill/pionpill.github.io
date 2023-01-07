@@ -6,6 +6,7 @@ export const Main = styled.main<{
   gap?: string;
   column?: boolean;
   reverse?: boolean;
+  height?: string;
 }>`
   display: flex;
   align-items: ${({ align }) => align};
@@ -19,4 +20,5 @@ export const Main = styled.main<{
       : column
       ? "column"
       : "row"};
+  height: ${(props) => (props.height ? props.height : "initial")};
 `;

@@ -11,13 +11,16 @@ import { A } from "./A";
 import Flex from "./Flex";
 import P from "./P";
 
-const FooterWrapper = styled.footer`
+const FooterWrapper = styled.footer<{ bottom?: boolean }>`
   background-color: ${(props) => props.theme.assist};
   width: auto;
   align-items: center;
   justify-content: center;
   padding: 0.5em 1em;
   flex-direction: column;
+  position: absolute;
+  left: 0px;
+  bottom: ${(props) => (props.bottom ? "0px" : "auto")};
 `;
 
 const Link = styled(A)`
@@ -25,9 +28,13 @@ const Link = styled(A)`
   margin: 0.25em;
 `;
 
-export const Footer: React.FC = () => {
+type Props = {
+  bottom?: boolean;
+};
+
+export const Footer: React.FC<Props> = ({ bottom }) => {
   return (
-    <FooterWrapper>
+    <FooterWrapper bottom={bottom}>
       <Flex justify="center" gap="5px" column={true} align="center">
         <P weight="bold" type="reverse-second">
           博客使用的开源技术

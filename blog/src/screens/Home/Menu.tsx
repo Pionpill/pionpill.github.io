@@ -1,20 +1,6 @@
 import styled from "styled-components";
-import { A } from "../../components/A";
 import Flex from "../../components/Flex";
-
-const Title = styled(A)`
-  color: ${(props) => props.theme.text_reverse};
-  font-size: initial;
-  font-weight: 400;
-  padding: 0.5em 0.75em;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background-color: ${(props) => props.theme.main};
-    transition: all 0.5s;
-  }
-`;
+import { RouteLink } from "../../components/RouteLink";
 
 const Wrapper = styled(Flex)`
   background-color: ${(props) => props.theme.assist};
@@ -23,12 +9,20 @@ const Wrapper = styled(Flex)`
   gap: 1em;
 `;
 
+const SubRouteLink = styled(RouteLink)`
+  &:hover {
+    background-color: ${(props) => props.theme.main};
+    color: ${(props) => props.theme.blue};
+    transition: all 0.5s;
+  }
+`;
+
 export const Menu: React.FC = () => {
   return (
     <Wrapper>
-      <Title> Brief (简介) </Title>
-      <Title> Experience (经历) </Title>
-      <Title> Skill (技能) </Title>
+      <SubRouteLink to="">Brief (简介)</SubRouteLink>
+      <SubRouteLink to=""> Experience (经历) </SubRouteLink>
+      <SubRouteLink to=""> Skill (技能) </SubRouteLink>
     </Wrapper>
   );
 };

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 type Props = {
   type?: "second" | "third" | "danger" | "reverse" | "reverse-second";
-  size?: "huge" | "large" | "small" | "xsmall" | "2x" | "3x";
+  size?: "huge" | "large" | "small" | "xsmall" | "2x" | "3x" | string;
   weight?: "bold" | "thin" | "heavy";
   space?: "small" | "large" | "huge";
   indent?: boolean;
@@ -39,6 +39,8 @@ export const P = styled.p<Props>`
       ? "2em"
       : props.size === "3x"
       ? "3em"
+      : props.size
+      ? props.size
       : "inherit"};
   font-weight: ${(props) =>
     props.weight === "bold"
@@ -46,7 +48,7 @@ export const P = styled.p<Props>`
       : props.weight === "thin"
       ? "200"
       : props.weight === "heavy"
-      ? "800"
+      ? "700"
       : "inherit"};
   display: inline;
   white-space: ${(props) => (props.wrap ? "normal" : "nowrap")};

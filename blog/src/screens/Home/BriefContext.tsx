@@ -226,7 +226,7 @@ const Future: React.FC = () => {
   );
 };
 
-export const Brief: React.FC = () => {
+export const BriefContext: React.FC = () => {
   return (
     <Wrapper gap="1em">
       <Profile />
