@@ -33,8 +33,9 @@ const InfoWrapper = styled(Flex)`
       rgba(0, 0, 0, 0.75) 100%
     ),
     url(${() => terrain["map-1"]}) no-repeat center;
+  background-size: cover;
   padding: ${() => spacing.padding};
-  width: 100%;
+  width: auto;
   gap: 4px;
 `;
 
@@ -50,7 +51,7 @@ const BaseInfo: React.FC = () => {
           pionpill
         </P>
       </Flex>
-      <P type="reverse">
+      <P type="reverse" wrap={true}>
         Coder, Designer, Artist; 主要开发方向: React 前端, Java 后端, Minecraft
         开发
       </P>
@@ -64,9 +65,17 @@ const BaseInfo: React.FC = () => {
   );
 };
 
+const BrandWrapper = styled(Flex)`
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  justify-content: center;
+`;
+
 const BrandInfo: React.FC = () => {
   return (
-    <Flex align="center" gap="6px">
+    <BrandWrapper>
       <FontAwesomeIcon icon={faCamera} color="#fff" title="摄影" />
       <SiAdobephotoshop
         color="#fff"
@@ -115,7 +124,7 @@ const BrandInfo: React.FC = () => {
         color="#fff"
         title="地形绘制 Gaea/WorldMachine"
       />
-    </Flex>
+    </BrandWrapper>
   );
 };
 

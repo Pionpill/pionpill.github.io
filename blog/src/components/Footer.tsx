@@ -13,15 +13,45 @@ import P from "./P";
 
 const FooterWrapper = styled.footer`
   background-color: ${(props) => props.theme.assist};
-  width: 100%;
+  width: auto;
   align-items: center;
   justify-content: center;
   padding: 0.5em 1em;
+  flex-direction: column;
+`;
+
+const Link = styled(A)`
+  color: ${(props) => props.theme.text_reverse_second};
+  margin: 0.25em;
 `;
 
 export const Footer: React.FC = () => {
   return (
     <FooterWrapper>
+      <Flex justify="center" gap="5px" column={true} align="center">
+        <P weight="bold" type="reverse-second">
+          博客使用的开源技术
+        </P>
+        <Flex wrap={true} gap="0px 25px">
+          <Link href="https://react.docschina.org/">React</Link>
+          <Link href="https://www.typescriptlang.org/">TypeScript</Link>
+          <Link href="https://code.visualstudio.com/">VSCode</Link>
+          <Link href="https://fontawesome.com/">fontawesome</Link>
+          <Link href="https://react-icons.github.io/react-icons/">
+            react-icons
+          </Link>
+          <Link href="https://www.npmjs.com/package/gh-pages">gh-pages</Link>
+          <Link href="https://github.com/styled-components/polished">
+            polished
+          </Link>
+          <Link href="https://www.npmjs.com/package/qrcode.react">
+            qrcode.react
+          </Link>
+
+          <Link href="https://styled-components.com/">styled-components</Link>
+        </Flex>
+      </Flex>
+      <hr />
       <Flex gap=".25em 1em" wrap={true} justify="center">
         <P type="reverse-second" size="small">
           <FontAwesomeIcon icon={faGithub} />
@@ -63,7 +93,7 @@ export const Footer: React.FC = () => {
           |
         </P>
         <P type="reverse-second" size="small">
-          博客项目地址(MIT License):
+          项目地址(MIT):&nbsp;
           <A
             type="reverse-second"
             href="https://github.com/Pionpill/pionpill.github.io"

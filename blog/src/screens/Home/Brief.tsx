@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { Brand } from "../../components/Brand";
 import Flex from "../../components/Flex";
+import { Img } from "../../components/Img";
 import P from "../../components/P";
 import { pionpill } from "../../shared/img";
-import { Img } from "./Img";
 
 const Wrapper = styled(Flex)`
   justify-content: center;
@@ -29,78 +29,36 @@ const ContextWrapper = styled(Flex)`
   padding: 1em;
   width: 100%;
   gap: 5%;
+  @media screen and (max-width: 1080px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
 `;
 
-const BriefCard: React.FC = () => {
-  return (
-    <Flex column={true} gap="1em" width="25%" align="center">
-      <Img
-        src={pionpill["pionpill-1"]}
-        size="200px"
-        height="200px"
-        border="8px"
-      />
-      <P type="reverse">Talk is easy, Show me your code</P>
-      <Flex gap="10px">
-        <Brand type="reverse" size="xsmall">
-          <FontAwesomeIcon icon={faGraduationCap} /> 大学生
-        </Brand>
-        <Brand type="reverse" size="xsmall" color="red">
-          <FontAwesomeIcon icon={faStar} /> 中共党员
-        </Brand>
-        <Brand type="reverse" size="xsmall">
-          <FontAwesomeIcon icon={faCode} /> 技术宅
-        </Brand>
-        <Brand type="reverse" size="xsmall">
-          <FontAwesomeIcon icon={faDumbbell} /> 健身
-        </Brand>
-      </Flex>
-      {/* <Flex gap=".25em 1em" wrap={true}>
-        <P type="reverse" size="small">
-          <FontAwesomeIcon icon={faGithub} />
-          &nbsp;
-          <A href="https://github.com/Pionpill" type="reverse">
-            @pionpill
-          </A>
-        </P>
-        <P type="reverse" size="small">
-          <FontAwesomeIcon icon={faTwitter} />
-          &nbsp;
-          <A type="reverse" href="https://twitter.com/pionpill">
-            @pionpill
-          </A>
-        </P>
-        <P type="reverse" size="small">
-          <FontAwesomeIcon icon={faQq} />
-          &nbsp;
-          <A type="reverse" href="https://user.qzone.qq.com/673486387">
-            小鸡炖蘑菇
-          </A>
-        </P>
-        <P type="reverse" size="small">
-          <FontAwesomeIcon icon={faWeixin} />
-          &nbsp;
-          <A type="reverse" href="https://user.qzone.qq.com/673486387">
-            小葱拌豆腐
-          </A>
-        </P>
+const ImgWrapper = styled(Flex)`
+  flex-direction: column;
+  gap: 1em;
+  width: 25%;
+  align-items: center;
+  @media screen and (max-width: 1080px) {
+    width: 75%;
+  }
+`;
 
-        <P type="reverse" size="small">
-          <FontAwesomeIcon icon={faEnvelope} />
-          &nbsp;
-          <A type="reverse" href="mailto:673486387@qq.com">
-            673486387@qq.com
-          </A>
-        </P>
-      </Flex> */}
-    </Flex>
-  );
-};
+const TextWrapper = styled(Flex)`
+  flex-direction: column;
+  width: 70%;
+  @media screen and (max-width: 1080px) {
+    width: 95%;
+    align-items: center;
+  }
+`;
 
 const Profile: React.FC = () => {
   return (
     <ContextWrapper>
-      <Flex column={true} gap="1em" width="25%" align="center">
+      <ImgWrapper>
         <Img
           src={pionpill["pionpill-1"]}
           size="200px"
@@ -122,9 +80,9 @@ const Profile: React.FC = () => {
             <FontAwesomeIcon icon={faDumbbell} /> 健身
           </Brand>
         </Flex>
-      </Flex>
+      </ImgWrapper>
 
-      <Flex column={true} width="70%">
+      <TextWrapper>
         <P type="reverse" size="2x" weight="bold" space="huge">
           个人简介
         </P>
@@ -156,7 +114,7 @@ const Profile: React.FC = () => {
         <P type="reverse" wrap={true}>
           具体项目/作品内容在对应界面下有展示
         </P>
-      </Flex>
+      </TextWrapper>
     </ContextWrapper>
   );
 };
@@ -164,7 +122,7 @@ const Profile: React.FC = () => {
 const School: React.FC = () => {
   return (
     <ContextWrapper>
-      <Flex column={true} gap="1em" width="25%" align="center">
+      <ImgWrapper>
         <Img
           src={pionpill["pionpill-2"]}
           size="200px"
@@ -183,9 +141,9 @@ const School: React.FC = () => {
             <FontAwesomeIcon icon={faCalculator} /> 国赛一等奖
           </Brand>
         </Flex>
-      </Flex>
+      </ImgWrapper>
 
-      <Flex column={true} width="70%">
+      <TextWrapper>
         <P type="reverse" size="2x" weight="bold" space="huge">
           大学生活
         </P>
@@ -218,7 +176,7 @@ const School: React.FC = () => {
         <P type="reverse" wrap={true}>
           必须吐槽大学的学阀风气，一类竞赛内定好了队伍还鼓励其他学生陪跑，带团队做了半个多月的项目全浪费了，真是世间险恶。
         </P>
-      </Flex>
+      </TextWrapper>
     </ContextWrapper>
   );
 };
@@ -226,7 +184,7 @@ const School: React.FC = () => {
 const Future: React.FC = () => {
   return (
     <ContextWrapper>
-      <Flex column={true} gap="1em" width="25%" align="center">
+      <ImgWrapper>
         <Img
           src={pionpill["pionpill-3"]}
           size="200px"
@@ -242,9 +200,9 @@ const Future: React.FC = () => {
             <FontAwesomeIcon icon={faReact} /> TypeScript 前端
           </Brand>
         </Flex>
-      </Flex>
+      </ImgWrapper>
 
-      <Flex column={true} width="70%">
+      <TextWrapper>
         <P type="reverse" size="2x" weight="bold" space="huge">
           未来打算
         </P>
@@ -263,7 +221,7 @@ const Future: React.FC = () => {
           如果您是HR，请查看技能页查看我的技术栈，Project
           页查看我做过的项目，Article 页查看我的一些笔记和文章。
         </P>
-      </Flex>
+      </TextWrapper>
     </ContextWrapper>
   );
 };

@@ -5,6 +5,7 @@ type Props = {
   size?: "large" | "small" | "xsmall";
   weight?: "bold" | "thin" | "heavy";
   padding?: string;
+  margin?: string;
   wrap?: boolean;
   align?: string;
 };
@@ -39,6 +40,7 @@ export const A = styled.a<Props>`
       ? "800"
       : "inherit"};
   padding: ${(props) => (props.padding ? props.padding : "initial")};
+  margin: ${(props) => (props.margin ? props.margin : "initial")};
   cursor: pointer;
   white-space: ${(props) => (props.wrap ? "wrap" : "nowrap")};
   justify-content: center;

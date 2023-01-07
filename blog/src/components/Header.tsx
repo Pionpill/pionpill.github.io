@@ -17,19 +17,22 @@ const HeaderWrapper = styled.header`
   background-color: ${(props) => props.theme.header};
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: auto;
   top: 0;
   padding: 0 1em;
   z-index: 800;
 `;
 
-const ContextWrapper = styled(Flex)`
+const ContextWrapper = styled(Flex)<{ hidden?: boolean }>`
   padding: 1em 2em;
   gap: 1em;
   align-items: center;
   justify-content: center;
   color: ${(props) => props.theme.background_second};
   flex: 1;
+  @media screen and (max-width: 1080px) {
+    display: ${(props) => (props.hidden ? "none" : "auto")};
+  }
 `;
 
 const Title = styled(A)`
@@ -48,7 +51,7 @@ export const Header: React.FC = () => {
   return (
     <>
       <HeaderWrapper>
-        <ContextWrapper>
+        <ContextWrapper hidden={true}>
           <Icon border="circle" size="24px" src={Github.icon} />
           <Title>
             <P weight="bold" type="reverse" size="large">
@@ -63,7 +66,7 @@ export const Header: React.FC = () => {
           <Title padding="0 .5em">Works</Title>
           <Title padding="0 .5em">Other</Title>
         </ContextWrapper>
-        <ContextWrapper>
+        <ContextWrapper hidden={true}>
           <P type="reverse" weight="thin">
             Concat me:
           </P>
