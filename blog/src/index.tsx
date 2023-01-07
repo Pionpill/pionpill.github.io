@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Theme from "./components/Theme";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Home } from "./screens/Home";
+import { App } from "./routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Theme>
       <Wrapper>
-        <Home></Home>
+        <App />
       </Wrapper>
     </Theme>
   </React.StrictMode>
