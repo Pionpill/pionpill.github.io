@@ -47,8 +47,10 @@ export const Footer: React.FC = () => {
           <Link href="https://www.npmjs.com/package/qrcode.react">
             qrcode.react
           </Link>
-
           <Link href="https://styled-components.com/">styled-components</Link>
+          <Link href="https://github.com/remix-run/react-router">
+            react-router
+          </Link>
         </Flex>
       </Flex>
       <hr />
