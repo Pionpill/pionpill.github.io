@@ -14,7 +14,7 @@ const Wrapper = styled(Flex)`
 export const ExperienceContext: React.FC = () => {
   return (
     <Wrapper>
-      <Map />
+      <Map coordinate={[113.127844, 30.723151]} />
     </Wrapper>
   );
 };
