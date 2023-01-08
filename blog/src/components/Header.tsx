@@ -11,6 +11,7 @@ import { Icon } from "./Icon";
 import P from "./P";
 import { EmailPopup } from "./Popup/EmailPopup";
 import { WeixinPopup } from "./Popup/WeixinPopup";
+import { RouteLink } from "./RouteLink";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -60,11 +61,21 @@ export const Header: React.FC = () => {
           </Title>
         </ContextWrapper>
         <ContextWrapper gap="2em">
-          <Title padding="0 .5em">Home</Title>
-          <Title padding="0 .5em">Article</Title>
-          <Title padding="0 .5em">Project</Title>
-          <Title padding="0 .5em">Works</Title>
-          <Title padding="0 .5em">Other</Title>
+          <RouteLink weight="bold" to="/">
+            Home
+          </RouteLink>
+          <RouteLink weight="bold" to="/">
+            Article
+          </RouteLink>
+          <RouteLink weight="bold" to="/">
+            Project
+          </RouteLink>
+          <RouteLink weight="bold" to="/">
+            Works
+          </RouteLink>
+          <RouteLink weight="bold" to="/">
+            Other
+          </RouteLink>
         </ContextWrapper>
         <ContextWrapper hidden={true}>
           <P type="reverse" weight="thin">

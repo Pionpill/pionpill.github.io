@@ -20,9 +20,9 @@ const SubRouteLink = styled(RouteLink)`
 export const Menu: React.FC = () => {
   return (
     <Wrapper>
-      <SubRouteLink to="">Brief (简介)</SubRouteLink>
-      <SubRouteLink to=""> Experience (经历) </SubRouteLink>
-      <SubRouteLink to=""> Skill (技能) </SubRouteLink>
+      <SubRouteLink to="/home/brief">Brief (简介)</SubRouteLink>
+      <SubRouteLink to="/home/experience"> Experience (经历) </SubRouteLink>
+      <SubRouteLink to="/home/skill"> Skill (技能) </SubRouteLink>
     </Wrapper>
   );
 };

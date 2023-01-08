@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Map } from "../../charts/Map";
 import Flex from "../../components/Flex";
 
 const Wrapper = styled(Flex)`
@@ -11,5 +12,9 @@ const Wrapper = styled(Flex)`
 `;
 
 export const ExperienceContext: React.FC = () => {
-  return <Wrapper></Wrapper>;
+  return (
+    <Wrapper>
+      <Map />
+    </Wrapper>
+  );
 };

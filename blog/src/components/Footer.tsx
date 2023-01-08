@@ -13,7 +13,7 @@ import P from "./P";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
   background-color: ${(props) => props.theme.assist};
-  width: auto;
+  width: 100vw;
   align-items: center;
   justify-content: center;
   padding: 0.5em 1em;
@@ -58,6 +58,12 @@ export const Footer: React.FC<Props> = ({ bottom }) => {
           <Link href="https://github.com/remix-run/react-router">
             react-router
           </Link>
+          <Link href="https://github.com/remix-run/react-router">
+            react-router
+          </Link>
+          <Link href="https://echarts.apache.org/zh/index.html">echarts</Link>
+          <Link href="https://plotly.com/javascript/">plotly.js</Link>
+          <Link href="https://account.mapbox.com/">mapbox</Link>
         </Flex>
       </Flex>
       <hr />
