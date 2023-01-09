@@ -23,20 +23,20 @@ export const ContextWrapper = styled(Flex)`
 
 export const ImgWrapper = styled(Flex)`
   flex-direction: column;
-  width: 25%;
+  width: 30%;
   height: 100%;
   max-height: 500px;
   align-items: center;
   @media screen and (max-width: 1080px) {
     width: 100%;
-    height: 250px;
+    height: 200px;
     flex-direction: row;
   }
 `;
 
 export const TextWrapper = styled(Flex)`
   flex-direction: column;
-  width: 70%;
+  width: auto;
   @media screen and (max-width: 1080px) {
     width: 95%;
     align-items: center;

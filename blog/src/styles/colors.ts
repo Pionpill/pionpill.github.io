@@ -19,7 +19,7 @@ export const colors = {
   important: "#e63672",
   warning: "#f08a24",
   danger: "#ff476f",
-
+  plain: "#95afc0",
   marine: "#2BC2FF",
   blue: "#0288d1",
   red: "#c72e0f",

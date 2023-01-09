@@ -17,6 +17,9 @@ export const Error: React.FC = () => {
         <P size="large" wrap={true}>
           您可通过上方链接重定位到其他位置
         </P>
+        <P size="large" wrap={true} type="third">
+          =.= 网站处于开发阶段，好多页面没写 =.=
+        </P>
       </Main>
       <Footer bottom={true} />
     </>
