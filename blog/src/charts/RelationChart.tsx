@@ -1,6 +1,6 @@
 import React from "react";
 
 export const RelationChart: React.FC = () => {
-  const chartContainer = React.useRef<any>(null);
-  const chart = React.useRef<any>(null);
+  // TODO: 关系图
+  return <div></div>;
 };

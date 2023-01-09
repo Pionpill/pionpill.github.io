@@ -4,6 +4,7 @@ import { Error } from "./screens/Error";
 import { Home } from "./screens/Home";
 import { Brief } from "./screens/Home/Brief";
 import { Experience } from "./screens/Home/Experience";
+import { Skill } from "./screens/Home/Skill";
 
 export const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ export const App: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/home/brief" element={<Brief />} />
         <Route path="/home/experience" element={<Experience />} />
+        <Route path="/home/skill" element={<Skill />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
