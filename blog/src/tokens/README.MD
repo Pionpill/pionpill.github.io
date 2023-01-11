@@ -1,4 +1,4 @@
-你需要自行创建一个 token.ts 文件并写入如下内容:
+你需要在 token.ts 文件中写入自己的 token，否则一些组件将无法加载:
 
 ```ts
 export const token = {
