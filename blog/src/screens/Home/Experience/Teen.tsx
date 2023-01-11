@@ -69,13 +69,13 @@ export const Teen: React.FC = () => {
           <Ul>
             <Li>
               2000 年生于
-              <Span onClick={() => changeCenter([113.159617, 30.64309])}>
+              <Span onClick={() => changeCenter([113.159617, 30.64309], 12)}>
                 湖北省天门市
               </Span>
             </Li>
             <Li>
               2006 年来到
-              <Span onClick={() => changeCenter([120.282231, 31.494045])}>
+              <Span onClick={() => changeCenter([120.282231, 31.494045], 12)}>
                 江苏省无锡市
               </Span>
             </Li>

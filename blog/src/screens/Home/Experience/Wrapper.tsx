@@ -13,32 +13,22 @@ export const Wrapper = styled(Flex)`
 export const ContextWrapper = styled(Flex)`
   padding: 1em;
   width: 100%;
-  gap: 5%;
-  @media screen and (max-width: 1080px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-  }
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
 `;
 
 export const ImgWrapper = styled(Flex)`
   flex-direction: column;
-  width: 30%;
-  height: 100%;
   max-height: 500px;
   align-items: center;
-  @media screen and (max-width: 1080px) {
-    width: 100%;
-    height: 200px;
-    flex-direction: row;
-  }
+  width: 100%;
+  height: 500px;
+  flex-direction: row;
 `;
 
 export const TextWrapper = styled(Flex)`
   flex-direction: column;
   width: auto;
-  @media screen and (max-width: 1080px) {
-    width: 95%;
-    align-items: center;
-  }
+  align-items: center;
 `;

@@ -1,8 +1,8 @@
 import mapboxgl from "mapbox-gl";
 import React from "react";
 import styled from "styled-components";
-import Flex from "../components/Flex";
 import { token } from "../tokens/token";
+import Flex from "./Flex";
 
 const styleSelector = (style: string | undefined) => {
   const prefix = "mapbox://styles/mapbox/";
@@ -45,7 +45,7 @@ type Props = {
   cube?: boolean;
 };
 
-export const MapContainer: React.FC<Props> = ({
+export const Mapbox: React.FC<Props> = ({
   styled,
   coordinate,
   width,

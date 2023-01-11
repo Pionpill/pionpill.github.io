@@ -13,10 +13,10 @@ import P from "./P";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
   background-color: ${(props) => props.theme.assist};
-  width: auto;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  padding: 0.5em 1em;
+  padding: 0.5em 0em;
   flex-direction: column;
   position: absolute;
   left: 0px;
