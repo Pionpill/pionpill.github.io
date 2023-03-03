@@ -5,11 +5,11 @@ import { lighten } from "polished";
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { QQ } from "../../shared/info";
-import { A } from "../A";
+import A from "../A";
 import Flex from "../Flex";
-import { Icon } from "../Icon";
+import Icon from "../Icon";
 import P from "../P";
-import { Popup } from "./Popup";
+import Popup from "./Popup";
 import { QRCode } from "./QRCode";
 
 const Wrapper = styled.div<{ link?: boolean }>`
@@ -37,23 +37,21 @@ export const EmailPopup = React.forwardRef(({}, ref: any) => {
 
   return (
     <Popup title="Email(QQ)" ref={ref}>
-      <Icon size="64px" src={QQ.icon} border="circle" />
-      <P size="large"> {QQ.name} </P>
+      <Icon width="64px" src={QQ.icon} />
+      <P size="lg"> {QQ.name} </P>
       <QRCode url={QQ.qr} icon={faQq} />
-      <P size="small" type="third">
+      <P size="sm" shallow="md">
         请注明来意，非必要不加好友
       </P>
       <Flex>
         <Wrapper>
-          <P type="reverse" ref={emailRef}>
-            {QQ.email}
-          </P>
+          <P ref={emailRef}>{QQ.email}</P>
         </Wrapper>
-        <Wrapper link={true} onClick={copyContext}>
+        <Wrapper link onClick={copyContext}>
           <FontAwesomeIcon icon={faCopy} title="复制邮箱" />
         </Wrapper>
-        <Wrapper link={true}>
-          <A type="reverse" href="mailto:673486387@qq.com">
+        <Wrapper link>
+          <A href="mailto:673486387@qq.com">
             <FontAwesomeIcon icon={faEnvelopeOpen} title="QQ邮箱" />
           </A>
         </Wrapper>

@@ -1,5 +1,5 @@
-import { Footer } from "../../../components/Footer";
-import { Header } from "../../../components/Header";
+import { Footer } from "../../../components/Flexed/Footer";
+import { Header } from "../../../components/Flexed/Header";
 import { Main } from "../../../components/Main";
 import { Info } from "../Info";
 import { Menu } from "../Menu";
@@ -12,7 +12,7 @@ export const Brief: React.FC = () => {
   return (
     <>
       <Header />
-      <Main column={true}>
+      <Main column>
         <Info />
         <Menu />
         <Wrapper gap="1em">

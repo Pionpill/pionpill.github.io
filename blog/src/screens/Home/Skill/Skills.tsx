@@ -11,8 +11,8 @@ const Card = styled(Flex)`
 export const Skills: React.FC = () => {
   return (
     <Flex>
-      <Card column={true}>
-        <P type="reverse">
+      <Card column>
+        <P>
           <FontAwesomeIcon icon={faJava} />
         </P>
       </Card>

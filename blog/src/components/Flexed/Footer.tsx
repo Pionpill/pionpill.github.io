@@ -7,9 +7,9 @@ import {
 import { faCopyright, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { A } from "./A";
-import Flex from "./Flex";
-import P from "./P";
+import A from "../A";
+import Flex from "../Flex";
+import P from "../P";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
   background-color: ${(props) => props.theme.assist};
@@ -35,11 +35,9 @@ type Props = {
 export const Footer: React.FC<Props> = ({ bottom }) => {
   return (
     <FooterWrapper bottom={bottom}>
-      <Flex justify="center" gap="5px" column={true} align="center">
-        <P weight="bold" type="reverse-second">
-          博客使用的开源技术
-        </P>
-        <Flex wrap={true} gap="0px 25px">
+      <Flex justify="center" gap="5px" column align="center">
+        <P weight="xl">博客使用的开源技术</P>
+        <Flex wrap gap="0px 25px">
           <Link href="https://react.docschina.org/">React</Link>
           <Link href="https://www.typescriptlang.org/">TypeScript</Link>
           <Link href="https://code.visualstudio.com/">VSCode</Link>
@@ -69,56 +67,41 @@ export const Footer: React.FC<Props> = ({ bottom }) => {
         </Flex>
       </Flex>
       <hr />
-      <Flex gap=".25em 1em" wrap={true} justify="center">
-        <P type="reverse-second" size="small">
+      <Flex gap=".25em 1em" wrap justify="center">
+        <P size="sm">
           <FontAwesomeIcon icon={faGithub} />
           &nbsp;
-          <A href="https://github.com/Pionpill" type="reverse-second">
-            @pionpill
-          </A>
+          <A href="https://github.com/Pionpill">@pionpill</A>
         </P>
-        <P type="reverse-second" size="small">
+        <P size="sm">
           <FontAwesomeIcon icon={faTwitter} />
           &nbsp;
-          <A type="reverse-second" href="https://twitter.com/pionpill">
-            @pionpill
-          </A>
+          <A href="https://twitter.com/pionpill">@pionpill</A>
         </P>
-        <P type="reverse-second" size="small">
+        <P size="sm">
           <FontAwesomeIcon icon={faQq} />
           &nbsp;
-          <A type="reverse-second" href="https://user.qzone.qq.com/673486387">
-            小鸡炖蘑菇
-          </A>
+          <A href="https://user.qzone.qq.com/673486387">小鸡炖蘑菇</A>
         </P>
-        <P type="reverse-second" size="small">
+        <P size="sm">
           <FontAwesomeIcon icon={faWeixin} />
           &nbsp;
-          <A type="reverse-second" href="https://user.qzone.qq.com/673486387">
-            小葱拌豆腐
-          </A>
+          <A href="https://user.qzone.qq.com/673486387">小葱拌豆腐</A>
         </P>
 
-        <P type="reverse-second" size="small">
+        <P size="sm">
           <FontAwesomeIcon icon={faEnvelope} />
           &nbsp;
-          <A type="reverse-second" href="mailto:673486387@qq.com">
-            673486387@qq.com
-          </A>
+          <A href="mailto:673486387@qq.com">673486387@qq.com</A>
         </P>
-        <P type="reverse-second" size="small">
-          |
-        </P>
-        <P type="reverse-second" size="small">
+        <P size="sm">|</P>
+        <P size="sm">
           项目地址(MIT):&nbsp;
-          <A
-            type="reverse-second"
-            href="https://github.com/Pionpill/pionpill.github.io"
-          >
+          <A href="https://github.com/Pionpill/pionpill.github.io">
             https://github.com/Pionpill/pionpill.github.io
           </A>
         </P>
-        <P type="reverse-second" size="small">
+        <P size="sm">
           <FontAwesomeIcon icon={faCopyright} /> &nbsp; 2023
         </P>
       </Flex>

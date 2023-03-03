@@ -74,10 +74,10 @@ export const Teen: React.FC = () => {
         <Wrapper ref={mapContainer} />
       </ImgWrapper>
       <TextWrapper>
-        <P type="reverse" size="2x" weight="bold" space="huge">
+        <P size="xxl" weight="xl" space="huge">
           学生时代
         </P>
-        <P type="reverse">
+        <P>
           <Ul>
             <Li>
               2000 年生于

@@ -1,22 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { EChart } from "../../../components/EChart";
-import Flex from "../../../components/Flex";
 import P from "../../../components/P";
 import { ContextWrapper, ImgWrapper, TextWrapper } from "./Wrapper";
-
-const Wrapper = styled(Flex)`
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-`;
-
-const Span = styled.span`
-  cursor: pointer;
-  padding: 0em 0.25em;
-  color: ${(props) => props.theme.pointer};
-  font-weight: 600;
-`;
 
 const Li = styled.li`
   white-space: normal;
@@ -401,7 +387,7 @@ export const Collage: React.FC = () => {
         <EChart options={options} />
       </ImgWrapper>
       <TextWrapper>
-        <P type="reverse" size="2x" weight="bold" space="huge">
+        <P size="xxl" weight="xl" space="huge">
           大学时代
         </P>
         <Ul>

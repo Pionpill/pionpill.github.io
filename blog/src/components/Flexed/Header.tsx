@@ -3,15 +3,15 @@ import { faEllipsis, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import styled from "styled-components";
-import { Github } from "../shared/info";
-import { togglePopup } from "../utils/toggle";
-import { A } from "./A";
-import Flex from "./Flex";
-import { Icon } from "./Icon";
-import P from "./P";
-import { EmailPopup } from "./Popup/EmailPopup";
-import { WeixinPopup } from "./Popup/WeixinPopup";
-import { RouteLink } from "./RouteLink";
+import { Github } from "../../shared/info";
+import { togglePopup } from "../../utils/toggleUtils";
+import A from "../A";
+import Flex from "../Flex";
+import Icon from "../Icon";
+import P from "../P";
+import { EmailPopup } from "../Popup/EmailPopup";
+import { WeixinPopup } from "../Popup/WeixinPopup";
+import { RouteLink } from "../RouteLink";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -52,35 +52,33 @@ export const Header: React.FC = () => {
   return (
     <>
       <HeaderWrapper>
-        <ContextWrapper hidden={true}>
-          <Icon border="circle" size="24px" src={Github.icon} />
+        <ContextWrapper hidden>
+          <Icon radius="circle" width="24px" src={Github.icon} />
           <Title>
-            <P weight="bold" type="reverse" size="large">
+            <P weight="xl" size="lg">
               Pionpill / gitpage
             </P>
           </Title>
         </ContextWrapper>
         <ContextWrapper gap="2em">
-          <RouteLink weight="bold" to="/">
+          <RouteLink weight="xl" to="/">
             Home
           </RouteLink>
-          <RouteLink weight="bold" to="/">
+          <RouteLink weight="xl" to="/">
             Article
           </RouteLink>
-          <RouteLink weight="bold" to="/">
+          <RouteLink weight="xl" to="/">
             Project
           </RouteLink>
-          <RouteLink weight="bold" to="/">
+          <RouteLink weight="xl" to="/">
             Works
           </RouteLink>
-          <RouteLink weight="bold" to="/">
+          <RouteLink weight="xl" to="/">
             Other
           </RouteLink>
         </ContextWrapper>
-        <ContextWrapper hidden={true}>
-          <P type="reverse" weight="thin">
-            Concat me:
-          </P>
+        <ContextWrapper hidden>
+          <P weight="sm">Concat me:</P>
           <Title href={Github.link}>
             <FontAwesomeIcon icon={faGithub} />
           </Title>

@@ -2,7 +2,7 @@ import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { QRCodeSVG } from "qrcode.react";
 import styled from "styled-components";
-import { base } from "../../styles/themes";
+import { common } from "../../styles/themes";
 import Flex from "../Flex";
 
 const IconWrapper = styled.div<{
@@ -12,16 +12,7 @@ const IconWrapper = styled.div<{
 }>`
   position: absolute;
   display: flex;
-  background-color: ${(props) =>
-    props.type === "second"
-      ? props.theme.text_second
-      : props.type === "third"
-      ? props.theme.text_third
-      : props.type === "danger"
-      ? props.theme.danger
-      : props.type === "reverse"
-      ? props.theme.text_reverse
-      : props.theme.text};
+  background-color: ${(props) => props.theme.text};
   border-radius: ${(props) =>
     props.border === "circle"
       ? "100%"
@@ -43,9 +34,9 @@ export const QRCode: React.FC<Props> = ({ url, icon }) => {
   return (
     <Flex align="center" justify="center">
       <QRCodeSVG value={url} size={192} />
-      <IconWrapper size="38px" type="reverse">
-        <IconWrapper size="30px" border="round">
-          <FontAwesomeIcon icon={icon} color={base.white} size="lg" />
+      <IconWrapper size="38px">
+        <IconWrapper size="30px">
+          <FontAwesomeIcon icon={icon} color={common.white} size="lg" />
         </IconWrapper>
       </IconWrapper>
     </Flex>

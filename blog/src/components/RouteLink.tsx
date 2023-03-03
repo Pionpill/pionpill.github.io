@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FontSize, FontWeight } from "../styles";
+import { fontSizeSelector, fontWeightSelector } from "../utils/styledUtils";
 
 type Props = {
   padding?: string;
-  size?: "large" | "small" | "xsmall";
-  weight?: "bold" | "thin" | "heavy";
+  size?: FontSize;
+  weight?: FontWeight;
 };
 
 export const RouteLink = styled(Link)<Props>`
@@ -16,23 +18,8 @@ export const RouteLink = styled(Link)<Props>`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  font-size: ${(props) =>
-    props.size === "large"
-      ? "18px"
-      : props.size === "small"
-      ? "14px"
-      : props.size === "xsmall"
-      ? "13px"
-      : "inherit"};
-  font-weight: ${(props) =>
-    props.weight === "bold"
-      ? "600"
-      : props.weight === "thin"
-      ? "200"
-      : props.weight === "heavy"
-      ? "800"
-      : "inherit"};
-
+  font-size: ${(props) => fontSizeSelector(props.size)};
+  font-weight: ${(props) => fontWeightSelector(props.weight)};
   &:hover {
     color: ${(props) => props.theme.blue};
     transition: all 0.5s;

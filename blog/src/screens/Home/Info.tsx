@@ -15,9 +15,9 @@ import {
   SiBlender,
 } from "react-icons/si";
 import styled from "styled-components";
-import { Brand } from "../../components/Brand";
+import Brand from "../../components/Brand";
 import Flex from "../../components/Flex";
-import { Icon } from "../../components/Icon";
+import Icon from "../../components/Icon";
 import P from "../../components/P";
 import { terrain } from "../../shared/img";
 import { Github } from "../../shared/info";
@@ -42,20 +42,20 @@ const InfoWrapper = styled(Flex)`
 const BaseInfo: React.FC = () => {
   return (
     <>
-      <Icon size="128px" border="circle" src={Github.icon}></Icon>
+      <Icon width="128px" src={Github.icon}></Icon>
       <Flex align="baseline">
-        <P type="reverse" size="2x" weight="bold" title="外婆家一条河谐音">
+        <P size="xxl" weight="xl" title="外婆家一条河谐音">
           北岸
         </P>
-        <P type="reverse" size="2x" weight="bold" title="匹勾匹勾">
+        <P size="xxl" weight="xl" title="匹勾匹勾">
           pionpill
         </P>
       </Flex>
-      <P type="reverse" wrap={true}>
+      <P>
         Coder, Designer, Artist; 主要开发方向: React 前端, Java 后端, Minecraft
         开发
       </P>
-      <P type="reverse">
+      <P>
         <FontAwesomeIcon icon={faLocationDot} /> &nbsp; 江苏 南京 &nbsp;&nbsp;
         <FontAwesomeIcon icon={faHome} title="从小生长在无锡" /> &nbsp; 江苏
         无锡 &nbsp;&nbsp;
@@ -89,27 +89,13 @@ const BrandInfo: React.FC = () => {
         color="#fff"
         title="Lightroom: Adobe 旗下影像处理(剪辑)软件"
       />
-      <Brand type="reverse" size="xsmall" color="red">
-        Java
-      </Brand>
-      <Brand type="reverse" size="xsmall" color="red">
-        SpringBoot
-      </Brand>
-      <Brand type="reverse" size="xsmall" color="green">
-        TypeScript
-      </Brand>
-      <Brand type="reverse" size="xsmall" color="green">
-        React
-      </Brand>
-      <Brand type="reverse" size="xsmall">
-        Python
-      </Brand>
-      <Brand type="reverse" size="xsmall">
-        LaTex
-      </Brand>
-      <Brand type="reverse" size="xsmall" color="purple">
-        Minecraft
-      </Brand>
+      <Brand color="red">Java</Brand>
+      <Brand color="red">SpringBoot</Brand>
+      <Brand color="green">TypeScript</Brand>
+      <Brand color="green">React</Brand>
+      <Brand>Python</Brand>
+      <Brand>LaTex</Brand>
+      <Brand color="purple">Minecraft</Brand>
       <SiAdobelightroom
         color="#fff"
         title="Lightroom: Adobe 旗下专业raw格式图像处理软件"

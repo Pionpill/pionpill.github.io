@@ -1,24 +1,22 @@
-import { CSSProperties } from "react";
-import styled from "styled-components";
+import styled, { css, CSSProperties } from "styled-components";
 
-type JustifyValues = CSSProperties["justifyContent"];
-
-type AlignValues = CSSProperties["alignItems"];
-
-const Flex = styled.div<{
-  auto?: boolean;
-  column?: boolean;
-  align?: AlignValues;
-  justify?: JustifyValues;
-  shrink?: boolean;
-  grow?: number;
-  reverse?: boolean;
-  gap?: string;
-  width?: string;
+type Props = {
   wrap?: boolean;
-}>`
+  column?: boolean;
+  reverse?: boolean;
+  justify?: CSSProperties["justifyContent"];
+  align?: CSSProperties["alignItems"];
+  gap?: CSSProperties["gap"];
+  position?: CSSProperties["position"];
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  full?: boolean;
+  zIndex?: CSSProperties["zIndex"];
+};
+
+const Flex = styled.div<Props>`
   display: flex;
-  flex: ${({ auto }) => (auto ? "1 1 auto" : "initial")};
+  flex-wrap: ${(props) => (props.wrap ? "wrap" : "nowrap")};
   flex-direction: ${({ column, reverse }) =>
     reverse
       ? column
@@ -27,15 +25,19 @@ const Flex = styled.div<{
       : column
       ? "column"
       : "row"};
-  align-items: ${({ align }) => align};
-  justify-content: ${({ justify }) => justify};
-  flex-shrink: ${({ shrink }) => (shrink ? 1 : "initial")};
-  flex-grow: ${({ grow }) => grow};
-  flex-wrap: ${(props) => (props.wrap ? "wrap" : "nowrap")};
-  gap: ${({ gap }) => (gap ? gap : "initial")};
-  min-height: 0;
-  min-width: 0;
-  width: ${({ width }) => width};
+  justify-content: ${(props) => (props.justify ? props.justify : "center")};
+  align-items: ${(props) => (props.align ? props.align : "center")};
+  gap: ${(props) => props.gap};
+  z-index: ${(props) => props.zIndex};
+  position: ${(props) => props.position};
+  ${(props) =>
+    props.full &&
+    css`
+      width: 100vw;
+      height: 100vh;
+    `}
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 `;
 
 export default Flex;

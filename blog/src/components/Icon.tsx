@@ -1,22 +1,20 @@
 import styled from "styled-components";
+import { RadiusType } from "../styles";
+import { radiusSelector } from "../utils/styledUtils";
 
 type Props = {
-  border?: "circle" | "round" | string;
-  size?: string;
+  radius?: RadiusType;
+  width?: string;
   height?: string;
 };
 
-export const Icon = styled.img<Props>`
-  width: ${(props) => (props.size ? props.size : "24px")};
+const Icon = styled.img<Props>`
+  width: ${(props) => (props.width ? props.width : "24px")};
   height: ${(props) =>
-    props.height ? props.height : props.size ? props.size : "24px"};
+    props.height ? props.height : props.width ? props.width : "24px"};
   border-radius: ${(props) =>
-    props.border === "circle"
-      ? "100%"
-      : props.border === "round"
-      ? "10%"
-      : props.border
-      ? props.border
-      : "0%"};
+    props.radius ? radiusSelector(props.radius) : radiusSelector("circle")};
   white-space: nowrap;
 `;
+
+export default Icon;

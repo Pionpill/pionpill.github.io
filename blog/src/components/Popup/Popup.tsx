@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lighten } from "polished";
 import React from "react";
 import styled from "styled-components";
-import { togglePopup } from "../../utils/toggle";
-import { A } from "../A";
+import { togglePopup } from "../../utils/toggleUtils";
+import A from "../A";
 import Flex from "../Flex";
 import P from "../P";
 type FixedProps = {
@@ -44,10 +44,6 @@ const Header = styled(Flex)`
   border-radius: 6px 6px 0px 0px;
 `;
 
-const Title = styled(P)`
-  margin: auto;
-`;
-
 const CloseIcon = styled(A)`
   position: absolute;
   top: 4px;
@@ -75,16 +71,16 @@ type Props = {
   children?: any;
 };
 
-export const Popup = React.forwardRef(
+const Popup = React.forwardRef(
   ({ title, children, ...rest }: Props, ref: any) => {
     return (
       <Wrapper ref={ref}>
         <Curtain {...rest} />
         <Fixed align="center" gap=".5em">
           <Header>
-            <Title type="reverse" weight="bold">
+            <P weight="xl" color="white">
               {title}
-            </Title>
+            </P>
           </Header>
           <CloseIcon onClick={() => togglePopup(ref)}>
             <FontAwesomeIcon icon={faXmark} />
@@ -95,3 +91,5 @@ export const Popup = React.forwardRef(
     );
   }
 );
+
+export default Popup;

@@ -1,44 +1,37 @@
+import { lighten } from "polished";
 import styled from "styled-components";
+import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
+import { common } from "../styles/themes";
+import {
+  fontSizeSelector,
+  fontWeightSelector,
+  shallowSelector,
+  textColorSelector,
+} from "../utils/styledUtils";
 
 type Props = {
-  type?: "second" | "third" | "danger" | "reverse" | "reverse-second";
-  size?: "large" | "small" | "xsmall";
-  weight?: "bold" | "thin" | "heavy";
+  color?: TextColor | "blue" | "link";
+  size?: FontSize;
+  shallow?: ShallowDegree;
+  weight?: FontWeight;
   padding?: string;
   margin?: string;
   wrap?: boolean;
   align?: string;
 };
 
-export const A = styled.a<Props>`
+const A = styled.a<Props>`
   color: ${(props) =>
-    props.type === "second"
-      ? props.theme.text_second
-      : props.type === "third"
-      ? props.theme.text_third
-      : props.type === "danger"
-      ? props.theme.danger
-      : props.type === "reverse"
-      ? props.theme.text_reverse
-      : props.type === "reverse-second"
-      ? props.theme.text_reverse_second
-      : props.theme.text};
-  font-size: ${(props) =>
-    props.size === "large"
-      ? "18px"
-      : props.size === "small"
-      ? "14px"
-      : props.size === "xsmall"
-      ? "13px"
-      : "inherit"};
-  font-weight: ${(props) =>
-    props.weight === "bold"
-      ? "600"
-      : props.weight === "thin"
-      ? "200"
-      : props.weight === "heavy"
-      ? "800"
-      : "inherit"};
+    lighten(
+      shallowSelector(props.shallow),
+      props.color === "blue"
+        ? common.pointer
+        : props.color === "link"
+        ? common.link
+        : textColorSelector(props.color, props.theme)
+    )};
+  font-size: ${(props) => fontSizeSelector(props.size)};
+  font-weight: ${(props) => fontWeightSelector(props.weight)};
   padding: ${(props) => (props.padding ? props.padding : "initial")};
   margin: ${(props) => (props.margin ? props.margin : "initial")};
   cursor: pointer;
@@ -54,3 +47,5 @@ export const A = styled.a<Props>`
   }
   display: inline;
 `;
+
+export default A;
