@@ -5,7 +5,7 @@ import { Home } from "./screens/Home";
 import { Brief } from "./screens/Home/Brief";
 import { Experience } from "./screens/Home/Experience";
 
-export const App: React.FC = () => {
+export const MainRoute: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>

@@ -1,3 +1,5 @@
 export const token = {
-    mapbox: "pk.eyJ1IjoicGlvbnBpbGwiLCJhIjoiY2xjcmQ2dmd6MDdieDNvcDlqNWF5NjI5biJ9.HA3ORx5UWF9Y9lrsTn0xzQ"
+    mapbox: "pk.eyJ1IjoicGlvbnBpbGwiLCJhIjoiY2tqejczeGlxMDBldTJubnl2azF1amphbSJ9.hXsTPxJ9vlbxhOPRcbgyTA",
+    amap: "8ed4af334f25fea4bb61aa3ba2a11111",
+    amap_secret: "e2bdefe3a8757e9344190661a9604026"
 }
