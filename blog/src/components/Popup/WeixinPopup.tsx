@@ -4,9 +4,9 @@ import { QQ, Weixin } from "../../shared/info";
 import Icon from "../Icon";
 import P from "../P";
 import Popup from "./Popup";
-import { QRCode } from "./QRCode";
+import QRCode from "./QRCode";
 
-export const WeixinPopup = React.forwardRef(({}, ref: any) => {
+const WeixinPopup = React.forwardRef(({}, ref: any) => {
   return (
     <Popup title="Weixin" ref={ref}>
       <Icon width="64px" src={QQ.icon} />
@@ -19,3 +19,5 @@ export const WeixinPopup = React.forwardRef(({}, ref: any) => {
     </Popup>
   );
 });
+
+export default WeixinPopup;

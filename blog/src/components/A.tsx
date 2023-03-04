@@ -1,5 +1,5 @@
 import { lighten } from "polished";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
@@ -10,14 +10,12 @@ import {
 } from "../utils/styledUtils";
 
 type Props = {
-  color?: TextColor | "blue" | "link";
   size?: FontSize;
+  color?: TextColor | "blue" | "link";
   shallow?: ShallowDegree;
   weight?: FontWeight;
-  padding?: string;
-  margin?: string;
   wrap?: boolean;
-  align?: string;
+  align?: CSSProperties["textAlign"];
 };
 
 const A = styled.a<Props>`
@@ -32,8 +30,7 @@ const A = styled.a<Props>`
     )};
   font-size: ${(props) => fontSizeSelector(props.size)};
   font-weight: ${(props) => fontWeightSelector(props.weight)};
-  padding: ${(props) => (props.padding ? props.padding : "initial")};
-  margin: ${(props) => (props.margin ? props.margin : "initial")};
+  margin: 0;
   cursor: pointer;
   white-space: ${(props) => (props.wrap ? "wrap" : "nowrap")};
   justify-content: center;
@@ -42,7 +39,6 @@ const A = styled.a<Props>`
   text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.blue};
-    text-decoration: underline;
     /* transition: all 0.5s; */
   }
   display: inline;

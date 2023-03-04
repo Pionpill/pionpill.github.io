@@ -5,7 +5,7 @@ import { fontWeight } from "../styles/size";
 import { spacing } from "../styles/spacing";
 import { shallowSelector, textColorSelector } from "../utils/styledUtils";
 
-const H1 = styled.h1<{
+const H2 = styled.h2<{
   shallow?: ShallowDegree;
   color?: TextColor;
 }>`
@@ -15,11 +15,11 @@ const H1 = styled.h1<{
       textColorSelector(props.color, props.theme)
     )};
   font-weight: ${() => fontWeight.xxl};
-  font-size: 36px;
+  font-size: 32px;
   text-align: center;
   margin: 0;
   padding: ${() => spacing.font} 0;
   text-shadow: 1px 1px 0.5px ${(props) => props.theme.shadow};
 `;
 
-export default H1;
+export default H2;

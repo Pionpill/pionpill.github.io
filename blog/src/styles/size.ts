@@ -4,8 +4,7 @@ export const fontSize = {
   md: "14px",
   lg: "16px",
   xl: "20px",
-  xxl: "24px",
-  h1: "36px",
+  xxl: "24px"
 }
 
 export const fontWeight = {

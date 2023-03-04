@@ -13,7 +13,7 @@ export const Future: React.FC = () => {
       <ImgWrapper>
         <Img src={pionpill["pionpill-3"]} size="200px" height="200px" />
         <P>上班! 上班! 上班!</P>
-        <Flex gap="10px" wrap justify="center">
+        <Flex style={{ gap: "10px" }} wrap justify="center">
           <Brand>
             <FontAwesomeIcon icon={faJava} /> Java 后端
           </Brand>

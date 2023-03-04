@@ -1,19 +1,34 @@
+import { lighten } from "polished";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FontSize, FontWeight } from "../styles";
-import { fontSizeSelector, fontWeightSelector } from "../utils/styledUtils";
+import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
+import { common } from "../styles/themes";
+import {
+  fontSizeSelector,
+  fontWeightSelector,
+  shallowSelector,
+  textColorSelector,
+} from "../utils/styledUtils";
 
 type Props = {
-  padding?: string;
+  color?: TextColor | "blue" | "link";
+  shallow?: ShallowDegree;
   size?: FontSize;
   weight?: FontWeight;
 };
 
-export const RouteLink = styled(Link)<Props>`
-  color: ${(props) => props.theme.text_reverse};
+const RouteLink = styled(Link)<Props>`
+  color: ${(props) =>
+    lighten(
+      shallowSelector(props.shallow),
+      props.color === "blue"
+        ? common.pointer
+        : props.color === "link"
+        ? common.link
+        : textColorSelector(props.color, props.theme)
+    )};
   font-size: initial;
   font-weight: 400;
-  padding: ${(props) => (props.padding ? props.padding : "0.5em 0.75em")};
   padding: 0.5em 0.75em;
   justify-content: center;
   align-items: center;
@@ -25,3 +40,5 @@ export const RouteLink = styled(Link)<Props>`
     transition: all 0.5s;
   }
 `;
+
+export default RouteLink;

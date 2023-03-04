@@ -44,7 +44,7 @@ export const common = {
     text_important: colors.red,
     text_link: colors.link,
     button: colors.blue,
-    button_red: colors.important,
+    button_red: colors.red,
     button_blue: colors.blue,
     button_orange: colors.orange,
     button_purple: colors.purple,
@@ -54,14 +54,13 @@ export const common = {
     pointer: colors.blue,
     header: colors.github_black,
     text_pointer: colors.plain,
-    shadow: colors.black,
+    shadow: colors.black50,
 }
 
 export const light = {
     ...common,
     text: colors.black90,
     text_reverse: colors.white90,
-
     background: colors.white90,
     main: colors.white75,
 }

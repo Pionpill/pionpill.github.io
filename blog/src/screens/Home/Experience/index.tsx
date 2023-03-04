@@ -11,10 +11,10 @@ export const Experience: React.FC = () => {
   return (
     <>
       <Header />
-      <Main column>
+      <Main>
         <Info />
         <Menu />
-        <Wrapper gap="1em">
+        <Wrapper style={{ gap: "1em" }}>
           <Teen />
           <Collage />
         </Wrapper>

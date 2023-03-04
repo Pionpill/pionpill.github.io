@@ -18,7 +18,7 @@ export const Profile: React.FC = () => {
       <ImgWrapper>
         <Img src={pionpill["pionpill-1"]} size="200px" height="200px" />
         <P>Talk is easy, Show me your code</P>
-        <Flex gap="10px" wrap justify="center">
+        <Flex style={{ gap: "10px" }} wrap justify="center">
           <Brand>
             <FontAwesomeIcon icon={faGraduationCap} /> 大学生
           </Brand>

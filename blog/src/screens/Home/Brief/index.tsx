@@ -12,10 +12,10 @@ export const Brief: React.FC = () => {
   return (
     <>
       <Header />
-      <Main column>
+      <Main>
         <Info />
         <Menu />
-        <Wrapper gap="1em">
+        <Wrapper style={{ gap: "1em" }}>
           <Profile />
           <School />
           <Future />

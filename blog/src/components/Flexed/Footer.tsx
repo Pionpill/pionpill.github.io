@@ -1,109 +1,119 @@
-import {
-  faGithub,
-  faQq,
-  faTwitter,
-  faWeixin,
-} from "@fortawesome/free-brands-svg-icons";
-import { faCopyright, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { darken } from "polished";
 import styled from "styled-components";
+import { Github } from "../../shared/info";
+import breakpoints from "../../styles/breakpoints";
 import A from "../A";
 import Flex from "../Flex";
+import Icon from "../Icon";
 import P from "../P";
+import RouteLink from "../RouteLink";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
-  background-color: ${(props) => props.theme.assist};
+  background-color: ${(props) => darken(0.05, props.theme.background)};
   width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5em 0em;
   flex-direction: column;
+  padding: 0.5em 0em;
   position: absolute;
   left: 0px;
-  bottom: ${(props) => (props.bottom ? "0px" : "auto")};
+  flex-wrap: wrap;
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    height: 300px;
+  }
 `;
 
-const Link = styled(A)`
-  color: ${(props) => props.theme.text_reverse_second};
-  margin: 0.25em;
-`;
-
-type Props = {
-  bottom?: boolean;
-};
-
-export const Footer: React.FC<Props> = ({ bottom }) => {
+export const Footer: React.FC = () => {
   return (
-    <FooterWrapper bottom={bottom}>
-      <Flex justify="center" gap="5px" column align="center">
-        <P weight="xl">博客使用的开源技术</P>
-        <Flex wrap gap="0px 25px">
-          <Link href="https://react.docschina.org/">React</Link>
-          <Link href="https://www.typescriptlang.org/">TypeScript</Link>
-          <Link href="https://code.visualstudio.com/">VSCode</Link>
-          <Link href="https://fontawesome.com/">fontawesome</Link>
-          <Link href="https://react-icons.github.io/react-icons/">
-            react-icons
-          </Link>
-          <Link href="https://www.npmjs.com/package/gh-pages">gh-pages</Link>
-          <Link href="https://github.com/styled-components/polished">
-            polished
-          </Link>
-          <Link href="https://www.npmjs.com/package/qrcode.react">
-            qrcode.react
-          </Link>
-          <Link href="https://styled-components.com/">styled-components</Link>
-          <Link href="https://github.com/remix-run/react-router">
-            react-router
-          </Link>
-          <Link href="https://github.com/remix-run/react-router">
-            react-router
-          </Link>
-          <Link href="https://echarts.apache.org/zh/index.html">echarts</Link>
-          <Link href="https://plotly.com/javascript/">plotly.js</Link>
-          <Link href="https://docs.mapbox.com/mapbox-gl-js/guides/">
-            mapbox-gl
-          </Link>
+    <FooterWrapper id="footer">
+      <Flex wrap align="flex-start" responsive style={{ gap: "36px" }}>
+        <Flex column align="flex-start">
+          <Flex gap="xs">
+            <Icon radius="circle" width="18px" src={Github.icon} />
+            <RouteLink weight="xl" to="/">
+              Pionpill/gitpage
+            </RouteLink>
+          </Flex>
+          <P shallow="md" size="sm">
+            个人博客，仅供学习与资料展示.
+          </P>
+          <Flex justify="flex-start" gap="lg">
+            <A shallow="sm" href="https://github.com/Pionpill">
+              <FontAwesomeIcon icon={faGithub} />
+            </A>
+            <A shallow="sm" href="https://twitter.com/pionpill">
+              <FontAwesomeIcon icon={faTwitter} />
+            </A>
+            <A shallow="sm" href="mailto:673486387@qq.com">
+              <FontAwesomeIcon icon={faEnvelope} />
+            </A>
+          </Flex>
         </Flex>
-      </Flex>
-      <hr />
-      <Flex gap=".25em 1em" wrap justify="center">
-        <P size="sm">
-          <FontAwesomeIcon icon={faGithub} />
-          &nbsp;
-          <A href="https://github.com/Pionpill">@pionpill</A>
-        </P>
-        <P size="sm">
-          <FontAwesomeIcon icon={faTwitter} />
-          &nbsp;
-          <A href="https://twitter.com/pionpill">@pionpill</A>
-        </P>
-        <P size="sm">
-          <FontAwesomeIcon icon={faQq} />
-          &nbsp;
-          <A href="https://user.qzone.qq.com/673486387">小鸡炖蘑菇</A>
-        </P>
-        <P size="sm">
-          <FontAwesomeIcon icon={faWeixin} />
-          &nbsp;
-          <A href="https://user.qzone.qq.com/673486387">小葱拌豆腐</A>
-        </P>
-
-        <P size="sm">
-          <FontAwesomeIcon icon={faEnvelope} />
-          &nbsp;
-          <A href="mailto:673486387@qq.com">673486387@qq.com</A>
-        </P>
-        <P size="sm">|</P>
-        <P size="sm">
-          项目地址(MIT):&nbsp;
-          <A href="https://github.com/Pionpill/pionpill.github.io">
-            https://github.com/Pionpill/pionpill.github.io
+        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+          <P weight="xl">使用的开源技术</P>
+          <A shallow="sm" href="https://react.docschina.org/">
+            React
           </A>
-        </P>
-        <P size="sm">
-          <FontAwesomeIcon icon={faCopyright} /> &nbsp; 2023
-        </P>
+          <A shallow="sm" href="https://github.com/remix-run/react-router">
+            react-router
+          </A>
+          <A shallow="sm" href="https://www.typescriptlang.org/">
+            TypeScript
+          </A>
+          <A shallow="sm" href="https://code.visualstudio.com/">
+            VSCode
+          </A>
+          <A shallow="sm" href="https://www.microsoft.com/edge">
+            Edge
+          </A>
+        </Flex>
+        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+          <P weight="xl">使用的开源组件</P>
+          <A shallow="sm" href="https://fontawesome.com/">
+            fontawesome
+          </A>
+          <A shallow="sm" href="https://react-icons.github.io/react-icons/">
+            react-icons
+          </A>
+          <A shallow="sm" href="https://www.npmjs.com/package/gh-pages">
+            gh-pages
+          </A>
+          <A shallow="sm" href="https://github.com/styled-components/polished">
+            polished
+          </A>
+          <A shallow="sm" href="https://www.npmjs.com/package/qrcode.react">
+            qrcode.react
+          </A>
+          <A shallow="sm" href="https://styled-components.com/">
+            styled-components
+          </A>
+
+          <A shallow="sm" href="https://echarts.apache.org/zh/index.html">
+            echarts
+          </A>
+          <A shallow="sm" href="https://plotly.com/javascript/">
+            plotly.js
+          </A>
+          <A shallow="sm" href="https://lbs.amap.com/">
+            amap
+          </A>
+        </Flex>
+        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+          <P weight="xl">数据来源</P>
+          <A shallow="sm" href="https://github.com/">
+            Github
+          </A>
+          <A shallow="sm" href="https://wakatime.com/@pionpill">
+            WakaTime
+          </A>
+          <A shallow="sm" href="https://cloud.tencent.com/">
+            Tecent COS
+          </A>
+        </Flex>
       </Flex>
     </FooterWrapper>
   );

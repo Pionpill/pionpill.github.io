@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lighten } from "polished";
 import React from "react";
 import styled from "styled-components";
-import { togglePopup } from "../../utils/toggleUtils";
+import { toggleComponent } from "../../utils/componentsUtils";
 import A from "../A";
 import Flex from "../Flex";
 import P from "../P";
@@ -76,13 +76,13 @@ const Popup = React.forwardRef(
     return (
       <Wrapper ref={ref}>
         <Curtain {...rest} />
-        <Fixed align="center" gap=".5em">
+        <Fixed align="center" style={{ gap: ".5em" }}>
           <Header>
             <P weight="xl" color="white">
               {title}
             </P>
           </Header>
-          <CloseIcon onClick={() => togglePopup(ref)}>
+          <CloseIcon onClick={() => toggleComponent(ref)}>
             <FontAwesomeIcon icon={faXmark} />
           </CloseIcon>
           <ContextWrapper>{children}</ContextWrapper>

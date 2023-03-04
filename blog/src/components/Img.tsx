@@ -6,7 +6,6 @@ type Props = {
   radius?: RadiusType;
   size?: string;
   height?: string;
-  clip?: string;
 };
 
 export const Img = styled.img<Props>`

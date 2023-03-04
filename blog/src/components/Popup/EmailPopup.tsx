@@ -10,7 +10,7 @@ import Flex from "../Flex";
 import Icon from "../Icon";
 import P from "../P";
 import Popup from "./Popup";
-import { QRCode } from "./QRCode";
+import QRCode from "./QRCode";
 
 const Wrapper = styled.div<{ link?: boolean }>`
   background: ${(props) => lighten(0.1, props.theme.header)};
@@ -24,7 +24,7 @@ const Wrapper = styled.div<{ link?: boolean }>`
   }
 `;
 
-export const EmailPopup = React.forwardRef(({}, ref: any) => {
+const EmailPopup = React.forwardRef(({}, ref: any) => {
   const emailRef = useRef<HTMLDivElement>(null);
 
   const copyContext = () => {
@@ -59,3 +59,5 @@ export const EmailPopup = React.forwardRef(({}, ref: any) => {
     </Popup>
   );
 });
+
+export default EmailPopup;

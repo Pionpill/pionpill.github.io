@@ -13,8 +13,6 @@ const P = styled.p<{
   shallow?: ShallowDegree;
   color?: TextColor;
   shadow?: boolean;
-  maxWidth?: CSSProperties["maxWidth"];
-  minWidth?: CSSProperties["minWidth"];
   textAlign?: CSSProperties["textAlign"];
   weight?: FontWeight;
   space?: string;
@@ -25,9 +23,7 @@ const P = styled.p<{
       shallowSelector(props.shallow),
       textColorSelector(props.color, props.theme)
     )};
-  max-width: ${(props) => props.maxWidth};
-  min-width: ${(props) => props.minWidth};
-  padding: 2px 0;
+  padding: 4px 0;
   text-align: ${(props) => props.textAlign};
   font-weight: ${(props) => fontWeightSelector(props.weight)};
   margin: 0;

@@ -6,5 +6,5 @@ export const spacing = {
   sidebarCollapsedWidth: 16,
   sidebarMinWidth: 200,
   sidebarMaxWidth: 400,
-  font: "2px",
+  font: "4px",
 };

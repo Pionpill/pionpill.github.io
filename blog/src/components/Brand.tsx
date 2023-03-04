@@ -19,7 +19,7 @@ const Brand = styled.span<Props>`
     props.size ? fontSizeSelector(props.size) : fontSizeSelector("xs")};
   text-shadow: 1px 0px ${(props) => props.theme.text};
   color: ${(props) =>
-    props.color
+    props.textColor
       ? textColorSelector(props.textColor, props.theme)
       : common.text_white};
   background-color: ${(props) => buttonColorSelector(props.color)};

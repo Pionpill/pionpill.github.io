@@ -1,4 +1,9 @@
+import { lighten } from "polished";
 import styled, { css, CSSProperties } from "styled-components";
+import { GapDegree, ShallowDegree } from "../styles";
+import breakpoints from "../styles/breakpoints";
+import { common } from "../styles/themes";
+import { gapSelector, shallowSelector } from "../utils/styledUtils";
 
 type Props = {
   wrap?: boolean;
@@ -6,17 +11,25 @@ type Props = {
   reverse?: boolean;
   justify?: CSSProperties["justifyContent"];
   align?: CSSProperties["alignItems"];
-  gap?: CSSProperties["gap"];
-  position?: CSSProperties["position"];
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
+  black?: boolean;
+  shallow?: ShallowDegree;
   full?: boolean;
-  zIndex?: CSSProperties["zIndex"];
+  gap?: GapDegree;
+  padding?: CSSProperties["padding"];
+  responsive?: Boolean;
 };
 
 const Flex = styled.div<Props>`
   display: flex;
   flex-wrap: ${(props) => (props.wrap ? "wrap" : "nowrap")};
+  flex: 1;
+  padding: ${(props) => (props.padding ? props.padding : "auto")};
+  gap: ${(props) => gapSelector(props.gap)};
+  background-color: ${(props) =>
+    lighten(
+      shallowSelector(props.shallow),
+      props.black ? common.header : "transparent"
+    )};
   flex-direction: ${({ column, reverse }) =>
     reverse
       ? column
@@ -27,17 +40,19 @@ const Flex = styled.div<Props>`
       : "row"};
   justify-content: ${(props) => (props.justify ? props.justify : "center")};
   align-items: ${(props) => (props.align ? props.align : "center")};
-  gap: ${(props) => props.gap};
-  z-index: ${(props) => props.zIndex};
-  position: ${(props) => props.position};
   ${(props) =>
     props.full &&
     css`
-      width: 100vw;
+      width: calc(100vw - 50px);
       height: 100vh;
     `}
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  ${(props) =>
+    props.responsive &&
+    css`
+      @media screen and (max-width: ${breakpoints.phone}) {
+        flex-direction: column;
+      }
+    `}
 `;
 
 export default Flex;

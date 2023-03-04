@@ -30,7 +30,7 @@ type Props = {
   icon: IconDefinition;
 };
 
-export const QRCode: React.FC<Props> = ({ url, icon }) => {
+const QRCode: React.FC<Props> = ({ url, icon }) => {
   return (
     <Flex align="center" justify="center">
       <QRCodeSVG value={url} size={192} />
@@ -42,3 +42,5 @@ export const QRCode: React.FC<Props> = ({ url, icon }) => {
     </Flex>
   );
 };
+
+export default QRCode;

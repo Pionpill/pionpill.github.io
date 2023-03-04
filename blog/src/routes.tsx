@@ -10,10 +10,9 @@ export const MainRoute: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/home/brief" element={<Brief />} />
-        <Route path="/home/experience" element={<Experience />} />
-        {/* <Route path="/home/skill" element={<Skill />} /> */}
+        <Route path="/brief" element={<Brief />} />
+        <Route path="/experience" element={<Experience />} />
+        {/* <Route path="/skill" element={<Skill />} /> */}
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

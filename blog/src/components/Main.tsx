@@ -1,24 +1,15 @@
 import styled from "styled-components";
+import { GapDegree } from "../styles";
+import { gapSelector } from "../utils/styledUtils";
 
 export const Main = styled.main<{
   align?: string;
   justify?: string;
-  gap?: string;
-  column?: boolean;
-  reverse?: boolean;
-  height?: string;
+  gap?: GapDegree;
 }>`
   display: flex;
-  align-items: ${({ align }) => align};
-  justify-content: ${({ justify }) => justify};
-  gap: ${({ gap }) => (gap ? gap : "initial")};
-  flex-direction: ${({ column, reverse }) =>
-    reverse
-      ? column
-        ? "column-reverse"
-        : "row-reverse"
-      : column
-      ? "column"
-      : "row"};
-  height: ${(props) => (props.height ? props.height : "initial")};
+  align-items: ${({ align }) => (align ? align : "center")};
+  justify-content: ${({ justify }) => (justify ? justify : "center")};
+  gap: ${({ gap }) => (gap ? gapSelector(gap) : 0)};
+  flex-direction: column;
 `;
