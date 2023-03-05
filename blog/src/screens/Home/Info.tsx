@@ -23,7 +23,7 @@ import Icon from "../../components/Icon";
 import P from "../../components/P";
 import { terrain } from "../../shared/img";
 import { Github } from "../../shared/info";
-import breakpoints from "../../styles/breakpoints";
+import { breakpoints } from "../../styles/measure";
 
 const InfoWrapper = styled(Flex)`
   flex-direction: column;

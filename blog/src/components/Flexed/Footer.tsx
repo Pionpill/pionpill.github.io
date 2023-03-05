@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { darken } from "polished";
 import styled from "styled-components";
 import { Github } from "../../shared/info";
-import breakpoints from "../../styles/breakpoints";
+import { breakpoints } from "../../styles/measure";
 import A from "../A";
 import Flex from "../Flex";
 import Icon from "../Icon";
@@ -12,14 +12,13 @@ import P from "../P";
 import RouteLink from "../RouteLink";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
-  background-color: ${(props) => darken(0.05, props.theme.background)};
+  background-color: ${({ theme }) => darken(0.05, theme.background)};
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 0.5em 0em;
-  position: absolute;
   left: 0px;
   flex-wrap: wrap;
   @media screen and (min-width: ${breakpoints.tablet}) {

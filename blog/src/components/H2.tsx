@@ -1,25 +1,22 @@
 import { lighten } from "polished";
 import styled from "styled-components";
 import { ShallowDegree, TextColor } from "../styles";
+import { spacing } from "../styles/measure";
 import { fontWeight } from "../styles/size";
-import { spacing } from "../styles/spacing";
 import { shallowSelector, textColorSelector } from "../utils/styledUtils";
 
 const H2 = styled.h2<{
   shallow?: ShallowDegree;
   color?: TextColor;
 }>`
-  color: ${(props) =>
-    lighten(
-      shallowSelector(props.shallow),
-      textColorSelector(props.color, props.theme)
-    )};
+  color: ${({ shallow, color, theme }) =>
+    lighten(shallowSelector(shallow), textColorSelector(color, theme))};
   font-weight: ${() => fontWeight.xxl};
   font-size: 32px;
   text-align: center;
   margin: 0;
   padding: ${() => spacing.font} 0;
-  text-shadow: 1px 1px 0.5px ${(props) => props.theme.shadow};
+  text-shadow: 1px 1px 0.5px ${({ theme }) => theme.shadow};
 `;
 
 export default H2;

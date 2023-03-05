@@ -18,14 +18,14 @@ type Props = {
 };
 
 const RouteLink = styled(Link)<Props>`
-  color: ${(props) =>
+  color: ${({ shallow, color, theme }) =>
     lighten(
-      shallowSelector(props.shallow),
-      props.color === "blue"
+      shallowSelector(shallow),
+      color === "blue"
         ? common.pointer
-        : props.color === "link"
+        : color === "link"
         ? common.link
-        : textColorSelector(props.color, props.theme)
+        : textColorSelector(color, theme)
     )};
   font-size: initial;
   font-weight: 400;
@@ -33,10 +33,10 @@ const RouteLink = styled(Link)<Props>`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  font-size: ${(props) => fontSizeSelector(props.size)};
-  font-weight: ${(props) => fontWeightSelector(props.weight)};
+  font-size: ${({ size }) => fontSizeSelector(size)};
+  font-weight: ${({ weight }) => fontWeightSelector(weight)};
   &:hover {
-    color: ${(props) => props.theme.blue};
+    color: ${({ theme }) => theme.blue};
     transition: all 0.5s;
   }
 `;

@@ -19,26 +19,26 @@ type Props = {
 };
 
 const A = styled.a<Props>`
-  color: ${(props) =>
+  color: ${({ shallow, color, theme }) =>
     lighten(
-      shallowSelector(props.shallow),
-      props.color === "blue"
+      shallowSelector(shallow),
+      color === "blue"
         ? common.pointer
-        : props.color === "link"
+        : color === "link"
         ? common.link
-        : textColorSelector(props.color, props.theme)
+        : textColorSelector(color, theme)
     )};
-  font-size: ${(props) => fontSizeSelector(props.size)};
-  font-weight: ${(props) => fontWeightSelector(props.weight)};
+  font-size: ${({ size }) => fontSizeSelector(size)};
+  font-weight: ${({ weight }) => fontWeightSelector(weight)};
   margin: 0;
   cursor: pointer;
-  white-space: ${(props) => (props.wrap ? "wrap" : "nowrap")};
+  white-space: ${({ wrap }) => (wrap ? "wrap" : "nowrap")};
   justify-content: center;
   align-items: center;
-  text-align: ${(props) => props.align};
+  text-align: ${({ align }) => align};
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.blue};
+    color: ${({ theme }) => theme.blue};
     /* transition: all 0.5s; */
   }
   display: inline;

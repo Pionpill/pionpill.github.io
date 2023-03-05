@@ -9,11 +9,10 @@ type Props = {
 };
 
 const Icon = styled.img<Props>`
-  width: ${(props) => (props.width ? props.width : "24px")};
-  height: ${(props) =>
-    props.height ? props.height : props.width ? props.width : "24px"};
-  border-radius: ${(props) =>
-    props.radius ? radiusSelector(props.radius) : radiusSelector("circle")};
+  width: ${({ width }) => (width ? width : "24px")};
+  height: ${({ height, width }) => (height ? height : width ? width : "24px")};
+  border-radius: ${({ radius }) =>
+    radius ? radiusSelector(radius) : radiusSelector("circle")};
   white-space: nowrap;
 `;
 

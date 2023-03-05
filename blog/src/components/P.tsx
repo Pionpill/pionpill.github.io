@@ -17,19 +17,16 @@ const P = styled.p<{
   weight?: FontWeight;
   space?: string;
 }>`
-  font-size: ${(props) => fontSizeSelector(props.size)};
-  color: ${(props) =>
-    lighten(
-      shallowSelector(props.shallow),
-      textColorSelector(props.color, props.theme)
-    )};
+  font-size: ${({ size }) => fontSizeSelector(size)};
+  color: ${({ shallow, color, theme }) =>
+    lighten(shallowSelector(shallow), textColorSelector(color, theme))};
   padding: 4px 0;
-  text-align: ${(props) => props.textAlign};
-  font-weight: ${(props) => fontWeightSelector(props.weight)};
+  text-align: ${({ textAlign }) => textAlign};
+  font-weight: ${({ weight }) => fontWeightSelector(weight)};
   margin: 0;
-  text-shadow: ${(props) =>
-    props.shadow ? `.5px .5px 1px ${props.theme.shadow}` : "auto"};
-  letter-spacing: ${(props) => props.space};
+  text-shadow: ${({ shadow, theme }) =>
+    shadow ? `.5px .5px 1px ${theme.shadow}` : "auto"};
+  letter-spacing: ${({ space }) => space};
 `;
 
 export default P;

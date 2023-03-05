@@ -9,9 +9,9 @@ type Props = {
 };
 
 export const Img = styled.img<Props>`
-  width: ${(props) => (props.size ? props.size : "24px")};
-  height: ${(props) => (props.height ? props.height : "auto")};
-  border-radius: ${(props) => radiusSelector(props.radius)};
+  width: ${({ size }) => (size ? size : "24px")};
+  height: ${({ height }) => (height ? height : "auto")};
+  border-radius: ${({ radius }) => radiusSelector(radius)};
   white-space: nowrap;
   object-fit: cover;
   overflow: hidden;

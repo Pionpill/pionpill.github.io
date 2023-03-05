@@ -1,5 +1,3 @@
-import { spacing } from "./spacing";
-
 const colors = {
     white: "#FFF",
     white05: "rgba(255, 255, 255, 0.05)",
@@ -33,7 +31,6 @@ const colors = {
 
 export const common = {
     ...colors,
-    ...spacing,
     wrong: colors.red,
     right: colors.green,
     danger: colors.danger,

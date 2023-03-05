@@ -15,14 +15,12 @@ type Props = {
 const Brand = styled.span<Props>`
   border-radius: 10%;
   padding: 3px 5px;
-  font-size: ${(props) =>
-    props.size ? fontSizeSelector(props.size) : fontSizeSelector("xs")};
-  text-shadow: 1px 0px ${(props) => props.theme.text};
-  color: ${(props) =>
-    props.textColor
-      ? textColorSelector(props.textColor, props.theme)
-      : common.text_white};
-  background-color: ${(props) => buttonColorSelector(props.color)};
+  font-size: ${({ size }) =>
+    size ? fontSizeSelector(size) : fontSizeSelector("xs")};
+  text-shadow: 1px 0px ${({ theme }) => theme.text};
+  color: ${({ textColor, theme }) =>
+    textColor ? textColorSelector(textColor, theme) : common.text_white};
+  background-color: ${({ color }) => buttonColorSelector(color)};
 `;
 
 export default Brand;

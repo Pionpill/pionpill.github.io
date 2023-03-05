@@ -1,4 +1,5 @@
-import breakpoints from "../styles/breakpoints";
+import { breakpoints } from "../styles/measure";
+
 
 export const isPhone = (): boolean => {
   return document.body.clientWidth < Number(breakpoints.phone.replace("px", ""));

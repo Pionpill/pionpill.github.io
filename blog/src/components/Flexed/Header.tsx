@@ -16,7 +16,7 @@ import RouteLink from "../RouteLink";
 
 const HeaderWrapper = styled.header`
   display: flex;
-  background-color: ${(props) => props.theme.header};
+  background-color: ${({ theme }) => theme.header};
   align-items: center;
   justify-content: space-around;
   height: 50px;
