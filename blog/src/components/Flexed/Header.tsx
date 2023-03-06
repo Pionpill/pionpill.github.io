@@ -1,17 +1,28 @@
 import { faGithub, faWeixin } from "@fortawesome/free-brands-svg-icons";
-import { faBars, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faEllipsis,
+  faEnvelope,
+  faMoon,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Github } from "../../shared/info";
+import { RootState } from "../../store";
+import { toggleTheme } from "../../store/root";
 import { toggleComponent } from "../../utils/componentsUtils";
 import { isPhone } from "../../utils/responsiveUtils";
 import A from "../A";
+import Button from "../Button";
 import Flex from "../Flex";
 import Icon from "../Icon";
 import P from "../P";
 import EmailPopup from "../Popup/EmailPopup";
 import WeixinPopup from "../Popup/WeixinPopup";
+import Responsive from "../Responsive";
 import RouteLink from "../RouteLink";
 
 const HeaderWrapper = styled.header`
@@ -53,21 +64,44 @@ export const Header: React.FC = () => {
       </>
     );
   };
+
+  const ThemeLinks: React.FC = () => {
+    const themeIcon =
+      useSelector((state: RootState) => state.root.theme) === "light"
+        ? faSun
+        : faMoon;
+    const dispatch = useDispatch();
+
+    return (
+      <>
+        <Button>
+          <FontAwesomeIcon
+            icon={themeIcon}
+            onClick={() => dispatch(toggleTheme())}
+          />
+        </Button>
+      </>
+    );
+  };
+
   const ContactLinks: React.FC = () => {
     return (
       <>
         <A href={Github.link} color="white">
           <FontAwesomeIcon icon={faGithub} />
         </A>
-        <A color="white">
+        <Button style={{ padding: 0 }}>
           <FontAwesomeIcon
             icon={faWeixin}
             onClick={() => toggleComponent(weixinPopupRef)}
           />
-        </A>
-        <A color="white" onClick={() => toggleComponent(emailPopupRef)}>
+        </Button>
+        <Button
+          style={{ padding: 0 }}
+          onClick={() => toggleComponent(emailPopupRef)}
+        >
           <FontAwesomeIcon icon={faEnvelope} />
-        </A>
+        </Button>
       </>
     );
   };
@@ -99,7 +133,9 @@ export const Header: React.FC = () => {
           </>
         )}
         <Flex>
-          <Icon radius="circle" width="24px" src={Github.icon} />
+          <Responsive tabletHidden>
+            <Icon radius="circle" width="24px" src={Github.icon} />
+          </Responsive>
           <RouteLink color="white" weight="xl" size="lg" to="/">
             Pionpill / gitpage
           </RouteLink>
@@ -110,22 +146,27 @@ export const Header: React.FC = () => {
               <RouteLinks />
             </Flex>
             <Flex gap="md">
-              <P weight="sm" color="white">
-                Concat Me:
-              </P>
+              <ThemeLinks />
+              <Responsive tabletHidden>
+                <P weight="sm" color="white">
+                  Concat Me:
+                </P>
+              </Responsive>
+              <Responsive tabletShow>
+                <P weight="sm" color="white">
+                  |
+                </P>
+              </Responsive>
               <ContactLinks />
             </Flex>
           </>
         )}
         {isPhone() && (
           <>
-            <A
-              color="white"
-              weight="sm"
-              onClick={() => toggleComponent(contactBarRef)}
-            >
-              Concat Me
-            </A>
+            <ThemeLinks />
+            <Button weight="sm" onClick={() => toggleComponent(contactBarRef)}>
+              <FontAwesomeIcon icon={faEllipsis} />
+            </Button>
             <Flex
               ref={contactBarRef}
               gap="md"

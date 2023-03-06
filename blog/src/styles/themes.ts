@@ -1,3 +1,5 @@
+import { Theme } from ".";
+
 const colors = {
     white: "#FFF",
     white05: "rgba(255, 255, 255, 0.05)",
@@ -54,7 +56,7 @@ export const common = {
     shadow: colors.black50,
 }
 
-export const light = {
+export const light: Theme = {
     ...common,
     text: colors.black90,
     text_reverse: colors.white90,
@@ -62,7 +64,7 @@ export const light = {
     main: colors.white75,
 }
 
-export const black = {
+export const dark: Theme = {
     ...common,
     text: colors.white90,
     text_reverse: colors.black90,
