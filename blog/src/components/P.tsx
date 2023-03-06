@@ -1,5 +1,5 @@
 import { lighten } from "polished";
-import styled, { CSSProperties } from "styled-components";
+import styled, { css } from "styled-components";
 import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
 import {
   fontSizeSelector,
@@ -13,19 +13,26 @@ const P = styled.p<{
   shallow?: ShallowDegree;
   color?: TextColor;
   shadow?: boolean;
-  textAlign?: CSSProperties["textAlign"];
+  center?: boolean;
+  isTitle?: boolean;
   weight?: FontWeight;
   space?: string;
 }>`
-  font-size: ${({ size }) => fontSizeSelector(size)};
   color: ${({ shallow, color, theme }) =>
     lighten(shallowSelector(shallow), textColorSelector(color, theme))};
   padding: 4px 0;
-  text-align: ${({ textAlign }) => textAlign};
-  font-weight: ${({ weight }) => fontWeightSelector(weight)};
+  text-align: ${({ center }) => (center ? "center" : "left")};
   margin: 0;
   text-shadow: ${({ shadow, theme }) =>
     shadow ? `.5px .5px 1px ${theme.shadow}` : "auto"};
+  font-size: ${({ size }) => fontSizeSelector(size)};
+  font-weight: ${({ weight }) => fontWeightSelector(weight)};
+  ${({ isTitle }) =>
+    isTitle &&
+    css`
+      font-size: ${() => fontSizeSelector("lg")};
+      font-weight: ${() => fontWeightSelector("xl")};
+    `}
   letter-spacing: ${({ space }) => space};
 `;
 

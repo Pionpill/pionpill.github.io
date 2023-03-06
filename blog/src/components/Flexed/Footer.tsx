@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { darken } from "polished";
 import styled from "styled-components";
 import { Github } from "../../shared/info";
-import { breakpoints } from "../../styles/measure";
 import A from "../A";
 import Flex from "../Flex";
 import Icon from "../Icon";
@@ -21,9 +20,6 @@ const FooterWrapper = styled.footer<{ bottom?: boolean }>`
   padding: 0.5em 0em;
   left: 0px;
   flex-wrap: wrap;
-  @media screen and (min-width: ${breakpoints.tablet}) {
-    height: 300px;
-  }
 `;
 
 export const Footer: React.FC = () => {
@@ -52,13 +48,13 @@ export const Footer: React.FC = () => {
             </A>
           </Flex>
         </Flex>
-        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">使用的开源技术</P>
           <A shallow="sm" href="https://react.docschina.org/">
             React
           </A>
-          <A shallow="sm" href="https://github.com/remix-run/react-router">
-            react-router
+          <A shallow="sm" href="https://cn.redux.js.org/">
+            Redux
           </A>
           <A shallow="sm" href="https://www.typescriptlang.org/">
             TypeScript
@@ -70,8 +66,11 @@ export const Footer: React.FC = () => {
             Edge
           </A>
         </Flex>
-        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">使用的开源组件</P>
+          <A shallow="sm" href="https://github.com/remix-run/react-router">
+            react-router
+          </A>
           <A shallow="sm" href="https://fontawesome.com/">
             fontawesome
           </A>
@@ -101,7 +100,7 @@ export const Footer: React.FC = () => {
             amap
           </A>
         </Flex>
-        <Flex column align="flex-start" style={{ maxWidth: "175px" }}>
+        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">数据来源</P>
           <A shallow="sm" href="https://github.com/">
             Github

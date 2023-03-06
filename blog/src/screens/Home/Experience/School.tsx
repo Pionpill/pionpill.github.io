@@ -9,12 +9,11 @@ import Flex from "../../../components/Flex";
 import { Img } from "../../../components/Img";
 import P from "../../../components/P";
 import { pionpill } from "../../../shared/img";
-import { ContextWrapper, ImgWrapper, TextWrapper } from "./Wrapper";
 
 export const School: React.FC = () => {
   return (
-    <ContextWrapper>
-      <ImgWrapper>
+    <Flex tabletResponsive>
+      <Flex>
         <Img src={pionpill["pionpill-2"]} size="200px" height="200px" />
         <P>明德格物，立己达人</P>
         <Flex style={{ gap: "10px" }} wrap justify="center">
@@ -28,9 +27,9 @@ export const School: React.FC = () => {
             <FontAwesomeIcon icon={faCalculator} /> 国赛一等奖
           </Brand>
         </Flex>
-      </ImgWrapper>
+      </Flex>
 
-      <TextWrapper>
+      <Flex>
         <P size="xxl" weight="xl" space="huge">
           大学生活
         </P>
@@ -65,7 +64,7 @@ export const School: React.FC = () => {
         <P>
           必须吐槽大学的学阀风气，一类竞赛内定好了队伍还鼓励其他学生陪跑，带团队做了半个多月的项目全浪费了，真是世间险恶。
         </P>
-      </TextWrapper>
-    </ContextWrapper>
+      </Flex>
+    </Flex>
   );
 };

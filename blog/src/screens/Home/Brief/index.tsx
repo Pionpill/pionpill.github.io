@@ -1,12 +1,9 @@
+import Flex from "../../../components/Flex";
 import { Footer } from "../../../components/Flexed/Footer";
 import { Header } from "../../../components/Flexed/Header";
 import { Main } from "../../../components/Main";
 import { Info } from "../Info";
 import { Menu } from "../Menu";
-import { Future } from "./Future";
-import { Profile } from "./Profile";
-import { School } from "./School";
-import { Wrapper } from "./Wrapper";
 
 export const Brief: React.FC = () => {
   return (
@@ -15,11 +12,11 @@ export const Brief: React.FC = () => {
       <Main>
         <Info />
         <Menu />
-        <Wrapper style={{ gap: "1em" }}>
-          <Profile />
+        <Flex style={{ gap: "1em" }}>
+          {/* <Profile />
           <School />
-          <Future />
-        </Wrapper>
+          <Future /> */}
+        </Flex>
       </Main>
       <Footer />
     </>

@@ -31,6 +31,7 @@ const A = styled.a<Props>`
   font-size: ${({ size }) => fontSizeSelector(size)};
   font-weight: ${({ weight }) => fontWeightSelector(weight)};
   margin: 0;
+  padding: 4px 0;
   cursor: pointer;
   white-space: ${({ wrap }) => (wrap ? "wrap" : "nowrap")};
   justify-content: center;

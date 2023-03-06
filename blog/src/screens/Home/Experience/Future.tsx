@@ -5,12 +5,11 @@ import Flex from "../../../components/Flex";
 import { Img } from "../../../components/Img";
 import P from "../../../components/P";
 import { pionpill } from "../../../shared/img";
-import { ContextWrapper, ImgWrapper, TextWrapper } from "./Wrapper";
 
 export const Future: React.FC = () => {
   return (
-    <ContextWrapper>
-      <ImgWrapper>
+    <Flex tabletResponsive>
+      <Flex>
         <Img src={pionpill["pionpill-3"]} size="200px" height="200px" />
         <P>上班! 上班! 上班!</P>
         <Flex style={{ gap: "10px" }} wrap justify="center">
@@ -21,9 +20,9 @@ export const Future: React.FC = () => {
             <FontAwesomeIcon icon={faReact} /> TypeScript 前端
           </Brand>
         </Flex>
-      </ImgWrapper>
+      </Flex>
 
-      <TextWrapper>
+      <Flex>
         <P size="xl" weight="xl" space="huge">
           未来打算
         </P>
@@ -40,7 +39,7 @@ export const Future: React.FC = () => {
           如果您是HR，请查看技能页查看我的技术栈，Project
           页查看我做过的项目，Article 页查看我的一些笔记和文章。
         </P>
-      </TextWrapper>
-    </ContextWrapper>
+      </Flex>
+    </Flex>
   );
 };

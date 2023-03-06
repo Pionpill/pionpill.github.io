@@ -11,6 +11,7 @@ export const Main = styled.main<{
 }>`
   display: flex;
   align-items: ${({ align }) => (align ? align : "center")};
+  background-color: ${({ theme }) => theme.background};
   justify-content: ${({ justify }) => (justify ? justify : "center")};
   padding: ${({ bleed }) =>
     bleed ? `${spacing.hpadding} ${spacing.vpadding}` : 0};

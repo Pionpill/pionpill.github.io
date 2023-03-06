@@ -10,12 +10,11 @@ import Flex from "../../../components/Flex";
 import { Img } from "../../../components/Img";
 import P from "../../../components/P";
 import { pionpill } from "../../../shared/img";
-import { ContextWrapper, ImgWrapper, TextWrapper } from "./Wrapper";
 
 export const Profile: React.FC = () => {
   return (
-    <ContextWrapper>
-      <ImgWrapper>
+    <Flex tabletResponsive>
+      <Flex>
         <Img src={pionpill["pionpill-1"]} size="200px" height="200px" />
         <P>Talk is easy, Show me your code</P>
         <Flex style={{ gap: "10px" }} wrap justify="center">
@@ -32,9 +31,9 @@ export const Profile: React.FC = () => {
             <FontAwesomeIcon icon={faDumbbell} /> 健身
           </Brand>
         </Flex>
-      </ImgWrapper>
+      </Flex>
 
-      <TextWrapper>
+      <Flex>
         <P size="xxl" weight="xl" space="huge">
           个人简介
         </P>
@@ -64,7 +63,7 @@ export const Profile: React.FC = () => {
           RimWorld，帝国时代4，战地系列，巫师3。不喜欢王者荣耀，吃鸡。
         </P>
         <P>具体项目/作品内容在对应界面下有展示</P>
-      </TextWrapper>
-    </ContextWrapper>
+      </Flex>
+    </Flex>
   );
 };

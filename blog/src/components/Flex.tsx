@@ -1,9 +1,13 @@
 import { lighten } from "polished";
 import styled, { css, CSSProperties } from "styled-components";
-import { GapDegree, ShallowDegree } from "../styles";
+import { GapDegree, RadiusType, ShallowDegree } from "../styles";
 import { breakpoints, spacing } from "../styles/measure";
 import { common } from "../styles/themes";
-import { gapSelector, shallowSelector } from "../utils/styledUtils";
+import {
+  gapSelector,
+  radiusSelector,
+  shallowSelector,
+} from "../utils/styledUtils";
 
 type Props = {
   wrap?: boolean;
@@ -18,9 +22,11 @@ type Props = {
   tabletResponsive?: boolean;
   phoneHidden?: boolean;
   tabletHidden?: boolean;
+  shadow?: boolean;
   justify?: CSSProperties["justifyContent"];
   align?: CSSProperties["alignItems"];
   padding?: CSSProperties["padding"];
+  radius?: RadiusType;
 };
 
 const Flex = styled.div<Props>`
@@ -46,6 +52,15 @@ const Flex = styled.div<Props>`
       : "row"};
   justify-content: ${({ justify }) => (justify ? justify : "center")};
   align-items: ${({ align }) => (align ? align : "center")};
+  border-radius: ${({ radius }) => {
+    return radius ? radiusSelector(radius) : "initial";
+  }};
+  ${({ shadow }) =>
+    shadow &&
+    css`
+      box-shadow: 0.5px 0.75px 2px ${({ theme }) => theme.shadow};
+    `}
+
   ${({ full }) =>
     full &&
     css`

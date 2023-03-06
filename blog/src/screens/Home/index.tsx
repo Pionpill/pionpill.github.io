@@ -1,10 +1,10 @@
+import Flex from "../../components/Flex";
 import { Footer } from "../../components/Flexed/Footer";
 import { Header } from "../../components/Flexed/Header";
 import { Main } from "../../components/Main";
-import { Future } from "./Brief/Future";
-import { Profile } from "./Brief/Profile";
-import { School } from "./Brief/School";
-import { Wrapper } from "./Brief/Wrapper";
+import { Future } from "./Experience/Future";
+import { Profile } from "./Experience/Profile";
+import { School } from "./Experience/School";
 import { Info } from "./Info";
 import { Menu } from "./Menu";
 
@@ -15,11 +15,11 @@ export const Home: React.FC = () => {
       <Main>
         <Info />
         <Menu />
-        <Wrapper style={{ gap: "1em" }}>
+        <Flex style={{ gap: "1em" }}>
           <Profile />
           <School />
           <Future />
-        </Wrapper>
+        </Flex>
       </Main>
       <Footer />
     </>

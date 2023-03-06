@@ -8,10 +8,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useThemeChoice } from "../../hooks/useThemeChoice";
 import { Github } from "../../shared/info";
-import { RootState } from "../../store";
 import { toggleTheme } from "../../store/root";
 import { toggleComponent } from "../../utils/componentsUtils";
 import { isPhone } from "../../utils/responsiveUtils";
@@ -66,10 +66,7 @@ export const Header: React.FC = () => {
   };
 
   const ThemeLinks: React.FC = () => {
-    const themeIcon =
-      useSelector((state: RootState) => state.root.theme) === "light"
-        ? faSun
-        : faMoon;
+    const themeIcon = useThemeChoice(faSun, faMoon);
     const dispatch = useDispatch();
 
     return (

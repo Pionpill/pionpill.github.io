@@ -1,25 +1,21 @@
-import { Footer } from "../../../components/Flexed/Footer";
-import { Header } from "../../../components/Flexed/Header";
-import { Main } from "../../../components/Main";
+import Flex from "../../../components/Flex";
+import Page from "../../../components/Flexed/Page";
 import { Info } from "../Info";
 import { Menu } from "../Menu";
 import { Collage } from "./Collage";
 import { Teen } from "./Teen";
-import { Wrapper } from "./Wrapper";
 
 export const Experience: React.FC = () => {
   return (
     <>
-      <Header />
-      <Main>
+      <Page>
         <Info />
         <Menu />
-        <Wrapper style={{ gap: "1em" }}>
+        <Flex column bleed style={{ gap: "1em" }}>
           <Teen />
           <Collage />
-        </Wrapper>
-      </Main>
-      <Footer />
+        </Flex>
+      </Page>
     </>
   );
 };

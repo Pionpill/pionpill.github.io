@@ -3,7 +3,7 @@ import RouteLink from "../../components/RouteLink";
 
 export const Menu: React.FC = () => {
   return (
-    <Flex black style={{ width: "100vw" }}>
+    <Flex black style={{ width: "100%" }}>
       <RouteLink color="white" to="/brief">
         Brief (简介)
       </RouteLink>

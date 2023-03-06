@@ -1,10 +1,11 @@
 import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { useThemeChoice } from "./hooks/useThemeChoice";
 import "./index.css";
 import { MainRoute } from "./routes";
-import store, { RootState } from "./store";
+import store from "./store";
 import { dark, light } from "./styles/themes";
 
 const root = ReactDOM.createRoot(
@@ -12,10 +13,7 @@ const root = ReactDOM.createRoot(
 );
 
 const Theme: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const theme =
-    useSelector((state: RootState) => state.root.theme) === "light"
-      ? light
-      : dark;
+  const theme = useThemeChoice(light, dark);
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
