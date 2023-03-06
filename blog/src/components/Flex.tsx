@@ -9,15 +9,16 @@ type Props = {
   wrap?: boolean;
   column?: boolean;
   reverse?: boolean;
-  justify?: CSSProperties["justifyContent"];
-  align?: CSSProperties["alignItems"];
   black?: boolean;
   shallow?: ShallowDegree;
   full?: boolean;
   bleed?: boolean;
   gap?: GapDegree;
+  phoneResponsive?: boolean;
+  tabletResponsive?: boolean;
+  justify?: CSSProperties["justifyContent"];
+  align?: CSSProperties["alignItems"];
   padding?: CSSProperties["padding"];
-  responsive?: boolean;
 };
 
 const Flex = styled.div<Props>`
@@ -49,8 +50,15 @@ const Flex = styled.div<Props>`
       width: calc(100vw - 50px);
       height: 100vh;
     `}
-  ${({ responsive }) =>
-    responsive &&
+  ${({ tabletResponsive }) =>
+    tabletResponsive &&
+    css`
+      @media screen and (max-width: ${breakpoints.tablet}) {
+        flex-direction: column;
+      }
+    `}
+  ${({ phoneResponsive }) =>
+    phoneResponsive &&
     css`
       @media screen and (max-width: ${breakpoints.phone}) {
         flex-direction: column;

@@ -17,7 +17,7 @@ const Brand = styled.span<Props>`
   padding: 3px 5px;
   font-size: ${({ size }) =>
     size ? fontSizeSelector(size) : fontSizeSelector("xs")};
-  text-shadow: 1px 0px ${({ theme }) => theme.text};
+  text-shadow: 0.5px 0.75px ${({ theme }) => theme.shadow};
   color: ${({ textColor, theme }) =>
     textColor ? textColorSelector(textColor, theme) : common.text_white};
   background-color: ${({ color }) => buttonColorSelector(color)};

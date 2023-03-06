@@ -29,7 +29,7 @@ const FooterWrapper = styled.footer<{ bottom?: boolean }>`
 export const Footer: React.FC = () => {
   return (
     <FooterWrapper id="footer">
-      <Flex wrap align="flex-start" responsive style={{ gap: "36px" }}>
+      <Flex wrap align="flex-start" phoneResponsive style={{ gap: "36px" }}>
         <Flex column align="flex-start">
           <Flex gap="xs">
             <Icon radius="circle" width="18px" src={Github.icon} />

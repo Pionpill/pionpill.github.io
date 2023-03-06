@@ -3,6 +3,7 @@ import {
   faHome,
   faLocationDot,
   faMountainSun,
+  faSchool,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -54,6 +55,7 @@ const BaseInfo: React.FC = () => {
         <FontAwesomeIcon icon={faLocationDot} /> &nbsp; 江苏 南京 &nbsp;
         <FontAwesomeIcon icon={faHome} title="从小生长在无锡" /> &nbsp; 江苏
         无锡 &nbsp;
+        <FontAwesomeIcon icon={faSchool} title="从小生长在无锡" /> &nbsp; 在校
       </P>
       <P color="white">专业: React 前端, Java 后端 | 兴趣: Minecraft 开发</P>
     </Flex>

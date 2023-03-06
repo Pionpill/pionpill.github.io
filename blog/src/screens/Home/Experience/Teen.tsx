@@ -1,5 +1,4 @@
 import AMapLoader from "@amap/amap-jsapi-loader";
-import mapboxgl from "mapbox-gl";
 import React from "react";
 import styled from "styled-components";
 import Flex from "../../../components/Flex";
@@ -34,7 +33,6 @@ export const Teen: React.FC = () => {
   const mapContainer = React.useRef<any>(null);
   const map = React.useRef<any>(null);
   const mapKey = token.amap;
-  mapboxgl.accessToken = token.mapbox;
 
   React.useEffect(() => {
     AMapLoader.load({
