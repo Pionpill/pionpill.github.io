@@ -28,11 +28,13 @@ const RouteLink = styled(Link)<Props>`
         : textColorSelector(color, theme)
     )};
   font-size: initial;
+  display: flex;
   font-weight: 400;
   padding: 0.5em 0.75em;
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  flex-direction: row;
   font-size: ${({ size }) => fontSizeSelector(size)};
   font-weight: ${({ weight }) => fontWeightSelector(weight)};
   &:hover {

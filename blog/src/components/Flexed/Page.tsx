@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { GapDegree } from "../../styles";
 import { Main } from "../Main";
 import { Footer } from "./Footer";
@@ -10,7 +10,7 @@ type Props = {
   gap?: GapDegree;
   style?: Object;
   bleed?: boolean;
-  children: any;
+  children: ReactNode;
 };
 
 const Page: React.FC<Props> = ({

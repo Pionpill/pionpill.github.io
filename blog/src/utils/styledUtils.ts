@@ -93,6 +93,8 @@ export const buttonColorSelector = (color: ButtonColor | undefined): string => {
     return common.button_green
   if (color === "plain")
     return common.button_plain
+  if (color === "transparent")
+    return "transparent"
   return common.button_blue
 }
 

@@ -16,6 +16,8 @@ type Props = {
   gap?: GapDegree;
   phoneResponsive?: boolean;
   tabletResponsive?: boolean;
+  phoneHidden?: boolean;
+  tabletHidden?: boolean;
   justify?: CSSProperties["justifyContent"];
   align?: CSSProperties["alignItems"];
   padding?: CSSProperties["padding"];
@@ -62,6 +64,20 @@ const Flex = styled.div<Props>`
     css`
       @media screen and (max-width: ${breakpoints.phone}) {
         flex-direction: column;
+      }
+    `}
+  ${({ tabletHidden }) =>
+    tabletHidden &&
+    css`
+      @media screen and (max-width: ${breakpoints.tablet}) {
+        display: none;
+      }
+    `}
+  ${({ phoneHidden }) =>
+    phoneHidden &&
+    css`
+      @media screen and (max-width: ${breakpoints.phone}) {
+        display: none;
       }
     `}
 `;
