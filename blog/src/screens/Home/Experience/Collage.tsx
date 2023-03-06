@@ -1,30 +1,56 @@
-import { faLeftLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGraduationCap,
+  faLeftLong,
+  faTrophy,
+  faUpLong,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import styled from "styled-components";
+import React, { ReactNode } from "react";
+import Absolute from "../../../components/Absolute";
+import Board from "../../../components/Board";
 import Brand from "../../../components/Brand";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import P from "../../../components/P";
+import { useThemeChoice } from "../../../hooks/useThemeChoice";
 import { isPhone } from "../../../utils/responsiveUtils";
 
-const Li = styled.li`
-  white-space: normal;
-`;
+type Props = { children: ReactNode };
 
-const Ul = styled.ul`
-  white-space: normal;
-  padding-left: 0;
-`;
+const CircleIcon: React.FC<Props> = ({ children }) => {
+  const bgColor = useThemeChoice("#f1f2f6", "#2a2a2a");
+  return (
+    <Flex
+      radius="circle"
+      style={{ backgroundColor: bgColor, minWidth: "36px", minHeight: "36px" }}
+    >
+      {children}
+    </Flex>
+  );
+};
 
 export const Collage: React.FC = () => {
   return (
     <Flex column>
       <H2>大学时代</H2>
       <Flex phoneResponsive>
-        <Flex style={{ width: "300px", height: "300px", position: "relative" }}>
-          <span style={{ position: "absolute", bottom: 0, left: 0 }}>123</span>
-        </Flex>
+        <Board width="300px" height="300px">
+          <Absolute x="150px" y="150px">
+            <CircleIcon>
+              <FontAwesomeIcon icon={faGraduationCap} color="#fc9588" />
+            </CircleIcon>
+          </Absolute>
+          <Absolute x="150px" y="50px">
+            <Flex column>
+              <CircleIcon>
+                <FontAwesomeIcon icon={faTrophy} color="#94e6fe" />
+              </CircleIcon>
+              <P size="xs" shallow="md" style={{ width: "100px" }}>
+                数模美赛 · 一等奖
+              </P>
+            </Flex>
+          </Absolute>
+        </Board>
         <Flex column align="flex-start">
           <P isTitle>庆幸大学没有荒废，学到很多</P>
           <Flex column align="flex-start" gap="xs">

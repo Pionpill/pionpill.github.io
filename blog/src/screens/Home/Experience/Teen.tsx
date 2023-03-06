@@ -17,8 +17,6 @@ import { coordinate } from "../../../shared/coordinate";
 import { token } from "../../../tokens/token";
 
 const Card: React.FC<{
-  light?: string;
-  dark?: string;
   children: ReactNode;
 }> = ({ children }) => {
   const bgColor = useThemeChoice("#f1f2f6", "#2a2a2a");
