@@ -1,0 +1,17 @@
+import Flex from "../../../components/Flex";
+import RouteLink from "../../../components/RouteLink";
+
+const Menu: React.FC = () => {
+  return (
+    <Flex black style={{ width: "100%" }}>
+      <RouteLink color="white" to="/">
+        Index (主页)
+      </RouteLink>
+      <RouteLink color="white" to="/experience">
+        Experience (经历)
+      </RouteLink>
+    </Flex>
+  );
+};
+
+export default Menu;

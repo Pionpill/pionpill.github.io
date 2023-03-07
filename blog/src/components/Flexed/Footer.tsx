@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
   return (
     <FooterWrapper id="footer">
       <Flex wrap align="flex-start" phoneResponsive style={{ gap: "36px" }}>
-        <Flex column align="flex-start">
+        <Flex gap="xxs" column align="flex-start">
           <Flex gap="xs">
             <Icon radius="circle" width="18px" src={Github.icon} />
             <RouteLink weight="xl" to="/">
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
             </A>
           </Flex>
         </Flex>
-        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
+        <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">使用的开源技术</P>
           <A shallow="sm" href="https://react.docschina.org/">
             React
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
             Edge
           </A>
         </Flex>
-        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
+        <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">使用的开源组件</P>
           <A shallow="sm" href="https://github.com/remix-run/react-router">
             react-router
@@ -100,7 +100,7 @@ export const Footer: React.FC = () => {
             amap
           </A>
         </Flex>
-        <Flex column align="flex-start" style={{ minWidth: "100px" }}>
+        <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">数据来源</P>
           <A shallow="sm" href="https://github.com/">
             Github

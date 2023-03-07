@@ -18,6 +18,8 @@ type Props = {
   full?: boolean;
   bleed?: boolean;
   gap?: Degree;
+  bgSecond?: boolean;
+  limitWidth?: boolean;
   phoneResponsive?: boolean;
   tabletResponsive?: boolean;
   phoneHidden?: boolean;
@@ -40,8 +42,7 @@ const Flex = styled.div<Props>`
       ? `${spacing.hpadding} ${spacing.vpadding}`
       : "auto"};
   gap: ${({ gap }) => gapSelector(gap)};
-  background-color: ${({ shallow, black }) =>
-    lighten(shallowSelector(shallow), black ? common.header : "transparent")};
+
   flex-direction: ${({ column, reverse }) =>
     reverse
       ? column
@@ -52,9 +53,20 @@ const Flex = styled.div<Props>`
       : "row"};
   justify-content: ${({ justify }) => (justify ? justify : "center")};
   align-items: ${({ align }) => (align ? align : "center")};
+  max-width: ${({ limitWidth }) => limitWidth && spacing.mainWidth};
   border-radius: ${({ radius }) => {
     return radius ? radiusSelector(radius) : "initial";
   }};
+
+  background-color: ${({ shallow, black }) =>
+    black &&
+    lighten(shallowSelector(shallow), black ? common.header : "transparent")};
+  background-color: ${({ shallow, bgSecond, theme }) =>
+    bgSecond &&
+    lighten(
+      shallowSelector(shallow),
+      bgSecond ? theme.background_second : "transparent"
+    )};
   ${({ shadow }) =>
     shadow &&
     css`

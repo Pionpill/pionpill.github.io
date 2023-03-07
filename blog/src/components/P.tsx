@@ -20,7 +20,8 @@ const P = styled.p<{
 }>`
   color: ${({ shallow, color, theme }) =>
     lighten(shallowSelector(shallow), textColorSelector(color, theme))};
-  padding: 4px 0;
+  padding: ${({ size }) =>
+    size === "xxs" || size === "xs" ? "2px 0" : "4px 0"};
   text-align: ${({ center }) => (center ? "center" : "left")};
   margin: 0;
   text-shadow: ${({ shadow, theme }) =>

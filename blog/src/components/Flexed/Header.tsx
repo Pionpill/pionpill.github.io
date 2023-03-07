@@ -43,22 +43,46 @@ export const Header: React.FC = () => {
   const routeBarRef = React.useRef(null);
   const contactBarRef = React.useRef(null);
 
+  const onClickAlert = () => {
+    alert("没时间写，呜呜呜");
+  };
+
   const RouteLinks: React.FC = () => {
     return (
       <>
         <RouteLink color="white" weight="xl" to="/">
           Home
         </RouteLink>
-        <RouteLink color="white" weight="xl" to="/">
+        <RouteLink
+          color="white"
+          weight="xl"
+          to="/"
+          onClick={() => onClickAlert()}
+        >
           Article
         </RouteLink>
-        <RouteLink color="white" weight="xl" to="/">
+        <RouteLink
+          color="white"
+          weight="xl"
+          to="/"
+          onClick={() => onClickAlert()}
+        >
           Project
         </RouteLink>
-        <RouteLink color="white" weight="xl" to="/">
+        <RouteLink
+          color="white"
+          weight="xl"
+          to="/"
+          onClick={() => onClickAlert()}
+        >
           Works
         </RouteLink>
-        <RouteLink color="white" weight="xl" to="/">
+        <RouteLink
+          color="white"
+          weight="xl"
+          to="/"
+          onClick={() => onClickAlert()}
+        >
           Other
         </RouteLink>
       </>
@@ -113,7 +137,7 @@ export const Header: React.FC = () => {
             </A>
             <Flex
               ref={routeBarRef}
-              gap="md"
+              gap="xs"
               black
               shallow="xs"
               style={{
@@ -129,7 +153,7 @@ export const Header: React.FC = () => {
             ;
           </>
         )}
-        <Flex>
+        <Flex gap="xs">
           <Responsive tabletHidden>
             <Icon radius="circle" width="24px" src={Github.icon} />
           </Responsive>
@@ -139,10 +163,10 @@ export const Header: React.FC = () => {
         </Flex>
         {!isPhone() && (
           <>
-            <Flex gap="md">
+            <Flex gap="xs">
               <RouteLinks />
             </Flex>
-            <Flex gap="md">
+            <Flex gap="xs">
               <ThemeLinks />
               <Responsive tabletHidden>
                 <P weight="sm" color="white">
@@ -166,7 +190,7 @@ export const Header: React.FC = () => {
             </Button>
             <Flex
               ref={contactBarRef}
-              gap="md"
+              gap="xs"
               black
               style={{
                 display: "none",

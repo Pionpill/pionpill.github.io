@@ -3,7 +3,7 @@ import Degree from "../styles";
 import { spacing } from "../styles/measure";
 import { gapSelector } from "../utils/styledUtils";
 
-export const Main = styled.main<{
+const Main = styled.main<{
   align?: string;
   justify?: string;
   gap?: Degree;
@@ -18,3 +18,5 @@ export const Main = styled.main<{
   gap: ${({ gap }) => (gap ? gapSelector(gap) : 0)};
   flex-direction: column;
 `;
+
+export default Main;

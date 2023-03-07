@@ -14,12 +14,13 @@ import H2 from "../../../components/H2";
 import P from "../../../components/P";
 import { useThemeChoice } from "../../../hooks/useThemeChoice";
 import { coordinate } from "../../../shared/coordinate";
+import { spacing } from "../../../styles/measure";
 import { token } from "../../../tokens/token";
 
 const Card: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  const bgColor = useThemeChoice("#f1f2f6", "#2a2a2a");
+  const bgColor = useThemeChoice("#fafafa", "#3a3a3a");
   return (
     <Flex
       style={{
@@ -77,12 +78,19 @@ export const Teen: React.FC = () => {
   };
 
   return (
-    <Flex column gap="xl">
+    <Flex column gap="xl" bleed limitWidth bgSecond>
       <H2>学生时代</H2>
-      <Flex>
-        <Flex ref={mapContainer} style={{ width: "75vw", height: "500px" }} />
+      <Flex style={{ width: "80vw" }} gap="xl">
+        <Flex
+          ref={mapContainer}
+          style={{
+            width: "100%",
+            maxWidth: spacing.mainWidth,
+            height: "500px",
+          }}
+        />
       </Flex>
-      <Flex wrap align="flex-start" style={{ gap: "32px" }}>
+      <Flex wrap align="flex-start" gap="lg">
         <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
           <Card>
             <FontAwesomeIcon icon={faBaby} size="2x" color="#dd7694" />

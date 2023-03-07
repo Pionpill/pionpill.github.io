@@ -7,8 +7,8 @@ const Absolute = styled(Flex)<{
 }>`
   position: absolute;
   left: ${({ x }) => (x ? x : "inherit")};
-  bottom: ${({ y }) => (y ? y : "inherit")};
-  transform: translateX(-50%) translateY(50%);
+  top: ${({ y }) => (y ? y : "inherit")};
+  transform: translateX(-50%) translateY(-50%);
 `;
 
 export default Absolute;

@@ -24,17 +24,17 @@ export const gapSelector = (gap: Degree | undefined): string => {
   if (gap === "xxs")
     return "2px"
   if (gap === "xs")
-    return "4px"
+    return "6px"
   if (gap === "sm")
-    return "8px"
-  if (gap === "md")
     return "12px"
-  if (gap === "lg")
-    return "16px"
-  if (gap === "xl")
+  if (gap === "md")
     return "24px"
+  if (gap === "lg")
+    return "36px"
+  if (gap === "xl")
+    return "48px"
   if (gap === "xxl")
-    return "38px"
+    return "64px"
   return "12px";
 }
 

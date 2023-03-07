@@ -14,10 +14,10 @@ const colors = {
     black20: "rgba(0, 0, 0, 0.2)",
     black50: "rgba(0, 0, 0, 0.50)",
     black75: "rgba(0, 0, 0, 0.75)",
+    black80: "rgba(0, 0, 0, 0.80)",
     black90: "rgba(0, 0, 0, 0.90)",
     github_black: "#24292f",
-    as_black_second: "#222222",
-    as_black: "#151515",
+    vsc_black: "#1e1e1e",
     link: "#1f6286",
     important: "#e63672",
     warning: "#f08a24",
@@ -30,6 +30,8 @@ const colors = {
     purple: "#7e57c2",
     green: "#7cb342",
     yellow: "#fbc02d",
+    light: "#f1f2f6",
+    dark: "#252526",
 };
 
 export const common = {
@@ -62,6 +64,7 @@ export const light: Theme = {
     text: colors.black90,
     text_reverse: colors.white90,
     background: colors.white90,
+    background_second: colors.light,
     main: colors.white75,
 }
 
@@ -69,6 +72,7 @@ export const dark: Theme = {
     ...common,
     text: colors.white90,
     text_reverse: colors.black90,
-    background: colors.black90,
-    main: colors.as_black,
+    background: colors.black80,
+    background_second: colors.dark,
+    main: colors.vsc_black,
 }

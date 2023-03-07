@@ -17,14 +17,14 @@ import {
   SiVisualstudiocode,
 } from "react-icons/si";
 import styled from "styled-components";
-import Brand from "../../components/Brand";
-import Flex from "../../components/Flex";
-import H1 from "../../components/H1";
-import Icon from "../../components/Icon";
-import P from "../../components/P";
-import { terrain } from "../../shared/img";
-import { Github } from "../../shared/info";
-import { breakpoints } from "../../styles/measure";
+import Brand from "../../../components/Brand";
+import Flex from "../../../components/Flex";
+import H1 from "../../../components/H1";
+import Icon from "../../../components/Icon";
+import P from "../../../components/P";
+import { terrain } from "../../../shared/img";
+import { Github } from "../../../shared/info";
+import { breakpoints } from "../../../styles/measure";
 
 const InfoWrapper = styled(Flex)`
   flex-direction: column;
@@ -64,7 +64,7 @@ const BaseInfo: React.FC = () => {
 
 const BrandInfo: React.FC = () => {
   return (
-    <Flex column gap="xl">
+    <Flex column>
       <Flex wrap>
         <Brand color="red">Java</Brand>
         <Brand color="red">SpringBoot</Brand>
@@ -112,7 +112,7 @@ const BrandInfo: React.FC = () => {
   );
 };
 
-export const Info: React.FC = () => {
+const Info: React.FC = () => {
   return (
     <InfoWrapper>
       <BaseInfo />
@@ -120,3 +120,5 @@ export const Info: React.FC = () => {
     </InfoWrapper>
   );
 };
+
+export default Info;

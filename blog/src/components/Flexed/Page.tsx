@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Degree from "../../styles";
-import { Main } from "../Main";
+import Main from "../Main";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 

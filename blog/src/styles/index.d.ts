@@ -6,6 +6,7 @@ export interface Theme {
   text: string
   text_reverse: string
   background: string
+  background_second: string
   main: string
 }
 

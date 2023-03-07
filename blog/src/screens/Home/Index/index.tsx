@@ -2,20 +2,20 @@ import Flex from "../../../components/Flex";
 import Page from "../../../components/Flexed/Page";
 import Info from "../templates/Info";
 import Menu from "../templates/Menu";
-import { Collage } from "./Collage";
-import { Future } from "./Future";
-import { Teen } from "./Teen";
+import Life from "./Life";
+import Profile from "./Profile";
+import Skill from "./Skill";
 
-export const Experience: React.FC = () => {
+export const Index: React.FC = () => {
   return (
     <>
       <Page>
         <Info />
         <Menu />
         <Flex column gap="lg">
-          <Teen />
-          <Collage />
-          <Future />
+          <Profile />
+          <Skill />
+          <Life />
         </Flex>
       </Page>
     </>
