@@ -1,12 +1,12 @@
 import { lighten } from "polished";
 import styled from "styled-components";
-import { ShallowDegree, TextColor } from "../styles";
+import Degree, { TextColor } from "../styles";
 import { spacing } from "../styles/measure";
 import { fontWeight } from "../styles/size";
 import { shallowSelector, textColorSelector } from "../utils/styledUtils";
 
 const H1 = styled.h1<{
-  shallow?: ShallowDegree;
+  shallow?: Degree;
   color?: TextColor;
 }>`
   color: ${({ shallow, color, theme }) =>

@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { GapDegree } from "../styles";
+import Degree from "../styles";
 import { spacing } from "../styles/measure";
 import { gapSelector } from "../utils/styledUtils";
 
 export const Main = styled.main<{
   align?: string;
   justify?: string;
-  gap?: GapDegree;
+  gap?: Degree;
   bleed?: boolean;
 }>`
   display: flex;

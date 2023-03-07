@@ -1,4 +1,5 @@
-import { Theme } from ".";
+import { Theme } from '.';
+
 
 const colors = {
     white: "#FFF",

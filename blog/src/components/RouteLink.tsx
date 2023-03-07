@@ -1,7 +1,7 @@
 import { lighten } from "polished";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
+import Degree, { TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
   fontSizeSelector,
@@ -12,9 +12,9 @@ import {
 
 type Props = {
   color?: TextColor | "blue" | "link";
-  shallow?: ShallowDegree;
-  size?: FontSize;
-  weight?: FontWeight;
+  shallow?: Degree;
+  size?: Degree;
+  weight?: Degree;
 };
 
 const RouteLink = styled(Link)<Props>`

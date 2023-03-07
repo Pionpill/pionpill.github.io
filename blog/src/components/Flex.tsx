@@ -1,6 +1,6 @@
 import { lighten } from "polished";
 import styled, { css, CSSProperties } from "styled-components";
-import { GapDegree, RadiusType, ShallowDegree } from "../styles";
+import Degree, { RadiusType } from "../styles";
 import { breakpoints, spacing } from "../styles/measure";
 import { common } from "../styles/themes";
 import {
@@ -14,10 +14,10 @@ type Props = {
   column?: boolean;
   reverse?: boolean;
   black?: boolean;
-  shallow?: ShallowDegree;
+  shallow?: Degree;
   full?: boolean;
   bleed?: boolean;
-  gap?: GapDegree;
+  gap?: Degree;
   phoneResponsive?: boolean;
   tabletResponsive?: boolean;
   phoneHidden?: boolean;

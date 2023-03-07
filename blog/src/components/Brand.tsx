@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonColor, FontSize, TextColor } from "../styles";
+import Degree, { ButtonColor, TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
   buttonColorSelector,
@@ -9,7 +9,7 @@ import {
 
 type Props = {
   color?: ButtonColor;
-  size?: FontSize;
+  size?: Degree;
   textColor?: TextColor;
 };
 const Brand = styled.span<Props>`

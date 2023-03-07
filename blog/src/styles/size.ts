@@ -1,13 +1,15 @@
 export const fontSize = {
-  xs: "10px",
+  xxs: "6px",
+  xs: "8px",
   sm: "12px",
   md: "14px",
-  lg: "16px",
-  xl: "20px",
-  xxl: "24px"
+  lg: "18px",
+  xl: "24px",
+  xxl: "28px"
 }
 
 export const fontWeight = {
+  xxs: 100,
   xs: 200,
   sm: 300,
   md: 400,
@@ -17,9 +19,11 @@ export const fontWeight = {
 }
 
 export const iconSize = {
+  xxs: "12px",
   xs: "16px",
   sm: "24px",
   md: "32px",
   lg: "48px",
   xl: "64px",
+  xxl: "128px",
 }

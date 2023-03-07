@@ -32,7 +32,7 @@ const CircleIcon: React.FC<Props> = ({ children }) => {
 export const Collage: React.FC = () => {
   return (
     <Flex column>
-      <H2>大学时代</H2>
+      <H2>大学生活</H2>
       <Flex phoneResponsive>
         <Board width="300px" height="300px">
           <Absolute x="150px" y="150px">
@@ -45,7 +45,7 @@ export const Collage: React.FC = () => {
               <CircleIcon>
                 <FontAwesomeIcon icon={faTrophy} color="#94e6fe" />
               </CircleIcon>
-              <P size="xs" shallow="md" style={{ width: "100px" }}>
+              <P size="xs" shallow="md">
                 数模美赛 · 一等奖
               </P>
             </Flex>

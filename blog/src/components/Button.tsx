@@ -1,12 +1,6 @@
 import { darken, lighten } from "polished";
 import styled from "styled-components";
-import {
-  ButtonColor,
-  FontSize,
-  FontWeight,
-  ShallowDegree,
-  TextColor,
-} from "../styles";
+import Degree, { ButtonColor, TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
   buttonColorSelector,
@@ -18,10 +12,10 @@ import {
 
 type Props = {
   bgColor?: ButtonColor;
-  size?: FontSize;
+  size?: Degree;
   textColor?: TextColor;
-  shallow?: ShallowDegree;
-  weight?: FontWeight;
+  shallow?: Degree;
+  weight?: Degree;
 };
 
 const Button = styled.button<Props>`

@@ -77,7 +77,7 @@ export const Teen: React.FC = () => {
   };
 
   return (
-    <Flex column bleed style={{ gap: "32px" }}>
+    <Flex column gap="xl">
       <H2>学生时代</H2>
       <Flex>
         <Flex ref={mapContainer} style={{ width: "75vw", height: "500px" }} />

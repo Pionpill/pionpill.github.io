@@ -1,8 +1,10 @@
 import { fontSize, fontWeight, iconSize } from '../styles/size';
 import { common, light } from '../styles/themes';
-import { ButtonColor, FontSize, FontWeight, GapDegree, IconSize, RadiusType, ShallowDegree, TextColor } from './../styles/index.d';
+import Degree, { ButtonColor, RadiusType, TextColor } from './../styles/index.d';
 
-export const shallowSelector = (shallow: ShallowDegree | undefined): number => {
+export const shallowSelector = (shallow: Degree | undefined): number => {
+  if (shallow === "xxs")
+    return 0.5
   if (shallow === "xs")
     return 0.15
   if (shallow === "sm")
@@ -10,27 +12,35 @@ export const shallowSelector = (shallow: ShallowDegree | undefined): number => {
   if (shallow === "md")
     return 0.5
   if (shallow === "lg")
-    return 0.8
+    return 0.75
   if (shallow === "xl")
+    return 0.8
+  if (shallow === "xxl")
     return 0.9
   return 0;
 }
 
-export const gapSelector = (gap: GapDegree | undefined): string => {
-  if (gap === "xs")
+export const gapSelector = (gap: Degree | undefined): string => {
+  if (gap === "xxs")
     return "2px"
-  if (gap === "sm")
+  if (gap === "xs")
     return "4px"
-  if (gap === "md")
+  if (gap === "sm")
     return "8px"
-  if (gap === "lg")
+  if (gap === "md")
     return "12px"
-  if (gap === "xl")
+  if (gap === "lg")
     return "16px"
-  return "8px";
+  if (gap === "xl")
+    return "24px"
+  if (gap === "xxl")
+    return "38px"
+  return "12px";
 }
 
-export const fontSizeSelector = (size: FontSize | undefined): string => {
+export const fontSizeSelector = (size: Degree | undefined): string => {
+  if (size === "xxs")
+    return fontSize.xxs
   if (size === "xs")
     return fontSize.xs
   if (size === "sm")
@@ -46,7 +56,9 @@ export const fontSizeSelector = (size: FontSize | undefined): string => {
   return fontSize.md;
 }
 
-export const fontWeightSelector = (weight: FontWeight | undefined): number => {
+export const fontWeightSelector = (weight: Degree | undefined): number => {
+  if (weight === "xxs")
+    return fontWeight.xxs
   if (weight === "xs")
     return fontWeight.xs
   if (weight === "sm")
@@ -62,7 +74,9 @@ export const fontWeightSelector = (weight: FontWeight | undefined): number => {
   return fontWeight.md
 }
 
-export const iconSizeSelector = (size: IconSize | undefined): string => {
+export const iconSizeSelector = (size: Degree | undefined): string => {
+  if (size === "xxs")
+    return iconSize.xxs
   if (size === "xs")
     return iconSize.xs
   if (size === "sm")
@@ -73,6 +87,8 @@ export const iconSizeSelector = (size: IconSize | undefined): string => {
     return iconSize.lg;
   if (size === "xl")
     return iconSize.xl;
+  if (size === "xxl")
+    return iconSize.xxl;
   return iconSize.md
 }
 

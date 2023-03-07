@@ -1,6 +1,6 @@
 import { lighten } from "polished";
 import styled, { css } from "styled-components";
-import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
+import Degree, { TextColor } from "../styles";
 import {
   fontSizeSelector,
   fontWeightSelector,
@@ -9,13 +9,13 @@ import {
 } from "../utils/styledUtils";
 
 const P = styled.p<{
-  size?: FontSize;
-  shallow?: ShallowDegree;
+  size?: Degree;
+  shallow?: Degree;
   color?: TextColor;
   shadow?: boolean;
   center?: boolean;
   isTitle?: boolean;
-  weight?: FontWeight;
+  weight?: Degree;
   space?: string;
 }>`
   color: ${({ shallow, color, theme }) =>

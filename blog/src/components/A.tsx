@@ -1,6 +1,6 @@
 import { lighten } from "polished";
 import styled, { CSSProperties } from "styled-components";
-import { FontSize, FontWeight, ShallowDegree, TextColor } from "../styles";
+import Degree, { TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
   fontSizeSelector,
@@ -10,10 +10,10 @@ import {
 } from "../utils/styledUtils";
 
 type Props = {
-  size?: FontSize;
+  size?: Degree;
   color?: TextColor | "blue" | "link";
-  shallow?: ShallowDegree;
-  weight?: FontWeight;
+  shallow?: Degree;
+  weight?: Degree;
   wrap?: boolean;
   align?: CSSProperties["textAlign"];
 };

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { GapDegree } from "../../styles";
+import Degree from "../../styles";
 import { Main } from "../Main";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -7,7 +7,7 @@ import { Header } from "./Header";
 type Props = {
   align?: string;
   justify?: string;
-  gap?: GapDegree;
+  gap?: Degree;
   style?: Object;
   bleed?: boolean;
   children: ReactNode;

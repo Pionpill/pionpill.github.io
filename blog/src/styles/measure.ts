@@ -5,7 +5,7 @@ export const length = {
 export const spacing = {
   padding: "1.5vw 1.875vw",
   vpadding: "5vw",
-  hpadding: "1.875vw",
+  hpadding: "3vw",
   sidebarWidth: 260,
   sidebarCollapsedWidth: 16,
   sidebarMinWidth: 200,
