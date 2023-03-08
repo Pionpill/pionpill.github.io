@@ -6,7 +6,7 @@ import Life from "./Life";
 import Profile from "./Profile";
 import Skill from "./Skill";
 
-export const Index: React.FC = () => {
+const Index: React.FC = () => {
   return (
     <>
       <Page>
@@ -21,3 +21,5 @@ export const Index: React.FC = () => {
     </>
   );
 };
+
+export default Index;

@@ -10,6 +10,9 @@ const Menu: React.FC = () => {
       <RouteLink color="white" to="/experience">
         Experience (经历)
       </RouteLink>
+      <RouteLink color="white" to="/skill">
+        Skill (技术)
+      </RouteLink>
     </Flex>
   );
 };

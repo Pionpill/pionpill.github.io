@@ -35,7 +35,7 @@ const Card: React.FC<{
   );
 };
 
-export const Teen: React.FC = () => {
+const Teen: React.FC = () => {
   const mapContainer = React.useRef<any>(null);
   const map = React.useRef<any>(null);
   const mapKey = token.amap;
@@ -78,134 +78,142 @@ export const Teen: React.FC = () => {
   };
 
   return (
-    <Flex column gap="xl" bleed limitWidth bgSecond>
-      <H2>学生时代</H2>
-      <Flex style={{ width: "80vw" }} gap="xl">
-        <Flex
-          ref={mapContainer}
-          style={{
-            width: "100%",
-            maxWidth: spacing.mainWidth,
-            height: "500px",
-          }}
-        />
-      </Flex>
-      <Flex wrap align="flex-start" gap="lg">
-        <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
-          <Card>
-            <FontAwesomeIcon icon={faBaby} size="2x" color="#dd7694" />
-          </Card>
-          <Flex column gap="xs" style={{ maxWidth: "150px" }}>
-            <P weight="xl" size="lg">
+    <Flex bgSecond style={{ width: "100vw" }}>
+      <Flex column gap="xl" bleed limitWidth>
+        <H2>学生时代</H2>
+        <Flex style={{ width: "80vw" }} gap="xl">
+          <Flex
+            ref={mapContainer}
+            style={{
+              width: "100%",
+              maxWidth: spacing.mainWidth,
+              height: "500px",
+            }}
+          />
+        </Flex>
+        <Flex wrap align="flex-start" gap="lg">
+          <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
+            <Card>
+              <FontAwesomeIcon icon={faBaby} size="2x" color="#dd7694" />
+            </Card>
+            <Flex column gap="xs" style={{ maxWidth: "150px" }}>
+              <P weight="xl" size="lg">
+                <A
+                  onClick={() => changeCenter([113.159617, 30.64309], 12)}
+                  color="link"
+                  weight="xl"
+                  size="lg"
+                >
+                  湖北省天门市
+                </A>
+              </P>
+              <P center weight="sm">
+                出生于一个普普通通的农村家庭，在这里上过幼儿园
+              </P>
+            </Flex>
+            <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
+              2000 - 2006
+            </P>
+          </Flex>
+          <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
+            <Card>
+              <FontAwesomeIcon icon={faChild} size="2x" color="#80a492" />
+            </Card>
+            <Flex column gap="xs" style={{ maxWidth: "150px" }}>
               <A
-                onClick={() => changeCenter([113.159617, 30.64309], 12)}
+                onClick={() => changeCenter([120.282231, 31.494045], 12)}
                 color="link"
                 weight="xl"
                 size="lg"
               >
-                湖北省天门市
+                江苏省无锡市
               </A>
-            </P>
-            <P center weight="sm">
-              出生于一个普普通通的农村家庭，在这里上过幼儿园
+              <P center weight="sm">
+                在这里度过了学生时代，就读于
+                <A
+                  color="link"
+                  weight="lg"
+                  onClick={() => changeCenter([120.278002, 31.605755], 16)}
+                >
+                  吴桥实小
+                </A>
+                &nbsp; · &nbsp;
+                <A
+                  color="link"
+                  weight="lg"
+                  onClick={() => changeCenter([120.291119, 31.607393], 16)}
+                >
+                  凤翔中学
+                </A>
+                &nbsp; · &nbsp;
+                <A
+                  color="link"
+                  weight="lg"
+                  onClick={() => changeCenter([120.286693, 31.492004], 16)}
+                >
+                  太湖高中
+                </A>
+              </P>
+            </Flex>
+            <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
+              2006 - 2019
             </P>
           </Flex>
-          <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
-            2000 - 2006
-          </P>
-        </Flex>
-        <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
-          <Card>
-            <FontAwesomeIcon icon={faChild} size="2x" color="#80a492" />
-          </Card>
-          <Flex column gap="xs" style={{ maxWidth: "150px" }}>
-            <A
-              onClick={() => changeCenter([120.282231, 31.494045], 12)}
-              color="link"
-              weight="xl"
-              size="lg"
-            >
-              江苏省无锡市
-            </A>
-            <P center weight="sm">
-              在这里度过了学生时代，就读于
-              <A
-                color="link"
-                weight="lg"
-                onClick={() => changeCenter([120.278002, 31.605755], 16)}
-              >
-                吴桥实小
-              </A>
-              &nbsp; · &nbsp;
-              <A
-                color="link"
-                weight="lg"
-                onClick={() => changeCenter([120.291119, 31.607393], 16)}
-              >
-                凤翔中学
-              </A>
-              &nbsp; · &nbsp;
-              <A
-                color="link"
-                weight="lg"
-                onClick={() => changeCenter([120.286693, 31.492004], 16)}
-              >
-                太湖高中
-              </A>
+          <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
+            <Card>
+              <FontAwesomeIcon
+                icon={faGraduationCap}
+                size="2x"
+                color="#6b798e"
+              />
+            </Card>
+            <Flex column gap="xs" style={{ maxWidth: "150px" }}>
+              <P weight="xl" size="lg">
+                江苏省南京市
+              </P>
+              <P center weight="sm">
+                <A
+                  color="link"
+                  weight="lg"
+                  onClick={() => changeCenter([113.159617, 30.64309], 12)}
+                >
+                  南京信息工程大学
+                </A>
+                本科，就读于软件学院软件工程系
+              </P>
+            </Flex>
+            <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
+              2019 - 2023
             </P>
           </Flex>
-          <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
-            2006 - 2019
-          </P>
-        </Flex>
-        <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
-          <Card>
-            <FontAwesomeIcon icon={faGraduationCap} size="2x" color="#6b798e" />
-          </Card>
-          <Flex column gap="xs" style={{ maxWidth: "150px" }}>
-            <P weight="xl" size="lg">
-              江苏省南京市
-            </P>
-            <P center weight="sm">
-              <A
-                color="link"
-                weight="lg"
-                onClick={() => changeCenter([113.159617, 30.64309], 12)}
-              >
-                南京信息工程大学
-              </A>
-              本科，就读于软件学院软件工程系
-            </P>
-          </Flex>
-          <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
-            2019 - 2023
-          </P>
-        </Flex>
-        <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
-          <Card>
-            <FontAwesomeIcon icon={faTrain} size="2x" color="#354e6b" />
-          </Card>
-          <Flex column gap="xs" style={{ maxWidth: "150px" }}>
-            <P weight="xl" size="lg">
-              江苏，上海，杭州
-            </P>
-            <P center weight="sm">
-              于无锡{" "}
-              <A
-                color="link"
-                weight="lg"
-                onClick={() => changeCenter([120.305619, 31.490248], 17)}
-              >
-                国联证券
-              </A>{" "}
-              实习，正在寻找一份长三角的工作
+          <Flex column style={{ minWidth: "110px", minHeight: "220px" }}>
+            <Card>
+              <FontAwesomeIcon icon={faTrain} size="2x" color="#354e6b" />
+            </Card>
+            <Flex column gap="xs" style={{ maxWidth: "150px" }}>
+              <P weight="xl" size="lg">
+                江苏，上海，杭州
+              </P>
+              <P center weight="sm">
+                于无锡{" "}
+                <A
+                  color="link"
+                  weight="lg"
+                  onClick={() => changeCenter([120.305619, 31.490248], 17)}
+                >
+                  国联证券
+                </A>{" "}
+                实习，正在寻找一份长三角的工作
+              </P>
+            </Flex>
+            <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
+              2023 - <FontAwesomeIcon icon={faEllipsis} />
             </P>
           </Flex>
-          <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
-            2023 - <FontAwesomeIcon icon={faEllipsis} />
-          </P>
         </Flex>
       </Flex>
     </Flex>
   );
 };
+
+export default Teen;

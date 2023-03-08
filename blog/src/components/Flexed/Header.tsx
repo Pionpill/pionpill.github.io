@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { useThemeChoice } from "../../hooks/useThemeChoice";
 import { Github } from "../../shared/info";
 import { toggleTheme } from "../../store/root";
+import { common } from "../../styles/themes";
 import { toggleComponent } from "../../utils/componentsUtils";
 import { isPhone } from "../../utils/responsiveUtils";
 import A from "../A";
@@ -67,15 +68,7 @@ export const Header: React.FC = () => {
           to="/"
           onClick={() => onClickAlert()}
         >
-          Project
-        </RouteLink>
-        <RouteLink
-          color="white"
-          weight="xl"
-          to="/"
-          onClick={() => onClickAlert()}
-        >
-          Works
+          Projects
         </RouteLink>
         <RouteLink
           color="white"
@@ -95,7 +88,7 @@ export const Header: React.FC = () => {
 
     return (
       <>
-        <Button>
+        <Button style={{ color: common.plain }}>
           <FontAwesomeIcon
             icon={themeIcon}
             onClick={() => dispatch(toggleTheme())}

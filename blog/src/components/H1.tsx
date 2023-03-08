@@ -14,6 +14,7 @@ const H1 = styled.h1<{
   font-weight: ${() => fontWeight.xxl};
   font-size: 36px;
   text-align: center;
+  letter-spacing: 2px;
   margin: 0;
   padding: ${() => spacing.font} 0;
   text-shadow: 1px 1px 0.5px ${({ theme }) => theme.shadow};

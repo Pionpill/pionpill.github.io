@@ -11,7 +11,7 @@ import P from "../P";
 import RouteLink from "../RouteLink";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
-  background-color: ${({ theme }) => darken(0.05, theme.background)};
+  background-color: ${({ theme }) => darken(0.1, theme.background)};
   width: 100%;
   display: flex;
   align-items: center;

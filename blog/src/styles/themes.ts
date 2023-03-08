@@ -32,10 +32,16 @@ const colors = {
     yellow: "#fbc02d",
     light: "#f1f2f6",
     dark: "#252526",
+    light_green: "#99bcac"
 };
 
 export const common = {
     ...colors,
+    x: colors.light_green,
+    xx: colors.green,
+    xxx: colors.orange,
+    xxxx: colors.link,
+    xxxxx: colors.purple,
     wrong: colors.red,
     right: colors.green,
     danger: colors.danger,
@@ -47,6 +53,7 @@ export const common = {
     text_link: colors.link,
     button: colors.blue,
     button_red: colors.red,
+    button_default: colors.link,
     button_blue: colors.blue,
     button_orange: colors.orange,
     button_purple: colors.purple,

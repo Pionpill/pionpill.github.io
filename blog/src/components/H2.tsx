@@ -13,6 +13,7 @@ const H2 = styled.h2<{
     lighten(shallowSelector(shallow), textColorSelector(color, theme))};
   font-weight: ${() => fontWeight.xxl};
   font-size: 32px;
+  letter-spacing: 2px;
   text-align: center;
   margin: 0;
   padding: ${() => spacing.font} 0;

@@ -43,7 +43,7 @@ const CircleIcon: React.FC<Props> = ({ children }) => {
   );
 };
 
-export const Collage: React.FC = () => {
+const Collage: React.FC = () => {
   const color = useThemeChoice("#bdc3c7", "#636e72");
   return (
     <Flex column bleed limitWidth gap="xl">
@@ -211,21 +211,8 @@ export const Collage: React.FC = () => {
           </Brand>
         </Flex>
       </Flex>
-      {/* <Ul>
-          <Li>
-            任职:
-            第一次上大学，加入了院青年新闻中心，院学生会，校社联等组织。之后留任青年新闻中心，任职至执行主席。
-          </Li>
-          <Li>
-            竞赛:
-            大二打了数模美赛，拿了一等奖。之后参加了一些小型赛事，参加互联网+陪跑后不再打比赛。认识到学术圈的现实并不打算考研。
-          </Li>
-          <Li>
-            技能:
-            大二陆续学习了图像处理方面的技能，不准备竞赛后学习专业技能，主要专业方向为
-            React 前端，SpringBoot 后端。
-          </Li>
-        </Ul> */}
     </Flex>
   );
 };
+
+export default Collage;

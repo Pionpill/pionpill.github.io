@@ -3,7 +3,7 @@ import Page from "../components/Flexed/Page";
 import H1 from "../components/H1";
 import P from "../components/P";
 
-export const Error: React.FC = () => {
+const Error: React.FC = () => {
   return (
     <Page style={{ padding: "100px 1.5vw" }}>
       <H1>404</H1>
@@ -15,3 +15,5 @@ export const Error: React.FC = () => {
     </Page>
   );
 };
+
+export default Error;
