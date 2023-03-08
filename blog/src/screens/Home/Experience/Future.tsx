@@ -9,7 +9,7 @@ import { pionpill } from "../../../shared/img";
 
 const Future: React.FC = () => {
   return (
-    <Flex bgSecond style={{ width: "100vw" }}>
+    <Flex bgSecond fullWidth>
       <Flex bleed gap="xl" limitWidth column>
         <H2>未来打算</H2>
         <Flex tabletResponsive gap="xl">

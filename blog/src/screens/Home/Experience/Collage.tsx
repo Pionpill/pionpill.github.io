@@ -46,7 +46,7 @@ const CircleIcon: React.FC<Props> = ({ children }) => {
 const Collage: React.FC = () => {
   const color = useThemeChoice("#bdc3c7", "#636e72");
   return (
-    <Flex column bleed limitWidth gap="xl">
+    <Flex column bleed limitWidth gap="xl" fullWidth>
       <H2>大学生活</H2>
       <Flex phoneResponsive gap="xl">
         <Board width="300px" height="300px">

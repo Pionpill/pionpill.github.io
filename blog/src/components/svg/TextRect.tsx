@@ -18,7 +18,9 @@ type Props = {
   size?: Degree;
   iconSize?: Degree;
   fill?: string;
+  color?: string;
   stroke?: string;
+  opacity?: string;
   radius?: "sm" | "md" | "lg" | "ellipse";
 };
 
@@ -31,11 +33,13 @@ const TextRect: React.FC<Props> = ({
   text,
   indent,
   center,
+  color,
   icon,
   size,
   iconSize,
   fill,
   stroke,
+  opacity,
   radius,
 }) => {
   const beginX: number = Number(x) - Number(width) / 2;
@@ -67,10 +71,12 @@ const TextRect: React.FC<Props> = ({
         shadow={shadow ? true : false}
         fill={fill}
         stroke={stroke}
+        opacity={opacity}
         radius={radius}
       ></Rect>
       <Text
         x={realTextX}
+        fill={color}
         size={size}
         y={y}
         anchor={center ? "middle" : "start"}

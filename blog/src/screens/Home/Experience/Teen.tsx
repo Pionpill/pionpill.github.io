@@ -78,7 +78,7 @@ const Teen: React.FC = () => {
   };
 
   return (
-    <Flex bgSecond style={{ width: "100vw" }}>
+    <Flex bgSecond fullWidth>
       <Flex column gap="xl" bleed limitWidth>
         <H2>学生时代</H2>
         <Flex style={{ width: "80vw" }} gap="xl">

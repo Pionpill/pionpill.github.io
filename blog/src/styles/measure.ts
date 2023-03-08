@@ -4,7 +4,7 @@ export const length = {
 
 export const spacing = {
   padding: "1.5vw 1.875vw",
-  vpadding: "40px",
+  vpadding: "20px",
   hpadding: "30px",
   mainWidth: "1230px",
   maxBlockWidth: "300px",

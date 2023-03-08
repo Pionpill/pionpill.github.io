@@ -22,7 +22,7 @@ const colors = {
     important: "#e63672",
     warning: "#f08a24",
     danger: "#ff476f",
-    plain: "#95afc0",
+    plain: "#7f8c8d",
     marine: "#2BC2FF",
     blue: "#0288d1",
     red: "#c72e0f",
@@ -32,16 +32,15 @@ const colors = {
     yellow: "#fbc02d",
     light: "#f1f2f6",
     dark: "#252526",
-    light_green: "#99bcac"
 };
 
 export const common = {
     ...colors,
-    x: colors.light_green,
+    x: colors.plain,
     xx: colors.green,
     xxx: colors.orange,
     xxxx: colors.link,
-    xxxxx: colors.purple,
+    xxxxx: colors.red,
     wrong: colors.red,
     right: colors.green,
     danger: colors.danger,

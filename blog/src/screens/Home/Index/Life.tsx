@@ -47,7 +47,7 @@ const LifeCard: React.FC<LifeCardProps> = ({
 
 const Life: React.FC = () => {
   return (
-    <Flex bgSecond style={{ width: "100vw" }}>
+    <Flex bgSecond fullWidth>
       <Flex bleed gap="xl" limitWidth column>
         <H2>关于我</H2>
         <Flex gap="sm" align="flex-start" wrap>

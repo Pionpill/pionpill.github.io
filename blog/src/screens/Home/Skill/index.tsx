@@ -10,7 +10,7 @@ const Skills: React.FC = () => {
       <Page>
         <Info />
         <Menu />
-        <Flex column gap="lg">
+        <Flex column gap="lg" fullWidth>
           <Front />
         </Flex>
       </Page>

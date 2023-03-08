@@ -16,6 +16,7 @@ type Props = {
   black?: boolean;
   shallow?: Degree;
   full?: boolean;
+  fullWidth?: boolean;
   bleed?: boolean;
   gap?: Degree;
   bgSecond?: boolean;
@@ -57,7 +58,7 @@ const Flex = styled.div<Props>`
   border-radius: ${({ radius }) => {
     return radius ? radiusSelector(radius) : "initial";
   }};
-
+  width: ${({ fullWidth }) => fullWidth && "100%"};
   background-color: ${({ shallow, black }) =>
     black &&
     lighten(shallowSelector(shallow), black ? common.header : "transparent")};

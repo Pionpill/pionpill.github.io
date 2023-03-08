@@ -121,7 +121,7 @@ const AppCard: React.FC<AppCardProps> = ({ degree, label, title, icon }) => {
 const Skill: React.FC = () => {
   const iconColor = useThemeChoice("#3d3d3d", "#f1f2f6");
   return (
-    <Flex bleed gap="xl" limitWidth column>
+    <Flex bleed gap="xl" limitWidth column fullWidth>
       <H2>技术简述</H2>
       <Flex gap="sm" wrap align="flex-start">
         <Flex phoneResponsive>

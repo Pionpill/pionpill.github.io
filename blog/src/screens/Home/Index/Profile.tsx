@@ -15,7 +15,7 @@ import { pionpill } from "../../../shared/img";
 
 const Profile: React.FC = () => {
   return (
-    <Flex bleed gap="xl" limitWidth column>
+    <Flex bleed gap="xl" limitWidth column fullWidth>
       <H2>个人简介</H2>
       <Flex tabletResponsive>
         <Flex style={{ maxWidth: "300px" }} column>

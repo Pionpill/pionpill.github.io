@@ -1,163 +1,217 @@
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import Svg from "../../../components/svg/Svg";
-import TextRect from "../../../components/svg/TextRect";
-import { spacing } from "../../../styles/measure";
+import Text from "../../../components/svg/Text";
+import { useThemeChoice } from "../../../hooks/useThemeChoice";
 import { common } from "../../../styles/themes";
-
-type SkillReactTextProps = {
-  x: string;
-  y: string;
-};
-
-const SkillReactText: React.FC<SkillReactTextProps> = ({ x, y }) => {
-  return (
-    <TextRect
-      x={x}
-      y={y}
-      width="30"
-      height="30"
-      size="sm"
-      radius="ellipse"
-      center
-      indent="30"
-      fill={common.x}
-      text="废弃"
-      icon={
-        <path
-          d="M145.2 96l66 746.6L512 928l299.6-85.4L878.9 96H145.2z m595 177.1l-4.8 47.2-1.7 19.5H382.3l8.2 94.2h335.1l-3.3 24.3-21.2 242.2-1.7 16.2-187 51.6v0.3h-1.2l-0.3 0.1v-0.1h-0.1l-188.6-52L310.8 572h91.1l6.5 73.2 102.4 27.7h0.4l102-27.6 11.4-118.6H510.9v-0.1H306l-22.8-253.5-1.7-24.3h460.3l-1.6 24.3z"
-          p-id="3404"
-          fill="white"
-        />
-      }
-    />
-  );
-};
+import SkillRectText from "./components/SkillRectText";
+import CSS3 from "./components/svg/CSS3";
+import Electron from "./components/svg/Electron";
+import Html5 from "./components/svg/Html5";
+import JavaScript from "./components/svg/JavaScript";
+import React from "./components/svg/React";
+import Redux from "./components/svg/Redux";
+import TypeScript from "./components/svg/TypeScript";
+import Vue from "./components/svg/Vue";
 
 const StackSvg: React.FC = () => {
-  const realWidth: string = "800";
-  const svgWidth: number =
-    document.body.clientWidth - 2 * Number(spacing.vpadding.replace("px", ""));
-  const realHeight: string =
-    svgWidth < Number(realWidth)
-      ? String((800 * svgWidth) / Number(realWidth))
-      : "800";
-
+  const noteColor = useThemeChoice("#222", "#eee");
   return (
-    <Svg width={realWidth} height={realHeight} style={{ maxWidth: "100%" }}>
-      <TextRect
+    <Svg width="800" height="700" style={{ maxWidth: "100%" }}>
+      <Text x="400" y="20" size="lg" fill={noteColor}>
+        前端基础
+      </Text>
+      <Text x="450" y="340" size="lg" fill={noteColor}>
+        框架路线
+      </Text>
+      <Text x="200" y="570" size="lg" fill={noteColor}>
+        3D
+      </Text>
+      <Text x="400" y="620" size="lg" fill={noteColor}>
+        跨平台
+      </Text>
+      <SkillRectText
         x="30"
         y="30"
         width="30"
-        height="30"
         size="sm"
+        text="弃用"
         radius="ellipse"
-        center
-        indent="30"
         fill={common.x}
-        text="废弃"
       />
-      <TextRect
+      <SkillRectText
         x="30"
         y="70"
         width="30"
-        height="30"
         size="sm"
-        radius="ellipse"
-        center
-        indent="30"
-        fill={common.xx}
         text="了解"
+        radius="ellipse"
+        fill={common.xx}
       />
-      <TextRect
+      <SkillRectText
         x="30"
         y="110"
         width="30"
-        height="30"
         size="sm"
-        radius="ellipse"
-        center
-        indent="30"
-        fill={common.xxx}
         text="熟悉"
+        radius="ellipse"
+        fill={common.xxx}
       />
-      <TextRect
+      <SkillRectText
         x="30"
         y="150"
         width="30"
-        height="30"
         size="sm"
-        radius="ellipse"
-        center
-        indent="30"
-        fill={common.xxxx}
         text="掌握"
+        radius="ellipse"
+        fill={common.xxxx}
       />
-      <TextRect
+      <SkillRectText
         x="30"
         y="190"
         width="30"
-        height="30"
         size="sm"
-        radius="ellipse"
-        center
-        indent="30"
-        fill={common.xxxxx}
         text="精通"
+        radius="ellipse"
+        fill={common.xxxxx}
       />
-      <TextRect
-        x="400"
-        y="20"
-        width="170"
-        height="30"
-        shadow
-        indent="30"
-        fill={common.xxxx}
-        text="HTML5"
-        center
-        icon={
-          <path
-            d="M145.2 96l66 746.6L512 928l299.6-85.4L878.9 96H145.2z m595 177.1l-4.8 47.2-1.7 19.5H382.3l8.2 94.2h335.1l-3.3 24.3-21.2 242.2-1.7 16.2-187 51.6v0.3h-1.2l-0.3 0.1v-0.1h-0.1l-188.6-52L310.8 572h91.1l6.5 73.2 102.4 27.7h0.4l102-27.6 11.4-118.6H510.9v-0.1H306l-22.8-253.5-1.7-24.3h460.3l-1.6 24.3z"
-            p-id="3404"
-            fill="white"
-          />
-        }
+      <SkillRectText
+        x="30"
+        y="230"
+        width="30"
+        size="sm"
+        text="准备"
+        radius="ellipse"
+        fill={common.purple}
       />
-      <TextRect
+      <SkillRectText x="400" y="70" text="HTML5" icon={<Html5 />} />
+      <SkillRectText x="200" y="70" text="SVG" component />
+      <SkillRectText x="400" y="110" text="CSS3" icon={<CSS3 />} />
+      <SkillRectText
         x="400"
-        y="80"
-        width="170"
-        height="30"
-        shadow
-        center
-        indent="30"
-        fill={common.xxxx}
-        text="CSS3"
-        icon={
-          <path
-            d="M152.384 48.512 118.016 220.448 817.76 220.448 795.904 331.488 95.712 331.488 61.824 503.392 761.504 503.392 722.464 699.456 440.48 792.896 196.064 699.456 212.8 614.432 40.896 614.432 0 820.768 404.224 975.488 870.24 820.768 1024 48.512z"
-            fill="#ffffff"
-            p-id="5027"
-          />
-        }
-      />
-      <TextRect
-        x="400"
-        y="140"
-        width="170"
-        height="30"
-        shadow
-        center
+        y="150"
         indent="20"
-        fill={common.xxxx}
         text="JavaScript"
-        icon={
-          <path
-            d="M0 0v1024h1024V0H0z m556.8 798.4c0 99.2-59.2 145.6-144 145.6-76.8 0-121.6-40-144-88l78.4-48c14.4 27.2 28.8 49.6 62.4 49.6 32 0 51.2-12.8 51.2-60.8V470.4h96v328zM785.6 944c-89.6 0-147.2-43.2-176-97.6L688 800c20.8 33.6 48 59.2 94.4 59.2 40 0 65.6-19.2 65.6-48 0-33.6-25.6-44.8-70.4-64l-24-9.6c-68.8-28.8-115.2-67.2-115.2-145.6 0-72 54.4-126.4 140.8-126.4 60.8 0 105.6 20.8 136 76.8l-75.2 48c-16-28.8-33.6-41.6-62.4-41.6-28.8 0-46.4 17.6-46.4 41.6 0 28.8 17.6 40 59.2 59.2l24 9.6c81.6 35.2 128 70.4 128 152 1.6 84.8-65.6 132.8-156.8 132.8z"
-            p-id="2211"
-            fill="white"
-          />
-        }
+        icon={<JavaScript />}
+      />
+      <SkillRectText x="200" y="150" component text="DOM & Web API" />
+      <SkillRectText
+        x="400"
+        y="190"
+        indent="20"
+        text="TypeScript"
+        fill={common.xxx}
+        icon={<TypeScript />}
+      />
+      <SkillRectText
+        x="400"
+        y="250"
+        text="Webpack"
+        width="80"
+        component
+        fill={common.xx}
+      />
+      <SkillRectText
+        x="400"
+        y="280"
+        text="Vite"
+        width="80"
+        component
+        fill={common.xx}
+      />
+      <SkillRectText
+        x="600"
+        y="420"
+        width="100"
+        text="Vue3"
+        indent="0"
+        fill={common.x}
+        icon={<Vue />}
+      />
+      <SkillRectText
+        x="740"
+        y="420"
+        width="90"
+        text="element-ui"
+        fill={common.x}
+        component
+      />
+      <SkillRectText
+        x="275"
+        y="420"
+        indent="10"
+        text="React (hooks)"
+        fill={common.xxxx}
+        icon={<React />}
+      />
+      <SkillRectText
+        x="60"
+        y="400"
+        component
+        text="styled-components"
+        fill={common.xxxx}
+      />
+      <SkillRectText x="60" y="430" component text="antd" fill={common.xx} />
+      <SkillRectText
+        x="60"
+        y="370"
+        component
+        text="react-router"
+        fill={common.xxx}
+      />
+      <SkillRectText x="60" y="460" component text="axios" fill={common.xxx} />
+      <SkillRectText
+        x="450"
+        y="400"
+        width="70"
+        component
+        text="amap"
+        fill={common.xx}
+      />
+      <SkillRectText
+        x="450"
+        y="430"
+        width="70"
+        component
+        text="echarts"
+        fill={common.xxx}
+      />
+      <SkillRectText
+        x="275"
+        y="500"
+        text="Redux"
+        fill={common.xxx}
+        icon={<Redux />}
+      />
+      <SkillRectText
+        x="60"
+        y="570"
+        text="tree.js"
+        component
+        fill={common.purple}
+      />
+      <SkillRectText
+        x="60"
+        y="600"
+        text="ar.js"
+        component
+        fill={common.purple}
+      />
+      <SkillRectText
+        x="200"
+        y="680"
+        indent="10"
+        icon={<React />}
+        text="React Native"
+        fill={common.purple}
+      />
+      <SkillRectText
+        x="400"
+        y="680"
+        text="Electorn"
+        indent="20"
+        fill={common.purple}
+        icon={<Electron />}
       />
     </Svg>
   );
@@ -165,7 +219,7 @@ const StackSvg: React.FC = () => {
 
 const Front: React.FC = () => {
   return (
-    <Flex bleed gap="xl" limitWidth column>
+    <Flex bleed gap="xxs" limitWidth column fullWidth>
       <H2>前端技术栈</H2>
       <StackSvg />
     </Flex>

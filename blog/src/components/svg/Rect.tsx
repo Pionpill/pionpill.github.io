@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Degree from "../../styles";
 import { common } from "../../styles/themes";
 
 type Props = {
@@ -10,9 +11,10 @@ type Props = {
   height: string;
   fill?: string;
   stroke?: string;
-  radius?: "sm" | "md" | "lg" | "ellipse";
+  radius?: Degree | "ellipse";
   shadow?: boolean;
   notCenter?: boolean;
+  opacity?: string;
   children?: ReactNode;
 };
 
@@ -28,6 +30,7 @@ const Rect: React.FC<Props> = ({
   radius,
   shadow,
   notCenter,
+  opacity,
   children,
 }) => {
   let realX = notCenter ? x : `${Number(x) - Number(width) / 2}`;
@@ -35,12 +38,20 @@ const Rect: React.FC<Props> = ({
   realX = offsetX ? `${Number(realX) + Number(offsetX)}` : realX;
   realY = offsetY ? `${Number(realY) + Number(offsetY)}` : realY;
   const realRadius =
-    radius === "sm"
+    radius === "xxs"
+      ? "3"
+      : radius === "xs"
       ? "5"
-      : radius === "md"
+      : radius === "sm"
       ? "9"
-      : radius === "lg"
+      : radius === "md"
       ? "12"
+      : radius === "lg"
+      ? "16"
+      : radius === "xl"
+      ? "24"
+      : radius === "xxl"
+      ? "32"
       : radius === "ellipse"
       ? height > width
         ? `${Number(width) / 2}`
@@ -77,6 +88,7 @@ const Rect: React.FC<Props> = ({
         fill={realFill}
         stroke={realStroke}
         pointer-events="all"
+        opacity={opacity}
       >
         {children}
       </rect>

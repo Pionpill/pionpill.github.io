@@ -12,7 +12,7 @@ const Index: React.FC = () => {
       <Page>
         <Info />
         <Menu />
-        <Flex column gap="lg">
+        <Flex column gap="lg" fullWidth>
           <Profile />
           <Skill />
           <Life />
