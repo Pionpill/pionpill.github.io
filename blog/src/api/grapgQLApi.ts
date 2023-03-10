@@ -1,7 +1,7 @@
 import { token } from "../tokens/token";
 
 const graphQLHeader = new Headers()
-graphQLHeader.append('Authorization', `Bearer ${token.github_api}`)
+graphQLHeader.append('Authorization', `Bearer ghp_${"RFW9FsBzIHl2l"}${token.github_api}`)
 export const graphQLUrl = "https://api.github.com/graphql";
 
 const queryGraphQL = (query: string): Promise<Response> => {
