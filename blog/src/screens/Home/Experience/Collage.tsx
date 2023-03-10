@@ -26,7 +26,7 @@ import Brand from "../../../components/Brand";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import P from "../../../components/P";
-import { useThemeChoice } from "../../../hooks/useThemeChoice";
+import useThemeChoice from "../../../hooks/useThemeChoice";
 import { isPhone } from "../../../utils/responsiveUtils";
 
 type Props = { children: ReactNode };

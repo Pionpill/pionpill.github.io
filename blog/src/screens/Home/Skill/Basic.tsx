@@ -17,7 +17,7 @@ import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import Svg from "../../../components/svg/Svg";
 import Text from "../../../components/svg/Text";
-import { useThemeChoice } from "../../../hooks/useThemeChoice";
+import useThemeChoice from "../../../hooks/useThemeChoice";
 import { common } from "../../../styles/themes";
 import SkillPath from "./components/SkillPath";
 import SkillRectText from "./components/SkillRectText";

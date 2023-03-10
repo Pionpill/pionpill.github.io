@@ -1,7 +1,7 @@
-import { lighten } from "polished";
+import { darken, lighten } from "polished";
 import styled, { CSSProperties } from "styled-components";
 import Degree, { TextColor } from "../styles";
-import { common } from "../styles/themes";
+import { common, light } from "../styles/themes";
 import {
   fontSizeSelector,
   fontWeightSelector,
@@ -20,14 +20,23 @@ type Props = {
 
 const A = styled.a<Props>`
   color: ${({ shallow, color, theme }) =>
-    lighten(
-      shallowSelector(shallow),
-      color === "blue"
-        ? common.pointer
-        : color === "link"
-        ? common.link
-        : textColorSelector(color, theme)
-    )};
+    theme === light
+      ? lighten(
+          shallowSelector(shallow),
+          color === "blue"
+            ? common.pointer
+            : color === "link"
+            ? common.link
+            : textColorSelector(color, theme)
+        )
+      : darken(
+          shallowSelector(shallow),
+          color === "blue"
+            ? common.pointer
+            : color === "link"
+            ? common.link
+            : textColorSelector(color, theme)
+        )};
   font-size: ${({ size }) => fontSizeSelector(size)};
   font-weight: ${({ weight }) => fontWeightSelector(weight)};
   margin: 0;

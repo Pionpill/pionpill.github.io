@@ -8,7 +8,7 @@ import EChart from "../../../components/EChart";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import P from "../../../components/P";
-import { useThemeChoice } from "../../../hooks/useThemeChoice";
+import useThemeChoice from "../../../hooks/useThemeChoice";
 import { queryDailyAndTotalContributionCount } from "../../../scripts/graphQLScript";
 import { common } from "../../../styles/themes";
 import { formatDate } from "../../../utils/dataUtils";
@@ -258,7 +258,7 @@ const State: React.FC = () => {
             linkText="@pionpill"
             linkHref="https://wakatime.com/@pionpill"
           >
-            <P style={{ color: common.plain }}>工作日平均Coding时间</P>
+            <P shallow="sm">工作日平均Coding时间</P>
             <P size="xl" weight="xl" color="white">{`${Math.floor(
               annualCodingMinutes / 170 / 60
             )} h ${
@@ -277,7 +277,7 @@ const State: React.FC = () => {
             linkText="@Pionpill"
             linkHref="https://github.com/Pionpill"
           >
-            <P style={{ color: common.plain }}>每周平均提交次数</P>
+            <P shallow="sm">每周平均提交次数</P>
             <P size="xl" weight="xl" color="white">{`${(
               (annualContribution / 250) *
               7

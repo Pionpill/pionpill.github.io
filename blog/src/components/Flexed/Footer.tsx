@@ -1,9 +1,10 @@
 import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { darken } from "polished";
+import { darken, lighten } from "polished";
 import styled from "styled-components";
 import { Github } from "../../shared/info";
+import { light } from "../../styles/themes";
 import A from "../A";
 import Flex from "../Flex";
 import Icon from "../Icon";
@@ -11,7 +12,10 @@ import P from "../P";
 import RouteLink from "../RouteLink";
 
 const FooterWrapper = styled.footer<{ bottom?: boolean }>`
-  background-color: ${({ theme }) => darken(0.1, theme.background)};
+  background-color: ${({ theme }) =>
+    theme === light
+      ? darken(0.1, theme.background)
+      : lighten(0.1, theme.background)};
   width: 100%;
   display: flex;
   align-items: center;

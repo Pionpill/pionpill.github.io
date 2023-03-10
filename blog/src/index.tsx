@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import { useThemeChoice } from "./hooks/useThemeChoice";
+import useThemeChoice from "./hooks/useThemeChoice";
 import "./index.css";
 import { MainRoute } from "./routes";
 import store from "./store";

@@ -1,8 +1,8 @@
-import { lighten } from "polished";
+import { darken, lighten } from "polished";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Degree, { TextColor } from "../styles";
-import { common } from "../styles/themes";
+import { common, light } from "../styles/themes";
 import {
   fontSizeSelector,
   fontWeightSelector,
@@ -19,14 +19,23 @@ type Props = {
 
 const RouteLink = styled(Link)<Props>`
   color: ${({ shallow, color, theme }) =>
-    lighten(
-      shallowSelector(shallow),
-      color === "blue"
-        ? common.pointer
-        : color === "link"
-        ? common.link
-        : textColorSelector(color, theme)
-    )};
+    theme === light
+      ? lighten(
+          shallowSelector(shallow),
+          color === "blue"
+            ? common.pointer
+            : color === "link"
+            ? common.link
+            : textColorSelector(color, theme)
+        )
+      : darken(
+          shallowSelector(shallow),
+          color === "blue"
+            ? common.pointer
+            : color === "link"
+            ? common.link
+            : textColorSelector(color, theme)
+        )};
   font-size: initial;
   display: flex;
   font-weight: 400;

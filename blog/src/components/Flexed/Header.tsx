@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useThemeChoice } from "../../hooks/useThemeChoice";
+import useThemeChoice from "../../hooks/useThemeChoice";
 import { Github } from "../../shared/info";
 import { toggleTheme } from "../../store/root";
 import { common } from "../../styles/themes";

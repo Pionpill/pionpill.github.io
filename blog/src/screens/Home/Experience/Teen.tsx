@@ -12,7 +12,7 @@ import A from "../../../components/A";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import P from "../../../components/P";
-import { useThemeChoice } from "../../../hooks/useThemeChoice";
+import useThemeChoice from "../../../hooks/useThemeChoice";
 import { coordinate } from "../../../shared/coordinate";
 import { spacing } from "../../../styles/measure";
 import { token } from "../../../tokens/token";

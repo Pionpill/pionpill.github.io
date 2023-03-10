@@ -1,8 +1,9 @@
-import { lighten } from "polished";
+import { darken, lighten } from "polished";
 import styled from "styled-components";
 import Degree, { TextColor } from "../styles";
 import { spacing } from "../styles/measure";
 import { fontWeight } from "../styles/size";
+import { light } from "../styles/themes";
 import { shallowSelector, textColorSelector } from "../utils/styledUtils";
 
 const H1 = styled.h1<{
@@ -10,7 +11,9 @@ const H1 = styled.h1<{
   color?: TextColor;
 }>`
   color: ${({ shallow, color, theme }) =>
-    lighten(shallowSelector(shallow), textColorSelector(color, theme))};
+    theme === light
+      ? lighten(shallowSelector(shallow), textColorSelector(color, theme))
+      : darken(shallowSelector(shallow), textColorSelector(color, theme))};
   font-weight: ${() => fontWeight.xxl};
   font-size: 36px;
   text-align: center;

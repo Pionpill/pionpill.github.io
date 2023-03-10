@@ -1,7 +1,7 @@
 import { darken, lighten } from "polished";
 import styled from "styled-components";
 import Degree, { ButtonColor, TextColor } from "../styles";
-import { common } from "../styles/themes";
+import { common, light } from "../styles/themes";
 import {
   buttonColorSelector,
   fontSizeSelector,
@@ -21,11 +21,16 @@ type Props = {
 const Button = styled.button<Props>`
   color: ${({ textColor, theme }) =>
     textColor ? textColorSelector(textColor, theme) : common.text_white};
-  background-color: ${({ shallow, bgColor: color }) =>
-    lighten(
-      shallowSelector(shallow),
-      color ? buttonColorSelector(color) : "transparent"
-    )};
+  background-color: ${({ theme, shallow, bgColor: color }) =>
+    theme === light
+      ? lighten(
+          shallowSelector(shallow),
+          color ? buttonColorSelector(color) : "transparent"
+        )
+      : darken(
+          shallowSelector(shallow),
+          color ? buttonColorSelector(color) : "transparent"
+        )};
   font-size: ${({ size }) => fontSizeSelector(size)};
   font-weight: ${({ weight }) => fontWeightSelector(weight)};
   margin: 0;

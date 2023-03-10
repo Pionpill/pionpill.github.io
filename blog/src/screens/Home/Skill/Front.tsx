@@ -11,7 +11,7 @@ import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import Svg from "../../../components/svg/Svg";
 import Text from "../../../components/svg/Text";
-import { useThemeChoice } from "../../../hooks/useThemeChoice";
+import useThemeChoice from "../../../hooks/useThemeChoice";
 import { common } from "../../../styles/themes";
 import SkillPath from "./components/SkillPath";
 import SkillRectText from "./components/SkillRectText";
@@ -107,10 +107,11 @@ const StackSvg: React.FC = () => {
         fill={common.x}
         component
       />
-      <SkillPath d="M 200 420 L 100 370" dash />
-      <SkillPath d="M 200 420 L 100 400" dash />
-      <SkillPath d="M 200 420 L 100 430" dash />
-      <SkillPath d="M 200 420 L 100 460" dash />
+      <SkillPath d="M 200 420 L 100 360" dash />
+      <SkillPath d="M 200 420 L 100 390" dash />
+      <SkillPath d="M 200 420 L 100 420" dash />
+      <SkillPath d="M 200 420 L 100 450" dash />
+      <SkillPath d="M 200 420 L 100 480" dash />
       <SkillPath d="M 350 420 L 450 400" dash />
       <SkillPath d="M 350 420 L 450 430" dash />
       <SkillPath d="M 350 420 L 450 460" dash />
@@ -124,20 +125,27 @@ const StackSvg: React.FC = () => {
       />
       <SkillRectText
         x="60"
-        y="400"
-        component
-        text="styled-components"
-        fill={common.xxxx}
-      />
-      <SkillRectText x="60" y="430" component text="antd" fill={common.xx} />
-      <SkillRectText
-        x="60"
-        y="370"
+        y="360"
         component
         text="react-router"
         fill={common.xxx}
       />
-      <SkillRectText x="60" y="460" component text="axios" fill={common.xxx} />
+      <SkillRectText
+        x="60"
+        y="390"
+        component
+        text="styled-components"
+        fill={common.xxxx}
+      />
+      <SkillRectText x="60" y="420" component text="antd" fill={common.xx} />
+      <SkillRectText x="60" y="450" component text="axios" fill={common.xxx} />
+      <SkillRectText
+        x="60"
+        y="480"
+        component
+        text="node-fetch"
+        fill={common.xxx}
+      />
       <SkillRectText
         x="450"
         y="400"

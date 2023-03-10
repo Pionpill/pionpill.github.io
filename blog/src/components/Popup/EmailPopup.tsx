@@ -13,14 +13,14 @@ import Popup from "./Popup";
 import QRCode from "./QRCode";
 
 const Wrapper = styled.div<{ link?: boolean }>`
-  background: ${(props) => lighten(0.1, props.theme.header)};
+  background: ${({ theme }) => lighten(0.1, theme.header)};
   padding: 0.5em;
   margin: 1em 0em;
-  border: 0.5px solid ${(props) => props.theme.background};
-  color: ${(props) => props.theme.background};
-  cursor: ${(props) => (props.link ? "pointer" : "initial")};
+  border: 0.5px solid ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.background};
+  cursor: ${({ link }) => (link ? "pointer" : "initial")};
   &:hover {
-    color: ${(props) => (props.link ? props.theme.blue : "initial")};
+    color: ${({ link, theme }) => (link ? theme.blue : "initial")};
   }
 `;
 

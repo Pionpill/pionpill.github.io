@@ -1,8 +1,8 @@
-import { lighten } from "polished";
+import { darken, lighten } from "polished";
 import styled, { css, CSSProperties } from "styled-components";
 import Degree, { RadiusType } from "../styles";
 import { breakpoints, spacing } from "../styles/measure";
-import { common } from "../styles/themes";
+import { common, light } from "../styles/themes";
 import {
   gapSelector,
   radiusSelector,
@@ -58,9 +58,13 @@ const Flex = styled.div<Props>`
     return radius ? radiusSelector(radius) : "initial";
   }};
   width: ${({ fullWidth }) => fullWidth && "100%"};
-  background-color: ${({ shallow, black }) =>
-    black &&
-    lighten(shallowSelector(shallow), black ? common.header : "transparent")};
+  background-color: ${({ theme, shallow, black }) =>
+    black && theme === light
+      ? lighten(shallowSelector(shallow), black ? common.header : "transparent")
+      : darken(
+          shallowSelector(shallow),
+          black ? common.header : "transparent"
+        )};
   background-color: ${({ shallow, bgSecond, theme }) =>
     bgSecond &&
     lighten(
