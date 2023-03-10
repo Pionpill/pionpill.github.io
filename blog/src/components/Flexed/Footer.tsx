@@ -68,6 +68,9 @@ export const Footer: React.FC = () => {
         </Flex>
         <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">使用的开源组件</P>
+          <A shallow="sm" href="https://www.axios-http.cn/">
+            axios
+          </A>
           <A shallow="sm" href="https://github.com/remix-run/react-router">
             react-router
           </A>
@@ -80,6 +83,8 @@ export const Footer: React.FC = () => {
           <A shallow="sm" href="https://www.npmjs.com/package/gh-pages">
             gh-pages
           </A>
+        </Flex>
+        <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <A shallow="sm" href="https://github.com/styled-components/polished">
             polished
           </A>
@@ -93,16 +98,13 @@ export const Footer: React.FC = () => {
           <A shallow="sm" href="https://echarts.apache.org/zh/index.html">
             echarts
           </A>
-          <A shallow="sm" href="https://plotly.com/javascript/">
-            plotly.js
-          </A>
           <A shallow="sm" href="https://lbs.amap.com/">
             amap
           </A>
         </Flex>
         <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">数据来源</P>
-          <A shallow="sm" href="https://github.com/">
+          <A shallow="sm" href="https://github.com/Pionpill">
             Github
           </A>
           <A shallow="sm" href="https://wakatime.com/@pionpill">

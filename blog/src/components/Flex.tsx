@@ -43,7 +43,6 @@ const Flex = styled.div<Props>`
       ? `${spacing.hpadding} ${spacing.vpadding}`
       : "auto"};
   gap: ${({ gap }) => gapSelector(gap)};
-
   flex-direction: ${({ column, reverse }) =>
     reverse
       ? column

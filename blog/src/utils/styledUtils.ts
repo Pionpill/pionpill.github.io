@@ -131,11 +131,19 @@ export const radiusSelector = (radius: RadiusType | undefined): string => {
     return "100%"
   if (radius === "rectangle")
     return "0%"
-  if (radius === "sm")
+  if (radius === "xxs")
+    return "2px"
+  if (radius === "xs")
     return "4px"
-  if (radius === "md")
+  if (radius === "sm")
     return "8px"
-  if (radius === "lg")
+  if (radius === "md")
     return "12px"
+  if (radius === "lg")
+    return "16px"
+  if (radius === "xl")
+    return "24px"
+  if (radius === "xxl")
+    return "32px"
   return "8px"
 }

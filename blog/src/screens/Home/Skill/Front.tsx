@@ -1,98 +1,67 @@
+import {
+  faCss3,
+  faHtml5,
+  faJs,
+  faReact,
+  faVuejs,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SiElectron, SiRedux, SiTypescript } from "react-icons/si";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import Svg from "../../../components/svg/Svg";
 import Text from "../../../components/svg/Text";
 import { useThemeChoice } from "../../../hooks/useThemeChoice";
 import { common } from "../../../styles/themes";
+import SkillPath from "./components/SkillPath";
 import SkillRectText from "./components/SkillRectText";
-import CSS3 from "./components/svg/CSS3";
-import Electron from "./components/svg/Electron";
-import Html5 from "./components/svg/Html5";
-import JavaScript from "./components/svg/JavaScript";
-import React from "./components/svg/React";
-import Redux from "./components/svg/Redux";
-import TypeScript from "./components/svg/TypeScript";
-import Vue from "./components/svg/Vue";
 
 const StackSvg: React.FC = () => {
   const noteColor = useThemeChoice("#222", "#eee");
   return (
-    <Svg width="800" height="700" style={{ maxWidth: "100%" }}>
+    <Svg width="650" height="700" style={{ maxWidth: "100%" }}>
+      <SkillPath d="M 400 40 L 400 315" />
       <Text x="400" y="20" size="lg" fill={noteColor}>
         前端基础
       </Text>
-      <Text x="450" y="340" size="lg" fill={noteColor}>
+      <Text x="400" y="330" size="lg" fill={noteColor}>
         框架路线
       </Text>
-      <Text x="200" y="570" size="lg" fill={noteColor}>
+      <SkillPath d="M 400 350 Q 400 375 300 375 Q 275 375 275 400" />
+      <SkillPath d="M 400 350 Q 400 375 500 375 Q 600 375 600 400" />
+      <SkillPath d="M 275 400 L 275 585" />
+      <SkillPath d="M 275 615 Q 275 630 225 630 Q 175 630 175 650" />
+      <SkillPath d="M 275 615 Q 275 630 325 630 Q 375 630 375 650" />
+      <SkillPath d="M 400 70 L 200 70" dash />
+      <SkillPath d="M 400 150 L 200 150" dash />
+      <SkillPath d="M 175 555 L 100 535" dash />
+      <SkillPath d="M 175 555 L 100 575" dash />
+      <SkillPath d="M 275 557 L 225 557" dash />
+      <Text x="200" y="555" size="lg" fill={noteColor}>
         3D
       </Text>
-      <Text x="400" y="620" size="lg" fill={noteColor}>
+      <Text x="275" y="600" size="lg" fill={noteColor}>
         跨平台
       </Text>
       <SkillRectText
-        x="30"
-        y="30"
-        width="30"
-        size="sm"
-        text="弃用"
-        radius="ellipse"
-        fill={common.x}
-      />
-      <SkillRectText
-        x="30"
+        x="400"
         y="70"
-        width="30"
-        size="sm"
-        text="了解"
-        radius="ellipse"
-        fill={common.xx}
+        text="HTML5"
+        icon={<FontAwesomeIcon icon={faHtml5} color="white" />}
       />
-      <SkillRectText
-        x="30"
-        y="110"
-        width="30"
-        size="sm"
-        text="熟悉"
-        radius="ellipse"
-        fill={common.xxx}
-      />
-      <SkillRectText
-        x="30"
-        y="150"
-        width="30"
-        size="sm"
-        text="掌握"
-        radius="ellipse"
-        fill={common.xxxx}
-      />
-      <SkillRectText
-        x="30"
-        y="190"
-        width="30"
-        size="sm"
-        text="精通"
-        radius="ellipse"
-        fill={common.xxxxx}
-      />
-      <SkillRectText
-        x="30"
-        y="230"
-        width="30"
-        size="sm"
-        text="准备"
-        radius="ellipse"
-        fill={common.purple}
-      />
-      <SkillRectText x="400" y="70" text="HTML5" icon={<Html5 />} />
       <SkillRectText x="200" y="70" text="SVG" component />
-      <SkillRectText x="400" y="110" text="CSS3" icon={<CSS3 />} />
+      <SkillRectText
+        x="400"
+        y="110"
+        text="CSS3"
+        icon={<FontAwesomeIcon icon={faCss3} color="white" />}
+      />
       <SkillRectText
         x="400"
         y="150"
         indent="20"
         text="JavaScript"
-        icon={<JavaScript />}
+        icon={<FontAwesomeIcon icon={faJs} color="white" />}
       />
       <SkillRectText x="200" y="150" component text="DOM & Web API" />
       <SkillRectText
@@ -101,7 +70,7 @@ const StackSvg: React.FC = () => {
         indent="20"
         text="TypeScript"
         fill={common.xxx}
-        icon={<TypeScript />}
+        icon={<SiTypescript color="#fff" size={1024} />}
       />
       <SkillRectText
         x="400"
@@ -119,6 +88,7 @@ const StackSvg: React.FC = () => {
         component
         fill={common.xx}
       />
+      <SkillPath d="M 600 420 L 600 460" dash />
       <SkillRectText
         x="600"
         y="420"
@@ -126,23 +96,31 @@ const StackSvg: React.FC = () => {
         text="Vue3"
         indent="0"
         fill={common.x}
-        icon={<Vue />}
+        icon={<FontAwesomeIcon icon={faVuejs} color="white" />}
       />
+
       <SkillRectText
-        x="740"
-        y="420"
+        x="600"
+        y="470"
         width="90"
         text="element-ui"
         fill={common.x}
         component
       />
+      <SkillPath d="M 200 420 L 100 370" dash />
+      <SkillPath d="M 200 420 L 100 400" dash />
+      <SkillPath d="M 200 420 L 100 430" dash />
+      <SkillPath d="M 200 420 L 100 460" dash />
+      <SkillPath d="M 350 420 L 450 400" dash />
+      <SkillPath d="M 350 420 L 450 430" dash />
+      <SkillPath d="M 350 420 L 450 460" dash />
       <SkillRectText
         x="275"
         y="420"
         indent="10"
         text="React (hooks)"
         fill={common.xxxx}
-        icon={<React />}
+        icon={<FontAwesomeIcon color="white" icon={faReact} />}
       />
       <SkillRectText
         x="60"
@@ -177,41 +155,49 @@ const StackSvg: React.FC = () => {
         fill={common.xxx}
       />
       <SkillRectText
+        x="450"
+        y="460"
+        width="70"
+        component
+        text="d3.js"
+        fill={common.purple}
+      />
+      <SkillRectText
         x="275"
         y="500"
         text="Redux"
         fill={common.xxx}
-        icon={<Redux />}
+        icon={<SiRedux color="white" size="1024" />}
       />
       <SkillRectText
         x="60"
-        y="570"
+        y="540"
         text="tree.js"
         component
         fill={common.purple}
       />
       <SkillRectText
         x="60"
-        y="600"
+        y="570"
         text="ar.js"
         component
         fill={common.purple}
       />
       <SkillRectText
-        x="200"
-        y="680"
+        x="175"
+        y="670"
         indent="10"
-        icon={<React />}
+        icon={<FontAwesomeIcon color="white" icon={faReact} />}
         text="React Native"
         fill={common.purple}
       />
       <SkillRectText
-        x="400"
-        y="680"
+        x="375"
+        y="670"
         text="Electorn"
         indent="20"
         fill={common.purple}
-        icon={<Electron />}
+        icon={<SiElectron color="white" size="1024" />}
       />
     </Svg>
   );
@@ -219,9 +205,11 @@ const StackSvg: React.FC = () => {
 
 const Front: React.FC = () => {
   return (
-    <Flex bleed gap="xxs" limitWidth column fullWidth>
-      <H2>前端技术栈</H2>
-      <StackSvg />
+    <Flex bgSecond fullWidth>
+      <Flex bleed gap="xxs" limitWidth column fullWidth>
+        <H2>前端技术路线</H2>
+        <StackSvg />
+      </Flex>
     </Flex>
   );
 };

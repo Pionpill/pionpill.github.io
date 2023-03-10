@@ -5,6 +5,7 @@ import Menu from "../templates/Menu";
 import Life from "./Life";
 import Profile from "./Profile";
 import Skill from "./Skill";
+import State from "./State";
 
 const Index: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Index: React.FC = () => {
         <Menu />
         <Flex column gap="lg" fullWidth>
           <Profile />
+          <State />
           <Skill />
           <Life />
         </Flex>
