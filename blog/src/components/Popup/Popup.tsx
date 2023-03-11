@@ -4,7 +4,7 @@ import { lighten } from "polished";
 import React from "react";
 import styled from "styled-components";
 import { toggleComponent } from "../../utils/componentsUtils";
-import A from "../A";
+import Button from "../Button";
 import Flex from "../Flex";
 import P from "../P";
 type FixedProps = {
@@ -35,6 +35,7 @@ const Curtain = styled(Fixed)`
 
 const Header = styled(Flex)`
   height: 36px;
+  max-height: 36px;
   width: 100%;
   background: ${(props) => props.theme.header};
   color: ${(props) => props.theme.text_reverse};
@@ -44,7 +45,7 @@ const Header = styled(Flex)`
   border-radius: 6px 6px 0px 0px;
 `;
 
-const CloseIcon = styled(A)`
+const CloseIcon = styled(Button)`
   position: absolute;
   top: 4px;
   right: 0px;

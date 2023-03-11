@@ -37,7 +37,7 @@ const EmailPopup = React.forwardRef(({}, ref: any) => {
 
   return (
     <Popup title="Email(QQ)" ref={ref}>
-      <Icon width="64px" src={QQ.icon} />
+      <Icon width="64px" src={QQ.icon} alt="QQ 头像" />
       <P size="lg"> {QQ.name} </P>
       <QRCode url={QQ.qr} icon={faQq} />
       <P size="sm" shallow="md">
@@ -45,13 +45,15 @@ const EmailPopup = React.forwardRef(({}, ref: any) => {
       </P>
       <Flex>
         <Wrapper>
-          <P ref={emailRef}>{QQ.email}</P>
+          <P color="white" ref={emailRef}>
+            {QQ.email}
+          </P>
         </Wrapper>
         <Wrapper link onClick={copyContext}>
           <FontAwesomeIcon icon={faCopy} title="复制邮箱" />
         </Wrapper>
         <Wrapper link>
-          <A href="mailto:673486387@qq.com">
+          <A color="white" href="mailto:673486387@qq.com">
             <FontAwesomeIcon icon={faEnvelopeOpen} title="QQ邮箱" />
           </A>
         </Wrapper>

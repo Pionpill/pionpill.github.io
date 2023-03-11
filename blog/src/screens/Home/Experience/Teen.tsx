@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ReactNode } from "react";
-import A from "../../../components/A";
+import Button from "../../../components/Button";
 import Flex from "../../../components/Flex";
 import H2 from "../../../components/H2";
 import P from "../../../components/P";
@@ -98,14 +98,14 @@ const Teen: React.FC = () => {
             </Card>
             <Flex column gap="xs" style={{ maxWidth: "150px" }}>
               <P weight="xl" size="lg">
-                <A
+                <Button
                   onClick={() => changeCenter([113.159617, 30.64309], 12)}
-                  color="link"
+                  textColor="link"
                   weight="xl"
                   size="lg"
                 >
                   湖北省天门市
-                </A>
+                </Button>
               </P>
               <P center weight="sm">
                 出生于一个普普通通的农村家庭，在这里上过幼儿园
@@ -120,39 +120,39 @@ const Teen: React.FC = () => {
               <FontAwesomeIcon icon={faChild} size="2x" color="#80a492" />
             </Card>
             <Flex column gap="xs" style={{ maxWidth: "150px" }}>
-              <A
+              <Button
                 onClick={() => changeCenter([120.282231, 31.494045], 12)}
-                color="link"
+                textColor="link"
                 weight="xl"
                 size="lg"
               >
                 江苏省无锡市
-              </A>
+              </Button>
               <P center weight="sm">
                 在这里度过了学生时代，就读于
-                <A
-                  color="link"
+                <Button
+                  textColor="link"
                   weight="lg"
                   onClick={() => changeCenter([120.278002, 31.605755], 16)}
                 >
                   吴桥实小
-                </A>
-                &nbsp; · &nbsp;
-                <A
-                  color="link"
+                </Button>
+                &nbsp;·&nbsp;
+                <Button
+                  textColor="link"
                   weight="lg"
                   onClick={() => changeCenter([120.291119, 31.607393], 16)}
                 >
                   凤翔中学
-                </A>
-                &nbsp; · &nbsp;
-                <A
-                  color="link"
+                </Button>
+                &nbsp;·&nbsp;
+                <Button
+                  textColor="link"
                   weight="lg"
                   onClick={() => changeCenter([120.286693, 31.492004], 16)}
                 >
                   太湖高中
-                </A>
+                </Button>
               </P>
             </Flex>
             <P weight="xl" shallow="md" style={{ justifySelf: "flex-end" }}>
@@ -172,13 +172,13 @@ const Teen: React.FC = () => {
                 江苏省南京市
               </P>
               <P center weight="sm">
-                <A
-                  color="link"
+                <Button
+                  textColor="link"
                   weight="lg"
                   onClick={() => changeCenter([113.159617, 30.64309], 12)}
                 >
                   南京信息工程大学
-                </A>
+                </Button>
                 本科，就读于软件学院软件工程系
               </P>
             </Flex>
@@ -196,13 +196,13 @@ const Teen: React.FC = () => {
               </P>
               <P center weight="sm">
                 于无锡{" "}
-                <A
-                  color="link"
+                <Button
+                  textColor="link"
                   weight="lg"
                   onClick={() => changeCenter([120.305619, 31.490248], 17)}
                 >
                   国联证券
-                </A>{" "}
+                </Button>
                 实习，正在寻找一份长三角的工作
               </P>
             </Flex>

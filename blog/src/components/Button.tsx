@@ -13,14 +13,20 @@ import {
 type Props = {
   bgColor?: ButtonColor;
   size?: Degree;
-  textColor?: TextColor;
+  textColor?: TextColor | "blue" | "link";
   shallow?: Degree;
   weight?: Degree;
 };
 
 const Button = styled.button<Props>`
   color: ${({ textColor, theme }) =>
-    textColor ? textColorSelector(textColor, theme) : common.text_white};
+    textColor
+      ? textColor === "blue"
+        ? common.pointer
+        : textColor === "link"
+        ? common.link
+        : textColorSelector(textColor, theme)
+      : common.text_white};
   background-color: ${({ theme, shallow, bgColor: color }) =>
     theme === light
       ? lighten(
@@ -41,9 +47,17 @@ const Button = styled.button<Props>`
   border: 0;
   &:hover {
     color: ${({ textColor, theme }) =>
-      darken(
+      lighten(
         shallowSelector("sm"),
-        textColor ? textColorSelector(textColor, theme) : common.text_white
+        textColor
+          ? textColor
+            ? textColor === "blue"
+              ? common.pointer
+              : textColor === "link"
+              ? common.link
+              : textColorSelector(textColor, theme)
+            : common.text_white
+          : common.text_white
       )};
     /* transition: all 0.5s; */
   }

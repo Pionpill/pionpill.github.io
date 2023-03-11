@@ -9,7 +9,7 @@ import QRCode from "./QRCode";
 const WeixinPopup = React.forwardRef(({}, ref: any) => {
   return (
     <Popup title="Weixin" ref={ref}>
-      <Icon width="64px" src={QQ.icon} />
+      <Icon width="64px" src={QQ.icon} alt="QQ 头像" />
       <P size="lg"> {Weixin.name} </P>
       <P> {Weixin.id} </P>
       <QRCode url={Weixin.qr} icon={faWeixin} />

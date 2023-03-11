@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
 
     return (
       <>
-        <Button style={{ color: common.plain }}>
+        <Button name="change theme" style={{ color: common.plain }}>
           <FontAwesomeIcon
             icon={themeIcon}
             onClick={() => dispatch(toggleTheme())}
@@ -104,13 +104,14 @@ export const Header: React.FC = () => {
         <A href={Github.link} color="white">
           <FontAwesomeIcon icon={faGithub} />
         </A>
-        <Button style={{ padding: 0 }}>
+        <Button name="weixin link" style={{ padding: 0 }}>
           <FontAwesomeIcon
             icon={faWeixin}
             onClick={() => toggleComponent(weixinPopupRef)}
           />
         </Button>
         <Button
+          name="email link"
           style={{ padding: 0 }}
           onClick={() => toggleComponent(emailPopupRef)}
         >
@@ -125,9 +126,13 @@ export const Header: React.FC = () => {
       <HeaderWrapper id="header">
         {isPhone() && (
           <>
-            <A color="white" onClick={() => toggleComponent(routeBarRef)}>
+            <Button
+              name="open route bar"
+              color="white"
+              onClick={() => toggleComponent(routeBarRef)}
+            >
               <FontAwesomeIcon icon={faBars} />
-            </A>
+            </Button>
             <Flex
               ref={routeBarRef}
               gap="xs"
@@ -148,7 +153,12 @@ export const Header: React.FC = () => {
         )}
         <Flex gap="xs">
           <Responsive tabletHidden>
-            <Icon radius="circle" width="24px" src={Github.icon} />
+            <Icon
+              radius="circle"
+              width="24px"
+              src="https://avatars.githubusercontent.com/u/70939356?s=24&v=4"
+              alt="头像"
+            />
           </Responsive>
           <RouteLink color="white" weight="xl" size="lg" to="/">
             Pionpill / gitpage
@@ -178,7 +188,11 @@ export const Header: React.FC = () => {
         {isPhone() && (
           <>
             <ThemeLinks />
-            <Button weight="sm" onClick={() => toggleComponent(contactBarRef)}>
+            <Button
+              name="open contact bar"
+              weight="sm"
+              onClick={() => toggleComponent(contactBarRef)}
+            >
               <FontAwesomeIcon icon={faEllipsis} />
             </Button>
             <Flex

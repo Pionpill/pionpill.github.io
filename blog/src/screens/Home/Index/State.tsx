@@ -72,7 +72,6 @@ const State: React.FC = () => {
   const [annualCodingMinutes, setAnnualCodingMinutes] =
     React.useState<number>(0);
   const [annualContribution, setAnnualContribution] = React.useState<number>(0);
-
   const wakaTimeItemColorArray: Array<string> = useThemeChoice(
     ["#ebedf0", "#b4c7d9", "#8baac5", "#527da4", "#36526c"],
     ["#252526", "#36526c", "#6b798e", "#8baac5", "#9aa7b1", "#ebedf0"]
@@ -125,8 +124,9 @@ const State: React.FC = () => {
     return {
       top: isPhone() ? 120 : 85,
       left: isPhone() ? "center" : "auto",
+      right: isPhone() ? "auto" : "0",
       orient: isPhone() ? "vertical" : "horizontal",
-      width: isPhone() ? 110 : "auto",
+      width: isPhone() ? 110 : 900,
       cellSize: isPhone() ? 12 : 14,
       range: [startDate, endDate],
       splitLine: {
@@ -228,7 +228,7 @@ const State: React.FC = () => {
   React.useEffect(() => {
     initWakaTime();
     initGithub();
-  }, [textColor]);
+  }, []);
 
   return (
     <Flex fullWidth bgSecond>

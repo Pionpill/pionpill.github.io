@@ -32,7 +32,12 @@ export const Footer: React.FC = () => {
       <Flex wrap align="flex-start" phoneResponsive style={{ gap: "36px" }}>
         <Flex gap="xxs" column align="flex-start">
           <Flex gap="xs">
-            <Icon radius="circle" width="18px" src={Github.icon} />
+            <Icon
+              radius="circle"
+              width="18px"
+              src={Github.icon}
+              alt="github 头像"
+            />
             <RouteLink weight="xl" to="/">
               Pionpill/gitpage
             </RouteLink>
