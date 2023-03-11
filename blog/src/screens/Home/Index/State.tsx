@@ -106,7 +106,7 @@ const State: React.FC = () => {
       orient: "horizontal",
       calculable: true,
       realtime: true,
-      left: "80%",
+      right: isPhone() ? "center" : "0%",
       bottom: "0",
       inRange: {
         symbol: "circle",
@@ -123,10 +123,11 @@ const State: React.FC = () => {
   };
   const setCalendar = (startDate: string, endDate: string) => {
     return {
-      top: 85,
-      left: 30,
-      right: 30,
-      cellSize: 14,
+      top: isPhone() ? 120 : 85,
+      left: isPhone() ? "center" : "auto",
+      orient: isPhone() ? "vertical" : "horizontal",
+      width: isPhone() ? 110 : "auto",
+      cellSize: isPhone() ? 12 : 14,
       range: [startDate, endDate],
       splitLine: {
         lineStyle: {
@@ -163,7 +164,7 @@ const State: React.FC = () => {
     const startDate = realData[0][0];
     const endDate = realData[realData.length - 1][0];
     const realWakatimeTableOptions = {
-      title: setTitle("近一年每日代码时长 (前面没数据)"),
+      title: setTitle("代码时长 (缺数据)"),
       tooltip: {
         formatter: (params: any) => {
           return `${params.value[0]} <br/> ${parseInt(
@@ -202,7 +203,7 @@ const State: React.FC = () => {
     const startDate = realData[0][0];
     const endDate = realData[realData.length - 1][0];
     const realGithubTableOptions = {
-      title: setTitle("近一年 Github 提交次数"),
+      title: setTitle("Github 提交次数"),
       tooltip: {
         formatter: (params: any) => {
           return `${params.value[0]} ${params.value[1]} 次`;
@@ -236,17 +237,23 @@ const State: React.FC = () => {
           <H2>最近状态</H2>
           {isPhone() && <P shallow="md">部分数据图可能挤压变形，请横屏刷新</P>}
         </Flex>
-        <Flex style={{ width: "100%" }}>
+        <Flex wrap align="space-between" style={{ width: "100%", gap: "0" }}>
           <Flex
-            column
             style={{
-              maxWidth: "1000px",
-              minWidth: "200px",
-              height: "500px",
-              minHeight: "100px",
+              maxWidth: isPhone() ? "170px" : "1000px",
+              minWidth: isPhone() ? "170px" : "1000px",
+              height: isPhone() ? "820px" : "250px",
             }}
           >
             <EChart options={wakaTimeOptions} />
+          </Flex>
+          <Flex
+            style={{
+              maxWidth: isPhone() ? "170px" : "1000px",
+              minWidth: isPhone() ? "170px" : "1000px",
+              height: isPhone() ? "820px" : "250px",
+            }}
+          >
             <EChart options={githubOptions} />
           </Flex>
         </Flex>
@@ -258,7 +265,9 @@ const State: React.FC = () => {
             linkText="@pionpill"
             linkHref="https://wakatime.com/@pionpill"
           >
-            <P shallow="sm">工作日平均Coding时间</P>
+            <P color="white" shallow="sm">
+              工作日平均Coding时间
+            </P>
             <P size="xl" weight="xl" color="white">{`${Math.floor(
               annualCodingMinutes / 170 / 60
             )} h ${
@@ -277,9 +286,11 @@ const State: React.FC = () => {
             linkText="@Pionpill"
             linkHref="https://github.com/Pionpill"
           >
-            <P shallow="sm">每周平均提交次数</P>
+            <P color="white" shallow="sm">
+              每周平均提交次数
+            </P>
             <P size="xl" weight="xl" color="white">{`${(
-              (annualContribution / 250) *
+              (annualContribution / 365) *
               7
             ).toPrecision(2)} `}</P>
             <P
