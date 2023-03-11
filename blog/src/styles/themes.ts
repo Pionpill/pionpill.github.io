@@ -32,6 +32,7 @@ const colors = {
     yellow: "#fbc02d",
     light: "#f1f2f6",
     dark: "#252526",
+    nuist: "#116e9f"
 };
 
 export const common = {
@@ -63,6 +64,7 @@ export const common = {
     header: colors.github_black,
     text_pointer: colors.plain,
     shadow: colors.black50,
+    article: colors.nuist,
 }
 
 export const light: Theme = {

@@ -14,6 +14,7 @@ type Props = {
   color?: TextColor | "blue" | "link";
   shallow?: Degree;
   weight?: Degree;
+  inline?: boolean;
   wrap?: boolean;
   align?: CSSProperties["textAlign"];
 };
@@ -37,10 +38,11 @@ const A = styled.a<Props>`
             ? common.link
             : textColorSelector(color, theme)
         )};
-  font-size: ${({ size }) => fontSizeSelector(size)};
-  font-weight: ${({ weight }) => fontWeightSelector(weight)};
+  font-size: ${({ size }) => (size ? fontSizeSelector(size) : "inherit")};
+  font-weight: ${({ weight }) =>
+    weight ? fontWeightSelector(weight) : "inherit"};
   margin: 0;
-  padding: 4px 0;
+  padding: ${({ inline }) => (inline ? "4px 4px" : "4px 0")};
   cursor: pointer;
   white-space: ${({ wrap }) => (wrap ? "wrap" : "nowrap")};
   justify-content: center;

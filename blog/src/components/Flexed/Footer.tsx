@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             个人博客，仅供学习与资料展示.
           </P>
           <Flex justify="flex-start" gap="lg">
-            <A shallow="sm" href="https://github.com/Pionpill">
+            <A shallow="sm" href={Github.link}>
               <FontAwesomeIcon icon={faGithub} />
             </A>
             <A shallow="sm" href="https://twitter.com/pionpill">
@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
         </Flex>
         <Flex gap="xxs" column align="flex-start" style={{ minWidth: "100px" }}>
           <P weight="xl">数据来源</P>
-          <A shallow="sm" href="https://github.com/Pionpill">
+          <A shallow="sm" href={Github.link}>
             Github
           </A>
           <A shallow="sm" href="https://wakatime.com/@pionpill">

@@ -27,15 +27,15 @@ const Button = styled.button<Props>`
         ? common.link
         : textColorSelector(textColor, theme)
       : common.text_white};
-  background-color: ${({ theme, shallow, bgColor: color }) =>
+  background-color: ${({ theme, shallow, bgColor }) =>
     theme === light
       ? lighten(
           shallowSelector(shallow),
-          color ? buttonColorSelector(color) : "transparent"
+          bgColor ? buttonColorSelector(bgColor) : "transparent"
         )
       : darken(
           shallowSelector(shallow),
-          color ? buttonColorSelector(color) : "transparent"
+          bgColor ? buttonColorSelector(bgColor) : "transparent"
         )};
   font-size: ${({ size }) => fontSizeSelector(size)};
   font-weight: ${({ weight }) => fontWeightSelector(weight)};

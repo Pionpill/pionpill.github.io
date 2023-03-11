@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import Degree, { ButtonColor, TextColor } from "../styles";
+import Degree, { ButtonColor, RadiusType, TextColor } from "../styles";
 import { common } from "../styles/themes";
 import {
   buttonColorSelector,
   fontSizeSelector,
+  radiusSelector,
   textColorSelector,
 } from "../utils/styledUtils";
 
@@ -11,9 +12,11 @@ type Props = {
   color?: ButtonColor;
   size?: Degree;
   textColor?: TextColor;
+  radius?: RadiusType;
 };
 const Brand = styled.span<Props>`
-  border-radius: 10%;
+  border-radius: ${({ radius }) =>
+    radius ? radiusSelector(radius) : radiusSelector("xs")};
   padding: 3px 5px;
   font-size: ${({ size }) =>
     size ? fontSizeSelector(size) : fontSizeSelector("xs")};

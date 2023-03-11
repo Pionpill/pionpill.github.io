@@ -54,12 +54,7 @@ export const Header: React.FC = () => {
         <RouteLink color="white" weight="xl" to="/">
           Home
         </RouteLink>
-        <RouteLink
-          color="white"
-          weight="xl"
-          to="/"
-          onClick={() => onClickAlert()}
-        >
+        <RouteLink color="white" weight="xl" to="/article">
           Article
         </RouteLink>
         <RouteLink

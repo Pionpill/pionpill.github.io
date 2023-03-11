@@ -9,7 +9,8 @@ export const QQ = {
 export const Weixin = {
     id: "wxid_ako3myhp30ye22",
     qr: "https://u.wechat.com/MMfF8uSEl8MVihJmf3_5r9g",
-    name: "小葱拌豆腐"
+    name: "小葱拌豆腐",
+    payCode: "wxp://f2f0Ve8HOGusr4fBk3bp31Ne7NEgNFHfHWqUUK32XazhG0z3fBho5nqF06hzVkBO9HNm"
 }
 
 export const Github = {

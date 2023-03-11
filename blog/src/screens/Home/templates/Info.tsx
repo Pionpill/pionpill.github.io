@@ -24,7 +24,6 @@ import Icon from "../../../components/Icon";
 import P from "../../../components/P";
 import { terrain } from "../../../shared/img";
 import { Github } from "../../../shared/info";
-import { breakpoints } from "../../../styles/measure";
 
 const bgUrl =
   terrain["map-1"] +
@@ -45,9 +44,6 @@ const InfoWrapper = styled(Flex)`
   gap: 12px;
   width: 100%;
   height: 500px;
-  @media screen and (max-width: ${breakpoints.phone}) {
-    height: calc(100vh- 50px);
-  }
 `;
 
 const BaseInfo: React.FC = () => {

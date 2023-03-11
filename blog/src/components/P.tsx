@@ -1,5 +1,5 @@
 import { darken, lighten } from "polished";
-import styled, { css } from "styled-components";
+import styled, { css, CSSProperties } from "styled-components";
 import Degree, { TextColor } from "../styles";
 import { light } from "../styles/themes";
 import {
@@ -17,7 +17,7 @@ const P = styled.p<{
   center?: boolean;
   isTitle?: boolean;
   weight?: Degree;
-  space?: string;
+  space?: CSSProperties["letterSpacing"];
 }>`
   color: ${({ shallow, color, theme }) =>
     theme === light

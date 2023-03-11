@@ -9,18 +9,16 @@ import State from "./State";
 
 const Index: React.FC = () => {
   return (
-    <>
-      <Page>
-        <Info />
-        <Menu />
-        <Flex column gap="lg" fullWidth>
-          <Profile />
-          <State />
-          <Skill />
-          <Life />
-        </Flex>
-      </Page>
-    </>
+    <Page>
+      <Info />
+      <Menu />
+      <Flex column gap="lg" fullWidth>
+        <Profile />
+        <State />
+        <Skill />
+        <Life />
+      </Flex>
+    </Page>
   );
 };
 

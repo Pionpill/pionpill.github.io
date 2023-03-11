@@ -10,6 +10,7 @@ import H2 from "../../../components/H2";
 import P from "../../../components/P";
 import useThemeChoice from "../../../hooks/useThemeChoice";
 import { queryDailyAndTotalContributionCount } from "../../../scripts/graphQLScript";
+import { Github } from "../../../shared/info";
 import { common } from "../../../styles/themes";
 import { formatDate } from "../../../utils/dataUtils";
 import { isPhone } from "../../../utils/responsiveUtils";
@@ -237,6 +238,7 @@ const State: React.FC = () => {
           <H2>最近状态</H2>
           {isPhone() && <P shallow="md">部分数据图可能挤压变形，请横屏刷新</P>}
         </Flex>
+        {/* TODO 待重构，请求异常处理，加载动画 */}
         <Flex wrap align="space-between" style={{ width: "100%", gap: "0" }}>
           <Flex
             style={{
@@ -284,7 +286,7 @@ const State: React.FC = () => {
             icon={<SiGithub color={common.text_white} size="48" />}
             title="Github"
             linkText="@Pionpill"
-            linkHref="https://github.com/Pionpill"
+            linkHref={Github.link}
           >
             <P color="white" shallow="sm">
               每周平均提交次数
