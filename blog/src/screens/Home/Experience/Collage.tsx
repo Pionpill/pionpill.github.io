@@ -136,7 +136,7 @@ const Collage: React.FC = () => {
               border: `1px dashed ${useThemeChoice("#2a2a2a", "#f1f2f6")}`,
             }}
           >
-            <Flex radius="rectangle" wrap gap="xxs" style={{ padding: "12px" }}>
+            <Flex radius="rectangle" wrap gap="xxs" style={{ padding: "10px" }}>
               <SiAdobephotoshop color="#a67eb7" />
               <SiAdobeillustrator color="#4c8045" />
               <SiAdobelightroom color="#68945c" />
