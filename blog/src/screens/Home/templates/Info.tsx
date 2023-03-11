@@ -26,6 +26,12 @@ import { terrain } from "../../../shared/img";
 import { Github } from "../../../shared/info";
 import { breakpoints } from "../../../styles/measure";
 
+const bgUrl =
+  terrain["map-1"] +
+  `?imageMogr2/thumbnail/${
+    document.body.clientWidth > 2048 ? 2048 : document.body.clientWidth
+  }x`;
+
 const InfoWrapper = styled(Flex)`
   flex-direction: column;
   background: linear-gradient(
@@ -33,7 +39,7 @@ const InfoWrapper = styled(Flex)`
       rgba(0, 0, 0, 0.5) 50%,
       rgba(0, 0, 0, 0.75) 100%
     ),
-    url(${() => terrain["map-1"]}) no-repeat center;
+    url(${() => bgUrl}) no-repeat center;
   background-size: cover;
   padding: 125px 0 25px 0;
   gap: 12px;
@@ -47,7 +53,7 @@ const InfoWrapper = styled(Flex)`
 const BaseInfo: React.FC = () => {
   return (
     <Flex column gap="xs">
-      <Icon width="128px" src={Github.icon}></Icon>
+      <Icon width="128px" src={Github.icon} alt="头像" />
       <Flex align="baseline">
         <H1 color="white">北岸 pionpill</H1>
       </Flex>

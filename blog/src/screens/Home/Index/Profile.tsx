@@ -19,7 +19,12 @@ const Profile: React.FC = () => {
       <H2>个人简介</H2>
       <Flex tabletResponsive>
         <Flex style={{ maxWidth: "300px" }} column>
-          <Img src={pionpill["pionpill-1"]} size="200px" height="200px" />
+          <Img
+            src={`${pionpill["collage"]}?imageMogr2/thumbnail/200x`}
+            size="200px"
+            height="200px"
+            alt="大二办公抓拍"
+          />
           <P>
             完成一份工作后 <FontAwesomeIcon icon={faUpLong} />
           </P>

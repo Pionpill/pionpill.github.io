@@ -14,7 +14,12 @@ const Future: React.FC = () => {
         <H2>未来打算</H2>
         <Flex tabletResponsive gap="xl">
           <Flex style={{ maxWidth: "300px" }} column>
-            <Img src={pionpill["pionpill-3"]} size="200px" height="200px" />
+            <Img
+              src={`${pionpill["volunteer"]}?imageMogr2/thumbnail/200x`}
+              size="200px"
+              height="200px"
+              alt="志愿者活动"
+            />
             <P>上班! 上班! 上班!</P>
             <Flex style={{ gap: "10px" }} wrap justify="center">
               <Brand>
