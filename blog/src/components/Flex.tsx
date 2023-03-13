@@ -19,6 +19,7 @@ type Props = {
   fullWidth?: boolean;
   bleed?: boolean;
   gap?: Degree;
+  bg?: boolean;
   bgSecond?: boolean;
   limitWidth?: boolean;
   phoneResponsive?: boolean;
@@ -58,12 +59,15 @@ const Flex = styled.div<Props>`
     return radius ? radiusSelector(radius) : "initial";
   }};
   width: ${({ fullWidth }) => fullWidth && "100%"};
-  background-color: ${({ theme, shallow, black }) =>
+  background-color: ${({ theme, shallow, bg, black }) =>
     black && theme === light
-      ? lighten(shallowSelector(shallow), black ? common.header : "transparent")
+      ? lighten(
+          shallowSelector(shallow),
+          black ? common.header : bg ? theme.background : "transparent"
+        )
       : darken(
           shallowSelector(shallow),
-          black ? common.header : "transparent"
+          black ? common.header : bg ? theme.background : "transparent"
         )};
   background-color: ${({ shallow, bgSecond, theme }) =>
     bgSecond &&
@@ -80,8 +84,8 @@ const Flex = styled.div<Props>`
   ${({ full }) =>
     full &&
     css`
-      width: calc(100vw - 50px);
-      height: 100vh;
+      min-width: 100%;
+      min-height: calc(100vh - 50px);
     `}
   ${({ tabletResponsive }) =>
     tabletResponsive &&
