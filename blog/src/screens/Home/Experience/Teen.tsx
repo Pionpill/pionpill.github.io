@@ -175,7 +175,7 @@ const Teen: React.FC = () => {
                 <Button
                   textColor="link"
                   weight="lg"
-                  onClick={() => changeCenter([113.159617, 30.64309], 12)}
+                  onClick={() => changeCenter([118.723694, 32.209782], 12)}
                 >
                   南京信息工程大学
                 </Button>
