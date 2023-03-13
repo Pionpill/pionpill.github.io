@@ -14,14 +14,6 @@ type Props = {
 };
 
 const Page: React.FC<Props> = ({ align, justify, gap, bleed, style }) => {
-  React.useEffect(() => {
-    const footer = document.getElementById("footer");
-    if (footer && window.innerHeight > document.body.clientHeight) {
-      footer.style.position = "fixed";
-      footer.style.bottom = "0";
-    }
-  });
-
   return (
     <>
       <Header />

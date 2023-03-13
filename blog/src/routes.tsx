@@ -11,7 +11,7 @@ import Skills from "./screens/Home/Skill";
 
 export const MainRoute: React.FC = () => {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Page />}>
           <Route index element={<Navigate to="/index" replace />} />
