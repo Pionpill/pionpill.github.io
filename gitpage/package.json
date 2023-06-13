@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d public"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
