@@ -9,10 +9,10 @@ import { homeTheme } from "../../styles/theme";
 
 const LinkTabs: React.FC = () => {
   const locationName = useLocation().pathname;
-  const [value, setValue] = React.useState(0);
+  const [, setValue] = React.useState(0);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
