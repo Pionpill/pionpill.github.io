@@ -21,7 +21,7 @@ import {
   BsMoonStarsFill,
   BsSunFill,
 } from "react-icons/bs";
-import { FaBars, FaProjectDiagram, FaWeixin } from "react-icons/fa";
+import { FaBars, FaBlog, FaProjectDiagram, FaWeixin } from "react-icons/fa";
 import { GiRiver, GiSkills } from "react-icons/gi";
 import { LuLanguages } from "react-icons/lu";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
@@ -257,7 +257,7 @@ const DesktopRouteLinks: React.FC = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseOut}
         />
-        {/* <RouteLink id="blog" to="/blog" i18nKey="root.blogs" /> */}
+        <RouteLink id="blog" to="/blog" i18nKey="root.blogs" />
         <RouteLink id="project" to="/project" i18nKey="root.projects" />
         <RouteLink id="article" to="/article" i18nKey="root.articles" />
         {/* <RouteLink id="work" to="/work" i18nKey="root.works" /> */}
@@ -347,7 +347,7 @@ const MobileRouteLinks: React.FC = () => {
               />
             </List>
           </Collapse>
-          {/* <ListItemButton component={Link} to="/blog">
+          <ListItemButton component={Link} to="/blog">
             <ListItemIcon sx={{ minWidth: "auto", pr: 2 }}>
               <FaBlog size={18} style={{ color: homeTheme[700] }} />
             </ListItemIcon>
@@ -355,7 +355,7 @@ const MobileRouteLinks: React.FC = () => {
               primaryTypographyProps={{ fontWeight: "fontWeightBold" }}
               primary={t("root.blogs") as string}
             />
-          </ListItemButton> */}
+          </ListItemButton>
           <ListItemButton component={Link} to="/project">
             <ListItemIcon sx={{ minWidth: "auto", pr: 2 }}>
               <FaProjectDiagram size={18} style={{ color: homeTheme[700] }} />

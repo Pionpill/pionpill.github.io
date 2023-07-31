@@ -1,9 +1,5 @@
 import { token } from "../../shared/token";
 
-// const octokit = new Octokit({
-//   auth: `${github_tokenPrefix}MnU9EyqQTz5ePvsBeCy0Z8NQb`,
-// });
-
 const graphQLHeader = new Headers();
 graphQLHeader.append(
   "Authorization",
@@ -37,3 +33,37 @@ export const githubReposLangApi = (
     headers: graphQLHeader,
   });
 };
+
+export const githubReposContentApi = (
+  repos: string,
+  user: string,
+  path: string
+): Promise<Response> => {
+  return fetch(
+    `https://api.github.com/repos/${user}/${repos}/contents/${path}`,
+    {
+      method: "GET",
+      headers: graphQLHeader,
+    }
+  );
+};
+
+export const blogContentApi = (path: string) =>
+  githubReposContentApi("pionpill.github.io", "Pionpill", path);
+
+export const githubReposCommitApi = (
+  repos: string,
+  user: string,
+  path: string
+): Promise<Response> => {
+  return fetch(
+    `https://api.github.com/repos/${user}/${repos}/commits?path=${path}`,
+    {
+      method: "GET",
+      headers: graphQLHeader,
+    }
+  );
+};
+
+export const blogCommitApi = (path: string) =>
+  githubReposCommitApi("pionpill.github.io", "Pionpill", path);

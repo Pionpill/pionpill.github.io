@@ -7,17 +7,31 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  SelectChangeEvent,
+  Skeleton,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Trans } from "react-i18next";
-import { BiChevronDown, BiChevronRight } from "react-icons/bi";
-import { FaBlog } from "react-icons/fa";
-import { SiD3Dotjs } from "react-icons/si";
+import { BiChevronDown, BiChevronRight, BiCode } from "react-icons/bi";
+import { FaBlog, FaVuejs } from "react-icons/fa";
+import { SiD3Dotjs, SiJavascript, SiReact, SiTypescript } from "react-icons/si";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { blogContentApi } from "../../api/github/githubApi";
 import FlexBox from "../../components/FlexBox";
+import { headerHeight } from "../../shared/config";
+import { RootState } from "../../stores";
+import { changeBlogCategory } from "../../stores/blogSlice";
 import { blogTheme } from "../../styles/theme";
 
 const Category: React.FC = () => {
+  const dispatch = useDispatch();
+  const handleChange = (event: SelectChangeEvent) => {
+    dispatch(changeBlogCategory(event.target.value));
+  };
+  const category = useSelector((state: RootState) => state.blog.category);
+
   return (
     <FlexBox flexDirection="column" gap={1}>
       <FlexBox gap={1}>
@@ -26,70 +40,157 @@ const Category: React.FC = () => {
           <Trans i18nKey="blog.category" />
         </Typography>
       </FlexBox>
-      <Select value="front" size="small">
-        <MenuItem value="front">
-          <Trans i18nKey="blog.front" />
-        </MenuItem>
-        <MenuItem value="back">
-          <Trans i18nKey="blog.back" />
-        </MenuItem>
-        <MenuItem value="cs">
-          <Trans i18nKey="blog.cs" />
-        </MenuItem>
-        <MenuItem value="lang">
-          <Trans i18nKey="blog.sql" />
-        </MenuItem>
-        <MenuItem value="other">
-          <Trans i18nKey="blog.lang" />
-        </MenuItem>
+      <Select value={category} size="small" onChange={handleChange}>
+        {["front", "back", "cs", "sql"].map((value) => {
+          return (
+            <MenuItem value={value} key={value}>
+              <Trans i18nKey={`blog.${value}`} />
+            </MenuItem>
+          );
+        })}
       </Select>
     </FlexBox>
   );
 };
 
-const BlogList: React.FC = () => {
+const formatReposContent = (json: any) => {
+  const tempDirs = [];
+  for (const dirInfo of json) {
+    tempDirs.push({
+      type: dirInfo.type,
+      downloadUrl: dirInfo.download_url,
+      path: dirInfo.path,
+    });
+  }
+  return tempDirs;
+};
+
+const DirList: React.FC<{ path: string }> = ({ path }) => {
+  const iconMap: Map<string, ReactNode> = new Map([
+    ["react", <SiReact />],
+    ["d3", <SiD3Dotjs />],
+    ["js", <SiJavascript />],
+    ["ts", <SiTypescript />],
+    ["vue", <FaVuejs />],
+  ]);
+  const navigate = useNavigate();
+  const title = path.split("/").pop() as string;
   const [open, setOpen] = React.useState<boolean>(false);
+  const [dirs, setDirs] = React.useState<
+    Array<{ type: string; downloadUrl: string; path: string }>
+  >([]);
+  const handleClick = (filePath: string) => {
+    navigate(`/${filePath}`);
+  };
+
+  React.useEffect(() => {
+    blogContentApi(path)
+      .then((response) => response.json())
+      .then((json) => {
+        return formatReposContent(json);
+      })
+      .then((result) => {
+        setDirs(result);
+      });
+  }, []);
 
   return (
-    <FlexBox flexDirection="column" gap={1}>
-      <List component="aside">
-        <ListItemButton
-          sx={{ p: 0, pl: 1, gap: 1 }}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <BiChevronDown /> : <BiChevronRight />}
+    <>
+      <ListItemButton
+        sx={{ p: 0, pl: 0, gap: 1 }}
+        onClick={() => setOpen(!open)}
+      >
+        {open ? <BiChevronDown /> : <BiChevronRight />}
+        {path.split("/").length === 3 && (
           <ListItemIcon sx={{ minWidth: "auto" }}>
-            <SiD3Dotjs />
+            {iconMap.get(title.toLowerCase()) || <BiCode />}
           </ListItemIcon>
-          <ListItemText primary="D3.js" />
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List
-            component="div"
-            disablePadding
-            sx={{ ml: 2, pl: 1, borderLeft: "1px solid #ccc" }}
-          >
-            <ListItemButton sx={{ p: 0, pl: 1 }}>
-              <ListItemText primary="123" />
-            </ListItemButton>
-            <ListItemButton sx={{ p: 0, pl: 1 }}>
-              <ListItemText primary="123" />
-            </ListItemButton>
-          </List>
-        </Collapse>
+        )}
+        <ListItemText
+          primary={title}
+          primaryTypographyProps={{ fontWeight: "fontWeightBold" }}
+        />
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List
+          component="div"
+          disablePadding
+          sx={{ ml: 1, pl: 0.25, borderLeft: "1px solid #ccc" }}
+        >
+          {dirs ? (
+            dirs.map((item) => {
+              if (item.type === "dir")
+                return <DirList path={item.path} key={item.path} />;
+              else
+                return (
+                  <ListItemButton
+                    sx={{ p: 0, pl: 1.5 }}
+                    key={item.path}
+                    onClick={() => handleClick(item.path.replace(".md", ""))}
+                  >
+                    <ListItemText
+                      primary={
+                        item.path.split("/").pop()?.split(".")[0].split("_")[1]
+                      }
+                    />
+                  </ListItemButton>
+                );
+            })
+          ) : (
+            <Skeleton width="100%" />
+          )}
+        </List>
+      </Collapse>
+    </>
+  );
+};
+
+const BlogList: React.FC = () => {
+  const category = useSelector((state: RootState) => state.blog.category);
+  const [topDirs, setTopDirs] = React.useState<
+    Array<{ type: string; downloadUrl: string; path: string }>
+  >([]);
+
+  React.useEffect(() => {
+    blogContentApi(`blog/${category}`)
+      .then((response) => response.json())
+      .then((json) => {
+        return formatReposContent(json);
+      })
+      .then((result) => {
+        setTopDirs(result);
+      });
+  }, []);
+
+  return (
+    <FlexBox flexDirection="column" gap={1} overflow="auto">
+      <List component="aside">
+        {topDirs ? (
+          topDirs.map((item) => <DirList path={item.path} key={item.path} />)
+        ) : (
+          <Skeleton width="100%" />
+        )}
       </List>
     </FlexBox>
   );
 };
 
-const Aside: React.FC = () => {
+const Aside: React.FC<{ side: boolean }> = ({ side }) => {
   return (
     <FlexBox
       component="aside"
-      width="325px"
       flexDirection="column"
-      sx={{ borderRight: "1px solid #ccc", p: 2 }}
-      gap={2}
+      gap={1}
+      minWidth={"250px"}
+      position="sticky"
+      sx={{
+        borderRight: "1px solid #ccc",
+        p: 2,
+        pt: 4,
+        pb: 4,
+        height: side ? "100vh" : `calc(100vh - ${headerHeight})`,
+        top: headerHeight,
+      }}
     >
       <Category />
       <Divider />
