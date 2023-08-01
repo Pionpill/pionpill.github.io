@@ -4,6 +4,8 @@
     "success": "Success",
     "fail": "Fail",
     "copy": "Copy",
+    "editOnGithub": "Edit on Github",
+    "copyUrl": "Copy Website URL",
     "asyncMessage": "asynchronous requesting, please try again later"
   },
   "root": {
@@ -19,6 +21,7 @@
     "weixin": "WeiXin",
     "email": "send email to me",
     "copyWeixinIdSuccessMessage": "add Weixin id to the clipboard",
+    "copyLinkSuccessMessage": "add website url to the clipboard",
     "copyWeixinIdFailMessage": "fail to copy Weixin id",
     "copyEmailSuccessMessage": "add email to the clipboard",
     "copyEmailFailMessage": "fail to copy email",
@@ -27,7 +30,7 @@
     "link": "Link",
     "sponsorMessage": "buy me a coffee",
     "sponsorTip": "thanks for your sponsoring",
-    "errorTitle": "Web URL does not exist",
+    "errorTitle": "Web URL does not Exist",
     "errorMessage": "Please check the URL and may project update URL expires, soon will jump to the home page",
     "errorJump": "page jump"
   },
@@ -185,12 +188,18 @@
     "homePage": "home page"
   },
   "blog": {
+    "showAside": "show blog list",
+    "showTOC": "show blog TOC",
     "category": "Blog Category",
     "front": "Front",
     "back": "Back",
     "sql": "SQL",
     "cs": "computer science",
-    "lang": "language"
+    "lang": "language",
+    "onThisPage": "On this Page",
+    "readme": "README",
+    "errorTitle": "Blog URL does not Exist",
+    "errorMessage": "Please check the URL and may project update URL expires, soon will jump to the blog index page"
   },
   "project": {
     "title": "Application Projects",

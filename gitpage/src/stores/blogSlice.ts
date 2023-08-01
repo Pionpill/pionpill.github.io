@@ -2,12 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface BlogState {
   category: string;
+  asideOpen: boolean;
+  tocOpen: boolean;
 }
 
 export const blogSlice = createSlice({
   name: "blog",
   initialState: {
     category: "front",
+    asideOpen: false,
+    tocOpen: false,
   },
   reducers: {
     changeBlogCategory: (
@@ -16,8 +20,14 @@ export const blogSlice = createSlice({
     ) => {
       state.category = action.payload;
     },
+    toggleAsideOpen: (state: BlogState) => {
+      state.asideOpen = !state.asideOpen;
+    },
+    toggleTocOpen: (state: BlogState) => {
+      state.tocOpen = !state.tocOpen;
+    }
   },
 });
 
-export const { changeBlogCategory } = blogSlice.actions;
+export const { changeBlogCategory, toggleAsideOpen, toggleTocOpen } = blogSlice.actions;
 export default blogSlice.reducer;

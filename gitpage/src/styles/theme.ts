@@ -51,11 +51,8 @@ export const lightTheme: Theme = createTheme(
   Object.assign(generalTheme, {
     palette: {
       mode: "light",
-      secondary: {
-        main: teal[500],
-        light: teal[300],
-        dark: teal[700],
-      },
+      light: "#f6f8fa",
+      deep: "#e1e1e1",
     },
   })
 );
@@ -64,11 +61,8 @@ export const darkTheme: Theme = createTheme(
   Object.assign(generalTheme, {
     palette: {
       mode: "dark",
-      secondary: {
-        main: teal[200],
-        light: teal[100],
-        dark: teal[300],
-      },
+      light: "#1a1a1a",
+      deep: "#37373d",
     },
   })
 );

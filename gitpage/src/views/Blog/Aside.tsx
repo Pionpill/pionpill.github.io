@@ -1,6 +1,5 @@
 import {
   Collapse,
-  Divider,
   List,
   ListItemButton,
   ListItemIcon,
@@ -17,7 +16,7 @@ import { BiChevronDown, BiChevronRight, BiCode } from "react-icons/bi";
 import { FaBlog, FaVuejs } from "react-icons/fa";
 import { SiD3Dotjs, SiJavascript, SiReact, SiTypescript } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { blogContentApi } from "../../api/github/githubApi";
 import FlexBox from "../../components/FlexBox";
 import { headerHeight } from "../../shared/config";
@@ -79,6 +78,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
   const [dirs, setDirs] = React.useState<
     Array<{ type: string; downloadUrl: string; path: string }>
   >([]);
+  const locationPath = decodeURIComponent(useLocation().pathname);
   const handleClick = (filePath: string) => {
     navigate(`/${filePath}`);
   };
@@ -97,10 +97,9 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
   return (
     <>
       <ListItemButton
-        sx={{ p: 0, pl: 0, gap: 1 }}
+        sx={{ p: 0, pl: 0.5, gap: 1 }}
         onClick={() => setOpen(!open)}
       >
-        {open ? <BiChevronDown /> : <BiChevronRight />}
         {path.split("/").length === 3 && (
           <ListItemIcon sx={{ minWidth: "auto" }}>
             {iconMap.get(title.toLowerCase()) || <BiCode />}
@@ -110,21 +109,36 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
           primary={title}
           primaryTypographyProps={{ fontWeight: "fontWeightBold" }}
         />
+        {open ? <BiChevronDown /> : <BiChevronRight />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List
           component="div"
           disablePadding
-          sx={{ ml: 1, pl: 0.25, borderLeft: "1px solid #ccc" }}
+          sx={{
+            ml: 1,
+            pl: 0.5,
+            borderLeftWidth: "1px",
+            borderLeftStyle: "solid",
+            borderLeftColor: "deep",
+          }}
         >
           {dirs ? (
             dirs.map((item) => {
               if (item.type === "dir")
                 return <DirList path={item.path} key={item.path} />;
-              else
+              else {
                 return (
                   <ListItemButton
-                    sx={{ p: 0, pl: 1.5 }}
+                    sx={{
+                      p: 0,
+                      pl: 1,
+                      borderRadius: "4px",
+                      bgcolor:
+                        `/${item.path.split(".")[0]}` === locationPath
+                          ? "deep"
+                          : "auto",
+                    }}
                     key={item.path}
                     onClick={() => handleClick(item.path.replace(".md", ""))}
                   >
@@ -135,6 +149,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                     />
                   </ListItemButton>
                 );
+              }
             })
           ) : (
             <Skeleton width="100%" />
@@ -184,16 +199,15 @@ const Aside: React.FC<{ side: boolean }> = ({ side }) => {
       minWidth={"250px"}
       position="sticky"
       sx={{
-        borderRight: "1px solid #ccc",
         p: 2,
         pt: 4,
         pb: 4,
         height: side ? "100vh" : `calc(100vh - ${headerHeight})`,
         top: headerHeight,
+        bgcolor: "light",
       }}
     >
       <Category />
-      <Divider />
       <BlogList />
     </FlexBox>
   );

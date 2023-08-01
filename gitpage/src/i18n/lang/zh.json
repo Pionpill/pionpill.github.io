@@ -4,6 +4,8 @@
     "success": "成功",
     "fail": "失败",
     "copy": "复制",
+    "editOnGithub": "在 Github 上编辑",
+    "copyUrl": "复制网页 URL",
     "asyncMessage": "异步请求中，请稍后重试"
   },
   "root": {
@@ -19,6 +21,7 @@
     "weixin": "微信",
     "email": "给我发邮箱",
     "copyWeixinIdSuccessMessage": "已将微信 id 添加到剪切板",
+    "copyLinkSuccessMessage": "已将网页 URL 添加到剪切板",
     "copyWeixinIdFailMessage": "复制微信 id 失败",
     "copyEmailSuccessMessage": "已将邮箱添加到剪切板",
     "copyEmailFailMessage": "复制邮箱失败",
@@ -185,12 +188,18 @@
     "homePage": "首页"
   },
   "blog": {
+    "showAside": "显示博客列表",
+    "showTOC": "显示博客目录",
     "category": "博客类型",
     "front": "前端",
     "back": "后端",
     "sql": "数据库",
     "cs": "计算机科学",
-    "lang": "语言"
+    "lang": "语言",
+    "onThisPage": "这篇文章",
+    "readme": "README",
+    "errorTitle": "博客 URL 不存在",
+    "errorMessage": "请检查 URL 格式, 也可能博客更新导致 URL 过期，即将跳转到博客首页"
   },
   "project": {
     "title": "程序项目",
