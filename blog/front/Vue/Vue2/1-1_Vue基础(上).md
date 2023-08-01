@@ -4,7 +4,7 @@ difficulty: easy
 
 # Vue2 基础(上)
 
-这篇对应官方文档基础部分(组件基础除外)，主要针对 Vue2 的基础语法。
+<p class="hint">这篇对应官方文档基础部分(组件基础除外)，主要针对 Vue2 的基础语法。</p>
 
 > [Vue2 官网文档](https://v2.cn.vuejs.org/v2/guide/index.html)
 
