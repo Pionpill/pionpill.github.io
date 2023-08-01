@@ -84,7 +84,7 @@ const Title: React.FC = () => {
       )}
       <Typography
         component={Link}
-        to="/home"
+        to="/home/profile"
         variant="h6"
         sx={{
           fontWeight: "fontWeightBold",

@@ -17,6 +17,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<View />}>
           <Route index element={<Navigate to="/home/profile" replace />} />
           <Route path="home" element={<Home />}>
+            <Route index element={<Navigate to="/home/profile" replace />} />
             <Route path="profile" element={<Profile />} />
             <Route path="experience" element={<Experience />} />
             <Route path="technology" element={<Technology />} />
