@@ -7,7 +7,7 @@ difficulty: easy
 <p class="hint">这篇对应官方文档深入了解组件(以及基础-组件基础)，主要针对 Vue2 的组件语法。如果没有实践经验，可能无法理解所有内容，建议快速浏览本文写项目后再回顾。</p>
 
 
-> [Vue2 官网文档](https://v2.cn.vuejs.org/v2/guide/index.html)
+> Vue2 官网文档: [https://v2.cn.vuejs.org/v2/guide/index.html](https://v2.cn.vuejs.org/v2/guide/index.html)
 
 ## 组件基础
 
