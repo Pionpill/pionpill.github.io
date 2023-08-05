@@ -111,6 +111,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
           {toc.map((item) => {
             return (
               <Link
+                key="item.title"
                 className="toc"
                 sx={tocHoverSxFunc(item)}
                 onClick={() => {

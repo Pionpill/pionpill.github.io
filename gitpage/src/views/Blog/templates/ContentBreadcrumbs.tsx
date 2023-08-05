@@ -17,7 +17,7 @@ const ContentBreadcrumbs: React.FC = () => {
           .replace("/blog", "")
           .split("/")
           .map((path) => (
-            <Typography key={path.split("_")[1]}>
+            <Typography key={path}>
               {path.includes("_") ? path.split("_")[1] : path}
             </Typography>
           ))}
