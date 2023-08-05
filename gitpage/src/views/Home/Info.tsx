@@ -2,7 +2,7 @@ import { Avatar, Typography } from "@mui/material";
 import { blue, purple, red, teal } from "@mui/material/colors";
 import { Trans } from "react-i18next";
 import { FaLaptopCode } from "react-icons/fa";
-import { GoDeviceCamera } from "react-icons/go";
+import { GoDeviceCameraVideo } from "react-icons/go";
 import { IoIosHome } from "react-icons/io";
 import { RiUserLocationFill } from "react-icons/ri";
 import {
@@ -105,7 +105,7 @@ const Info: React.FC = () => {
         <SiAdobeindesign color="#fff" title="InDesign" />
         <SiBlender color="#fff" title="Blender" />
         <SiVisualstudiocode color="#fff" title="VSCode" />
-        <GoDeviceCamera color="#fff" title="photography" />
+        <GoDeviceCameraVideo color="#fff" title="photography" />
       </FlexBox>
     </FlexBox>
   );
