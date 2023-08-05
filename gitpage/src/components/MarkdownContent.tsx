@@ -55,6 +55,7 @@ const MarkdownContentWrapper = styled('div')`
     right: 16px;
     opacity: 0;
     color: white;
+    z-index: 100;
     &:hover {
       background-color: #555;
     }
