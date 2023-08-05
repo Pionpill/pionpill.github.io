@@ -13,7 +13,7 @@ import {
 import React, { ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { BiChevronDown, BiChevronRight, BiCode } from "react-icons/bi";
-import { FaBlog, FaVuejs } from "react-icons/fa";
+import { FaBlog, FaCss3Alt, FaVuejs } from "react-icons/fa";
 import { SiD3Dotjs, SiJavascript, SiReact, SiTypescript } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
@@ -71,6 +71,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
     ["js", <SiJavascript />],
     ["ts", <SiTypescript />],
     ["vue", <FaVuejs />],
+    ["css", <FaCss3Alt />],
   ]);
   const navigate = useNavigate();
   const title = path.split("/").pop() as string;
