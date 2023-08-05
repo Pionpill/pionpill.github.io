@@ -127,14 +127,16 @@ const Content: React.FC = () => {
       for (const sectionElement of sectionElementList) {
         sectionElementOffsetTopList.push(sectionElement.offsetTop);
       }
-      highlightToc(sectionElementOffsetTopList, tocElementList);
-      window.addEventListener(
-        "scroll",
-        throttle(
-          () => highlightToc(sectionElementOffsetTopList, tocElementList),
-          100
-        )
-      );
+      if (tocElementList.length !== 0) {
+        highlightToc(sectionElementOffsetTopList, tocElementList);
+        window.addEventListener(
+          "scroll",
+          throttle(
+            () => highlightToc(sectionElementOffsetTopList, tocElementList),
+            100
+          )
+        );
+      }
     }, 2000);
   }, [locationPath]);
 
