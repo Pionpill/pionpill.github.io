@@ -199,7 +199,8 @@
     "onThisPage": "On this Page",
     "readme": "README",
     "errorTitle": "Blog URL does not Exist",
-    "errorMessage": "Please check the URL and may project update URL expires, soon will jump to the blog index page"
+    "errorMessage": "Please check the URL and may project update URL expires, soon will jump to the blog index page",
+    "copyCodeSuccessMessage": "add code to the clipboard"
   },
   "project": {
     "title": "Application Projects",
