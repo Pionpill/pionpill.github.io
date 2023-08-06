@@ -1,5 +1,6 @@
 ---
 difficulty: medium
+type: organize
 pre: -/front/Vue/Vue2/1-1_Vue基础(上) -/front/Vue/Vue2/1-1_Vue基础(中)
 ---
 

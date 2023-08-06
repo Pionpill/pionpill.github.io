@@ -1,5 +1,6 @@
 ---
 difficulty: easy
+type: note
 ---
 
 # MDX
