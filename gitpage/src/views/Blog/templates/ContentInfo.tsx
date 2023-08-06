@@ -89,7 +89,7 @@ const ContentInfo: React.FC<{
         <ContentTag icon={<MdTimelapse />} title="阅读时间">
           约 {calculateReadTime()} 分钟
         </ContentTag>
-        <ContentTag icon={<BsCalendarDateFill />} title="创建事件">
+        <ContentTag icon={<BsCalendarDateFill />} title="创建时间">
           {createData}
         </ContentTag>
         <ContentTag icon={<MdUpdate />} title="更新时间">

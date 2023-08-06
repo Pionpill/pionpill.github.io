@@ -84,8 +84,8 @@ const Content: React.FC = () => {
     return blogCommitApi(`${locationPath.substring(1)}.md`)
       .then((response) => response.json())
       .then((response) => {
-        setCreateDate(getData(response[0]));
-        setUpdateDate(getData(response[response.length - 1]));
+        setCreateDate(getData(response[response.length - 1]));
+        setUpdateDate(getData(response[0]));
       }).catch(() => setFetchResult(false));
   };
 
