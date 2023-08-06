@@ -245,7 +245,6 @@ const DesktopRouteLinks: React.FC = () => {
   return (
     <>
       <FlexBox
-        component="nav"
         sx={{ alignItems: "center", height: "50px" }}
         gap={2}
       >

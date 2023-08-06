@@ -23,7 +23,6 @@ const Footer: React.FC = () => {
 
   return (
     <FlexBox
-      component="footer"
       sx={{
         bgcolor: "background.paper",
         minHeight: footerHeight,

@@ -194,7 +194,6 @@ const BlogList: React.FC = () => {
 const Aside: React.FC<{ side: boolean }> = ({ side }) => {
   return (
     <FlexBox
-      component="aside"
       flexDirection="column"
       gap={1}
       minWidth={"250px"}
