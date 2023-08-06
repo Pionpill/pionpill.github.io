@@ -2,7 +2,7 @@ import { Button, Skeleton, Typography } from "@mui/material";
 import { PropsWithChildren, ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { AiFillTags } from "react-icons/ai";
-import { BsCalendarDateFill } from "react-icons/bs";
+import { BsCalendarDateFill, BsStars } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
 import { MdCategory, MdTextSnippet, MdTimelapse, MdUpdate } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router";
@@ -12,6 +12,7 @@ import FlexBox from "../../../components/FlexBox";
 export type ContentInfoType = {
   difficulty?: string;
   pre?: string;
+  type?: "note" | "organize" | "origin"
 };
 
 const ContentInfo: React.FC<{
@@ -20,7 +21,7 @@ const ContentInfo: React.FC<{
   createData: string;
   updateDate: string;
 }> = ({ meta, wordCount, createData, updateDate }) => {
-  const { difficulty, pre } = meta;
+  const { difficulty, type, pre } = meta;
   const navigate = useNavigate();
   const locationPath = useLocation().pathname;
   const preList = pre?.split(" ");
@@ -34,6 +35,13 @@ const ContentInfo: React.FC<{
         : difficulty === "hard"
           ? "底层"
           : difficulty
+  }
+  const typeTextSelector = () => {
+    return type === "note"
+      ? "笔记"
+      : type === "organize"
+        ? "整理"
+        : "原创"
   }
   const calculateReadTime = () => {
     const multiple = difficulty === "easy"
@@ -63,6 +71,11 @@ const ContentInfo: React.FC<{
   return (
     <FlexBox flexDirection="column">
       <FlexBox alignItems="center" flexWrap="wrap" columnGap={1.5}>
+        {type ? (
+          <ContentTag icon={<BsStars />} title="类型">
+            {typeTextSelector()}
+          </ContentTag>
+        ) : <Skeleton width={50} />}
         {difficulty ? (
           <ContentTag icon={<MdCategory />} title="难度">
             {difficultyTextSelector()}
