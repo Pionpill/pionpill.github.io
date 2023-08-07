@@ -107,7 +107,7 @@ const ContentInfo: React.FC<{
               const blogName = item.split("/").pop()?.split("_").pop();
               const path = preType === "common" ? `/blog${item}` : `/blog${item.substring(1)}`
               return (
-                <Button onClick={() => navigate(path)} color={preType === "necessary" ? "error" : preType === "optional" ? "success" : "primary"}>
+                <Button onClick={() => navigate(path)} color={preType === "necessary" ? "error" : preType === "optional" ? "success" : "primary"} sx={{ textTransform: 'none'}} size="small">
                   {blogName}
                 </Button>)
             })
