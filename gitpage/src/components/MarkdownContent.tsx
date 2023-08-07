@@ -1,8 +1,9 @@
-import styled from "@emotion/styled";
-import { Alert, IconButton, Link, Snackbar, Typography } from "@mui/material";
+import { Alert, IconButton, Link, Snackbar, Typography, styled } from "@mui/material";
 import React, { MouseEventHandler, PropsWithChildren } from "react";
 import { Trans } from "react-i18next";
 import { BiCopy } from "react-icons/bi";
+import { FaRegLightbulb } from "react-icons/fa";
+import { TbMessageCheck } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
 import { CodeProps } from "react-markdown/lib/ast-to-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -18,18 +19,6 @@ import FlexBox from "./FlexBox";
 const MarkdownContentWrapper = styled('div')`
   .katex-html {
     display: none
-  }
-  .warn {
-    border-left: 5px solid #ff6666;
-    padding-left: 16px;
-  }
-  .discuss {
-    border-left: 5px solid #0091ea;
-    padding-left: 16px;
-  }
-  .tip {
-    border-left: 5px solid #33691e;
-    padding-left: 16px;
   }
   .hint {
     opacity: 0.75;
@@ -77,7 +66,7 @@ const MarkdownContentWrapper = styled('div')`
 
 const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, node, inline, className, setAlert, ...props }) => {
   const match = /language-(\w+)/.exec(className || "");
-  
+
   const handleClick: MouseEventHandler = () => {
     navigator.clipboard.writeText(String(children));
     setAlert(true);
@@ -155,15 +144,15 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypeRaw]}
         components={{
-          h2: ({children}) => {
+          h2: ({ children }) => {
             const anchor = getTocAnchor(children);
             return <h2 id={anchor}>{children}</h2>;
           },
-          h3: ({children}) => {
+          h3: ({ children }) => {
             const anchor = getTocAnchor(children);
             return <h3 id={anchor}>{children}</h3>;
           },
-          img: ({src, alt}) => (
+          img: ({ src, alt }) => (
             <img src={src} alt={alt} style={{ maxWidth: "100%" }} />
           ),
           a: ({ href, target, children }) => (
@@ -179,6 +168,20 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
           ),
           blockquote: ({ children }) => <MarkdownBlockquote children={children} />,
           code: ({ node, inline, className, children, ...props }) => <MarkdownCode node={node} inline={inline} className={className} children={children} {...props} setAlert={setSuccessCopyAlertOpen} />,
+          p: ({ className, children }) => {
+            if (!className) return <Typography>{children}</Typography>
+            switch (className) {
+              case 'warn':
+                return <Alert severity="error" sx={{ mt: 2, mb: 2 }}>{children}</Alert>
+              case 'version':
+                return <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>{children}</Alert>
+              case 'tip':
+                return <Alert severity="info" sx={{ mt: 2, mb: 2 }} icon={<FaRegLightbulb />}>{children}</Alert>
+              case 'discuss':
+                return <Alert severity="success" sx={{ mt: 2, mb: 2 }} icon={<TbMessageCheck />}>{children}</Alert>
+            }
+            return <Typography>{children}</Typography>;
+          },
         }}
         children={children}
       />
