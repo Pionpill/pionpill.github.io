@@ -1,7 +1,7 @@
 ---
 difficulty: medium
 type: organize
-pre: -/front/Vue/Vue2/1-1_Vue基础(上) -/front/Vue/Vue2/1-1_Vue基础(中)
+pre: -/front/Vue/Vue2/1-3_Vue基础(下)
 ---
 
 # Options API

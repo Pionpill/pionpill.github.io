@@ -1,6 +1,7 @@
 ---
 difficulty: easy
 type: note
+rear: +/front/Vue/Vue2/1-2_Vue基础(中)
 ---
 
 # Vue2 基础(上)

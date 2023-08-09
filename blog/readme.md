@@ -1,5 +1,6 @@
 ---
 difficulty: easy
+type: origin
 ---
 
 # 博客

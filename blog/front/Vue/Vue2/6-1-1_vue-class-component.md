@@ -2,6 +2,7 @@
 difficulty: medium
 type: note
 pre: +/front/JS/TypeScript/4-1_装饰器 /front/Vue/Vue2/2-1_OptionsAPI
+rear: +/front/Vue/Vue2/6-1-2_vue-property-decorator
 ---
 
 # vue-class-component
