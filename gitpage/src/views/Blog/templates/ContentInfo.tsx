@@ -3,17 +3,41 @@ import { PropsWithChildren, ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { AiFillTags } from "react-icons/ai";
 import { BsCalendarDateFill, BsStars } from "react-icons/bs";
-import { FaClipboardList } from "react-icons/fa";
 import { MdCategory, MdTextSnippet, MdTimelapse, MdUpdate } from "react-icons/md";
+import { TbArrowBigLeftLinesFilled, TbArrowBigRightLinesFilled } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router";
 import FlexBox from "../../../components/FlexBox";
+import { getRelatedBlogName, getRelatedBlogPath, getRelatedBlogType } from "../../../utils/markdown";
 
 // 后续持续增加 meta
 export type ContentInfoType = {
   difficulty?: string;
   pre?: string;
+  rear?: string;
   type?: "note" | "organize" | "origin"
 };
+
+const RelatedBlog: React.FC<{ blogs: string, type: 'pre' | 'rear' }> = ({ blogs, type }) => {
+  const navigate = useNavigate();
+
+  return (
+    <FlexBox alignItems="center" gap={1} sx={{ opacity: 0.75 }}>
+      {type === 'pre' ? <TbArrowBigLeftLinesFilled /> : <TbArrowBigRightLinesFilled />}
+      <Typography variant="subtitle2">{type === 'pre' ? '前置' : '后置'}博客: </Typography>
+      {
+        blogs.split(" ").map((item) => {
+          const blogType = getRelatedBlogType(item);
+          const blogName = getRelatedBlogName(item);
+          const path = getRelatedBlogPath(item, blogType);
+          return (
+            <Button onClick={() => navigate(path)} color={blogType === "necessary" ? "error" : blogType === "optional" ? "success" : "primary"} sx={{ textTransform: 'none' }} size="small">
+              {blogName}
+            </Button>)
+        })
+      }
+    </FlexBox>
+  )
+}
 
 const ContentInfo: React.FC<{
   meta: ContentInfoType;
@@ -21,11 +45,8 @@ const ContentInfo: React.FC<{
   createData: string;
   updateDate: string;
 }> = ({ meta, wordCount, createData, updateDate }) => {
-  const { difficulty, type, pre } = meta;
-  const navigate = useNavigate();
+  const { difficulty, type, pre, rear } = meta;
   const locationPath = useLocation().pathname;
-  const preList = pre?.split(" ");
-  console.log(preList);
 
   const difficultyTextSelector = () => {
     return difficulty === "easy"
@@ -69,7 +90,7 @@ const ContentInfo: React.FC<{
   };
 
   return (
-    <FlexBox flexDirection="column">
+    <FlexBox flexDirection="column" gap={1}>
       <FlexBox alignItems="center" flexWrap="wrap" columnGap={1.5}>
         {type ? (
           <ContentTag icon={<BsStars />} title="类型">
@@ -96,26 +117,14 @@ const ContentInfo: React.FC<{
           {updateDate}
         </ContentTag>
       </FlexBox>
-      {
-        preList &&
-        <FlexBox alignItems="center" gap={1} sx={{ opacity: 0.75 }}>
-          <FaClipboardList />
-          <Typography variant="subtitle2">前置博客: </Typography>
-          {
-            preList.map((item) => {
-              const preType = item[0] === "-" ? "optional" : item[0] === "+" ? "necessary" : "common";
-              const blogName = item.split("/").pop()?.split("_").pop();
-              const path = preType === "common" ? `/blog${item}` : `/blog${item.substring(1)}`
-              return (
-                <Button onClick={() => navigate(path)} color={preType === "necessary" ? "error" : preType === "optional" ? "success" : "primary"} sx={{ textTransform: 'none'}} size="small">
-                  {blogName}
-                </Button>)
-            })
-          }
-        </FlexBox>
-      }
+      <FlexBox flexDirection="column">
+        {pre && <RelatedBlog blogs={pre} type="pre" />}
+        {rear && <RelatedBlog blogs={rear} type="rear" />}
+      </FlexBox>
     </FlexBox>
   );
 };
+
+
 
 export default ContentInfo;

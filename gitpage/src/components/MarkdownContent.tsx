@@ -1,5 +1,5 @@
-import { Alert, IconButton, Link, Snackbar, Typography, styled } from "@mui/material";
-import React, { MouseEventHandler, PropsWithChildren } from "react";
+import { Alert, AlertColor, AlertTitle, IconButton, Link, Snackbar, Typography, styled } from "@mui/material";
+import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { BiCopy } from "react-icons/bi";
 import { FaRegLightbulb } from "react-icons/fa";
@@ -83,7 +83,7 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
       <SyntaxHighlighter
         {...props}
         style={oneDark}
-        customStyle={{ width: "100%" }}
+        customStyle={{ width: "100%", fontSize: "0.85em" }}
         language={match[1]}
         PreTag="div"
       >
@@ -124,8 +124,27 @@ const MarkdownBlockquote: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
+const MarkdownAlert: React.FC<PropsWithChildren<{ severity: AlertColor, icon?: ReactNode }>> = ({ severity, children, icon }) => {
+  if (!children) return;
+  const text = children.toString();
+  let content: string = text;
+  let title: string | null = null;
+  if (text.includes('|||')) {
+    const textArray = text.split('|||');
+    content = textArray[1];
+    title = textArray[0];
+  }
+  return (
+    <Alert severity={severity} icon={icon} sx={{ mt: 2, mb: 2 }}>
+      {title && <AlertTitle sx={{fontWeight: 'fontWeightBold'}}>{title}</AlertTitle>}
+      {content}
+    </Alert>)
+
+}
+
 const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
   const [successCopyAlertOpen, setSuccessCopyAlertOpen] = React.useState<boolean>(false);
+  const lineColor = useThemeChoice("#e1e1e1", "#313131");
 
   return (
     <MarkdownContentWrapper>
@@ -146,7 +165,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
         components={{
           h2: ({ children }) => {
             const anchor = getTocAnchor(children);
-            return <h2 id={anchor}>{children}</h2>;
+            return <h2 id={anchor} style={{ borderBottom: `1px solid ${lineColor}`}}>{children}</h2>;
           },
           h3: ({ children }) => {
             const anchor = getTocAnchor(children);
@@ -172,13 +191,13 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
             if (!className) return <Typography>{children}</Typography>
             switch (className) {
               case 'warn':
-                return <Alert severity="error" sx={{ mt: 2, mb: 2 }}>{children}</Alert>
+                return <MarkdownAlert severity="error">{children}</MarkdownAlert>
               case 'version':
-                return <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>{children}</Alert>
+                return <MarkdownAlert severity="warning">{children}</MarkdownAlert>
               case 'tip':
-                return <Alert severity="info" sx={{ mt: 2, mb: 2 }} icon={<FaRegLightbulb />}>{children}</Alert>
+                return <MarkdownAlert severity="info" icon={<FaRegLightbulb />}>{children}</MarkdownAlert>
               case 'discuss':
-                return <Alert severity="success" sx={{ mt: 2, mb: 2 }} icon={<TbMessageCheck />}>{children}</Alert>
+                return <MarkdownAlert severity="success" icon={<TbMessageCheck />}>{children}</MarkdownAlert>
             }
             return <Typography>{children}</Typography>;
           },
