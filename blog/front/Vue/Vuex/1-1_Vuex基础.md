@@ -3,7 +3,7 @@ difficulty: easy
 type: note
 ---
 
-# Vue 基础
+# Vuex 基础
 
 > Vuex 官网文档: [https://vuex.vuejs.org/zh/](https://vuex.vuejs.org/zh/)
 
