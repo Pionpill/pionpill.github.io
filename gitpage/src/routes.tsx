@@ -25,7 +25,7 @@ const AppRoutes: React.FC = () => {
           <Route path="article" element={<Article />} />
           <Route path="article/:articleName" element={<Pdf />} />
           <Route path="blog/*" element={<Blog />} />
-          <Route path="project" element={<Project />}></Route>
+          <Route path="project" element={<Project />}/>
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
