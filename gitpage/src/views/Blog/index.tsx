@@ -9,6 +9,7 @@ import FlexBox from "../../components/FlexBox";
 import { useLargeMinMedia, useXLargeMinMedia } from "../../hooks/useMedia";
 import { RootState } from "../../stores";
 import { toggleAsideOpen, toggleTocOpen } from "../../stores/blogSlice";
+import { getBlogGithubPath } from "../../utils/blog";
 import { copyCurrentUrl } from "../../utils/window";
 import Aside from "./Aside";
 import Content from "./Content";
@@ -51,9 +52,7 @@ const Blog: React.FC = () => {
           }
           <SpeedDialAction key="toc" icon={<BiListOl />} tooltipTitle={t("blog.showTOC")} onClick={() => dispatch(toggleTocOpen())} />
           <SpeedDialAction key="github" icon={<FaGithub />} tooltipTitle={t("common.editOnGithub")} onClick={() => {
-            window.open(
-              `https://github.com/Pionpill/pionpill.github.io/blob/main${locationPath}.md`
-            )
+            window.open( getBlogGithubPath(locationPath) )
           }} />
           <SpeedDialAction key="link" icon={<FaLink />} tooltipTitle={t("common.copyUrl")} onClick={() => {
             copyCurrentUrl();

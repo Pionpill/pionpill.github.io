@@ -26,7 +26,7 @@ import {
 import { RootState } from "../../stores";
 import { toggleTocOpen } from "../../stores/blogSlice";
 import { blogTheme } from "../../styles/theme";
-import { getRelatedBlogName, getRelatedBlogPath } from "../../utils/blog";
+import { getBlogFilePath, getBlogGithubPath, getRelatedBlogName, getRelatedBlogPath } from "../../utils/blog";
 import { throttle } from "../../utils/optimize";
 import { scrollToAnchor } from "../../utils/window";
 import ContentBreadcrumbs from "./templates/ContentBreadcrumbs";
@@ -81,9 +81,7 @@ const Content: React.FC = () => {
     obj["commit"]["author"]["date"].substring(0, 10);
 
   const fetchMarkdownContent = async () => {
-    const response = await fetch(
-      `https://raw.githubusercontent.com/Pionpill/pionpill.github.io/main/${locationPath}.md`
-    );
+    const response = await fetch( getBlogFilePath(locationPath) );
     const text = await response.text();
     // 设置内容与 meta 信息
     const textArray = text.split("---\n").filter(Boolean);
@@ -221,9 +219,7 @@ const Content: React.FC = () => {
           }
           <FlexBox alignContent="flex-end" justifyContent="flex-end" sx={{ mb: 1 }}>
             <Button variant="text" sx={{ gap: 1 }} onClick={() => {
-              window.open(
-                `https://github.com/Pionpill/pionpill.github.io/blob/main${locationPath}.md`
-              );
+              window.open( getBlogGithubPath(locationPath) );
             }}>
               <FaGithub /> <Trans i18nKey="common.editOnGithub" />
             </Button>

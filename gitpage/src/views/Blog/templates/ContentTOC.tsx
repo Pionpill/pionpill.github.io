@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 import FlexBox from "../../../components/FlexBox";
 import { headerHeight } from "../../../shared/config";
 import { blogTheme } from "../../../styles/theme";
+import { getBlogGithubPath } from "../../../utils/blog";
 import { copyCurrentUrl, scrollToAnchor } from "../../../utils/window";
 
 const TocButton: React.FC<PropsWithChildren<{ handleClick: Function }>> = ({
@@ -80,9 +81,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
         <FlexBox flexDirection="column" sx={tocCommonSx}>
           <TocButton
             handleClick={() => {
-              window.open(
-                `https://github.com/Pionpill/pionpill.github.io/blob/main${locationPath}.md`
-              );
+              window.open( getBlogGithubPath(locationPath) );
             }}
           >
             <FaGithub /> <Trans i18nKey="common.editOnGithub" />

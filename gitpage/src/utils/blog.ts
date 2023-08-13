@@ -9,3 +9,11 @@ export const getRelatedBlogName = (blogLink: string) => {
 export const getRelatedBlogPath = (blogLink: string, type: string ) => {
   return type === "common" ? `/blog${blogLink}` : `/blog${blogLink.substring(1)}`
 }
+
+export const getBlogFilePath = (path: string) => {
+  return `https://raw.githubusercontent.com/Pionpill/pionpill.github.io/main/${path}.md`;
+}
+
+export const getBlogGithubPath = (path: string) => {
+  return `https://github.com/Pionpill/pionpill.github.io/blob/main${path}.md`;
+}
