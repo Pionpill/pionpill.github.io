@@ -33,6 +33,26 @@ import ContentBreadcrumbs from "./templates/ContentBreadcrumbs";
 import ContentInfo, { ContentInfoType } from "./templates/ContentInfo";
 import ContentTOC from "./templates/ContentTOC";
 
+const RelatedBlogLink: React.FC<{ type: 'pre' | 'rear', link: string }> = ({ type, link }) => {
+  const navigate = useNavigate();
+  const blogName = getRelatedBlogName(link);
+  const blogPath = getRelatedBlogPath(link, type);
+  const wrapperSx: SxProps = {
+    gap: 1,
+    position: 'absolute',
+    top: 1,
+    left: type === 'pre' ? 0 : 'auto',
+    right: type === 'rear' ? 0 : 'auto',
+  }
+
+  return (
+    <FlexBox sx={wrapperSx}>
+      <Button onClick={() => navigate(blogPath)} sx={{ gap: 1, color: blogTheme[600] }}>{type === 'pre' && <TbArrowBigLeftLinesFilled />}
+        {blogName} {type === 'rear' && <TbArrowBigRightLinesFilled />}
+      </Button>
+    </FlexBox>
+  )
+}
 
 const Content: React.FC = () => {
   const tocOpen = useSelector((state: RootState) => state.blog.tocOpen);
@@ -84,7 +104,7 @@ const Content: React.FC = () => {
     // 统计字数
     const textRegex = /[\u4e00-\u9fa5]|(\b[A-Za-z]+\b)/g;
     const matches = textArray[1].match(textRegex);
-    setWordCount(matches ? matches.length : 0);
+    setWordCount((matches && matches.length) ? matches.length : 0);
   };
 
   const fetchMarkdownInfo = async () => {
@@ -227,26 +247,5 @@ const Content: React.FC = () => {
     </>
   );
 };
-
-const RelatedBlogLink: React.FC<{ type: 'pre' | 'rear', link: string }> = ({ type, link }) => {
-  const navigate = useNavigate();
-  const blogName = getRelatedBlogName(link);
-  const blogPath = getRelatedBlogPath(link, type);
-  const wrapperSx: SxProps = {
-    gap: 1,
-    position: 'absolute',
-    top: 1,
-    left: type === 'pre' ? 0 : 'auto',
-    right: type === 'rear' ? 0 : 'auto',
-  }
-
-  return (
-    <FlexBox sx={wrapperSx}>
-      <Button onClick={() => navigate(blogPath)} sx={{ gap: 1, color: blogTheme[600] }}>{type === 'pre' && <TbArrowBigLeftLinesFilled />}
-        {blogName} {type === 'rear' && <TbArrowBigRightLinesFilled />}
-      </Button>
-    </FlexBox>
-  )
-}
 
 export default Content;
