@@ -7,7 +7,7 @@ import { MdCategory, MdTextSnippet, MdTimelapse, MdUpdate } from "react-icons/md
 import { TbArrowBigLeftLinesFilled, TbArrowBigRightLinesFilled } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router";
 import FlexBox from "../../../components/FlexBox";
-import { getRelatedBlogName, getRelatedBlogPath, getRelatedBlogType } from "../../../utils/markdown";
+import { getRelatedBlogName, getRelatedBlogPath, getRelatedBlogType } from "../../../utils/blog";
 
 // 后续持续增加 meta
 export type ContentInfoType = {

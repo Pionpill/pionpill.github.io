@@ -26,7 +26,7 @@ import {
 import { RootState } from "../../stores";
 import { toggleTocOpen } from "../../stores/blogSlice";
 import { blogTheme } from "../../styles/theme";
-import { getRelatedBlogName, getRelatedBlogPath } from "../../utils/markdown";
+import { getRelatedBlogName, getRelatedBlogPath } from "../../utils/blog";
 import { throttle } from "../../utils/optimize";
 import { scrollToAnchor } from "../../utils/window";
 import ContentBreadcrumbs from "./templates/ContentBreadcrumbs";
