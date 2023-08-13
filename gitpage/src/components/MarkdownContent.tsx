@@ -40,8 +40,8 @@ const MarkdownContentWrapper = styled('div')`
     transition: opacity 0.3s ease;
     transition: background-color 0.3s ease;
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 12px;
+    right: 12px;
     opacity: 0;
     color: white;
     z-index: 100;
@@ -54,6 +54,7 @@ const MarkdownContentWrapper = styled('div')`
     transition: opacity 0.3s ease;
     transition: background-color 0.3s ease;
     position: absolute;
+    font-size: 0.75em;
     top: 16px;
     right: 16px;
     opacity: 0.5;
@@ -188,7 +189,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
           blockquote: ({ children }) => <MarkdownBlockquote children={children} />,
           code: ({ node, inline, className, children, ...props }) => <MarkdownCode node={node} inline={inline} className={className} children={children} {...props} setAlert={setSuccessCopyAlertOpen} />,
           p: ({ className, children }) => {
-            if (!className) return <Typography>{children}</Typography>
+            if (!className) return <p>{children}</p>
             switch (className) {
               case 'warn':
                 return <MarkdownAlert severity="error">{children}</MarkdownAlert>
@@ -199,7 +200,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
               case 'discuss':
                 return <MarkdownAlert severity="success" icon={<TbMessageCheck />}>{children}</MarkdownAlert>
             }
-            return <Typography>{children}</Typography>;
+            return <p>{children}</p>;
           },
         }}
         children={children}
