@@ -49,6 +49,8 @@ const DevelopPaper: React.FC<DevelopCardProps> = ({
 const Abstract: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isSmallMedia = useSmallMedia();
+  const isMiddleMaxMedia = useMiddleMaxMedia();
 
   return (
     <Wrapper
@@ -82,7 +84,7 @@ const Abstract: React.FC = () => {
         elevation={0}
         sx={{
           height: "330px",
-          width: useSmallMedia() ? "205px" : "220px",
+          width: isSmallMedia ? "205px" : "220px",
           background: `url(${profile_img}) no-repeat center`,
           backgroundSize: "cover",
         }}
@@ -93,9 +95,9 @@ const Abstract: React.FC = () => {
           justifyContent: "center",
           flexDirection: "column",
           color: "text.primary",
-          width: useSmallMedia()
+          width: isSmallMedia
             ? "100%"
-            : useMiddleMaxMedia()
+            : isMiddleMaxMedia
             ? "300px"
             : "400px",
           gap: 2,
