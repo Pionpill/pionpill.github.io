@@ -121,7 +121,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
             pl: 0.5,
             borderLeftWidth: "1px",
             borderLeftStyle: "solid",
-            borderLeftColor: "deep",
+            borderLeftColor: "line",
           }}
         >
           {dirs ? (
@@ -137,7 +137,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                       borderRadius: "4px",
                       bgcolor:
                         `/${item.path.split(".")[0]}` === locationPath
-                          ? "deep"
+                          ? "line"
                           : "auto",
                     }}
                     key={item.path}
@@ -204,7 +204,7 @@ const Aside: React.FC<{ side: boolean }> = ({ side }) => {
         pb: 4,
         height: side ? "100vh" : `calc(100vh - ${headerHeight})`,
         top: headerHeight,
-        bgcolor: "light",
+        bgcolor: "aside",
       }}
     >
       <Category />

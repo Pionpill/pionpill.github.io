@@ -48,23 +48,25 @@ const generalTheme: Theme = createTheme({
 });
 
 export const lightTheme: Theme = createTheme(
-  Object.assign(generalTheme, {
-    palette: {
-      mode: "light",
-      light: "#f6f8fa",
-      deep: "#e1e1e1",
-    },
-  })
+    Object.assign(generalTheme, {
+        palette: {
+            mode: "light",
+            aside: "#f6f8fa",
+            content: "#ffffff",
+            line: "#dfdfe1",
+        },
+    })
 );
 
 export const darkTheme: Theme = createTheme(
-  Object.assign(generalTheme, {
-    palette: {
-      mode: "dark",
-      light: "#1a1a1a",
-      deep: "#37373d",
-    },
-  })
+    Object.assign(generalTheme, {
+        palette: {
+            mode: "dark",
+            aside: "#161616",
+            content: "#1e1e1e",
+            line: "#29292d",
+        },
+    })
 );
 
 export const homeTheme = orange;

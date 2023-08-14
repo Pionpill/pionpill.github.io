@@ -176,7 +176,7 @@ const Content: React.FC = () => {
 
   return (
     <>
-      <FlexBox width="100%">
+      <FlexBox width="100%" sx={{bgcolor: "content"}}>
         <Container
           maxWidth={isLargeMedia ? "lg" : isSmallMedia ? "sm" : "md"}
           component="main"
