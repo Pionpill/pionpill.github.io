@@ -46,7 +46,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
       width: "1px",
       height: "100%",
       transform: "translateX(1px)",
-      backgroundColor: "deep",
+      backgroundColor: "line",
     },
   };
   const tocHoverSxFunc = (item: { hierarchy: number }): SxProps => {
@@ -74,6 +74,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
           gap: 2,
           top: headerHeight,
           height: side ? "100vh" : `calc(100vh - ${headerHeight})`,
+          bgcolor: "content"
         }}
         width="300px"
         position="sticky"
@@ -110,7 +111,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
           {toc.map((item) => {
             return (
               <Link
-                key="item.title"
+                key={item.title}
                 className="toc"
                 sx={tocHoverSxFunc(item)}
                 onClick={() => {

@@ -30,7 +30,7 @@ const RelatedBlog: React.FC<{ blogs: string, type: 'pre' | 'rear' }> = ({ blogs,
           const blogName = getRelatedBlogName(item);
           const path = getRelatedBlogPath(item, blogType);
           return (
-            <Button onClick={() => navigate(path)} color={blogType === "necessary" ? "error" : blogType === "optional" ? "success" : "primary"} sx={{ textTransform: 'none' }} size="small">
+            <Button onClick={() => navigate(path)} color={blogType === "necessary" ? "error" : blogType === "optional" ? "success" : "primary"} sx={{ textTransform: 'none' }} size="small" key={blogName}>
               {blogName}
             </Button>)
         })
