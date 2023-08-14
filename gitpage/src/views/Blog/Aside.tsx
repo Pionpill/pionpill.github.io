@@ -144,6 +144,8 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                     onClick={() => handleClick(item.path.replace(".md", ""))}
                   >
                     <ListItemText
+                      sx={{ opacity: 0.75 }}
+                      primaryTypographyProps={{ fontSize: "0.75em" }}
                       primary={
                         item.path.split("/").pop()?.split(".")[0].split("_")[1]
                       }

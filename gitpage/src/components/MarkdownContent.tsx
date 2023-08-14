@@ -7,7 +7,7 @@ import { TbMessageCheck } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
 import { CodeProps } from "react-markdown/lib/ast-to-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { oneLight, vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -63,6 +63,19 @@ const MarkdownContentWrapper = styled('div')`
       background-color: #555;
     }
   }
+
+  tr {
+    border-spacing: 0px;
+  }
+
+  th {
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #555;
+  }
+
+  td {
+    border-bottom: 1px solid #555;
+  }
 `
 
 const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, node, inline, className, setAlert, ...props }) => {
@@ -83,8 +96,8 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
       </Typography>
       <SyntaxHighlighter
         {...props}
-        style={oneDark}
-        customStyle={{ width: "100%", fontSize: "0.85em" }}
+        style={useThemeChoice(oneLight, vscDarkPlus)}
+        customStyle={{ width: "100%", fontSize: "0.85em", backgroundColor: useThemeChoice('#f6f8fa', '#161618') }}
         language={match[1]}
         PreTag="div"
       >
@@ -137,7 +150,7 @@ const MarkdownAlert: React.FC<PropsWithChildren<{ severity: AlertColor, icon?: R
   }
   return (
     <Alert severity={severity} icon={icon} sx={{ mt: 2, mb: 2 }}>
-      {title && <AlertTitle sx={{fontWeight: 'fontWeightBold'}}>{title}</AlertTitle>}
+      {title && <AlertTitle sx={{ fontWeight: 'fontWeightBold' }}>{title}</AlertTitle>}
       {content}
     </Alert>)
 
@@ -166,7 +179,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
         components={{
           h2: ({ children }) => {
             const anchor = getTocAnchor(children);
-            return <h2 id={anchor} style={{ borderBottom: `1px solid ${lineColor}`}}>{children}</h2>;
+            return <h2 id={anchor} style={{ borderTop: `1px solid ${lineColor}`, paddingTop: '16px' }}>{children}</h2>;
           },
           h3: ({ children }) => {
             const anchor = getTocAnchor(children);
