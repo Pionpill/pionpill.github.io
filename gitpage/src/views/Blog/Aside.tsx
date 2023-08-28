@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React, { ReactNode } from "react";
 import { Trans } from "react-i18next";
-import { BiChevronDown, BiChevronRight, BiCode } from "react-icons/bi";
+import { BiChevronDown, BiChevronRight, BiCode, BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
 import { FaBlog, FaCss3Alt, FaVuejs } from "react-icons/fa";
 import { SiD3Dotjs, SiJavascript, SiReact, SiTypescript } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ import FlexBox from "../../components/FlexBox";
 import { headerHeight } from "../../shared/config";
 import { RootState } from "../../stores";
 import { changeBlogCategory } from "../../stores/blogSlice";
+import { singleOmit } from "../../styles/macro";
 import { blogTheme } from "../../styles/theme";
 
 const Category: React.FC = () => {
@@ -80,6 +81,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
     Array<{ type: string; downloadUrl: string; path: string }>
   >([]);
   const locationPath = decodeURIComponent(useLocation().pathname);
+  const isTopDir = path.split("/").length === 3;
   const handleClick = (filePath: string) => {
     navigate(`/${filePath}`);
   };
@@ -98,19 +100,23 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
   return (
     <>
       <ListItemButton
-        sx={{ p: 0, pl: 0.5, gap: 1 }}
+        sx={{ p: 0, pl: 0.5, gap: 1, opacity: isTopDir ? 1 : 0.8 }}
         onClick={() => setOpen(!open)}
       >
-        {path.split("/").length === 3 && (
+        {isTopDir && (
           <ListItemIcon sx={{ minWidth: "auto" }}>
             {iconMap.get(title.toLowerCase()) || <BiCode />}
           </ListItemIcon>
         )}
         <ListItemText
+          sx={singleOmit}
+          title={title}
           primary={title}
-          primaryTypographyProps={{ fontWeight: "fontWeightBold" }}
+          primaryTypographyProps={{ fontWeight: isTopDir ? "fontWeightBold" : "auto" }}
         />
-        {open ? <BiChevronDown /> : <BiChevronRight />}
+        {open ?
+          isTopDir ? <BiSolidChevronDown /> : <BiChevronDown /> :
+          isTopDir ? <BiSolidChevronRight /> : <BiChevronRight />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List
@@ -133,7 +139,7 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                   <ListItemButton
                     sx={{
                       p: 0,
-                      pl: 1,
+                      pl: 0.5,
                       borderRadius: "4px",
                       bgcolor:
                         `/${item.path.split(".")[0]}` === locationPath
@@ -144,8 +150,9 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                     onClick={() => handleClick(item.path.replace(".md", ""))}
                   >
                     <ListItemText
-                      sx={{ opacity: 0.75 }}
-                      primaryTypographyProps={{ fontSize: "0.75em" }}
+                      sx={{ opacity: 0.8, ...singleOmit }}
+                      primaryTypographyProps={{ fontSize: "0.8em" }}
+                      title={ item.path.split("/").pop()?.split(".")[0].split("_")[1] }
                       primary={
                         item.path.split("/").pop()?.split(".")[0].split("_")[1]
                       }
@@ -184,7 +191,7 @@ const BlogList: React.FC = () => {
     <FlexBox flexDirection="column" gap={1} overflow="auto">
       <List component="aside">
         {topDirs ? (
-          topDirs.map((item) => <DirList path={item.path} key={item.path} />)
+          topDirs.map((item) => <DirList key={item.path} path={item.path} />)
         ) : (
           <Skeleton width="100%" />
         )}
