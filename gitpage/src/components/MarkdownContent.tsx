@@ -1,4 +1,5 @@
 import { Alert, AlertColor, AlertTitle, IconButton, Link, Snackbar, Typography, styled } from "@mui/material";
+import { blue } from "@mui/material/colors";
 import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { BiCopy } from "react-icons/bi";
@@ -13,6 +14,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import useThemeChoice from "../hooks/useThemeChoice";
+import { blogTheme } from "../styles/theme";
 import { getTocAnchor } from "../utils/toc";
 import FlexBox from "./FlexBox";
 
@@ -27,6 +29,7 @@ const MarkdownContentWrapper = styled('div')`
     position: relative;
     &:hover {
       .markdown-code-copy {
+        background-color: grey;
         opacity: 0.5;
         transition: opacity 0.3s ease;
       }
@@ -37,31 +40,21 @@ const MarkdownContentWrapper = styled('div')`
     }
   }
   .markdown-code-copy {
-    transition: opacity 0.3s ease;
-    transition: background-color 0.3s ease;
     position: absolute;
     top: 12px;
     right: 12px;
     opacity: 0;
     color: white;
     z-index: 100;
-    &:hover {
-      background-color: #555;
-    }
   }
 
   .markdown-code-language {
-    transition: opacity 0.3s ease;
-    transition: background-color 0.3s ease;
     position: absolute;
     font-size: 0.75em;
     top: 16px;
     right: 16px;
     opacity: 0.5;
-    color: white;
-    &:hover {
-      background-color: #555;
-    }
+    color: grey;
   }
 
   tr {
@@ -112,7 +105,7 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
         padding: "2px 4px",
         borderRadius: 4,
         background: useThemeChoice("#f1f1f1", "#2f2f2f"),
-        color: useThemeChoice("#1f1f1f", "#aac8e4"),
+        color: blogTheme[500],
         display: "inline",
       }}
     >
@@ -128,8 +121,8 @@ const MarkdownBlockquote: React.FC<PropsWithChildren> = ({ children }) => {
       sx={{
         borderLeftWidth: "0.25rem",
         borderLeftStyle: "solid",
-        borderLeftColor: (theme) => `${theme.palette.primary.main}80`,
-        paddingLeft: "0.5rem",
+        borderLeftColor: blue[500],
+        paddingLeft: "1rem",
         opacity: 0.75,
       }}
     >
@@ -194,6 +187,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
               target={target}
               sx={{
                 textDecoration: "none",
+                color: blue[500],
               }}
             >
               {children}
