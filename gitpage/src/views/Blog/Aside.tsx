@@ -89,12 +89,8 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
   React.useEffect(() => {
     blogContentApi(path)
       .then((response) => response.json())
-      .then((json) => {
-        return formatReposContent(json);
-      })
-      .then((result) => {
-        setDirs(result);
-      });
+      .then((json) => formatReposContent(json))
+      .then((result) => setDirs(result));
   }, []);
 
   return (
@@ -132,10 +128,8 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
         >
           {dirs ? (
             dirs.map((item) => {
-              if (item.type === "dir")
-                return <DirList path={item.path} key={item.path} />;
-              else {
-                return (
+              return item.type === "dir" ?
+                <DirList path={item.path} key={item.path} /> : (
                   <ListItemButton
                     sx={{
                       p: 0,
@@ -152,14 +146,13 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
                     <ListItemText
                       sx={{ opacity: 0.8, ...singleOmit }}
                       primaryTypographyProps={{ fontSize: "0.8em" }}
-                      title={ item.path.split("/").pop()?.split(".")[0].split("_")[1] }
+                      title={item.path.split("/").pop()?.split(".")[0].split("_")[1]}
                       primary={
                         item.path.split("/").pop()?.split(".")[0].split("_")[1]
                       }
                     />
                   </ListItemButton>
-                );
-              }
+                )
             })
           ) : (
             <Skeleton width="100%" />
