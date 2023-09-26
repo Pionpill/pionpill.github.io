@@ -1,0 +1,415 @@
+---
+difficulty: medium
+type: note
+---
+
+# Next.js 路由文件
+
+## Page
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/page](https://nextjs.org/docs/app/api-reference/file-conventions/page)
+
+Page 就是路由要获取的 UI 本体。来自 page.tsx 文件。
+
+假设我们要访问 `/dashboard/setting` 路由，只需要在 app/dashboard/setting 中添加一个 page.tsx 文件并导出组件就可以了:
+
+```tsx
+export default function Page() {
+  return <h1>Hello, Next.js!</h1>
+}
+```
+
+关于 Page 有几个注意点:
+- 只有 page 文件存在，文件夹结构对应的路由才能被访问到。
+- Page 默认是服务端组件，也可以被设置为客户端组件。
+- Page 可以 fetch 数据。
+
+Page 可以收两个参数:
+- `params!: Object`: 动态路由对应的 segments 对象。
+- `searchParams!: Object`: GET 方法传的搜索参数。
+
+```tsx
+export default function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  return <h1>My Page</h1>
+}
+```
+
+## Layout
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/layout](https://nextjs.org/docs/app/api-reference/file-conventions/layout)
+
+Layout 是在多个页面中可复用的包裹 Page 的 UI。Layout 会保存**不可更改**的状态，不会被重新渲染，Layouts 是可嵌套的。Layout 导出的组件有一个 `children: ReactNode` 属性用于接收嵌被包裹的组件。 
+
+使用 `default` 导出的 Layout 组件将自动应用在路由中并且包裹 Page。Layout 一般来自 layout.tsx 文件, 有如下注意点:
+- Layout 是可选的，如果存在则会包裹对应内部元素。
+- Layout 默认是服务端组件，可以被设置为客户端组件。
+- Layout 可以 fetch 数据。
+
+Layout 可以接收两个参数:
+- `children!: ReactNode`: 被包裹的子组件。
+- `params!: Object`: 动态路由对应的 segments 对象。
+
+### Root Layout
+
+有个特殊的 Layout: Root Layout。这个 Layout 在最外层且必须存在，需要承担初始化 HTML 的作用:
+
+```tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+Root Layout 有以下限制:
+- Root Layout 必须存在，且要用 html 和 body 标签。
+- 可以使用 [built-in SEP support](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) 管理 head 标签
+
+#### Metadata
+
+在 app 路由中，我们可以间接修改 `<head>` 元素。通过在 layout.ts 或 page.ts 文件中导出一个 `metadata` 对象或者 `generateMetadata` 方法来修改 Meta 数据:
+
+```tsx
+import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Next.js',
+}
+ 
+export default function Page() {
+  return '...'
+}
+```
+
+更详细的 Meta 信息配置可以参考这篇文章: [Metadata Files](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons)
+
+### Nesting Layouts
+
+之前我们提到过 Layout 是 nested(嵌套) 的，Layout 会将 Page (或其他元素)包裹起来。具体技术上是将 Page 作为 children 传给 Layout。这种方案非常有效，例如我们的页面顶部总需要一个导航栏，底部总会加上一些项目信息，这些都可以放在 Layout 中。当我们进入一个文档类的界面时，又需要在左侧添加目录信息，这可以让子路由文件的 Layout 负责:
+
+![nested layout](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fnested-layouts-ui.png&w=3840&q=75&dpl=dpl_GGqC9f3YC9X7o2mZgeZfBtLubEXa)
+
+## Template
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/template](https://nextjs.org/docs/app/api-reference/file-conventions/template)
+
+Templates 和 Layouts 非常类似，都提供一个 children 用于包裹子组件。但是 Layout 的状态是保持不变的，只会在第一次获取时渲染。Template 是**可以持有状态**的，他在每次切换路由时都会重新渲染并返回 UI，因此 Template 是可以使用 `useEffect` `useState` 钩子的。
+
+Template 来自 template.tsx 文件，Template 会被 Layout 包裹，例如我们同时在 layout.tsx 导出 `<Layout>`，在 template.tsx 导出 `<Template>`，则会这样渲染:
+
+```tsx
+<Layout>
+  {/* Template 需要接收一个唯一 key */}
+  <Template key={routeParam}>{children}</Template>
+</Layout>
+```
+
+Template 可以接收一个参数:
+- `children!: ReactNode`: 被包裹的子组件。
+
+## Loading
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/loading](https://nextjs.org/docs/app/api-reference/file-conventions/loading)
+
+`loading.ts` 会使用 React [Suspense](https://react.dev/reference/react/Suspense) 创建一个 Loading UI。Loading UI 会在 Page 被加载之前显示，在 Page 处理完成之后自动消失，使用 `loading.ts` 创建的 Loading 会自动包裹 Page 内容:
+
+![Loading UI](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Floading-overview.png&w=3840&q=75&dpl=dpl_6kC9cveZW6cx5rhkGGyJEFwTh8gL)
+
+### Streaming
+
+除了 loading.ts，也可以手动为我们的 UI 组件创建 Suspense。App Router 支持 Node.ts 和 Edge runtime 的 streaming with Suspense。
+
+看一下 React 和 Next.js 的 Streaming 处理过程。
+
+在 SSR 过程中，在用户与页面交互之前会有如下步骤:
+1. 在服务端所有的数据会 fetch 完成。
+2. 服务器为页面渲染 HTML。
+3. HTML，CSS，JavaScript 被传送到客户端。
+4. 无法交互的 UI(HTML + CSS) 会呈现出来。
+5. 最后，React 会 [hydrates](https://react.dev/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) UI 以增加交互功能。
+
+![SSR 步骤](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-without-streaming-chart.png&w=3840&q=75&dpl=dpl_6kC9cveZW6cx5rhkGGyJEFwTh8gL)
+
+上述步骤是顺序执行且阻塞的。在 C 步骤完成之前，客户端什么都不会显示，所以我们需要 Loading UI。
+
+![SSR 过程](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-without-streaming.png&w=3840&q=75&dpl=dpl_6kC9cveZW6cx5rhkGGyJEFwTh8gL)
+
+如果项目大的话，这个顺序执行的步骤会非常慢，所以有了 Streaming。Streaming 可以将页面的 HTML 拆分为几个小 chunk (块)并将这些 chunk 逐步发送给客户端。
+
+![Streaming](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-with-streaming.png&w=3840&q=75&dpl=dpl_6kC9cveZW6cx5rhkGGyJEFwTh8gL)
+
+Streaming 机制可以让部分 React 组件快速渲染，尤其是一些无需 fetch 数据的组件，可以更快地被传输给客户端。对于一些需要长时间获取数据的组件，Streaming 会延后他们的传输以避免整个页面被阻塞。
+
+![Streaming 机制](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fserver-rendering-with-streaming-chart.png&w=3840&q=75&dpl=dpl_6kC9cveZW6cx5rhkGGyJEFwTh8gL)
+
+Loading 不接受任何参数。
+
+## Error
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/error-handling](https://nextjs.org/docs/app/building-your-application/routing/error-handling) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/error](https://nextjs.org/docs/app/api-reference/file-conventions/error)
+
+Error (来自`error.ts`) 用于错误处理，得益于 Next.js 的文件路由系统以及 Streaming 机制。错误处理变得更细粒度，无需等待所有组件加载完成，仅影响部分页面内容...
+
+Error 必须是客户端组件，Error 的作用原理和 Loading 类似，也会自动包裹 Page 内容:
+
+![Error](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Ferror-overview.png&w=3840&q=75&dpl=dpl_6xWnVNfgYh4afmoM1VzZYhpgiLFh)
+
+Error 接收两个参数:
+- `error: Error`: 包含 `message` 和 `digest` 两个属性，分别代表错误原因及编号。
+- `reset: () => void`: 一个刷新方法。
+
+### reset
+
+有些情况下，错误是临时的，也许我们刷新一下界面就可以了。为此，Next.js 提供了一个 reset 方法，调用改方法会重新渲染错误相关的内容:
+
+```tsx
+'use client'
+
+export default function Error({ error, reset }: {
+  error: Error
+  reset: () => void
+}) {
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button onClick={() => reset()}>Try again</button>
+    </div>
+  )
+}
+```
+
+### Error 嵌套
+
+同时存在 Layout，Error，Page 的文件会被渲染为这样的 HTML 结构:
+
+![Error 嵌套](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fnested-error-component-hierarchy.png&w=3840&q=75&dpl=dpl_6xWnVNfgYh4afmoM1VzZYhpgiLFh)
+
+有两个注意点:
+- Error 会处理他所有的子元素，如果需要细粒度的错误处理，则需要写多个 Error。
+- Error 是被 Layout 包裹在内的，因此无法处理 Layout(以及 Template)。
+  - 如果要处理 Layout/Template 的错误，在它们的父级文件中写 Error。
+  - 要处理 Root Layout 的错误，添加一个 `app/global-error.ts` 文件，同时也必须定义 `<html>` 和 `body` 标签。
+
+### Server Error
+
+如果 Error 在服务器组件中被抛出，Next.js 会向最近的 error.ts 文件提供一个 error 参数(Error Object)。
+
+在生产环境中，抛给客户端的 Error 对象只包含两个属性: message, digest。digest 是一个哈希值，可用于和服务端的日志匹配。
+
+### global-error
+
+全局错误处理文件: `global-error.ts` 和 Root Layout 类似，用于处理整个界面的错误。因此必须包含 `html` 和 `body` 标签:
+
+```tsx
+'use client'
+ 
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  return (
+    <html>
+      <body>
+        <h2>Something went wrong!</h2>
+        <button onClick={() => reset()}>Try again</button>
+      </body>
+    </html>
+  )
+}
+```
+
+## Route
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/route-handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) \
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/route](https://nextjs.org/docs/app/api-reference/file-conventions/route)
+
+Route 允许我们通过 Web 的 Request 和 Response API 创建自定义 request 处理器。
+
+![Route](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-special-file.png&w=3840&q=75&dpl=dpl_5PwFtC7dn1cJkeJ8CTR2vPDLubXw)
+
+Route 被定义在 `route.ts` 文件里，是可嵌套的，但是不允许和 `page.js` 处于同一个 route segment 下，一般写在 `app/api` 文件夹下:
+
+Route 是可以嵌套的，支持如下 HTTP 方法: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`。如果调用了不支持的方法，会报 405 错误。
+
+```ts
+export async function GET(request: Request) {}
+```
+
+此外，Next.js 为了支持原生 Request 和 Response，还提供了 `NextRequest` 和 `NextResponse` 两个方法。
+
+当配合使用 GET 方法以及 Response 对象时，Router 默认情况下会被缓存:
+
+```ts
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  const res = await fetch('https://data.mongodb-api.com/...', {
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
+    },
+  })
+  const data = await res.json()
+  return NextResponse.json({ data })
+}
+```
+
+<p class="tip">可以使用 Response.json() 方法，但是 TS 会报错，因此这里使用 NextResponse.json() 方法。</p>
+
+你可以通过如下方式禁用缓存:
+- GET 方法配合 Request 使用。
+- 使用 GET 以外的 HTTP 方法。
+- 使用动态方法，例如 cookies，headers。
+- 在 Segment Config 里面写入一些配置
+
+
+例如第一种方案:
+
+```ts
+import { NextResponse } from 'next/server'
+ 
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const id = searchParams.get('id')
+  const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
+    },
+  })
+  const product = await res.json()
+ 
+  return NextResponse.json({ product })
+}
+```
+
+Handler 的文件结构一般和 Page 对应，由于无法让 route.ts 和 page.ts 处于同一个文件夹下，我们一般这样做:
+- Page: app/page.ts
+- Route Handler: app/api/page.ts
+
+这样我们就可以有规律地获取 Route Handler 并将异步请求逻辑分离了出来。
+
+Route 接收两个参数:
+- `request?: NextRequest`: 封装过的 Web Request API。
+- `context?: { params: Object}`: 动态路由对象。
+
+<p class="tip">官方文档还有很多路由处理例子，这里不一一例举。</p>
+
+在 Layout，Page，Route 中可以进行一些路由配置，具体参数参考 [Segment API](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)。
+
+## Middleware
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+
+中间件(Middleware) 允许你在一个 request 完成之前运行代码。我们可以在 `middleware.ts` 文件中定义中间件:
+
+```ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+ 
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  return NextResponse.redirect(new URL('/home', request.url))
+}
+ 
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: '/about/:path*',
+}
+```
+
+中间件会被项目里的所有路由调用，路由具体的执行顺序为:
+- `headers`: 在 `next.config.ts` 中的配置
+- `redirects`: 在 `next.config.ts` 中的配置
+- 中间件: 我们自己写的 (`rewrite`, `redirects` 等)
+- `beforeFiles`: 在 `next.config.ts` 中的配置 (`rewrite`)
+- 文件系统路由
+- `afterFiles`: 在 `next.config.ts` 中的配置 (`rewrite`)
+- 动态路由
+- `fallbacks`: 在 `next.config.ts` 中的配置 (`rewrite`)
+
+### 中间件运行位置
+
+有两种定义中间件运行路径的方式。
+
+#### Matcher
+
+在 `middleware.ts` 文件中导出的 config 对象中写入 matcher 属性，对应中间件会运行的路由，例如:
+
+```ts
+export const config = {
+  matcher: '/about/:path*',
+  // 支持多个路由
+  matcher: ['/about/:path*', '/dashboard/:path*'],
+  // 支持正则表达式
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+}
+```
+
+这里的 matcher 属性值有以下限制:
+- 必须是静态的，不能包含动态参数。
+- 元素必须以 `/` 开头
+- 可以在 segment 前加一个 `:` 表示修饰，segment 后面可以加正则匹配符。
+
+<p class="tip">Next.js 会将 /public 等价于 /public/index。因此 /public/:path 总可以匹配到 /public 的内容。</p>
+
+#### 条件语句
+
+直接看代码吧:
+
+```ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+ 
+export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/about')) {
+    return NextResponse.rewrite(new URL('/about-2', request.url))
+  }
+ 
+  if (request.nextUrl.pathname.startsWith('/dashboard')) {
+    return NextResponse.rewrite(new URL('/dashboard/user', request.url))
+  }
+}
+```
+
+### NextResponse
+
+`NextResponse` API 可以做如下内容:
+- `redirect` 根据传入的 request 重定向到新的 URL
+- `rewrite` 根据传入的 URL 重写 response
+- 设置 request/response 的 header， 设置 cookie
+
+## NotFound
+
+> 官方 API 参考: [https://nextjs.org/docs/app/api-reference/file-conventions/not-found](https://nextjs.org/docs/app/api-reference/file-conventions/not-found)
+
+来自 `not-found.js` 文件，出现 404 错误时显示。默认是服务端组件，不接受任何属性。

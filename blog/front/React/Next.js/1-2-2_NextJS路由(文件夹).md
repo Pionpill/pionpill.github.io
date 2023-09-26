@@ -1,0 +1,267 @@
+---
+difficulty: medium
+type: note
+---
+
+# Next.js 路由文件夹
+
+## 路由基础
+
+首先了解几个 Next.js 的概念:
+
+![路由树](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fterminology-component-tree.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+- Tree: 路由树，从根文件(app 或 page)开始包含所有子文件的树形结构
+- Subtree: 子路由树，路由树的分支
+- Root: 根，某一个路由树的根路由片段
+- Leaf: 最低一级的路由片段，没有子路由片段，也可以是 page 文件。
+
+![路由](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fterminology-url-anatomy.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+- URL Segment: 路由片段，用斜杆分隔的 URL 一部分
+- URL Path: domain 之后的内容
+
+Next.js 的文件夹结构决定了路由结构，在 Next.js 中文件和文件夹的作用分别是:
+- 文件夹: 用于定义路由，从 Root 节点一直到 Leaf 的 page.ts 文件构成一个完整的路由。
+- 文件: 负责 UI 及相关逻辑。
+
+![路由与文件关系](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-segments-to-path-segments.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+如果嵌套的文件有多个 layout，则访问对应路由时也嵌套渲染:
+
+![组件嵌套渲染](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fnested-file-conventions-component-hierarchy.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+除了 Next.js 保留的几个文件名，我们也可以添加自定义的文件。但这些内容不会被路由直接访问到(也不会被自动整合)，只有 page.ts 或 route.ts 的内容会被路由访问到:
+
+![自定义文件](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fproject-organization-colocation.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+<p class="tip">除了 route 文件只能是 route.js 或者 route.ts。其他几个文件都可以是 .js, .ts, .tsx 格式。下文默认使用 .ts/.tsx。</p>
+
+## Linking & Navigating
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating)
+
+Next.js 有两种切换路由的方式:
+- 使用 `<Link>` 组件
+- 使用 `useRouter` 钩子
+
+### Link 组件
+
+`<Link>` 继承自 HTML 的 `<a>` 标签，从客户端切换路由，是 Next.js 主流的路由切换方案。使用 `<Link>` 组件一般只需要传一个 `href` 属性就行了:
+
+```tsx
+import Link from 'next/link'
+ 
+export default function Page() {
+  return <Link href="/dashboard">Dashboard</Link>
+}
+```
+
+### useRouter 钩子
+
+`useRouter()` 可以命令式地切换路由，这个钩子只能在客户端组件中使用:
+
+```tsx
+'use client'
+ 
+import { useRouter } from 'next/navigation'
+ 
+export default function Page() {
+  const router = useRouter()
+ 
+  return (
+    <button type="button" onClick={() => router.push('/dashboard')}>
+      Dashboard
+    </button>
+  )
+}
+```
+
+<p class="tip">不建议使用 useRouter 钩子，Link 组件可以完成绝大部分工作。</p>
+
+### 路由切换是如何实现的
+
+App 路由使用了一种混合模式：
+- 在服务端，应用代码会被自动根据 segments 拆分
+- 在客户端，Next.js 会 prefetch、cache (提前获取与缓存) segments
+
+这种机制代表着当用户导航到一个新的路由时，浏览器不会重新加载整个界面，仅部分路由 segments 会被重绘，这大大提高了性能。
+
+#### Prefetching
+
+Prefetching 是一种机制，它会在用户访问相关路由之前预加载路由。有两种方式可以触发这种机制:
+- `<Link>`: 路由对应的内容进入用户视野时会自动触发预加载机制，只有页面第一次加载或鼠标滚到对应视野时会触发。
+- `router.prefetch()`: 使用 `useRouter` 钩子命令式使用预加载机制。
+
+`<Link>` 的预加载机制在静态路由与动态路由中表现有所不同:
+- 静态路由: 默认启用预加载机制，整个路由会被预加载并缓存
+- 动态路由: 首先会预加载共享的 Layout，loading.ts 的内容会被预加载，缓存30s，然后再考虑其他组件。这种策略有效避免了预加载整个动态路由的性能开销。
+
+我们可以通过给 `<Link>` 组件传一个 `prefetch` 属性决定是否开启预加载机制。
+
+#### Caching
+
+Next.js 有一个在客户端内存中缓存的机制: Router Catch。用户访问对应路由时，服务端组件的一些预加载内容会被存在缓存中。
+
+这意味着缓存内容会被复用，而不是多次向服务端请求内容。
+
+#### Partial Rendering
+
+Partial Rendering(局部渲染) 很好理解，只有不同的内容会被重新渲染，相同内容保留不变，例如 `/dashboard/settings` 和 `/dashboard/analytics`，只有 settings 和 analytics 的内容会被重新渲染，外部的 dashboard 内容不会改变:
+
+![Partial Rendering](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fpartial-rendering.png&w=3840&q=75&dpl=dpl_GGqC9f3YC9X7o2mZgeZfBtLubEXa)
+
+#### Soft Navigation
+
+默认情况下，浏览器在页面之间执行硬导航(hard navigation)。硬导航会强制页面重新加载并重置 React 的 state，浏览器的 state(聚焦元素、滚动位置...)。在 Next.js 中，App 路由使用软导航(soft navigation)。这意味着 React 只渲染改动的 segments 未改动的 React 和浏览器状态会被保留。
+
+#### Back and Forward Navigation
+
+默认情况下，Next.js 会为前端路由以及后端路由保留滚动位置。
+
+## Route Groups
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/route-groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
+
+路由组可以防止文件夹被捕捉进路由系统，我们可以在路由组中提供一些公有的内容(例如 Layout)，但不影响到路由结构。
+
+路由组的语法是在文件夹名字上加个小括号: `(folderName)`:
+
+![路由组](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Froute-group-organisation.png&w=3840&q=75&dpl=dpl_5rg9ZXpXqVfVeubWxAmmbQKQLy3U)
+
+有了路由组我们可以更灵活地组织文件的 Layout，路由组也可以被应用在根目录上，这样的话每个 Layout 都需要 `<html>` 和 `<body>` 标签。
+
+## 动态路由
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
+
+最简单的动态的路由语法: `[folderName]`，这会传一个动态路由参数(`params`)给对应的 `layout`, `page`, `route` 和 `generateMetadata` 函数。
+
+比如说我们有一个 `[slug]` 文件夹，那么 Page 可以这样获取路由信息:
+
+```tsx
+// app/blog/[slug]/page.tsx
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+```
+
+### 生成静态参数
+
+`generateStaticParams` 函数可以用于在 build 阶段将动态路由与静态生成路由结合。
+
+```tsx
+// app/blog/[slug]/page.tsx
+export async function generateStaticParams() {
+  const posts = await fetch('https://.../posts').then((res) => res.tson())
+ 
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+```
+
+使用 `generateStaticParams` 最大的好处是它对数据的智能检索。在 `generateStaticParams` 函数中 fetch 的 request 会被自动记录在内存(automatically memoized)，这意味着一个有相同参数的 fetch 请求(在多个 `generateStaticParams`，Layout，Page 中)只会被 build 一次。 
+
+### 捕获所有路由片段
+
+通过 `[...folderName]` 语法可以捕获多个路由片段，此时路由片段会以数组形式返回，例如: `app/shop/[...slug]/page.ts` 对应 `/shop/a/b/c` 的 params 参数为: `{ slug: ['a', 'b', 'c'] }`。
+
+此外 `[[...folderName]]` 语法捕获的片段可以为空。
+
+## Parallel Routes
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/parallel-routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)
+
+Parallel Routes(平行路由) 允许我们同时或者有条件地在同一个 Layout 中加载多个 page。在 DashBoard，Feed 这样高度动态的页面中，Parallel Route 可以被用于实现复杂的路由匹配。它的语法是: `[@fileName]`
+
+每个单独的 Parallel Route 都是独立的，可以拥有自己的 Loading，Error 等文件。
+
+![Parallel Routes](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fparallel-routes-cinematic-universe.png&w=3840&q=75&dpl=dpl_6xWnVNfgYh4afmoM1VzZYhpgiLFh)
+
+Parallel Routes 使用 named slots (具名插槽)创建(就是 `[@fileName]`)，slot 不会影响路由，可以看作 Route Group。创建 slot 以后，会给同级的 Layout 创建同名的 prop(ReactNode 类型)。比如下面两个 slot:
+
+![Named Slots](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fparallel-routes-file-system.png&w=3840&q=75&dpl=dpl_6xWnVNfgYh4afmoM1VzZYhpgiLFh)
+
+```tsx
+export default function Layout(props: {
+  children: React.ReactNode
+  analytics: React.ReactNode
+  team: React.ReactNode
+}) {
+  return (
+    <>
+      {props.children}
+      {props.team}
+      {props.analytics}
+    </>
+  )
+}
+```
+
+<p class="tip">可以将 children 属性看作一个匿名槽，app/page.ts 和 app/@children/page.ts 是等价的。</p>
+
+如果有未匹配到的 slot，Next.js 会基于文件结构给出不同的结果。Next.js 会首先尝试渲染未匹配到 Slot 的 `default.ts` 的内容，如果没有的话，再渲染 404。
+
+`useSelectedLayoutSegment` 和 `useSelectedLayoutSegments` 接收一个 `parallelRouteKey` 作为参数，允许我们再 slot 内访问到对应 active 的 route segment。
+
+```tsx
+'use client'
+ 
+import { useSelectedLayoutSegment } from 'next/navigation'
+ 
+export default async function Layout(props: {
+  //...
+  auth: React.ReactNode
+}) {
+  const loginSegments = useSelectedLayoutSegment('auth')
+  // ...
+}
+```
+
+官方文档还有很多例子，建议看一遍。
+
+## Intercepting Routes
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes)
+
+路由拦截允许我们从应用的另一部分加载路由到当前 Layout 中，这允许我们跨路由显示内容。
+
+![Intercepting Routes](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fintercepting-routes-soft-navigate.png&w=3840&q=75&dpl=dpl_5PwFtC7dn1cJkeJ8CTR2vPDLubXw)
+
+Intercepting Routes 的语法包括:
+- `(.)folderName`: 匹配同级路由
+- `(..)folderName`: 匹配上级路由
+- `(..)(..)folderName`: 匹配上两级路由
+- `(...)folderName`: 匹配根目录路由
+
+注意 Intercepting Routes 是基于路由系统的而不是文件系统(文件存在动态路由，Group Routes 等)，加入我们想要在 feed 视图李拦截 photo 界面，可以这样做:
+
+![Intercepting Routes 例子](https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fintercepted-routes-files.png&w=3840&q=75&dpl=dpl_5PwFtC7dn1cJkeJ8CTR2vPDLubXw)
+
+## 项目结构
+
+> 官方文档(英): [https://nextjs.org/docs/app/building-your-application/routing/colocation](https://nextjs.org/docs/app/building-your-application/routing/colocation)
+
+由于 Next.js 的路由系统是基于文件系统的，因此我们的项目结构必须遵守一些既定的规则:
+- 仅有包含 Page 或 Route 的路由是可达(访问对应路由有返回)的。
+- 返回某个路由时，仅会返回对应 `page.tsx` 或 `route.ts` 中返回的内容。
+
+为了更好地组织文件结构，Next.js 提供了如下规则:
+- 私有文件夹(`_folder`): 路由系统不会捕获私有文件夹及其子文件夹的内容。
+- Route Groups(`folder`): 路由系统会跳过当前 segment。
+- src 目录: Next.js 可以提供一个 src 目录用于放源代码。
+- 模块路径别名: 可以通过配置的方式定义模块路径别名:
+  ```ts
+  // before
+  import { Button } from '../../../components/button'
+  
+  // after
+  import { Button } from '@/components/button'
+  ```
+
+官方文档还有一些组织文件结构的建议，可以根据个人或团队习惯采用。
+
+## 其他
+
+Next.js 官网的路由模块还提供了国际化相关的文档，但是使用的是 Next.js 内置的 next-intl。该模块不常用，更普遍的技术选择是 next-i18next，这部分就不作说明了。
