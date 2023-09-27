@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { BlogCategory } from "../models/blog";
 
 interface BlogState {
-  category: string;
+  category: BlogCategory;
   asideOpen: boolean;
   tocOpen: boolean;
 }
@@ -9,14 +10,14 @@ interface BlogState {
 export const blogSlice = createSlice({
   name: "blog",
   initialState: {
-    category: "front",
+    category: "front" as BlogCategory,
     asideOpen: false,
     tocOpen: false,
   },
   reducers: {
     changeBlogCategory: (
       state: BlogState,
-      action: { type: string; payload: string }
+      action: { type: string; payload: BlogCategory }
     ) => {
       state.category = action.payload;
     },
