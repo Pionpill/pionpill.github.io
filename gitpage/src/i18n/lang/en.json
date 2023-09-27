@@ -194,13 +194,18 @@
     "front": "Front",
     "back": "Back",
     "sql": "SQL",
-    "cs": "general",
-    "lang": "language",
+    "python": "Python",
+    "cs": "General",
+    "lang": "Language",
+    "minecraft": "Minecraft",
     "onThisPage": "On this Page",
     "readme": "README",
     "errorTitle": "Blog URL does not Exist",
     "errorMessage": "Please check the URL and may project update URL expires, soon will jump to the blog index page",
-    "copyCodeSuccessMessage": "add code to the clipboard"
+    "copyCodeSuccessMessage": "add code to the clipboard",
+    "frontAbstract": "JS, TS, V8, React, Vue, NextJS... including some SSR, nodejs framework",
+    "minecraftAbstract": "Bedrock, Netease development experience",
+    "pythonAbstract": "write some scripting tools in Python"
   },
   "project": {
     "title": "Application Projects",
