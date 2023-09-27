@@ -64,7 +64,7 @@ export const darkTheme: Theme = createTheme(
             mode: "dark",
             aside: "#161616",
             content: "#1e1e1e",
-            line: "#29292d",
+            line: "#474747",
         },
     })
 );

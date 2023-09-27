@@ -73,6 +73,7 @@ const MarkdownContentWrapper = styled('div')`
 
 const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, node, inline, className, setAlert, ...props }) => {
   const match = /language-(\w+)/.exec(className || "");
+  const codeColor = useThemeChoice(blogTheme[700], blogTheme['A400'])
 
   const handleClick: MouseEventHandler = () => {
     navigator.clipboard.writeText(String(children));
@@ -84,13 +85,15 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
       <IconButton className="markdown-code-copy" onClick={handleClick}>
         <BiCopy />
       </IconButton>
-      <Typography className="markdown-code-language">
-        {match[1]}
-      </Typography>
+      <Typography className="markdown-code-language">{match[1]}</Typography>
       <SyntaxHighlighter
         {...props}
         style={useThemeChoice(oneLight, vscDarkPlus)}
-        customStyle={{ width: "100%", fontSize: "0.85em", backgroundColor: useThemeChoice('#f6f8fa', '#161618') }}
+        customStyle={{
+          width: "100%",
+          fontSize: "0.85em",
+          backgroundColor: useThemeChoice("#f6f8fa", "#161618"),
+        }}
         language={match[1]}
         PreTag="div"
       >
@@ -105,7 +108,7 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
         padding: "2px 4px",
         borderRadius: 4,
         background: useThemeChoice("#f1f1f1", "#2f2f2f"),
-        color: blogTheme[500],
+        color: codeColor,
         display: "inline",
       }}
     >
@@ -152,6 +155,7 @@ const MarkdownAlert: React.FC<PropsWithChildren<{ severity: AlertColor, icon?: R
 const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
   const [successCopyAlertOpen, setSuccessCopyAlertOpen] = React.useState<boolean>(false);
   const lineColor = useThemeChoice("#e1e1e1", "#313131");
+  const linkColor = useThemeChoice(blue[800], blue[300]);
 
   return (
     <MarkdownContentWrapper>
@@ -187,7 +191,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
               target={target}
               sx={{
                 textDecoration: "none",
-                color: blue[500],
+                color: linkColor,
               }}
             >
               {children}

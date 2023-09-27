@@ -23,7 +23,7 @@ const TocButton: React.FC<PropsWithChildren<{ handleClick: Function }>> = ({
       gap: 1,
       marginBottom: 0,
       pt: 0,
-      color: blogTheme[700],
+      color: blogTheme[500],
       justifyContent: "flex-start",
       textTransform: "inherit",
     }}
@@ -60,7 +60,7 @@ const ContentTOC: React.FC<{ toc: Array<{ hierarchy: number; title: string }>, s
       cursor: "pointer",
       opacity: 0.75,
       "&:hover": {
-        color: blogTheme[700],
+        color: blogTheme[500],
       },
     };
   };
