@@ -179,7 +179,7 @@ const MarkdownContent: React.FC<{ children: string }> = ({ children }) => {
             return <h3 id={anchor}>{children}</h3>;
           },
           img: ({ src, alt }) => (
-            <img src={src} alt={alt} style={{ maxWidth: "100%" }} />
+            <img src={src} alt={alt} style={{ maxWidth: "100%", borderRadius: "0.3em" }} />
           ),
           a: ({ href, target, children }) => (
             <Link
