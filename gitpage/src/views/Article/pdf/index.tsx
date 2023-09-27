@@ -97,7 +97,6 @@ const PdfPreview: React.FC<{ reposUrl: string }> = ({ reposUrl }) => {
 
   const handleDocLoadSuccess = (doc: any) => {
     setNumPages(doc.numPages);
-    doc.getOutline().then((response: any) => console.log(response));
   };
   const handleLastPage = () => {
     if (getPage() > 1) {
@@ -118,7 +117,6 @@ const PdfPreview: React.FC<{ reposUrl: string }> = ({ reposUrl }) => {
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && inputRef.current) {
       const targetNumPage = Number(inputRef.current.value);
-      console.log(targetNumPage);
       if (targetNumPage >= 0 && targetNumPage <= numPages) {
         setPage(targetNumPage);
       } else {

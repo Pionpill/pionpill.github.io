@@ -90,7 +90,6 @@ const Abstract: React.FC = () => {
   });
 
   const changeCenter = (center: [number, number], zoom?: number) => {
-    console.log("尝试切换坐标");
     map.current.setCenter(center);
     if (zoom) {
       map.current.setZoom(zoom);

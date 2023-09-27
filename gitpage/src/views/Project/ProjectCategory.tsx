@@ -33,12 +33,6 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ icon, project }) => {
         setLanguage(data.language);
         setProjectLink(data.html_url);
       });
-    // const langPromise = githubReposLangApi(project);
-    // langPromise
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
   });
 
   return (

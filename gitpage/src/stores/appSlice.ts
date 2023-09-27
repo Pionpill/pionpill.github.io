@@ -39,7 +39,6 @@ export const appSlice = createSlice({
       const lang = state.lang === "en" ? "zh" : "en";
       localStorage.setItem("lang", lang);
       state.lang = lang;
-      console.log(state.lang);
     },
   },
 });

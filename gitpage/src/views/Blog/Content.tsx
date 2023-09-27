@@ -139,7 +139,6 @@ const Content: React.FC = () => {
   const getStrongRelatedBlog = (blogs: string | undefined) => {
     if (!blogs) return;
     const blogList = blogs.split(" ");
-    console.log(blogList);
     for (let i = 0; i < blogList.length; i++)
       if (blogList[i][0] === "+")
         return blogList[i];
