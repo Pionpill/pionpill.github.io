@@ -14,11 +14,12 @@ import React, { ReactNode } from "react";
 import { Trans } from "react-i18next";
 import { BiChevronDown, BiChevronRight, BiCode, BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
 import { FaBlog, FaCss3Alt, FaVuejs } from "react-icons/fa";
-import { SiD3Dotjs, SiJavascript, SiReact, SiTypescript } from "react-icons/si";
+import { SiD3Dotjs, SiJavascript, SiMicrosoft, SiPython, SiReact, SiTypescript } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { blogContentApi } from "../../api/github/githubApi";
 import FlexBox from "../../components/FlexBox";
+import { BlogCategories, BlogCategory } from "../../models/blog";
 import { headerHeight } from "../../shared/config";
 import { RootState } from "../../stores";
 import { changeBlogCategory } from "../../stores/blogSlice";
@@ -28,7 +29,7 @@ import { blogTheme } from "../../styles/theme";
 const Category: React.FC = () => {
   const dispatch = useDispatch();
   const handleChange = (event: SelectChangeEvent) => {
-    dispatch(changeBlogCategory(event.target.value));
+    dispatch(changeBlogCategory(event.target.value as BlogCategory));
   };
   const category = useSelector((state: RootState) => state.blog.category);
 
@@ -41,7 +42,7 @@ const Category: React.FC = () => {
         </Typography>
       </FlexBox>
       <Select value={category} size="small" onChange={handleChange}>
-        {["front", "back", "cs", "sql"].map((value) => {
+        {BlogCategories.map((value) => {
           return (
             <MenuItem value={value} key={value}>
               <Trans i18nKey={`blog.${value}`} />
@@ -69,10 +70,12 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
   const iconMap: Map<string, ReactNode> = new Map([
     ["react", <SiReact />],
     ["d3", <SiD3Dotjs />],
-    ["js", <SiJavascript />],
+    ["javascript", <SiJavascript />],
     ["ts", <SiTypescript />],
     ["vue", <FaVuejs />],
     ["css", <FaCss3Alt />],
+    ["bedrock", <SiMicrosoft />],
+    ["python", <SiPython/>]
   ]);
   const navigate = useNavigate();
   const title = path.split("/").pop() as string;
@@ -178,7 +181,7 @@ const BlogList: React.FC = () => {
       .then((result) => {
         setTopDirs(result);
       });
-  }, []);
+  }, [category]);
 
   return (
     <FlexBox flexDirection="column" gap={1} overflow="auto">
