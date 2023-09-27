@@ -37,6 +37,7 @@ const HeaderPopoverButton: React.FC<HeaderPopoverButtonProps> = ({
         expand
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseOut}
+        sx={{fontWeight: '500'}}
         {...props}
       />
       <Popover
@@ -63,15 +64,25 @@ const HeaderPopoverButton: React.FC<HeaderPopoverButtonProps> = ({
 };
 
 const DesktopRouteLinks: React.FC = () => (
-  <FlexBox sx={{ alignItems: "center", height: "50px" }} gap={2}>
+  <FlexBox sx={{ alignItems: "center", height: "50px" }} gap={3}>
     <HeaderPopoverButton id="home" to="/home/profile" i18nKey="root.home">
       <ProfileList />
     </HeaderPopoverButton>
     <HeaderPopoverButton id="blog" to="/blog" i18nKey="root.blogs">
       <BlogList />
     </HeaderPopoverButton>
-    <RouteLink id="project" to="/project" i18nKey="root.projects" />
-    <RouteLink id="article" to="/article" i18nKey="root.articles" />
+    <RouteLink
+      sx={{ fontWeight: "500" }}
+      id="project"
+      to="/project"
+      i18nKey="root.projects"
+    />
+    <RouteLink
+      sx={{ fontWeight: "500" }}
+      id="article"
+      to="/article"
+      i18nKey="root.articles"
+    />
     {/* <RouteLink id="work" to="/work" i18nKey="root.works" /> */}
   </FlexBox>
 );
