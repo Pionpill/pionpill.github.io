@@ -16,6 +16,7 @@ import { SiMojangstudios } from "react-icons/si";
 import { useDispatch } from "react-redux";
 import { To } from "react-router";
 import { Link } from "react-router-dom";
+import { BlogCategory } from "../../models/blog";
 import { changeBlogCategory } from "../../stores/blogSlice";
 import { icon36x } from "../../styles/macro";
 import { blogTheme, homeTheme } from "../../styles/theme";
@@ -115,7 +116,7 @@ export const BlogList: React.FC = () => {
           icon={item.icon}
           primary={t(`blog.${item.segment}`) as string}
           secondary={t(`blog.${item.segment}Abstract`)}
-          handleClick={(e) => dispatch(changeBlogCategory(item.segment))}
+          handleClick={() => dispatch(changeBlogCategory(item.segment as BlogCategory))}
         />
       ))}
     </List>
