@@ -469,7 +469,7 @@ export function enqueueUpdate<State>(
   lane: Lane,
 ): FiberRoot | null {
   const updateQueue = fiber.updateQueue;
-  if (updateQueue === null) { // 这表示 FIberNode 已经不存在 (unmount) 了
+  if (updateQueue === null) { // 这表示 FiberNode 已经不存在 (unmount) 了
     return null;
   }
 
