@@ -1,6 +1,7 @@
 ---
 difficulty: easy
 type: note
+rear: +/front/JavaScript/ECMAScript/1-2_基本对象-Function
 ---
 
 # Object
