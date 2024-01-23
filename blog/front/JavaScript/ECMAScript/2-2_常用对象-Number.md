@@ -52,3 +52,30 @@ $$Number = (-1)^{sign} · (1+mantissa) · 2^{exponent}$$
 - `Number.prototype.toExponential()`: 返回指数形式字符串
 - `Number.prototype.toFixed()`: 返回定点表示法表示数值地字符串
 - `Number.prototype.toPrecision()`: 返回定点/指数表示法至指定精度的字符串
+
+## BigInt
+
+> MDN 官方文档: [mozilla](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+
+`BigInt` 可以用来表示任意大的整数，一般用于展示大于 `2^53-1` 的整数。有两种创建 `BigInt` 对象的方式:
+- 字面量: 在整数字面量后面加 `n`，例如 `10n`
+- 面向对象: 通过 `BigInt(value: string | number)` 构建
+
+`BigInt` 的多数行为类似 `Number`，以下行为除外:
+- 不能用于 `Math` 对象中的方法
+- 不能合 `Number` 实例混合运算，必须转换为统一类型
+- `BigInt` 转为 `Number` 是存在精度丢失问题
+
+使用 `typeof` 测试 `BigInt` 对象会返回 `bigint`。
+
+`BigInt` 可以使用绝大多数操作符，`>>>`(无符号右移)不可以，且不支持单目 + 运算。使用除法运算时会向零取整: `5n / 2n === 2n`。
+
+`BigInt` 可以与 `Number` 进行比较，但是不严格相等。
+
+对 `BigInt` 值使用 `JSON.stringify()` 会引发 `TypeError`，如果需要可以实现 `toJSON` 方法:
+
+```js
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
+```
