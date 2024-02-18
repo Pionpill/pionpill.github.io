@@ -222,3 +222,24 @@ console.log(+0 === -0);     // true
 ```ts
 Object.fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): { [k: string]: T }   // ES2019
 ```
+
+## 内部方法
+
+JavaScript 对象的实际语义是由对象的内部方法指定的。内部方法是指对象进行操作时引擎内部调用的方法，这些方法对于 JavaScript 开发者来说是不可见的，但这些方法与 `Object` 的一些静态方法息息相关，我们有必要了解一下:
+
+ECMAScript 规范使用 [[xxx]] 标识内部方法，十一个必要的内部方法包括:
+- `[[GetPrototypeOf]]`: 获取原型，null 表示没有继承
+- `[[SetPrototypeOf]]`: 设置原型，null 表示没有继承
+- `[[IsExtensible]]`: 判断是否允许向该对象添加其他属性
+- `[[PreventExtensions]]`: 控制能否向该对象添加新属性
+- `[[GetOwnProperty]]`: 获取该对象自身属性的描述符
+- `[[DefineOwnProperty]]`: 创建或更改自己的属性
+- `[[HasProperty]]`: 判断是否已存在对应的属性
+- `[[Get]]`: 获取属性值
+- `[[Set]]`: 设置属性值
+- `[[Delete]]`: 删除属性值
+- `[[OwnPropertyKeys]]`: 获取所有属性
+
+还有两个额外的必要方法:
+- `[[Call]]`: 将运行的代码与this对象关联
+- `[[Construct]]`: 创建一个对象。通过new运算符或super调用触发。
