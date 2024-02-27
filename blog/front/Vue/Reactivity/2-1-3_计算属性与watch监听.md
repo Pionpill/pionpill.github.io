@@ -1,7 +1,8 @@
 ---
 difficulty: medium
 type: note
-rear: +/front/Vue/reactivity/3-1-2_概念-Fiber架构
+pre: +/front/Vue/reactivity/2-1-2_系统实现-功能完善
+rear: +/front/Vue/reactivity/2-2-1_代理对象-Object
 ---
 
 # 计算属性与 watch 监听
