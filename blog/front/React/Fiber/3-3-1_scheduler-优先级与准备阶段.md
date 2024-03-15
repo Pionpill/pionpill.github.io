@@ -13,7 +13,7 @@ rear: +/front/React/Fiber/3-3-2_scheduler-调度流程
 
 ## 优先级
 
-react 有两类优先级，一类是在 react-reconciler 包下的 react 事件优先级:
+react 有两类优先级，一类是在 `react-reconciler` 包下的 react 事件优先级（[✨约24行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactEventPriorities.js#L24)）:
 ```ts
 // export type Lane = number;
 // export opaque type EventPriority = Lane; 如果不认识可以忽略 opaque 关键字
@@ -23,9 +23,10 @@ export const DefaultEventPriority: EventPriority = DefaultLane;   // 32
 export const IdleEventPriority: EventPriority = IdleLane;   // 33554431
 ```
 
-还有一类是 `scheduler` 包下的调度优先级:
+还有一类是 `scheduler` 包下的调度优先级（[✨约13行](https://github.com/facebook/react/blob/main/packages/scheduler/src/SchedulerPriorities.js#L13)）:
 ```ts
-// export type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5;
+export type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5;
+
 export const NoPriority = 0;
 export const ImmediatePriority = 1;
 export const UserBlockingPriority = 2;
@@ -34,7 +35,7 @@ export const LowPriority = 4;
 export const IdlePriority = 5;
 ```
 
-这两种优先级的转换关系如下:
+这两种优先级的转换关系如下（[✨约374行](https://github.com/facebook/react/blob/main/packages/react-dom-bindings/src/events/ReactDOMEventListener.js#L374)）:
 ```ts
 switch (schedulerPriority) {
   case ImmediateSchedulerPriority:
@@ -97,7 +98,7 @@ export const CommitContext = 0b100;
 
 ### scheduleUpdateOnFiber
 
-首先看一下 `scheduleUpdateOnFiber` 方法:
+首先看一下 `scheduleUpdateOnFiber` 方法（[✨约724行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L724)）:
 
 ```ts
 export function scheduleUpdateOnFiber(
@@ -175,6 +176,8 @@ ensureRootIsScheduled(root, eventTime);
 
 ### markRootUpdated
 
+源码[✨约612行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.js#L612)
+
 ```ts
 export function markRootUpdated(root: FiberRoot, updateLane: Lane) {
   // 将更新优先级加到 root 的等待优先级上，这一步告诉根节点有东西要处理
@@ -189,7 +192,7 @@ export function markRootUpdated(root: FiberRoot, updateLane: Lane) {
 
 ### ensureRootIsScheduled
 
-这个方法很重要，当 react 内部需要更新时，都会调用这个方法，确保根节点在恰当的时机触发更新流程:
+这个方法很重要，当 react 内部需要更新时，都会调用这个方法，确保根节点在恰当的时机触发更新流程（[✨约84行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRootScheduler.js#L84)）:
 
 ```ts
 // 确保root应用根节点被调度
@@ -224,7 +227,7 @@ export function ensureRootIsScheduled(root: FiberRoot): void {
 1. 确保 root 处于 schedule 中，不在则加入进去。
 2. 让一个等待中的微任务去执行 root schedule
 
-再看一下 `scheduleImmediateTask` 的逻辑:
+再看一下 `scheduleImmediateTask` 的逻辑（[✨约455行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRootScheduler.js#L455)）:
 
 ```ts
 function scheduleImmediateTask(cb: () => mixed) {

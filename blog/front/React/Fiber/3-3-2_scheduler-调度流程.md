@@ -13,7 +13,7 @@ rear: +/front/React/Fiber/3-4-1_双缓存机制
 
 ## scheduleCallback
 
-react 处理同步任务的逻辑比较简单: 将任务加入到任务队列中，然后一一执行。处理异步任务就比较复杂，因为涉及到优先级，核心方法就是 `scheduleCallback`:
+react 处理同步任务的逻辑比较简单: 将任务加入到任务队列中，然后一一执行。处理异步任务就比较复杂，因为涉及到优先级，核心方法就是 `scheduleCallback`（[✨约322行](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L322)）:
 
 ```ts
 function scheduleCallback( priorityLevel: PriorityLevel, callback: RenderTaskFn ) {
@@ -29,7 +29,6 @@ function unstable_scheduleCallback(
 ): Task {
   // 当前程序执行时间
   var currentTime = getCurrentTime();
-
   var startTime;
   // 一般都不会传 options 参数
   if (typeof options === 'object' && options !== null) {
@@ -124,7 +123,7 @@ function requestHostCallback() {
 }
 ```
 
-重点是 `schedulePerformWorkUntilDeadline` 属性(对，他是个属性):
+重点是 `schedulePerformWorkUntilDeadline` ([✨约516行](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L516)):
 
 ```ts
 let schedulePerformWorkUntilDeadline;
@@ -186,7 +185,7 @@ schedulePerformWorkUntilDeadline = () => {
 
 ## performWorkUntilDeadline
 
-这个方法直译可以说成: 干活到死😂。它是 react 实现时间片内执行任务的核心方法，作用为: 在规定时间片内执行任务。
+这个方法直译可以说成: 干活到死😂。它是 react 实现时间片内执行任务的核心方法，作用为: 在规定时间片内执行任务（[✨约488行](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L488)）。
 
 ```ts
 const performWorkUntilDeadline = () => {
@@ -214,7 +213,7 @@ const performWorkUntilDeadline = () => {
 
 ### flushWork
 
-来看一下工作是怎样执行的:
+来看一下工作是怎样执行的（[✨约144行](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L144)）:
 
 ```ts
 function flushWork(initialTime: number) {
@@ -238,7 +237,7 @@ function flushWork(initialTime: number) {
 
 ### workLoop
 
-继续看最重要的 `workLoop` 方法:
+继续看最重要的 `workLoop` 方法（[✨约188行](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L188)）:
 
 ```ts
 function workLoop(initialTime: number) {

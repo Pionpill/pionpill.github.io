@@ -21,7 +21,7 @@ LayoutMask = Update | Callback | Ref | Visibility;
 - 类组件调用 `this.setState` 时传递的 `callback` 回调函数的会被保存到 Fiber 节点的 `updateQueue` 属性中在这里执行。
 - 函数组件的 `useLayoutEffect` 钩子。
 
-总的来说，Layout 阶段是在 DOM 渲染完成之后，执行组件定义的一些 `callback` 回调函数。
+总的来说，Layout 阶段是在 DOM 渲染完成之后，执行组件定义的一些 `callback` 回调函数（[✨约3081行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L3081)）。
 
 ```ts
 export function commitLayoutEffects(
@@ -43,7 +43,7 @@ export function commitLayoutEffects(
 
 ## commitLayoutEffectOnFiber
 
-核心方法 `commitLayoutEffectOnFiber` 同样会针对不同 tag 类型的 FiberNode 做处理，我们重点关注一下函数组件和类组件:
+核心方法 `commitLayoutEffectOnFiber` 同样会针对不同 tag 类型的 FiberNode 做处理，我们重点关注一下函数组件和类组件（[✨约1032行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L1032)）:
 
 ```ts
 function commitLayoutEffectOnFiber(
@@ -104,6 +104,8 @@ function commitLayoutEffectOnFiber(
 在该方法中，首先调用了 `recursivelyTraverseLayoutEffects` 方法，然后针对类组件和函数组件调用了对应的生命周期钩子方法。
 
 ### recursivelyTraverseLayoutEffects
+
+源码（[✨约3096行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L3096)）：
 
 ```ts
 function recursivelyTraverseLayoutEffects(

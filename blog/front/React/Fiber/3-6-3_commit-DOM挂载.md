@@ -17,7 +17,7 @@ rear: +/front/React/Fiber/3-6-4_commit_DOM挂载后
 MutationMask = Placement | Update | ChildDeletion | ContentReset | Ref | Hydrating | Visibility;
 ```
 
-这个阶段要处理的副作用比较多，主要对应 FiberNode 的增删改操作，我们看源代码:
+这个阶段要处理的副作用比较多，主要对应 FiberNode 的增删改操作，我们看源代码（[✨约2474行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L2474)）:
 
 ```ts
 export function commitMutationEffects(
@@ -35,7 +35,7 @@ export function commitMutationEffects(
 }
 ```
 
-核心方法 `commitMutationEffectsOnFiber` 会根据 FiberNode 的类型做一些特殊处理，我们只需要了解这几个类型的处理逻辑即可:
+核心方法 `commitMutationEffectsOnFiber` 会根据 FiberNode 的类型做一些特殊处理，我们只需要了解这几个类型的处理逻辑即可（[✨约2523行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L2523)）:
 
 <p class="tip">几种钩子的详细作用原理我们会在其他文章中说明</p>
 
@@ -85,6 +85,8 @@ function commitMutationEffectsOnFiber(
 
 ### recursivelyTraverseMutationEffects
 
+源码（[✨约2490行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L2490)）：
+
 ```ts
 function recursivelyTraverseMutationEffects(
   root: FiberRoot,
@@ -129,7 +131,7 @@ function recursivelyTraverseMutationEffects(
 
 ## commitReconciliationEffects
 
-为什么说 `commitReconciliationEffects` 是自下而上地更新与插入 DOM 呢？在卸载过程中 react 会一直递归调用 `commitMutationEffectsOnFiber` 方法，因此在调用栈中会首先执行子 FiberNode 的 `commitReconciliationEffects` 方法。
+为什么说 `commitReconciliationEffects` 是自下而上地更新与插入 DOM 呢？在卸载过程中 react 会一直递归调用 `commitMutationEffectsOnFiber` 方法，因此在调用栈中会首先执行子 FiberNode 的 `commitReconciliationEffects` 方法（[✨约3059行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L3059)）。
 
 ```ts
 function commitReconciliationEffects(finishedWork: Fiber) {
@@ -152,7 +154,7 @@ function commitReconciliationEffects(finishedWork: Fiber) {
 }
 ```
 
-核心逻辑在 `commitPlacement` 方法中:
+核心逻辑在 `commitPlacement` 方法中（[✨约1790行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L1790)）:
 
 ```ts
 function commitPlacement(finishedWork: Fiber): void {
@@ -196,7 +198,7 @@ function commitPlacement(finishedWork: Fiber): void {
 }
 ```
 
-然后还要看一下 `insertOrAppendPlacementNode` 这个方法:
+然后还要看一下 `insertOrAppendPlacementNode` 这个方法（[✨约1848行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L1848)）:
 
 ```ts
 function insertOrAppendPlacementNodeIntoContainer(

@@ -17,7 +17,7 @@ rear: +/front/React/Fiber/3-3-1_scheduler-优先级与准备阶段
 - 作为静态数据结构: 保存了一个组件所需要的所有 DOM 信息，也即从 ReactElement 来的数据。
 - 作为动态工作单元: 保存了本次更新过程中组件需要执行操作的状态与信息。
 
-看下 `FiberNode` 的源代码，这里的属性都非常重要，后面如果忘了建议回来多看几遍:
+看下 `FiberNode` 的源代码（[✨约136行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L136)），这里的属性都非常重要，后面如果忘了建议回来多看几遍:
 
 ```ts
 function FiberNode(
@@ -49,7 +49,7 @@ function FiberNode(
   this.memoizedState = null;        // 组件当前的 state
   this.dependencies = null;         // 组件的依赖项
   this.flags = NoFlags;             // render 阶段打上的 flag(一个标签)，commit 阶段处理
-  this.subtreeFlags = NoFlags;       // 子树的 flag
+  this.subtreeFlags = NoFlags;      // 子树的 flag
   this.deletions = null;            // 要删除的节点
   this.alternate = null;            // 状态的备份
   this.stateNode = null;            // 当前节点关联的实际DOM节点或其他类型的节点
@@ -59,7 +59,7 @@ function FiberNode(
 
 ## FiberNode 构造过程
 
-先看一下 Fiber 是如何将 `ReactElement` 转换为 `FiberNode` 的，这里接收的参数多了两个：`mode` 和 `lanes`，`mode` 是指节点模式，比如 StrictMode，`lanes` 则是优先级，后文会细讲:
+先看一下 Fiber 是如何将 `ReactElement` 转换为 `FiberNode` 的，这里接收的参数多了两个：`mode` 和 `lanes`，`mode` 是指节点模式，比如 StrictMode，`lanes` 则是优先级，后文会细讲（[✨约659行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L659)）:
 
 ```ts
 export function createFiberFromElement(
@@ -71,13 +71,11 @@ export function createFiberFromElement(
   const type = element.type;
   const key = element.key;
   const pendingProps = element.props;
-
-  const fiber = createFiberFromTypeAndProps(type, key, pendingProps, source, owner, mode, lanes);
-  return fiber;
+  return createFiberFromTypeAndProps(type, key, pendingProps, source, owner, mode, lanes);
 }
 ```
 
-核心方法在 `createFiberFromTypeAndProps` 上:
+核心方法在 `createFiberFromTypeAndProps` 上（[✨约488行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L488)）:
 
 ```ts
 export function createFiberFromTypeAndProps(
@@ -107,7 +105,6 @@ export function createFiberFromTypeAndProps(
   fiber.elementType = type;
   fiber.type = resolvedType;
   fiber.lanes = lanes;
-
   return fiber;
 }
 ```
@@ -175,7 +172,7 @@ const App:React.FC = () => {
 
 ## FiberRootNode
 
-`FiberRootNode` 是指 React 应用程序的根节点，`FiberRootNode` 和 `FiberNode` 不同，它所持有的属性和整个 Fiber 树关联，它是存储与管理 `FiberNode` 的容器(有个印象就行):
+`FiberRootNode` 是指 React 应用程序的根节点，`FiberRootNode` 和 `FiberNode` 不同，它所持有的属性和整个 Fiber 树关联，它是存储与管理 `FiberNode` 的容器([✨约47行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberRoot.js#L47)):
 
 ```ts
 function FiberRootNode(
@@ -233,7 +230,7 @@ function FiberRootNode(
 
 ### 构建过程
 
-`FiberRootNode` 源于 `createRoot` 这个方法:
+`FiberRootNode` 源于 `createRoot` 这个方法（[✨约153行](https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js#L153)）
 
 ```ts
 export function createRoot(
@@ -274,7 +271,7 @@ export function createRoot(
 
   const root = createContainer(
     container,
-    ConcurrentRoot, // 默认开启并发模式，React16，17 会使用 LegacyRoot  模式 
+    ConcurrentRoot, // 默认开启并发模式，React16，17 会使用 LegacyRoot 模式 
     null,
     isStrictMode,
     concurrentUpdatesByDefaultOverride,
@@ -305,7 +302,7 @@ export function createRoot(
 
 ### createContainer
 
-`createContainer` 会返回一个 `FiberRootNode`:
+`createContainer` 会返回一个 `FiberRootNode`（[✨约245行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.js#L245)）:
 
 ```ts
 export function createContainer(
@@ -398,7 +395,7 @@ export function createFiberRoot(
 
 ### updateContainer
 
-前面说过 `FiberRootNode` 是 `FiberNode` 的容器，同时负责管理 `FiberNode`。那么当我们需要更新 DOM 结构时，就会调用对应的更新函数:
+前面说过 `FiberRootNode` 是 `FiberNode` 的容器，同时负责管理 `FiberNode`。那么当我们需要更新 DOM 结构时，就会调用对应的更新函数（[✨约321行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberReconciler.js#L321)）:
 
 ```ts
 export function updateContainer(
@@ -428,7 +425,6 @@ export function updateContainer(
     scheduleUpdateOnFiber(root, current, lane);
     entangleTransitions(root, current, lane);
   }
-
   return lane;
 }
 ```
@@ -460,7 +456,7 @@ export const ForceUpdate = 2;
 export const CaptureUpdate = 3;
 ```
 
-这个 update 对象最终会被塞到 `FiberNode` 的 `updateQueue` 中:
+这个 update 对象最终会被塞到 `FiberNode` 的 `updateQueue` 中（[✨约225行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberClassUpdateQueue.js#L225)）:
 
 ```ts
 export function enqueueUpdate<State>(

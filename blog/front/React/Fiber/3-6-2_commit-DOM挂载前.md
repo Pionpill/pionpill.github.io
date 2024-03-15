@@ -31,7 +31,7 @@ BeforeMutationMask = Update | Snapshot;
 
 <p class="tip">update 在三个阶段都会处理，这个阶段其实只有函数组件会执行一部分 update 操作。</p>
 
-我们看一下 `commitBeforeMutationEffects` 方法:
+我们看一下 `commitBeforeMutationEffects` 方法（[✨约357行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L357)）:
 
 ```ts
 export function commitBeforeMutationEffects(
@@ -52,7 +52,7 @@ export function commitBeforeMutationEffects(
 
 ### commitBeforeMutationEffects_begin
 
-这个方法的核心操作在 `commitBeforeMutationEffects_begin` 里面:
+这个方法的核心操作在 `commitBeforeMutationEffects_begin` 里面（[✨约374行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L374)）:
 
 ```ts
 function commitBeforeMutationEffects_begin() {
@@ -76,7 +76,7 @@ function commitBeforeMutationEffects_begin() {
 - 该 `fiber` 的子节点存在 `BeforeMutation` 阶段相关的 `flags` 标记。
 - `child` 不为 `null`。
 
-如果同时满足这两个条件，则将 `child` 设置为新的 `nextEffect`，开启下一个循环。如果不满足这两个条件，则说明当前节点就是需要处理副作用的节点，用 `commitBeforeMutationEffects_complete` 处理。
+如果同时满足这两个条件，则将 `child` 设置为新的 `nextEffect`，开启下一个循环。如果不满足这两个条件，则说明当前节点就是需要处理副作用的节点，用 `commitBeforeMutationEffects_complete` 处理（[✨约404行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L404)）。
 
 ```ts
 function commitBeforeMutationEffects_complete() {
@@ -123,7 +123,7 @@ function commitBeforeMutationEffects_complete() {
 
 ## commitBeforeMutationEffectsOnFiber
 
-来看看 before commit 阶段对 FiberNode 干了什么吧:
+来看看 before commit 阶段对 FiberNode 干了什么吧（[✨约426行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L426)）:
 
 ```ts
 function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
@@ -181,7 +181,7 @@ function commitBeforeMutationEffectsOnFiber(finishedWork: Fiber) {
 
 绝大部分类型的 FiberNode 在这一阶段啥都没做，仅函数组件处理了 `Update` 标记，类组件和DOM根组件处理了 `Snapshot` 标记。
 
-我们继续看一下 `commitUseEffectEventMount` 方法:
+我们继续看一下 `commitUseEffectEventMount` 方法（[✨约709行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L709)）:
 
 ```ts
 function commitUseEffectEventMount(finishedWork: Fiber) {

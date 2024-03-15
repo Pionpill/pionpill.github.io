@@ -16,7 +16,7 @@ let exitStatus = shouldTimeSlice ? renderRootConcurrent(root, lanes) : renderRoo
 
 ## renderRootSync
 
-这里我们看一下同步 render 的逻辑，因为 react 大多数情况下都是同步 render，并且同步异步的核心逻辑差不多。
+这里我们看一下同步 render 的逻辑，因为 react 大多数情况下都是同步 render，并且同步异步的核心逻辑差不多（[✨约1946行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L1946)）。
 
 ```ts
 function renderRootSync(root: FiberRoot, lanes: Lanes) {
@@ -97,7 +97,7 @@ function renderRootSync(root: FiberRoot, lanes: Lanes) {
 
 ### prepareFreshStack
 
-`prepareFreshStack` 的作用是在每次更新之前做一些准备工作，主要是关闭一些原有的回调函数，重置一些属性：
+`prepareFreshStack` 的作用是在每次更新之前做一些准备工作，主要是关闭一些原有的回调函数，重置一些属性（[✨约1598行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L1598)）：
 
 ```ts
 function prepareFreshStack(root: FiberRoot, lanes: Lanes): Fiber {
@@ -166,7 +166,7 @@ function workLoopConcurrent() {
   }
 }
 ```
-然后看一下核心的 `performUnitOfWork` 方法(删掉无关紧要的内容):
+然后看一下核心的 `performUnitOfWork` 方法（[✨约2347行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L2347)）:
 
 ```ts
 // 这里传进来的就是正在构建的 Fiber 树

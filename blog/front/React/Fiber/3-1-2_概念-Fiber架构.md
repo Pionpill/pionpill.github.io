@@ -10,7 +10,7 @@ rear: +/front/React/Fiber/3-2-1_vDOM-JSX解析
 > React 技术揭秘: [https://kasong.gitee.io/just-react/preparation/idea.html](https://kasong.gitee.io/just-react/preparation/idea.html)  
 > React 之 Fiber 架构: [https://juejin.cn/post/7067153014544400415/](https://juejin.cn/post/7067153014544400415/)
 
-<p class="hint">从这篇文章开始剖析 React16 之后的 Fiber 架构，具体代码以 18.2.0 为准。本篇主要是一些框架设计理念。</p>
+<p class="hint">从这篇文章开始剖析 React16 之后的 Fiber 架构。本篇主要是一些框架设计理念。</p>
 
 如果了解 Java 一定知道多线程这个概念，Java 通过同一时间不同线程执行不同的逻辑实现了多任务处理，Java 的多任务处理基本单元是 thread。React 多任务处理的基本单元是 fiber。
 - thread: 对应 CPU 中的线程，是一种抢占式多任务方式，是正真意义上的同一时刻执行多个任务。
@@ -32,17 +32,15 @@ Fiber 架构的理念就是第二种，让 JS 定时放弃自己的运行权限�
 
 ### Fiber 的处理逻辑
 
-只要我们将长任务划分为多个短任务，放在不同的浏览器帧时间内执行，就不会产生卡顿。Fiber 架构中，浏览器每一帧时间内，都会预留一些时间给 JS 线程(一般是 5ms 作用，这段时间也被可以叫做时间片)，react 利用这部分时间更新组件，剩余的时间留给浏览器其他任务。等到下一帧重新执行未完成的操作。
+只要我们将长任务划分为多个短任务，放在不同的浏览器帧时间内执行，就不会产生卡顿。Fiber 架构中，浏览器每一帧时间内，都会预留一些时间给 JS 线程(5ms，这段时间也被可以叫做时间片)，react 利用这部分时间更新组件，剩余的时间留给浏览器其他任务。等到下一帧重新执行未完成的操作。
 
-查看使用 Fiber 架构的堆栈图，会发现每帧时间执行完任务后，到达 16.6ms，任务会立即停止，待到下一帧开始新的任务。
+查看使用 Fiber 架构的堆栈图，会发现异步渲染时每帧时间执行完任务后，到达 16.6ms，任务会立即停止，待到下一帧开始新的任务。
 
 这样的处理逻辑带来了一个特性: 操作的决定权由框架转移到了浏览器。在以往的处理逻辑中，都是框架控制 JS 线程，继而决定浏览器的操作(怎么执行，执行到哪结束，执行多久框架说了算)。Fiber 架构规定了仅能在一帧时间内进行操作，只有浏览器有空闲资源时才会让框架逻辑执行。
 
 ## 新老架构对比
 
-React 15 及以前使用的是 Stack 架构，采用**同步不可中断**的架构操作虚拟 DOM。React 16 使用的是**异步可中断**的 Fiber 架构。
-
-Fiber 架构是基于 Stack 架构的，采用可中断递归的方案操作虚拟 DOM。
+React 15 及以前使用的是 Stack 架构，采用**同步不可中断**的架构操作虚拟 DOM。React 16 使用的是**异步可中断**的 Fiber 架构。Fiber 架构是基于 Stack 架构的，采用可中断递归的方案操作虚拟 DOM。
 
 ### Stack 架构
 
@@ -140,6 +138,8 @@ Scheduler 和 Reconciler 的工作都在内存中执行，只有所有组件完�
 - main: https://github.com/facebook/react/tree/main
 - v18.2.0: https://github.com/facebook/react/tree/v18.2.0
 
+<p class="tip">我会在每次引用源代码前给上 Github 链接，以便实时查阅</p>
+
 react 核心源代码位于 packages 文件夹中，这里有如下重要的文件:
 ```json
 |- react // react 的核心，包含所有全局 API
@@ -175,9 +175,11 @@ react 核心源代码位于 packages 文件夹中，这里有如下重要的文�
 总而言之，react 源代码很难读(并不是逻辑上难，而是可读性不高)，后文贴的源代码我会做一些改动:
 - 无用的逻辑判断，直接省略。
 - 使用 ES6 语法优化部分可读性差的代码片段。
-- 对于开发模式(\_\_DEV\_\_)，开启性能追踪(`enableTransitionTracing`)，开启性能分析计时器(`enableProfilerTimer`) ...非生产环境逻辑代码全部删除。
+- 对于开发模式(\_\_DEV\_\_)，开启性能追踪(`enableTransitionTracing`)，开启性能分析计时器(`enableProfilerTimer`) 等非生产环境逻辑代码全部删除。
 - Scheduler 相关代码如果删除，会给出注释
 - 使用 ts 语法
+
+<p class="tip">大部分代码上面会贴源码地址，文中的代码是剔除我认为不重要的部分后优化过的</p>
 
 ### 文字说明
 

@@ -21,7 +21,7 @@ root.finishedLanes = lanes;
 
 ## 准备阶段
 
-commit 阶段开始于 `commitRoot` 方法，具体实现为 `commitRootImpl` 方法。这个方法可以分为准备阶段，主要阶段，收尾阶段三部分，先看一下准备阶段:
+commit 阶段开始于 `commitRoot` 方法，具体实现为 `commitRootImpl` 方法。这个方法可以分为准备阶段，主要阶段，收尾阶段三部分，先看一下准备阶段（[✨约2729行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L2729)）:
 
 ```ts
 function commitRootImpl(

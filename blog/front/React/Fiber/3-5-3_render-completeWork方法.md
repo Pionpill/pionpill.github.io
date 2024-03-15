@@ -14,7 +14,7 @@ rear: +/front/React/Fiber/3-6-1_commit-概述
 
 ## completeUnitOfWork
 
-`completeWork` 方法代表一个 Fiber 节点工作结束，首先看一下 `completeUnitOfWork` 方法:
+`completeWork` 方法代表一个 Fiber 节点工作结束，首先看一下 `completeUnitOfWork` 方法（[✨约2566行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js#L2566)）:
 
 ```ts
 // 传进来正在构建的 Fiber 树
@@ -55,7 +55,7 @@ function completeUnitOfWork(unitOfWork: Fiber): void {
 
 ## completeWork
 
-`completeWork` 这个方法的源码小长(900+)，但主要是根据 tag 对 Fiber 节点分别进行处理:
+`completeWork` 这个方法的源码小长(900+)，但主要是根据 tag 对 Fiber 节点分别进行处理（[✨约939行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js#L939)）:
 
 ```ts
 function completeWork(
@@ -129,7 +129,7 @@ if (current !== null && workInProgress.stateNode != null) {
 }
 ```
 
-这里的 `updateHostComponent` 方法会将处理完的 `props` 赋值给 `workInProgress.updateQueue`，最终在 commit 阶段更新:
+这里的 `updateHostComponent` 方法会将处理完的 `props` 赋值给 `workInProgress.updateQueue`，最终在 commit 阶段更新（[✨约420行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js#L420)）:
 
 ```ts
 function updateHostComponent(
@@ -236,7 +236,7 @@ else {
 
 前面我们讲过，在 `mount` 时只有 rootFiber 被打上 Placement effectTag。在归阶段的最后，rootFiber 调用 `appendAllChildren` 方法将子孙 DOM 节点插入到构建中的 DOM 树上，就构建好了一个完整的 DOM 树。
 
-`createInstance` 这个方法很重要, 会根据客户端环境创建一个真实 DOM 结构, 它最终会调用原生 DOM 的 `document.createElement(type)` 创建真实的 DOM 元素, 简单看一下:
+`createInstance` 这个方法很重要, 会根据客户端环境创建一个真实 DOM 结构, 它最终会调用原生 DOM 的 `document.createElement(type)` 创建真实的 DOM 元素, 简单看一下（[✨约396行](https://github.com/facebook/react/blob/main/packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js#L396)）:
 
 ```ts
 export function createInstance(
@@ -310,7 +310,7 @@ export function createInstance(
 
 然后调用 `appendAllChildren` 方法将下一级的 dom 内容添加到当前的 DOM 元素之中，主要是设置 `return`, `sibling`, `child` 等属性。
 
-最后会调用名为 `finalizeInitialChildren` 的方法初始化原生 DOM 的属性，添加事件绑定:
+最后会调用名为 `finalizeInitialChildren` 的方法初始化原生 DOM 的属性，添加事件绑定（[✨约529行](https://github.com/facebook/react/blob/main/packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js#L529)）:
 
 ```ts
 export function finalizeInitialChildren(

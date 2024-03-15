@@ -9,7 +9,7 @@ rear: +/front/React/Fiber/3-5-3_render-completeWork方法
 
 > 对应源码: [https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js)
 
-`beginWork` 方法的目的是创建新的节点替换原节点，先看一下源代码的大致逻辑:
+`beginWork` 方法的目的是创建新的节点替换原节点，先看一下源代码的大致逻辑（[✨约3946行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js#L3946):
 
 ```ts
 function beginWork(
@@ -105,7 +105,7 @@ function checkScheduledUpdateOrContext(
 }
 ```
 
-`attemptEarlyBailoutIfNoScheduledUpdate` 方法会在没有更新计划时尝试提前退出并复用当前的 Fiber 节点，针对不同的 tag 类型节点，它会对子节点，context 做一些操作以确保是否有相关节点需要变更，最终它会调一个名为 `bailoutOnAlreadyFinishedWork` 的方法并作为返回值:
+`attemptEarlyBailoutIfNoScheduledUpdate` 方法会在没有更新计划时尝试提前退出并复用当前的 Fiber 节点，针对不同的 tag 类型节点，它会对子节点，context 做一些操作以确保是否有相关节点需要变更，最终它会调一个名为 `bailoutOnAlreadyFinishedWork` 的方法并作为返回值（[✨约3594行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js#L3594)）：
 
 ```ts
 function bailoutOnAlreadyFinishedWork(
@@ -138,6 +138,8 @@ function bailoutOnAlreadyFinishedWork(
   return workInProgress.child;
 }
 ```
+
+源码（[✨约1786行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js#L1786)）:
 
 ```ts
 export function cloneChildFibers(
@@ -230,7 +232,7 @@ throw new Error('xxx');
 
 ### reconcileChildren
 
-对于常见的组件类型，最终会调用一个名为 `reconcileChildren` 方法:
+对于常见的组件类型，最终会调用一个名为 `reconcileChildren` 方法（[✨约329行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js#L329)）:
 
 ```ts
 export function reconcileChildren(
@@ -270,7 +272,7 @@ export const mountChildFibers: ChildReconciler = createChildReconciler(false);
 
 ### reconcileChildFibers
 
-`reconcileChildFibers` 核心逻辑在 `reconcileChildFibersImpl` 中:
+`reconcileChildFibers` 核心逻辑在 `reconcileChildFibersImpl` 中（[✨约1601行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js#L1601)）:
 
 ```ts
 function reconcileChildFibersImpl(
@@ -354,7 +356,7 @@ return placeSingleChild(reconcileSingleElement(xxx))
 
 ### reconcileSingleElement
 
-这个方法都非常非常重要，几乎是这一阶段最核心的方法。涉及到 diff，FiberNode 的更新与创建，看不懂建议反复看逻辑:
+这个方法都非常非常重要，几乎是这一阶段最核心的方法。涉及到 diff，FiberNode 的更新与创建，看不懂建议反复看逻辑（[✨约1477行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js#L1477)）:
 
 ```ts
 function reconcileSingleElement(

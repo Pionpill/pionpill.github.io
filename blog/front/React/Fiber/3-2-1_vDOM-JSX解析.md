@@ -59,8 +59,8 @@ function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
 
 使用 `createElement` 创建的 React 元素有如下特点:
 - 所有元素和它的 `props` 都是不可变的，在创建之后不允许改变他们的任一属性。在开发模式种，react 会冻结元素及其 `props` 强制开发者遵守这一原则。
-- 使用 JSX 语法创建元素时必须使用**大驼峰**命名法创建。大驼峰创建的 `<Element/>` 会被正确传给 `createElement<Element>`，如果使用小驼峰法创建，则会传字符串给 `createElement<element>`。
-- 在传递 `children` 属性时，如果 children 是可知的，应该通过 `createElement('h1', {}, child1, child2, ...)` 的方式传递。如果是变化的，则应该传递 `createElement('h1', {}, chidList)`。同时传 key 给每个数组元素。
+- 使用 JSX 语法创建元素时必须使用**大驼峰**命名法创建。大驼峰创建的 `<Element/>` 会被正确传给 `createElement<Element>`，如果使用小驼峰法创建，则会传字符串给 `createElement<element>`（被认为是原生标签）。
+- 在传递 `children` 属性时，如果 `children` 是可知的，应该通过 `createElement('h1', {}, child1, child2, ...)` 的方式传递。如果是变化的，则应该传递 `createElement('h1', {}, chidList)`。同时传 key 给每个数组元素。
 
 下面为某个元素的 JSX 创建语法与等效的 `createElement` 函数调用:
 
@@ -89,6 +89,8 @@ function Greeting({ name }) {
 ```
 
 ### createElement 源代码
+
+源码地址：[✨约602行](https://github.com/facebook/react/blob/main/packages/react/src/jsx/ReactJSXElement.js#L602)
 
 ```js
 export function createElement(type, config, children) {
@@ -171,7 +173,7 @@ export function createElement(type, config, children) {
 
 ### ReactElement
 
-这个对象就更简单了，直接上代码:
+这个对象就更简单了，直接上代码（[✨约177行](https://github.com/facebook/react/blob/main/packages/react/src/jsx/ReactJSXElement.js#L177)）:
 
 ```js
 function ReactElement(type, key, ref, self, source, owner, props) {
