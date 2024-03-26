@@ -46,8 +46,8 @@ function FiberNode(
   /** 与组件更新相关的属性 */
   this.memoizedProps = null;        // 组件当前的 prop
   this.updateQueue = null;          // 更新队列
-  this.memoizedState = null;        // 组件当前的 state
-  this.dependencies = null;         // 组件的依赖项
+  this.memoizedState = null;        // hook 链表
+  this.dependencies = null;         // 组件的 context 依赖项
   this.flags = NoFlags;             // render 阶段打上的 flag(一个标签)，commit 阶段处理
   this.subtreeFlags = NoFlags;      // 子树的 flag
   this.deletions = null;            // 要删除的节点
