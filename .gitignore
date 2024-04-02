@@ -132,3 +132,4 @@ dist
 temp/
 temp.*
 .VSCodeCounter
+*.drawio
