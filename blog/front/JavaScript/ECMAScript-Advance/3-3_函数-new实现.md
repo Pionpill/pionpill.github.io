@@ -42,6 +42,6 @@ function objFactory(Constructor, ...args) {
   const obj = new Object()
   obj.__proto__ = Constructor.prototype;
   const result = Constructor.apply(obj, args)
-  return typeof obj === 'object' ? result : obj;
+  return typeof result === 'object' ? result : obj;
 }
 ```
