@@ -34,6 +34,11 @@ readonly length: number
 readonly name: string;
 ```
 
+获取原型(在使用 function 作为构造函数与 new 运算符一起使用时，用作新对象的原型。):
+```ts
+prototype: any;
+```
+
 ## 实例方法
 
 `Function` 常用的实例方法只有三个，功能上类似: `apply`, `call`, `bind`。这三个方法都是用来改变函数执行上下文的(解决 `this` 指向问题):

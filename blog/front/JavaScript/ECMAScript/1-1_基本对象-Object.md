@@ -78,6 +78,7 @@ interface Object {
     valueOf(): Object;
 
     // 判断对象是否存在某个属性，传入的 number 会被自动转为 string
+    // 该方法不追溯原型链上的属性
     hasOwnProperty(v: string | number | symbol): boolean;
 
     // 判断对象的原型链上是否存在某个对象
