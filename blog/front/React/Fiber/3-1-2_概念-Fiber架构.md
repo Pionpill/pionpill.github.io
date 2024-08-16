@@ -26,7 +26,7 @@ rear: +/front/React/Fiber/3-2-1_vDOM-JSX解析
 - 优化框架，使代码被浏览器更快地解析(废话)。
 - 将长任务"分解"为多个短任务，将其分派在多个帧中执行。
 
-Fiber 架构的理念就是第二种，让 JS 定时放弃自己的运行权限。
+Fiber 架构的理念就是第二种，让 JS "定时主动"放弃自己的运行权限。
 
 <p class="discuss">React vs Vue ||| 由于 react 大量采用了 JSX 语法，因此在解析过程中会多一步 JSX -> vDOM 的操作，这限制了使用第一种方案的优化上限(但是 JSX 用起来很爽!)。而 Vue 采用更接近原生 HTML 的写法，可以对模板代码做更极致的优化。</p>
 
@@ -107,7 +107,7 @@ Fiber 架构多了一层:
 - Reconciler(协调器): 找出变化的组件
 - Renderer(渲染器): 将变化的组件渲染到页面上
 
-<p class="tip">Fiber 框架最核心的就是 Fiber Reconciler。为了支持 Fiber Reconciler，重构出了 vDOM 的具体实现 FiberNode。</p>
+<p class="tip">Fiber 框架最核心的是 Fiber Reconciler。为了支持 Fiber Reconciler，重构出了 vDOM 的具体实现 FiberNode。</p>
 
 #### Scheduler
 

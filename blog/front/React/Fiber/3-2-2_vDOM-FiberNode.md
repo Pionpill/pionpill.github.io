@@ -164,9 +164,9 @@ const App:React.FC = () => {
 }
 ```
 
-就会产生如下 Fiber 树:
+它对应的 FiberNode 结构为:
 
-<img src="https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog%2Fdiagrams%2Ffront%2FReact%2F3-2-2_Fiber%E8%8A%82%E7%82%B9%2FFiberNode%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7.svg">
+<img src="https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog/diagrams/front/React/Fiber/struct.svg">
 
 这样在任一节点上，我们都能找到其邻近节点(左节点比较难找)。
 
