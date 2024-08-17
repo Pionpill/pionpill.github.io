@@ -22,6 +22,7 @@ function scheduleCallback( priorityLevel: PriorityLevel, callback: RenderTaskFn 
 ```
 
 ```ts
+// 就是上文的 Scheduler_scheduleCallback 名字不一样
 function unstable_scheduleCallback(
   priorityLevel: PriorityLevel,
   callback: Callback,
@@ -135,10 +136,9 @@ if (typeof localSetImmediate === 'function') {
 } else if (typeof MessageChannel !== 'undefined') {
   // 常规浏览器 DOM 环境
   const channel = new MessageChannel();
-  const port = channel.port2;
   channel.port1.onmessage = performWorkUntilDeadline;
   schedulePerformWorkUntilDeadline = () => {
-    port.postMessage(null);
+    channel.port2.postMessage(null);
   };
 } else {
   // 其他环境
@@ -199,7 +199,7 @@ const performWorkUntilDeadline = () => {
       hasMoreWork = flushWork(currentTime);
     } finally {
       if (hasMoreWork) {
-        // 有没执行完的，下一轮继续
+        // 有没执行完的，下一轮宏任务继续更新
         schedulePerformWorkUntilDeadline();
       } else {
         // 停止工作循环
@@ -307,6 +307,16 @@ function shouldYieldToHost(): boolean {
 ![任务循环执行过程](https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog%2Fdiagrams%2Ffront%2FReact%2Fworkloop.svg)
 
 我们了解了异步任务调度逻辑，我们需要牢记以下几个方法：
-- `scheduleCallback`/`Scheduler_scheduleCallback`: 开启异步任务调度流程
+- `scheduleCallback`/`Scheduler_scheduleCallback`: 开启异步宏任务调度流程
   - 上一节提到的 `scheduleImmediateTask` 会调用这个方法
 - `schedulePerformWorkUntilDeadline`/`performWorkUntilDeadline`: 会触发宏任务
+
+## 执行宏任务或微任务
+
+在上一节中，React 创建了微任务去调度立即执行的任务，在本节，React 使用 `MessageChannel` 创建宏任务执行 `workLoop`。这两者有什么区别呢？
+- 微任务：当前事件循环需要执行完成的任务，会阻塞 UI 渲染，适用于需要立即执行的逻辑
+- 宏任务：下一轮事件循环执行的任务，不会阻塞当前的 UI 渲染，适用于不紧急或者可以延迟执行的逻辑
+
+创建微任务可以立即执行对应的逻辑，但这是有代价的，微任务必须在本轮事件循环执行，也即在当前帧任务中执行完。如果一个存在微任务处理很慢，多个微任务需要处理，微任务产生微任务的情形，必然会出现长任务，导致浏览器帧卡顿，这和 React 的设计原则是相悖的。
+
+上一节的 `scheduleImmediateTask` 方法创建了微任务去处理 `scheduleCallback`，但 `scheduleCallback` 本身是宏任务处理，为什么要这样做？因为从 `scheduleImmediateTask` 到宏任务执行完毕，再从微任务开启到执行  `scheduleCallback` 过程中还有很多其他逻辑要处理。

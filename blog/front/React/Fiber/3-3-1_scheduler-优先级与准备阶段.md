@@ -9,7 +9,7 @@ rear: +/front/React/Fiber/3-3-2_scheduler-调度流程
 
 > 主要源码: [ReactEventPriorities](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactEventPriorities.js)
 
-这两章借着工作循环机制专门讲一下 scheduler，后面的文章中会穿插着讲 scheduler。
+<p class="tip">这两章专门讲一下 scheduler，后面的文章中会穿插着讲 scheduler。React 仓库对这部分代表逻辑改动较为频繁，请以你使用的版本为准，但总体逻辑不会改变。</p>
 
 ## 优先级
 
@@ -52,9 +52,11 @@ switch (schedulerPriority) {
 }
 ```
 
+不用死记硬背，只要知道有哪些优先级就可以了。
+
 ### 优先级位运算
 
-React 源代码中有大量的位运算(比较快)，不了解的可以看下 [菜鸟教程](https://www.runoob.com/w3cnote/bit-operation.html)。这里看几个常见的优先级位运算:
+React 源代码中有大量的位运算(比较快)，不了解的可以看下 [菜鸟教程](https://www.runoob.com/w3cnote/bit-operation.html)。这里看几个常见的优先级位运算（了解）:
 
 ```ts
 // 合并lanes
@@ -245,8 +247,10 @@ function scheduleImmediateTask(cb: () => mixed) {
       cb();
     });
   } else {
-    // 如果不支持微任务，直接进行 workloop
+    // 如果不支持微任务，直接进行回调处理
     Scheduler_scheduleCallback(ImmediateSchedulerPriority, cb);
   }
 }
 ```
+
+`scheduleMicrotask` 的具体实现视 React 环境决定。我们需要知道，如果环境支持微任务，那么 React 会将这个更新事件放到微任务队列中执行，微任务会在当前事件循环中执行完成，这符合预期的目标。
