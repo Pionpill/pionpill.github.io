@@ -114,7 +114,7 @@ export function createElement(type, config, children) {
 }
 ```
 
-这个方法本质上是一个预处理器，接收 JSX 编译后的三个参数，分别对他们进行处理，最后创建一个 ReactElement 对象(实际上是一个函数，但是它首字母大写，就认为他是个对象好了)返回。
+这个方法本质上是一个预处理器，接收 JSX 编译后的三个参数，分别对他们进行处理，最后创建一个 ReactElement 对象返回。
 
 我们分别看一下 3 个处理过程:
 1. config 逻辑: 处理 `key`, `ref`, `props`
@@ -129,10 +129,12 @@ export function createElement(type, config, children) {
       // 只保留必要的属性
       for (propName in config) {
         if (
+          // 对象自身是否存在这些属性，不追溯原型链
           hasOwnProperty.call(config, propName) &&
           // 排除 key, ref, __self, __source 这些属性
           !RESERVED_PROPS.hasOwnProperty(propName)
         ) {
+          // 转移到 props 属性中
           props[propName] = config[propName];
         }
       }
@@ -170,6 +172,8 @@ export function createElement(type, config, children) {
       }
     }
     ```
+
+<p class="discuss">我没遇到过 defaultProps 情形，或者遇到但忽略了，希望大佬补充一下这种场景</p>
 
 ### ReactElement
 
@@ -235,7 +239,7 @@ ClassComponent.prototype.isReactComponent = {};
 ```js
 {
   $$typeof: REACT_ELEMENT_TYPE, // 标识它是一个 ReactElement
-  type: type, // 标记它的类型
+  type: type, // 标记它的类型，函数组件，类组件，H5原生标签
   key: key, // 优化用的 key，一个字符串
   ref: ref, // 一个引用
   props: props, // 元素属性，children 也在里面。会被冻结
@@ -249,3 +253,13 @@ ClassComponent.prototype.isReactComponent = {};
 - Renderer: 被 Reconciler 打上的标记。
 
 在组件 mount 过程中，Reconciler 会根据 JSX 描述的内容生产对应的 vDOM。在 update 过程中，则将 JSX 与现有的 vDOM 数据对比，生成对应的 vDOM，根据结果为 vDOM 打上标记。
+
+## ReactElement 的结构属性
+
+为了之后方便理解 Fiber 树结构，这里简单说明一下 `ReactElement` 的结构属性：`_owner` 与 `props.children`。
+- `_owner`: 指向父元素
+- `props.children`: 指向子元素
+
+那么一个简单的 `ReactElement` 树结构可以是:
+
+<img src="https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog/diagrams/front/React/Fiber/ReactElementStruct.svg">

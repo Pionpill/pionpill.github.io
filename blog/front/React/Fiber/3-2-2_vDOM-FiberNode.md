@@ -11,10 +11,10 @@ rear: +/front/React/Fiber/3-3-1_scheduler-优先级与准备阶段
 
 <p class="tip">这章涉及到很多重要的数据结构及属性，比较难记，后文讲到建议多回来看几遍。</p>
 
-`FiberNode` 是一个包含 Fiber 架构所需要数据的对象(使用函数实现)，也是 vDOM 这一概念对应的具体数据结构。后文中 `FiberNode` 就是指 Fiber 架构中的 vDOM。
+`FiberNode` 是一个包含 Fiber 架构所需要数据的对象，也是 vDOM 这一概念对应的具体数据结构。后文中 `FiberNode` 就是指 Fiber 架构中的 vDOM。
 
 `FiberNode` 包含了两层重要的数据:
-- 作为静态数据结构: 保存了一个组件所需要的所有 DOM 信息，也即从 ReactElement 来的数据。
+- 作为静态数据结构: 保存了一个组件所需要的所有 DOM 信息，也即从 `ReactElement` 来的数据。
 - 作为动态工作单元: 保存了本次更新过程中组件需要执行操作的状态与信息。
 
 看下 `FiberNode` 的源代码（[✨约136行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L136)），这里的属性都非常重要，后面如果忘了建议回来多看几遍:
@@ -30,7 +30,7 @@ function FiberNode(
   this.tag = tag;                   // 对应节点的详细类型，非常重要
   this.key = key;                   // 优化用的key，源于 ReactElement
   this.elementType = null;          // 节点的元素类型，源于 ReactElement 的 type
-  this.type = null;                 // 节点的类型，主要起作用于开发模式，生产环境峡和 elementType 类似
+  this.type = null;                 // 节点的类型，主要起作用于开发模式，生产环境下和 elementType 类似
   this.pendingProps = pendingProps; // 组件属性，源于 ReactElement
   this.mode = mode;                 // 优先级相关
   this.lanes = NoLanes;             // 优先级相关
@@ -59,7 +59,7 @@ function FiberNode(
 
 ## FiberNode 构造过程
 
-先看一下 Fiber 是如何将 `ReactElement` 转换为 `FiberNode` 的，这里接收的参数多了两个：`mode` 和 `lanes`，`mode` 是指节点模式，比如 StrictMode，`lanes` 则是优先级，后文会细讲（[✨约659行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L659)）:
+先看一下 Fiber 是如何将 `ReactElement` 转换为 `FiberNode` 的，这里接收的参数多了两个：`mode` 和 `lanes`，`mode` 是指节点模式，比如 `StrictMode`，`lanes` 则是优先级，后文会细讲（[✨约659行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js#L659)）:
 
 ```ts
 export function createFiberFromElement(
@@ -109,7 +109,7 @@ export function createFiberFromTypeAndProps(
 }
 ```
 
-这个过程有两个属性不知道哪来的，mode 和 lanes。这两个属性有很大的关联，会在将 Scheduler 时讲到。
+这个过程有两个属性不知道哪来的，mode 和 lanes。这两个属性有很大的关联，会在讲 Scheduler 时提到。
 
 ### 节点类型
 
