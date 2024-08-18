@@ -9,7 +9,7 @@ rear: +/front/React/Fiber/3-5-3_render-completeWork方法
 
 > 对应源码: [https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js)
 
-`beginWork` 方法的目的是创建新的节点替换原节点，先看一下源代码的大致逻辑（[✨约3946行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js#L3946):
+`beginWork` 方法的目的是创建新的节点替换原节点，先看一下源代码的大致逻辑（[✨约3946行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberBeginWork.js#L3946)）:
 
 ```ts
 function beginWork(
@@ -50,10 +50,10 @@ if (current !== null) {
 
     if (
       oldProps !== newProps || // 这时候会拿新老 props 进行浅比较
-      hasLegacyContextChanged() // 这个方法不用管，做兼容性的
+      hasLegacyContextChanged() // 上下文是否变化
     ) {
       didReceiveUpdate = true;  // 需要 update
-      // 这里搭上了 update 标签但是没有执行相关逻辑，因为后续会紧系 memo 判断
+      // 这里搭上了 update 标签但是没有执行相关逻辑，因为后续会根据 memo 判断
     } else {
       // 如果通过内部状态(context)判断组件是否要更新
       const hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current, renderLanes);
@@ -80,7 +80,7 @@ if (current !== null) {
   }
 ```
 
-这里我们发现如果发现需要更新并没有立即执行更新逻辑，而是给全局的 `didReceiveUpdate` 变量赋值，因为后续如果发现
+这里我们发现如果发现需要更新并没有立即执行更新逻辑，而是给全局的 `didReceiveUpdate` 变量赋值。
 
 内部状态更新判断我们看一下 `checkScheduledUpdateOrContext` 方法:
 
@@ -125,7 +125,7 @@ function bailoutOnAlreadyFinishedWork(
       // 判断子节点是否有 context 变更
       lazilyPropagateParentContextChanges(current, workInProgress, renderLanes);
       if (!includesSomeLane(renderLanes, workInProgress.childLanes)) {
-        return null;
+        return null; // 返回 null 表示子节点不需要变更
       }
     } else {
       return null;
@@ -156,6 +156,7 @@ export function cloneChildFibers(
   workInProgress.child = newChild;
 
   newChild.return = workInProgress;
+  // 对所有子节点进行处理
   while (currentChild.sibling !== null) {
     currentChild = currentChild.sibling;
     newChild = newChild.sibling = createWorkInProgress(
@@ -356,7 +357,7 @@ return placeSingleChild(reconcileSingleElement(xxx))
 
 ### reconcileSingleElement
 
-这个方法都非常非常重要，几乎是这一阶段最核心的方法。涉及到 diff，FiberNode 的更新与创建，看不懂建议反复看逻辑（[✨约1477行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js#L1477)）:
+这个方法是用于处理单节点 diff 的，本文重点是了解 `beginWork` 阶段的流程，因此不深入 diff，仅以该方法为例。（[✨约1477行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactChildFiber.js#L1477)）:
 
 ```ts
 function reconcileSingleElement(
@@ -374,7 +375,7 @@ function reconcileSingleElement(
       const elementType = element.type;
       // 两个 FRAGMENT
       if (elementType === REACT_FRAGMENT_TYPE && child.tag === Fragment) {
-        deleteRemainingChildren(returnFiber, child.sibling); // 删除右兄弟节点
+        deleteRemainingChildren(returnFiber, child.sibling); // 右兄弟打上删除标签
         // 创建一个新的 Fiber 节点并设置为当前节点的父节点，并返回
         const existing = useFiber(child, element.props.children); 
         existing.return = returnFiber;
@@ -387,7 +388,7 @@ function reconcileSingleElement(
           elementType.$$typeof === REACT_LAZY_TYPE &&
           resolveLazy(elementType) === child.type)
       ) {
-        // 逻辑和上面类似，删除右兄弟节点，创建新节点并返回
+        // 逻辑和上面类似，右兄弟打上删除标签，创建新节点并返回
         deleteRemainingChildren(returnFiber, child.sibling);
         const existing = useFiber(child, element.props);
         existing.ref = coerceRef(returnFiber, child, element);
@@ -397,6 +398,7 @@ function reconcileSingleElement(
       deleteRemainingChildren(returnFiber, child);
       break;
     } else {
+      // 无法进行 key 优化，暴力删除
       deleteChild(returnFiber, child);
     }
     // 更新为兄弟节点，进入下一次更新
@@ -423,7 +425,7 @@ function reconcileSingleElement(
 ```
 
 总的来说分为两个过程: 
-- 兄弟节点更新判断: 只要不是特殊的 Fragment，懒加载，存在 key 优化情形，节点直接删掉。非常暴力。
+- 兄弟节点更新判断: 只要不是特殊的 Fragment，懒加载，存在 key 优化情形；节点直接删掉，非常暴力。
 - 创建新的节点替换。
 
 ### createFiberFromElement
@@ -454,6 +456,6 @@ export function createFiberFromElement(
 
 节点的创建在前面讲 `FiberNode` 的时候仔细分析过了，这里简单看一下。这里创建的节点最终会替换到 `workInProgress.child` 上，成为构建树中的新节点。然后开始下一个 `FiberNode` 的替换过程。
 
-最后我们整理一下 `beginWork` 更新组件的大致流程:
+最后我们整理一下 `beginWork` 更新组件的大致流程（单节点 diff 为例）:
 
 ![beginWork 方法流程](https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog%2Fdiagrams%2Ffront%2FReact%2FFiber%2FbeginWork.svg)
