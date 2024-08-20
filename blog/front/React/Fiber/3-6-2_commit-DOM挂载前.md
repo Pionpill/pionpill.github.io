@@ -60,7 +60,7 @@ function commitBeforeMutationEffects_begin() {
     // 遍历 FiberNode 树
     const fiber = nextEffect;
     const child = fiber.child;
-    // 如果该fiber的子节点存在 BeforeMutation 阶段相关的flgas标记 且 child不为null;  则继续循环，
+    // 如果该fiber的子节点存在 BeforeMutation 阶段相关的flags标记 且 child不为null;  则继续循环，
     if ((fiber.subtreeFlags & BeforeMutationMask) !== NoFlags && child !== null) {
       child.return = fiber;
       nextEffect = child;
