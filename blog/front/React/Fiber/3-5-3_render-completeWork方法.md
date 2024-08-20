@@ -9,8 +9,7 @@ rear: +/front/React/Fiber/3-6-1_commit-概述
 
 > 对应源码: [https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCompleteWork.js)
 
-`beginWork` 方法对应节点递阶段，是从父节点开始向子节点处理。`completeWork` 方法则相反，从子节点
-
+`beginWork` 方法对应节点递阶段，是从父节点开始向子节点处理，主要任务是进行 diff，新节点的创建。`completeWork` 方法则相反，从子节点开始向上归，主要任务是完善 Fiber 节点，将完成好的节点准备提交到真实 DOM。
 
 ## completeUnitOfWork
 
@@ -51,7 +50,7 @@ function completeUnitOfWork(unitOfWork: Fiber): void {
 }
 ```
 
-`completeUnitOfWork` 方法关键就是一个 `do...while` 循环，当前节点处理完就返回。这个过程可能会开启新节点的 `beginWork` 工作。
+`completeUnitOfWork` 方法关键就是一个 `do...while` 循环，从子节点开始，处理同级节点，全部处理完成后再向上处理父节点，核心处理过程在 `completeWork` 方法中。
 
 ## completeWork
 
@@ -88,7 +87,7 @@ function completeWork(
 
 ## HostComponent
 
-这里我们看一下 `HostComponent` (原生 DOM 组件)处理过程:
+这里我们看一下 `HostComponent` (常规节点)处理过程:
 
 ```ts
 case HostComponent: {
@@ -110,9 +109,65 @@ case HostComponent: {
 }
 ```
 
-这里和 `beginWork` 方法类似，也会分 commit 和 update 阶段的操作。
+## bubbleProperties
 
-### update 操作
+几乎所有类型的接口都会调用 `bubbleProperties` 方法:
+
+```ts
+function bubbleProperties(completedWork: Fiber) {
+  // 是否进行过 bailout（跳过渲染） 优化
+  const didBailout =
+    completedWork.alternate !== null &&
+    completedWork.alternate.child === completedWork.child;
+
+  let newChildLanes: Lanes = NoLanes;
+  let subtreeFlags = NoFlags;
+
+  if (!didBailout) {
+    let child = completedWork.child;
+    while (child !== null) {
+      newChildLanes = mergeLanes(
+        newChildLanes,
+        mergeLanes(child.lanes, child.childLanes),
+      );
+      subtreeFlags |= child.subtreeFlags;
+      subtreeFlags |= child.flags;
+      // 再次指定结构：concurrent 模式下之前的结构属性可能出错
+      child.return = completedWork;
+      child = child.sibling;
+    }
+
+    completedWork.subtreeFlags |= subtreeFlags;
+  } else {
+    let child = completedWork.child;
+    while (child !== null) {
+      newChildLanes = mergeLanes(
+        newChildLanes,
+        mergeLanes(child.lanes, child.childLanes),
+      );
+      subtreeFlags |= child.subtreeFlags & StaticMask;
+      subtreeFlags |= child.flags & StaticMask;
+      // 再次指定结构：concurrent 模式下之前的结构属性可能出错
+      child.return = completedWork;
+      child = child.sibling;
+    }
+
+    completedWork.subtreeFlags |= subtreeFlags;
+  }
+  completedWork.childLanes = newChildLanes;
+  return didBailout;
+}
+```
+
+这个方法做了两件事：
+- 合并一些 `flag`
+- 重新指定结构属性 `return`, `sibling` 等
+
+根据是否 `didBailout`（跳过渲染） 会多打上一个 `StaticMask` 标签，他标记那些与组件静态部分（比如静态属性或静态上下文）相关的 Fiber 节点。如果 `didBailout`，那么静态部分标记使 React 能够在处理组件时识别这些部分不需要重新计算，从而减少渲染的开销。
+
+其余操作和 `beginWork` 方法类似，也会分 commit 和 update 阶段的操作。
+
+## update 操作
 
 ```ts
 if (current !== null && workInProgress.stateNode != null) {
@@ -192,9 +247,9 @@ function updateHostComponent(
 }
 ```
 
-这个过程最关键的是调用 `reconcileChildren` 方法进行更新操作，这个方法上一节详细讲过了，这里不再说明。
+这个过程调用了 `reconcileChildren` 方法进行更新操作，这个方法上一节详细讲过了，这里不再说明。
 
-### mount 操作
+## mount 操作
 
 ```ts
 else {
@@ -310,7 +365,7 @@ export function createInstance(
 
 然后调用 `appendAllChildren` 方法将下一级的 dom 内容添加到当前的 DOM 元素之中，主要是设置 `return`, `sibling`, `child` 等属性。
 
-最后会调用名为 `finalizeInitialChildren` 的方法初始化原生 DOM 的属性，添加事件绑定（[✨约529行](https://github.com/facebook/react/blob/main/packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js#L529)）:
+最后会调用名为 `finalizeInitialChildren` 的方法初始化原生 DOM 的属性，添加事件绑定。（[✨约529行](https://github.com/facebook/react/blob/main/packages/react-dom-bindings/src/client/ReactFiberConfigDOM.js#L529)）:
 
 ```ts
 export function finalizeInitialChildren(
@@ -335,6 +390,6 @@ export function finalizeInitialChildren(
 }
 ```
 
-最后总结一下 `completeWork` 方法的大致流程:
+在 `completeWork` 执行完成后，就具备了基础的新 Fiber 结构，构建 DOM 所需要的属性，事件绑定都完成了。最后总结一下 `completeWork` 方法的大致流程:
 
 ![completeWork 方法流程](https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/blog%2Fdiagrams%2Ffront%2FReact%2FFiber%2FcompleteWork.svg)

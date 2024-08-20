@@ -9,6 +9,8 @@ rear: +/front/React/Fiber/3-6-2_commit-DOM挂载前
 
 > 对应源码: [https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.js)
 
+render 阶段完成后，一棵完整的新 Fiber 树就构建完成了，commit 阶段会负责将这棵 Fiber 树转换为真实 DOM 并挂载。
+
 在进入 commit 阶段前，无论是同步构建还是异步构建都会执行如下操作:
 
 ```ts
