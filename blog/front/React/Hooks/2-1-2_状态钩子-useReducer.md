@@ -289,7 +289,7 @@ function updateReducerImpl<S, A>(
 5. 任务队列更新(可能有未处理的任务)
 6. 更新 `hook` 状态并返回新的状态
 
-<p class="tip">offscreen 是指那些不在屏幕内的部分, 例如超出屏幕范围.</p>
+<p class="tip">offscreen 是指那些不在屏幕内的部分, 例如超出屏幕范围，是 React 的一种性能优化策略。</p>
 
 ## rerenderReducer
 
@@ -343,4 +343,8 @@ function rerenderReducer<S, I, A>(
 }
 ```
 
-`rerenderReducer` 就是简化版的 `updateReducer`, 不再有花里胡哨的优先级, 急切任务等判断, 直接讲所有的更新任务处理完.
+`rerenderReducer` 就是简化版的 `updateReducer`, 不再有花里胡哨的优先级, 急切任务等判断, 直接将所有的更新任务处理完。
+
+## 总结
+
+`useReducer` 本质上是可以自定义 `reducer` 的 `useState`。但 `useReducer` 不会判断执行结果是否与旧状态相同。在 `useState` 中如果新旧状态相同，会进行 `bailout` 优化，组件不更新。

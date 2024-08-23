@@ -58,8 +58,9 @@ function mountState<S>(
 
 ```ts
 function mountStateImpl<S>(initialState: (() => S) | S): Hook {
-  // 返回空 hook
+  // 构建一个 hook
   const hook = mountWorkInProgressHook();
+  // 初始状态为函数的话，获取执行结果
   if (typeof initialState === 'function') {
     initialState = initialState();
   }
@@ -77,15 +78,15 @@ function mountStateImpl<S>(initialState: (() => S) | S): Hook {
 }
 ```
 
-`queue` 属性用于存储待处理的更新。
-
-`basicStateReducer` 我们之前讲过，作用仅是处理 `action`（[✨约1143行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L1143)）:
+`basicStateReducer` 用处是处理 `action`（[✨约1143行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L1143)）:
 
 ```ts
 function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
   return typeof action === 'function' ? action(state) : action;
 }
 ```
+
+这是这简单的 `reducer`，如果使用 `useReducer` 可以自定义处理方案。
 
 #### UpdateQueue
 
@@ -117,13 +118,13 @@ export type UpdateQueue<S, A> = {
 
 <p class="discuss">很有 redux 的味道，因为 redux 的作者 Dan Abramov 同时给也是 react 的核心成员之一。</p>
 
-回到 `mountState` 方法中，创建 `hook` 之后会初始化一个 `dispatch` 函数挂在 `queue.despatch` 属性上。目前我们只关注 `action`。 `hook` 中还有一种属性: `state`，他表示 `action` 被 `reducer` 处理后的结果，即我们常用的状态，不要搞混了。
+回到 `mountState` 方法中，创建 `hook` 之后会初始化一个 `dispatch` 函数挂在 `queue.dispatch` 属性上。目前我们只关注 `action`。 `hook` 中还有一种属性: `state`，他表示 `action` 被 `reducer` 处理后的结果，即我们常用的状态，不要搞混了。
 
 `action` 被封装成了另一种数据结构 `Update`。
 
 #### Update
 
-`action` 被封装成了另一种数据结构 `Update`，被挂在 `hook` 的 `pending` 属性上。它的数据结构如下（[✨约161行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L170)）:
+`action` 被封装成了另一种数据结构 `Update`，被挂在 `hook` 的 `pending` 属性上，表示需要进行的更新。它的数据结构如下（[✨约161行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L170)）:
 
 ```ts
 export type Update<S, A> = {
@@ -192,7 +193,7 @@ function dispatchSetState<S, A>(
           const eagerState = lastRenderedReducer(currentState, action);
           update.hasEagerState = true;
           update.eagerState = eagerState;
-          // 比较新旧 state，
+          // 比较新旧 state，相同则执行优化逻辑
           if (is(eagerState, currentState)) {
             enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update);
             return;
@@ -342,7 +343,7 @@ function enqueueUpdate(
 
 `dispatchSetState` 的执行逻辑如下:
 - 当前 `FiberNode` 处于渲染阶段
-  - 将 `update` 队列添加到 `hook.pending` 对位，暂不处理
+  - 将 `update` 队列添加到 `hook.pending` 对尾，暂不处理
 - 不处于渲染阶段
   - `FiberNode` 优先级不高
     - 计算前后 `state` 尝试优化，更新 `concurrentQueues`
@@ -371,4 +372,4 @@ function rerenderState<S>(
 }
 ```
 
-讲 `useReducer` 的时候再讲吧。
+这两个实现讲 `useReducer` 的时候再讲，因为 `useState` 就是简化版的 `useReducer`。

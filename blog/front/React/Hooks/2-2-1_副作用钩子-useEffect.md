@@ -94,7 +94,7 @@ function pushEffect(
 }
 ```
 
-这两个函数的逻辑还是很好理解的, `pushEffect` 创建了一个 `Effect` 对象, 同时更新 `FiberNode.updateQueue` 的 `lastEffect` 属性, 这允许我们直接通过 `FiberNode` 访问到副作用信息. 最后将 `Effect` 返回给 `hook.memorizedState` 属性.
+这两个函数的逻辑还是很好理解的, `pushEffect` 创建了一个 `Effect` 对象, 同时更新 `FiberNode.updateQueue` 的 `lastEffect` 属性（注意 `effect` 是会放到对应 `FiberNode` 的 `updateQueue` 中）, 这允许我们直接通过 `FiberNode` 访问到副作用。最后将 `Effect` 返回给 `hook.memorizedState` 属性.
 
 涉及到两个新的数据结构, 一个是 `Effect`（[✨约214行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L214)）:
 
