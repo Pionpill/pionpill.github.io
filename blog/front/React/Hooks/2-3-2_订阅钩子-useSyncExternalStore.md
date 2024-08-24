@@ -8,7 +8,7 @@ pre: +/front/React/Hooks/2-1-1_状态钩子-useState
 
 > 官方文档: [https://react.dev/reference/react/useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore)
 
-`useSyncExternalStore` 使用来看订阅非 react 项目的外部状态的，它的是用方式如下:
+`useSyncExternalStore` 适用于订阅非 react 组件的外部状态的，它的使用方式如下:
 
 ```ts
 const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
@@ -175,8 +175,10 @@ function updateSyncExternalStore<T>(
     nextSnapshot = getSnapshot();
   }
   const prevSnapshot = (currentHook || hook).memoizedState;
+  // 判断状态是否改变
   const snapshotChanged = !is(prevSnapshot, nextSnapshot);
   if (snapshotChanged) {
+    // 如果改变了，打上更新标记
     hook.memoizedState = nextSnapshot;
     markWorkInProgressReceivedUpdate();
   }
@@ -215,3 +217,9 @@ function updateSyncExternalStore<T>(
   return nextSnapshot;
 }
 ```
+
+总的来说，`useSyncExternalStore` 的处理逻辑更类似 `useEffect`。在组件每次渲染时都会通过 `getSnapshot` 获取新的外部状态快照，如果快照变化，则重新渲染。他们有以下不同:
+- `useSyncExternalStore` 通过 `subscribe` 函数确保外部状态变化时更新，`useEffect` 通过依赖数组
+- `useSyncExternalStore` 每次重新渲染都会执行一次 `getSnapshot` 再比较，`useEffect` 先判断依赖数组是否有变化再比较。
+
+<p class="discuss">这个钩子作者也没用过，欢迎补充实战场景。</p>

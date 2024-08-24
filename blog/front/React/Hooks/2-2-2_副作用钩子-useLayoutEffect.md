@@ -56,7 +56,7 @@ function updateLayoutEffect(
 
 通过前面几篇文章我们知道 `useEffect` 产生的被动副作用会在浏览器有空的时候执行，是一个低优先级的异步任务。
 
-但 `useLayoutEffect` 不同，它是一个同步任务，且有固定的执行顺序，在 `commitLayoutEffects` 方法中执行(`commit` 的最后阶段)，在该方法中有这样一段代码（[✨约1041行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L1041)）：
+但 `useLayoutEffect` 不同，它会产生一个同步任务，且有固定的执行顺序，在 `commitLayoutEffects` 方法中执行(`commit` 的最后阶段，DOM 挂载后)，在该方法中有这样一段代码（[✨约1041行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L1041)）：
 
 ```ts
 switch (finishedWork.tag) {
@@ -74,7 +74,6 @@ switch (finishedWork.tag) {
     }
     break;
   }
-// xxx
 ```
 
 具体执行顺序参考 [commit-概述](https://pionpill.github.io/blog/front/React/Fiber/3-6-1_commit-%E6%A6%82%E8%BF%B0#%E4%B8%BB%E8%A6%81%E9%98%B6%E6%AE%B5)，函数调用栈参考 [commit-DOM挂在后](https://pionpill.github.io/blog/front/React/Fiber/3-6-4_commit-DOM%E6%8C%82%E8%BD%BD%E5%90%8E)，我们直接看一下执行逻辑（[✨约619行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberCommitWork.js#L619)）：
@@ -107,4 +106,4 @@ function commitHookEffectListMount(flags: HookFlags, finishedWork: Fiber) {
 - `useEffect`: 异步执行，低优先级，在 `render` 和 `commit` 阶段都有可能执行
 - `useLayoutEffect`: 同步执行，只在 `mount` 的 `layout` 阶段(`commit` 阶段最后一段)执行一次。
 
-一般首选 `useEffect` 钩子，它的性能更好，不会造成阻塞。如果需要依赖完整的 `DOM` 才会使用 `useLayoutEffect`。
+一般首选 `useEffect` 钩子，它的性能更好，不会造成阻塞。如果只执行一次且需要依赖完整的 `DOM` 才考虑使用 `useLayoutEffect`。

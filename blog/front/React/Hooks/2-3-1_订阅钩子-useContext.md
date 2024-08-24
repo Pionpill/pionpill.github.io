@@ -51,7 +51,7 @@ function Button() {
 }
 ```
 
-`useContext` 允许子组件获取组件树上方最近的 `Context.Provider` 的 `value`。避免 `context` 需要多重传递的问题。注意，`useContext` 获取的值并不属于 `prop` 或 `state`，不会引起组件刷新（除非把他用 `useState` 包起来）。
+`useContext` 允许子组件获取组件树上方最近的 `Context.Provider` 的 `value`。避免 `context` 需要多重传递的问题。注意，`useContext` 获取的值并不属于 `prop` 或 `state`，不会开启 Fiber 树更新（下文会解释为什么这样说）。
 
 <p class="discuss">作用和 Vue 的 provide，inject 很像，甚至思想有点类似 Spring 的 IOC。</p>
 
@@ -68,8 +68,7 @@ function Button() {
 ```ts
 export function createContext<T>(defaultValue: T): ReactContext<T> {
   const context: ReactContext<T> = {
-    $$typeof: REACT_CONTEXT_TYPE,
-    // 最多同时支持两个并发渲染器处理
+    $$typeof: REACT_CONTEXT_TYPE, // 最多同时支持两个并发渲染器处理
     _currentValue: defaultValue,  // 主要值
     _currentValue2: defaultValue, // 次要值
     // 记录有多少个并发渲染器
@@ -148,7 +147,9 @@ function updateContextProvider(
 }
 ```
 
-这个过程如果要触发 `bailout` 优化，需要比较 `props.value` 以及 `children`。重点看一下 `pushProvider` 和 `propagateContextChange`:
+这个过程会比较生产者组件的 `props`（`context` 内容是挂在 `props` 上的），如果有变化（即使是其他 prop 变化），则让消费者组件更新。
+
+重点看一下 `pushProvider` 和 `propagateContextChange`:
 
 ### pushProvider
 

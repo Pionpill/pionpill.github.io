@@ -48,3 +48,5 @@ function updateInsertionEffect(
 `HookInsertion` 标记的副作用会在 `commit` 阶段的 `commitMutationEffects` 方法中被执行，具体执行方法是 `commitHookEffectListMount`。细节不再展开，处理逻辑和前面的大致相同。
 
 `commitMutationEffects` 处于替换阶段树的前一阶段，在此阶段应用动态样式可以减小对 react 其他事务的影响。
+
+<p class="discuss">本人没使用过这个钩子，所以知道的很少。希望大佬补充一些应用场景。</p>

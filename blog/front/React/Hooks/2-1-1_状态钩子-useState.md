@@ -350,10 +350,6 @@ function enqueueUpdate(
   - 其他情形
     - 更新 `concurrentQueues`，开启新的更新任务
 
-### 其他参考资料
-
-> [张小凡：React18.2x源码解析：函数组件的加载过程](https://juejin.cn/post/7280062870669787197)
-
 ## updateState 与 rerenderState
 
 看一下这两个方法（[✨约1789行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L1789)）：
