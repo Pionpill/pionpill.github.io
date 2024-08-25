@@ -39,6 +39,27 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
+然后我们就可以在外部调用这些方法:
+
+```ts
+export default function Form() {
+  const ref = useRef(null);
+
+  function handleClick() {
+    ref.current.focus();
+  }
+
+  return (
+    <form>
+      <MyInput placeholder="Enter your name" ref={ref} />
+      <button type="button" onClick={handleClick}>
+        Edit
+      </button>
+    </form>
+  );
+}
+```
+
 感觉是 `useEffect` 和 `forwardRef` 的孩子。
 
 ## mountImperativeHandle

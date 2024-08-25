@@ -105,6 +105,7 @@ function updateMemoComponent(
     compare = compare !== null ? compare : shallowEqual;
     // 关键：新旧 props 比较，且视图与构建中的 FiberNode 相同
     if (compare(prevProps, nextProps) && current.ref === workInProgress.ref) {
+      // bailout 优化：跳过渲染
       return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
     }
   }
@@ -228,7 +229,7 @@ function shallowEqual(objA: mixed, objB: mixed): boolean {
 
 这个方法还是很有意思的，虽然直译过来叫浅比较，但是却对直接属性进行了比较，有几个值得注意的地方:
 - 如果前后 `props` 没有改变，直接返回 `true`。
-- 如果改变了取出所有直接属性进行比较。
+- 如果改变了取出所有直接属性进行比较（`Object.keys()` 取不出不可枚举与 `Symbol` 属性）。
 
 这个方法比直接传一个 `(pre, new) => per === new` 更好，因此除非要特殊处理，否则不建议传第二个参数。
 
