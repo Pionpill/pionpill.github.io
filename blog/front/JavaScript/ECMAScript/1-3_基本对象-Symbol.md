@@ -31,7 +31,7 @@ Symbol.keyFor(symbol);  // 通过 symbol 获取对应的 key
 
 ES6 之前，对象属性的 key 只能是字符串(或隐式转换为字符串)，ES6 之后 key 可以是 symbol 类型(symbol 无法被隐式转换为 string)。
 
-symbol 作为对象属性的 kye 无法通过点号(.)访问，只能使用中括号获取。在定义 symbol 类型的 key 时，也必须使用中括号语法，例如:
+symbol 作为对象属性的 key 无法通过点号(.)访问，只能使用中括号获取。在定义 symbol 类型的 key 时，也必须使用中括号语法，例如:
 
 ```js
 const symbol1 = Symbol();
