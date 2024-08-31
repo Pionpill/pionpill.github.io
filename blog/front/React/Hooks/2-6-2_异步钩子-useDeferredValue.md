@@ -1,7 +1,7 @@
 ---
 difficulty: hard
 type: origin
-pre: +/front/React/Hooks/3-1-1_异步钩子-useTransition
+pre: +/front/React/Hooks/2-6-1_异步钩子-useTransition
 ---
 
 # useDeferredValue
