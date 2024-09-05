@@ -46,6 +46,39 @@ const AboutMeItem: React.FC<AboutMeItemProps> = ({
 };
 
 const AboutMe: React.FC = () => {
+  const config = [
+    {
+      Icon: FcCollaboration,
+      titleI18nKey: "home-profile.character",
+      keywordsI18nKey: "home-profile.characterKeywords",
+      abstractI18nKey: "home-profile.characterAbstract",
+    },
+    {
+      Icon: FcSportsMode,
+      titleI18nKey: "home-profile.live",
+      keywordsI18nKey: "home-profile.liveKeywords",
+      abstractI18nKey: "home-profile.liveAbstract",
+    },
+    {
+      Icon: FcCommandLine,
+      titleI18nKey: "home-profile.working",
+      keywordsI18nKey: "home-profile.workingKeywords",
+      abstractI18nKey: "home-profile.workingAbstract",
+    },
+    {
+      Icon: FcSteam,
+      titleI18nKey: "home-profile.game",
+      keywordsI18nKey: "home-profile.gameKeywords",
+      abstractI18nKey: "home-profile.gameAbstract",
+    },
+    {
+      Icon: FcViewDetails,
+      titleI18nKey: "home-profile.dream",
+      keywordsI18nKey: "home-profile.dreamKeywords",
+      abstractI18nKey: "home-profile.dreamAbstract",
+    },
+  ];
+
   return (
     <Wrapper
       bgcolor="background.default"
@@ -58,37 +91,17 @@ const AboutMe: React.FC = () => {
       >
         <Trans i18nKey="home-profile.aboutMe" />
       </Typography>
-      <Grid container spacing={3}>
-        <AboutMeItem
-          icon={<FcCollaboration size={32} />}
-          titleI18nKey="home-profile.character"
-          keywordsI18nKey="home-profile.characterKeywords"
-          abstractI18nKey="home-profile.characterAbstract"
-        />
-        <AboutMeItem
-          icon={<FcSportsMode size={32} />}
-          titleI18nKey="home-profile.live"
-          keywordsI18nKey="home-profile.liveKeywords"
-          abstractI18nKey="home-profile.liveAbstract"
-        />
-        <AboutMeItem
-          icon={<FcCommandLine size={32} />}
-          titleI18nKey="home-profile.working"
-          keywordsI18nKey="home-profile.workingKeywords"
-          abstractI18nKey="home-profile.workingAbstract"
-        />
-        <AboutMeItem
-          icon={<FcSteam size={32} />}
-          titleI18nKey="home-profile.game"
-          keywordsI18nKey="home-profile.gameKeywords"
-          abstractI18nKey="home-profile.gameAbstract"
-        />
-        <AboutMeItem
-          icon={<FcViewDetails size={32} />}
-          titleI18nKey="home-profile.dream"
-          keywordsI18nKey="home-profile.dreamKeywords"
-          abstractI18nKey="home-profile.dreamAbstract"
-        />
+      <Grid container spacing={4}>
+        {config.map(
+          ({ Icon, titleI18nKey, keywordsI18nKey, abstractI18nKey }) => (
+            <AboutMeItem
+              icon={<Icon size={32} />}
+              titleI18nKey={titleI18nKey}
+              keywordsI18nKey={keywordsI18nKey}
+              abstractI18nKey={abstractI18nKey}
+            />
+          )
+        )}
       </Grid>
     </Wrapper>
   );

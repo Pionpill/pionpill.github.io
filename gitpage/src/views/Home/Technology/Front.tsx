@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Trans, useTranslation } from "react-i18next";
 import { FaCss3, FaHtml5, FaJs, FaReact, FaVuejs } from "react-icons/fa";
-import { SiElectron, SiRedux, SiTypescript } from "react-icons/si";
+import { SiElectron, SiTypescript } from "react-icons/si";
 import Wrapper from "../../../components/Wrapper";
 import { TechPath } from "../../../components/svg/Path";
 import Svg from "../../../components/svg/Svg";
@@ -75,7 +75,7 @@ const Front: React.FC = () => {
           y="190"
           indent="20"
           text="TypeScript"
-          fill={techColor.xxx}
+          fill={techColor.xxxx}
           icon={<SiTypescript color="white" />}
         />
         <TechTextRect
@@ -101,7 +101,7 @@ const Front: React.FC = () => {
           width="100"
           text="Vue3"
           indent="0"
-          fill={techColor.x}
+          fill={techColor.xxx}
           icon={<FaVuejs color="white" />}
         />
 
@@ -110,7 +110,7 @@ const Front: React.FC = () => {
           y="470"
           width="90"
           text="element-ui"
-          fill={techColor.x}
+          fill={techColor.xxx}
           component
         />
         <TechPath d="M 200 420 L 100 360" dash />
@@ -161,7 +161,7 @@ const Front: React.FC = () => {
           x="60"
           y="480"
           component
-          text="node-fetch"
+          text="redux"
           fill={techColor.xxx}
         />
         <TechTextRect
@@ -187,13 +187,6 @@ const Front: React.FC = () => {
           component
           text="d3.js"
           fill={techColor.xxxxxx}
-        />
-        <TechTextRect
-          x="275"
-          y="500"
-          text="Redux"
-          fill={techColor.xxx}
-          icon={<SiRedux color="white" />}
         />
         <TechTextRect
           x="60"

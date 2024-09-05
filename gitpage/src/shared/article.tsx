@@ -145,7 +145,7 @@ const FluentPython: Article = {
   reposUrl:
     "https://github.com/Pionpill/Notebook-Code/blob/python/Python/FluentPython/FluentPython.pdf",
   titleIcon: <FaPython size={36} />,
-  title: "Fluent Python",
+  title: "FluentPython",
   reference: "《Fluent Python》",
   abstract:
     "Python 进阶，讲述Python风格的写法，Python 语言设计，高性能Python 写法",

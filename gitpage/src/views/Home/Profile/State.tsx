@@ -25,9 +25,14 @@ import { formatDateToGraphQL } from "../../../utils/date";
 type DataStateProps = {
   data: string;
   annotationI8nKey: string;
+  unit?: 'day' | 'week';
 };
 
-const DataState: React.FC<DataStateProps> = ({ data, annotationI8nKey }) => {
+const DataState: React.FC<DataStateProps> = ({
+  data,
+  annotationI8nKey,
+  unit = 'day',
+}) => {
   return (
     <FlexBox sx={{ color: "text.primary", flexDirection: "column" }}>
       <FlexBox sx={{ alignItems: "flex-end" }}>
@@ -36,7 +41,14 @@ const DataState: React.FC<DataStateProps> = ({ data, annotationI8nKey }) => {
         </Typography>
         &nbsp;
         <Typography variant="caption" sx={{ opacity: 0.5 }}>
-          /<Trans i18nKey="home-profile.workingDay" />
+          /
+          <Trans
+            i18nKey={
+              unit === "day"
+                ? "home-profile.workingDay"
+                : "home-profile.week"
+            }
+          />
         </Typography>
       </FlexBox>
       <Typography color="text.secondary">
@@ -273,6 +285,7 @@ const State: React.FC = () => {
           <DataState
             data={`${((annualContribution / 250) * 7).toPrecision(2)}`}
             annotationI8nKey="home-profile.githubFrequency"
+            unit="week"
           />
           <DataState
             data={`${(annualCodingMinutes / (250 * 60)).toPrecision(2)} h`}

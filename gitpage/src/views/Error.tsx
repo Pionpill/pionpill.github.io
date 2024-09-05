@@ -11,11 +11,12 @@ const Error: React.FC = () => {
   const [time, setTime] = React.useState<number>(10);
   const navigate = useNavigate();
   React.useEffect(() => {
-    setInterval(() => {
+    const cutdownTaskId = setInterval(() => {
       setTime(time - 1);
     }, 1000);
     if (time <= 0) navigate("/");
-  });
+    return () => clearInterval(cutdownTaskId);
+  }, []);
 
   return (
     <Wrapper fillHeight sx={{ height: "100%" }}>

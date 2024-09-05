@@ -1,29 +1,57 @@
+import { BsHammer } from "react-icons/bs";
+import { FaBlog } from "react-icons/fa";
 import { MdViewInAr } from "react-icons/md";
 import { RiPlantFill } from "react-icons/ri";
+import { VscNotebook } from "react-icons/vsc";
 import Banner from "./Banner";
-import ProjectCategory, { ProjectItemProps } from "./ProjectCategory";
+import ProjectCategory from "./ProjectCategory";
 
 const Project: React.FC = () => {
-  const internetProjectItems: ProjectItemProps[] = [
-    { icon: <MdViewInAr size={24} />, project: "Collage-BachelorThesis" },
-  ];
-  const minecraftProjectItems: ProjectItemProps[] = [
-    { icon: <RiPlantFill size={24} />, project: "HammerWorkshop-CookingCraft" },
+  const config = [
+    {
+      titleI18nKey: "project.internet",
+      abstractI18nKey: "project.internetAbstract",
+      items: [
+        { icon: <BsHammer size={24} />, project: "HammerWorkshop" },
+        { icon: <MdViewInAr size={24} />, project: "Collage-BachelorThesis" },
+      ],
+    },
+    {
+      titleI18nKey: "project.minecraft",
+      abstractI18nKey: "project.minecraftAbstract",
+      items: [
+        {
+          icon: <RiPlantFill size={24} />,
+          project: "ecology-netease",
+        },
+      ],
+    },
+    {
+      titleI18nKey: "project.notebook",
+      abstractI18nKey: "project.notebookAbstract",
+      items: [
+        {
+          icon: <FaBlog size={24} />,
+          project: "pionpill.github.io",
+        },
+        {
+          icon: <VscNotebook size={24} />,
+          project: "Notebook-Code",
+        },
+      ],
+    },
   ];
 
   return (
     <>
       <Banner />
-      <ProjectCategory
-        titleI18nKey="project.internet"
-        abstractI18nKey="project.internetAbstract"
-        projectItems={internetProjectItems}
-      />
-      <ProjectCategory
-        titleI18nKey="project.minecraft"
-        abstractI18nKey="project.minecraftAbstract"
-        projectItems={minecraftProjectItems}
-      />
+      {config.map(({ titleI18nKey, abstractI18nKey, items }) => (
+        <ProjectCategory
+          titleI18nKey={titleI18nKey}
+          abstractI18nKey={abstractI18nKey}
+          projectItems={items}
+        />
+      ))}
     </>
   );
 };

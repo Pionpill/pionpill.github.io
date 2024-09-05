@@ -33,10 +33,10 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ icon, project }) => {
         setLanguage(data.language);
         setProjectLink(data.html_url);
       });
-  });
+  }, []);
 
   return (
-    <Grid item sm={12} md={6} lg={4}>
+    <Grid item sm={12} md={6}>
       <Paper
         sx={{
           p: 2,
@@ -135,7 +135,7 @@ const ProjectCategory: React.FC<Props> = ({
           <Trans i18nKey={abstractI18nKey} />
         </Typography>
       </FlexBox>
-      <Grid container>
+      <Grid container spacing={4}>
         {projectItems.map((item) => (
           <ProjectItem
             icon={item.icon}

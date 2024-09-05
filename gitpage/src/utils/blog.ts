@@ -11,7 +11,7 @@ export const getRelatedBlogPath = (blogLink: string, type: string ) => {
 }
 
 export const getBlogFilePath = (path: string) => {
-  return `https://raw.githubusercontent.com/Pionpill/pionpill.github.io/main/${path}.md`;
+  return `https://raw.githubusercontent.com/Pionpill/pionpill.github.io/main${path}.md`;
 }
 
 export const getBlogGithubPath = (path: string) => {

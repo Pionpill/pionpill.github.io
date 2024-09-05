@@ -18,23 +18,17 @@ import {
   SiAdobelightroom,
   SiAdobephotoshop,
   SiAdobepremierepro,
-  SiBlender,
   SiD3Dotjs,
-  SiIntellijidea,
   SiJavascript,
   SiLatex,
   SiMui,
-  SiMysql,
   SiPlotly,
   SiPython,
   SiRedux,
   SiSpring,
   SiSpringboot,
-  SiSpringsecurity,
-  SiTableau,
   SiTypescript,
-  SiUbuntu,
-  SiVisualstudiocode,
+  SiVisualstudiocode
 } from "react-icons/si";
 import { TbBrandThreejs } from "react-icons/tb";
 import FlexBox from "../../../components/FlexBox";
@@ -156,6 +150,88 @@ const AppCard: React.FC<AppCardProps> = ({
 };
 
 const Develop: React.FC = () => {
+  const developConfig = [
+    {
+      theme: blue,
+      Icon: SiJavascript,
+      titleI18nKey: "home-profile.jsDevelop",
+      contentI18nKey: "home-profile.jsContent",
+      Icons: (
+        <>
+          <SiTypescript size={18} /> <FaReact size={18} />
+          <SiRedux size={18} /> <SiMui size={18} />
+        </>
+      ),
+    },
+    {
+      theme: red,
+      Icon: FaJava,
+      titleI18nKey: "home-profile.javaDevelop",
+      contentI18nKey: "home-profile.javaContent",
+      Icons: (
+        <>
+          <SiSpring size={18} /> <SiSpringboot size={18} />
+        </>
+      ),
+    },
+    {
+      theme: deepOrange,
+      Icon: BsFillClipboard2DataFill,
+      titleI18nKey: "home-profile.visualDevelop",
+      contentI18nKey: "home-profile.visualContent",
+      Icons: (
+        <>
+          <SiPlotly size={18} /> <SiD3Dotjs size={18} />
+          <TbBrandThreejs size={18} />
+        </>
+      ),
+    },
+    {
+      theme: teal,
+      Icon: RiDeviceFill,
+      titleI18nKey: "home-profile.other",
+      contentI18nKey: "home-profile.otherContent",
+      Icons: (
+        <>
+          <SiPython size={18} /> <SiLatex size={18} />
+        </>
+      ),
+    },
+  ];
+
+  const softwareConfig = [
+    {
+      Icon: SiVisualstudiocode,
+      title: "VsCode",
+      degree: 90,
+      labelI18nKey: "home-profile.vscodeLabel",
+    },
+    {
+      Icon: SiAdobephotoshop,
+      title: "PhotoShop",
+      degree: 40,
+      labelI18nKey: "home-profile.psLabel",
+    },
+    {
+      Icon: SiAdobeillustrator,
+      title: "Illustrator",
+      degree: 60,
+      labelI18nKey: "home-profile.aiLabel",
+    },
+    {
+      Icon: SiAdobelightroom,
+      title: "LightRoom",
+      degree: 70,
+      labelI18nKey: "home-profile.lrLabel",
+    },
+    {
+      Icon: SiAdobepremierepro,
+      title: "PremierePro",
+      degree: 50,
+      labelI18nKey: "home-profile.blenderLabel",
+    },
+  ];
+
   return (
     <Wrapper
       bgcolor={useThemeChoice(homeTheme[50], grey[900])}
@@ -171,57 +247,17 @@ const Develop: React.FC = () => {
           </Typography>
         </FlexBox>
         <Grid container spacing={2}>
-          <DevelopPaper
-            theme={red}
-            titleIcon={<FaJava color={red[900]} size={36} />}
-            titleI18nKey="home-profile.javaDevelop"
-            contentI18nKey="home-profile.javaContent"
-            icons={
-              <>
-                <SiSpring size={18} /> <SiSpringboot size={18} />
-                <SiSpringsecurity size={18} />
-              </>
-            }
-          />
-          <DevelopPaper
-            theme={blue}
-            titleIcon={<SiJavascript color={blue[900]} size={36} />}
-            titleI18nKey="home-profile.jsDevelop"
-            contentI18nKey="home-profile.jsContent"
-            icons={
-              <>
-                <SiTypescript size={18} /> <FaReact size={18} />
-                <SiRedux size={18} /> <SiMui size={18} />{" "}
-                <SiD3Dotjs size={18} />
-              </>
-            }
-          />
-          <DevelopPaper
-            theme={deepOrange}
-            titleIcon={
-              <BsFillClipboard2DataFill color={deepOrange[900]} size={36} />
-            }
-            titleI18nKey="home-profile.visualDevelop"
-            contentI18nKey="home-profile.visualContent"
-            icons={
-              <>
-                <SiPlotly size={18} /> <SiD3Dotjs size={18} />
-                <TbBrandThreejs size={18} /> <SiPlotly size={18} />
-              </>
-            }
-          />
-          <DevelopPaper
-            theme={teal}
-            titleIcon={<RiDeviceFill color={teal[900]} size={36} />}
-            titleI18nKey="home-profile.other"
-            contentI18nKey="home-profile.otherContent"
-            icons={
-              <>
-                <SiPython size={18} /> <SiLatex size={18} />{" "}
-                <SiMysql size={18} />
-              </>
-            }
-          />
+          {developConfig.map(
+            ({ theme, Icon, titleI18nKey, contentI18nKey, Icons }) => (
+              <DevelopPaper
+                theme={theme}
+                titleIcon={<Icon color={red[900]} size={36} />}
+                titleI18nKey={titleI18nKey}
+                contentI18nKey={contentI18nKey}
+                icons={Icons}
+              />
+            )
+          )}
         </Grid>
       </FlexBox>
       <FlexBox sx={{ flexDirection: "column", width: "100%" }} gap={2}>
@@ -234,60 +270,14 @@ const Develop: React.FC = () => {
           </Typography>
         </FlexBox>
         <Grid container spacing={1}>
-          <AppCard
-            icon={<SiVisualstudiocode size={18} />}
-            degree={90}
-            title="VsCode"
-            labelI18nKey="home-profile.vscodeLabel"
-          />
-          <AppCard
-            icon={<SiIntellijidea size={18} />}
-            degree={60}
-            title="IDE"
-            labelI18nKey="home-profile.javaLabel"
-          />
-          <AppCard
-            icon={<SiUbuntu size={18} />}
-            degree={40}
-            title="Ubuntu"
-            labelI18nKey="home-profile.ubuntuLabel"
-          />
-          <AppCard
-            icon={<SiAdobephotoshop size={18} />}
-            degree={40}
-            title="Photoshop"
-            labelI18nKey="home-profile.psLabel"
-          />
-          <AppCard
-            icon={<SiAdobeillustrator size={18} />}
-            degree={70}
-            title="Illustrator"
-            labelI18nKey="home-profile.aiLabel"
-          />
-          <AppCard
-            icon={<SiAdobelightroom size={18} />}
-            degree={70}
-            title="LightRoom"
-            labelI18nKey="home-profile.lrLabel"
-          />
-          <AppCard
-            icon={<SiAdobepremierepro size={18} />}
-            degree={50}
-            title="PremierePro"
-            labelI18nKey="home-profile.prLabel"
-          />
-          <AppCard
-            icon={<SiBlender size={18} />}
-            degree={30}
-            title="Blender"
-            labelI18nKey="home-profile.blenderLabel"
-          />
-          <AppCard
-            icon={<SiTableau size={18} />}
-            degree={40}
-            title="Tableau"
-            labelI18nKey="home-profile.tableauLabel"
-          />
+          {softwareConfig.map(({ Icon, degree, title, labelI18nKey }) => (
+            <AppCard
+              icon={<Icon size={18} />}
+              degree={degree}
+              title={title}
+              labelI18nKey={labelI18nKey}
+            />
+          ))}
         </Grid>
       </FlexBox>
     </Wrapper>

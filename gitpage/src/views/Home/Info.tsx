@@ -36,7 +36,7 @@ const Info: React.FC = () => {
       }}
       gap={2}
     >
-      <Avatar alt="pionpill" src={github_avatar} sx={icon128x}></Avatar>
+      <Avatar alt="pionpill" src={github_avatar} sx={icon128x}/>
       <Typography variant="h3" fontWeight="fontWeightBold" color="white">
         北岸 Pionpill
       </Typography>
@@ -63,11 +63,6 @@ const Info: React.FC = () => {
       >
         <Brand
           label="Java"
-          size="small"
-          sx={{ backgroundColor: red[500], color: "white" }}
-        />
-        <Brand
-          label="SpringBoot"
           size="small"
           sx={{ backgroundColor: red[500], color: "white" }}
         />

@@ -22,6 +22,7 @@ type AbstractItemProps = {
 const AbstractItem: React.FC<PropsWithChildren<AbstractItemProps>> = ({
   icon,
   titleI18nKey,
+  timePeriod,
   children,
 }) => {
   return (
@@ -49,7 +50,7 @@ const AbstractItem: React.FC<PropsWithChildren<AbstractItemProps>> = ({
         {children}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        2000 - 2006
+        {timePeriod}
       </Typography>
     </FlexBox>
   );
@@ -172,7 +173,7 @@ const Abstract: React.FC = () => {
         <AbstractItem
           icon={<BiCodeBlock size={36} color={homeTheme[900]} />}
           titleI18nKey="home-experience.workingAddress"
-          timePeriod="2019 - 2023"
+          timePeriod="2023 - now"
         >
           <Trans i18nKey="home-experience.workingContent" />
         </AbstractItem>

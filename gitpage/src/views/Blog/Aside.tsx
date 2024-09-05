@@ -12,9 +12,25 @@ import {
 } from "@mui/material";
 import React, { ReactNode } from "react";
 import { Trans } from "react-i18next";
-import { BiChevronDown, BiChevronRight, BiCode, BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
-import { FaBlog, FaCss3Alt, FaVuejs } from "react-icons/fa";
-import { SiD3Dotjs, SiJavascript, SiMicrosoft, SiPython, SiReact, SiTypescript } from "react-icons/si";
+import {
+  BiChevronDown,
+  BiChevronRight,
+  BiCode,
+  BiSolidChevronDown,
+  BiSolidChevronRight,
+} from "react-icons/bi";
+import { BsBookHalf } from "react-icons/bs";
+import { CgListTree } from "react-icons/cg";
+import { FaBlog, FaCss3Alt, FaDatabase, FaNetworkWired, FaVuejs } from "react-icons/fa";
+import {
+  SiD3Dotjs,
+  SiJavascript,
+  SiMicrosoft,
+  SiMongodb,
+  SiPython,
+  SiReact,
+  SiTypescript,
+} from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { blogContentApi } from "../../api/github/githubApi";
@@ -75,7 +91,12 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
     ["vue", <FaVuejs />],
     ["css", <FaCss3Alt />],
     ["bedrock", <SiMicrosoft />],
-    ["python", <SiPython/>]
+    ["python", <SiPython />],
+    ["dom", <CgListTree />],
+    ["network", <FaNetworkWired />],
+    ["mongodb", <SiMongodb />],
+    ["indexedDB", <FaDatabase />],
+    ["八股", <BsBookHalf />],
   ]);
   const navigate = useNavigate();
   const title = path.split("/").pop() as string;
@@ -111,11 +132,21 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
           sx={singleOmit}
           title={title}
           primary={title}
-          primaryTypographyProps={{ fontWeight: isTopDir ? "fontWeightBold" : "auto" }}
+          primaryTypographyProps={{
+            fontWeight: isTopDir ? "fontWeightBold" : "auto",
+          }}
         />
-        {open ?
-          isTopDir ? <BiSolidChevronDown /> : <BiChevronDown /> :
-          isTopDir ? <BiSolidChevronRight /> : <BiChevronRight />}
+        {open ? (
+          isTopDir ? (
+            <BiSolidChevronDown />
+          ) : (
+            <BiChevronDown />
+          )
+        ) : isTopDir ? (
+          <BiSolidChevronRight />
+        ) : (
+          <BiChevronRight />
+        )}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List
@@ -131,31 +162,34 @@ const DirList: React.FC<{ path: string }> = ({ path }) => {
         >
           {dirs ? (
             dirs.map((item) => {
-              return item.type === "dir" ?
-                <DirList path={item.path} key={item.path} /> : (
-                  <ListItemButton
-                    sx={{
-                      p: 0,
-                      pl: 0.5,
-                      borderRadius: "4px",
-                      bgcolor:
-                        `/${item.path.split(".")[0]}` === locationPath
-                          ? "line"
-                          : "auto",
-                    }}
-                    key={item.path}
-                    onClick={() => handleClick(item.path.replace(".md", ""))}
-                  >
-                    <ListItemText
-                      sx={{ opacity: 0.8, ...singleOmit }}
-                      primaryTypographyProps={{ fontSize: "0.8em" }}
-                      title={item.path.split("/").pop()?.split(".")[0].split("_")[1]}
-                      primary={
-                        item.path.split("/").pop()?.split(".")[0].split("_")[1]
-                      }
-                    />
-                  </ListItemButton>
-                )
+              return item.type === "dir" ? (
+                <DirList path={item.path} key={item.path} />
+              ) : (
+                <ListItemButton
+                  sx={{
+                    p: 0,
+                    pl: 0.5,
+                    borderRadius: "4px",
+                    bgcolor:
+                      `/${item.path.split(".")[0]}` === locationPath
+                        ? "line"
+                        : "auto",
+                  }}
+                  key={item.path}
+                  onClick={() => handleClick(item.path.replace(".md", ""))}
+                >
+                  <ListItemText
+                    sx={{ opacity: 0.8, ...singleOmit }}
+                    primaryTypographyProps={{ fontSize: "0.8em" }}
+                    title={
+                      item.path.split("/").pop()?.split(".")[0].split("_")[1]
+                    }
+                    primary={
+                      item.path.split("/").pop()?.split(".")[0].split("_")[1]
+                    }
+                  />
+                </ListItemButton>
+              );
             })
           ) : (
             <Skeleton width="100%" />
