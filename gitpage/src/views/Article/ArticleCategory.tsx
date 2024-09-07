@@ -1,6 +1,7 @@
 import { Button, Link, Typography } from "@mui/material";
 import { Trans } from "react-i18next";
 import { FaDownload, FaEye, FaGithub } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import FlexBox from "../../components/FlexBox";
 import Wrapper from "../../components/Wrapper";
 import { useMiddleMaxMedia, useSmallMedia } from "../../hooks/useMedia";
@@ -54,20 +55,18 @@ const ContentItem: React.FC<{ article: Article }> = ({ article }) => {
   );
 };
 
-type Props = {
+type ArticleCategoryProps = {
   titleI18nKey: string;
   abstractI18nKey: string;
   type: string;
   id: string;
+  url?: string;
 };
 
-const ArticleCategory: React.FC<Props> = ({
-  titleI18nKey,
-  abstractI18nKey,
-  type,
-  id,
-}) => {
+const ArticleCategory: React.FC<ArticleCategoryProps> = (props) => {
+  const { titleI18nKey, abstractI18nKey, type, id, url } = props;
   const isMiddleMedia = useMiddleMaxMedia();
+  const navigate = useNavigate();
 
   return (
     <Wrapper bgcolor="background.paper">
@@ -99,9 +98,16 @@ const ArticleCategory: React.FC<Props> = ({
             >
               <Trans i18nKey="article.repository" />
             </Link>
-            <Button variant="contained" size="small" color="secondary">
-              <Trans i18nKey="article.relatedBlog" />
-            </Button>
+            {url && (
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                onClick={() => navigate(url)}
+              >
+                <Trans i18nKey="article.relatedBlog" />
+              </Button>
+            )}
           </FlexBox>
         </FlexBox>
         <FlexBox

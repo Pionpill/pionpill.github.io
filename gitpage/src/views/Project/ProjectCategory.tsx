@@ -54,7 +54,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ icon, project }) => {
       >
         {icon}
         <FlexBox flexDirection="column" width="100%" gap={2}>
-          <FlexBox flexDirection="column">
+          <FlexBox flexDirection="column" gap={1}>
             {name ? (
               <Typography variant="h6" fontWeight="fontWeightBold">
                 {name}
@@ -63,7 +63,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ icon, project }) => {
               <Skeleton />
             )}
             {description ? (
-              <Typography>{description}</Typography>
+              <Typography sx={{ opacity: 0.8 }}>{description}</Typography>
             ) : (
               <Skeleton />
             )}

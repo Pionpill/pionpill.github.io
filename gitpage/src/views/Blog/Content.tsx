@@ -91,9 +91,9 @@ const Content: React.FC = () => {
 
   const isSmallMedia = useSmallMedia();
   const isLargeMedia = useLargeMedia();
+  const isXLargeMinMedia = useXLargeMinMedia();
   const locationPath = decodeURIComponent(location.pathname);
   const locationHash = decodeURIComponent(location.hash);
-  const isXLargeMinMedia = useXLargeMinMedia();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

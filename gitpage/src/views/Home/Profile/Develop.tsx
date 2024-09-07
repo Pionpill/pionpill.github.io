@@ -10,6 +10,7 @@ import {
 } from "@mui/material/colors";
 import { ReactNode } from "react";
 import { Trans } from "react-i18next";
+import { BiCube } from "react-icons/bi";
 import { BsFillClipboard2DataFill } from "react-icons/bs";
 import { FaJava, FaReact } from "react-icons/fa";
 import { RiDeviceFill } from "react-icons/ri";
@@ -230,6 +231,12 @@ const Develop: React.FC = () => {
       degree: 50,
       labelI18nKey: "home-profile.blenderLabel",
     },
+    {
+      Icon: BiCube,
+      title: "BlockBench",
+      degree: 80,
+      labelI18nKey: "home-profile.blockbenchLabel",
+    },
   ];
 
   return (
@@ -269,7 +276,7 @@ const Develop: React.FC = () => {
             <Trans i18nKey="home-profile.softwareAbstract" />
           </Typography>
         </FlexBox>
-        <Grid container spacing={1}>
+        <Grid container columnSpacing={8} rowSpacing={4}>
           {softwareConfig.map(({ Icon, degree, title, labelI18nKey }) => (
             <AppCard
               icon={<Icon size={18} />}

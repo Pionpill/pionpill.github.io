@@ -37,7 +37,7 @@ const AboutMeItem: React.FC<AboutMeItemProps> = ({
         <Typography color={homeTheme[900]}>
           <Trans i18nKey={keywordsI18nKey} />
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" sx={{opacity: 0.8}}>
           <Trans i18nKey={abstractI18nKey} />
         </Typography>
       </FlexBox>
