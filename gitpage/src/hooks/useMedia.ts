@@ -37,11 +37,15 @@ export const useSmallMedia = () => {
 };
 
 export const useMiddleMedia = () => {
-  return useMiddleMaxMedia() && useSmallMinMedia();
+  const middleMaxMedia = useMiddleMaxMedia();
+  const smallMinMedia = useSmallMinMedia();
+  return middleMaxMedia && smallMinMedia;
 };
 
 export const useLargeMedia = () => {
-  return useLargeMaxMedia() && useMiddleMinMedia();
+  const largeMaxMedia = useLargeMaxMedia();
+  const middleMinMedia = useMiddleMinMedia();
+  return largeMaxMedia && middleMinMedia;
 };
 
 export const useXLargeMedia = () => {
