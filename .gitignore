@@ -133,3 +133,4 @@ temp/
 temp.*
 .VSCodeCounter
 *.drawio
+package-lock.json
