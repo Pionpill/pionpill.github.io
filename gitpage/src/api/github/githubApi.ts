@@ -43,7 +43,7 @@ export const githubReposContentApi = (
     `https://api.github.com/repos/${user}/${repos}/contents/${path}`,
     {
       method: "GET",
-      headers: graphQLHeader,
+      headers: graphQLHeader
     }
   );
 };

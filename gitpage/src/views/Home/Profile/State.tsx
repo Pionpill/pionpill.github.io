@@ -1,20 +1,10 @@
-import { Skeleton, Typography } from "@mui/material";
-import { blueGrey, grey, teal } from "@mui/material/colors";
-import { HeatmapChart } from "echarts/charts";
-import {
-  CalendarComponent,
-  TitleComponent,
-  TooltipComponent,
-  VisualMapComponent,
-} from "echarts/components";
-import { CanvasRenderer } from "echarts/renderers";
-import { ECBasicOption } from "echarts/types/dist/shared";
-import $ from "jquery";
+import { Typography } from "@mui/material";
+import { interpolatePurples } from "d3-scale-chromatic";
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { githubGraphQLApi } from "../../../api/github/githubApi";
 import { queryDailyAndTotalContributionCount } from "../../../api/github/graphQL/pionpill";
-import EChart from "../../../components/EChart";
+import CalendarChart from "../../../components/d3/CalendarChart";
 import FlexBox from "../../../components/FlexBox";
 import Wrapper from "../../../components/Wrapper";
 import { useSmallMedia } from "../../../hooks/useMedia";
@@ -25,13 +15,13 @@ import { formatDateToGraphQL } from "../../../utils/date";
 type DataStateProps = {
   data: string;
   annotationI8nKey: string;
-  unit?: 'day' | 'week';
+  unit?: "day" | "week";
 };
 
 const DataState: React.FC<DataStateProps> = ({
   data,
   annotationI8nKey,
-  unit = 'day',
+  unit = "day",
 }) => {
   return (
     <FlexBox sx={{ color: "text.primary", flexDirection: "column" }}>
@@ -44,9 +34,7 @@ const DataState: React.FC<DataStateProps> = ({
           /
           <Trans
             i18nKey={
-              unit === "day"
-                ? "home-profile.workingDay"
-                : "home-profile.week"
+              unit === "day" ? "home-profile.workingDay" : "home-profile.week"
             }
           />
         </Typography>
@@ -58,131 +46,20 @@ const DataState: React.FC<DataStateProps> = ({
   );
 };
 
-const CalendarHeatmapChart: React.FC<{
-  isSmallMedia: boolean;
-  options: ECBasicOption;
-}> = ({ isSmallMedia, options }) => {
-  return (
-    <FlexBox
-      sx={{
-        maxWidth: isSmallMedia ? "170px" : "1000px",
-        minWidth: isSmallMedia ? "170px" : "1000px",
-        height: isSmallMedia ? "820px" : "250px",
-      }}
-    >
-      <EChart
-        options={options}
-        components={[
-          TitleComponent,
-          TooltipComponent,
-          CanvasRenderer,
-          HeatmapChart,
-          VisualMapComponent,
-          CalendarComponent,
-        ]}
-      />
-    </FlexBox>
-  );
-};
-
 const State: React.FC = () => {
   const isSmallMedia = useSmallMedia();
-  const textColor = useThemeChoice(grey[800], grey[100]);
-  const bgColor = useThemeChoice(grey[600], grey[900]);
   const { t } = useTranslation();
-  const wakaTimeItemColorArray: Array<string> = useThemeChoice(
-    [grey[50], blueGrey[300], blueGrey[500], blueGrey[700], blueGrey[900]],
-    [
-      grey[900],
-      blueGrey[800],
-      blueGrey[600],
-      blueGrey[400],
-      blueGrey[200],
-      blueGrey[50],
-    ]
-  );
-  const githubItemColorArray: Array<string> = useThemeChoice(
-    [grey[50], teal[300], teal[500], teal[700], teal[900]],
-    [grey[900], teal[800], teal[600], teal[400], teal[200], teal[50]]
-  );
+  const darkMode = useThemeChoice(false, true);
 
-  const [wakaTimeOptions, setWakaTimeOptions] = React.useState<any>(null);
-  const [githubOptions, setGithubOptions] = React.useState<any>(null);
+  const [wakaTimeData, setWakaTimeData] = React.useState<
+    Array<{ date: Date; value: number }>
+  >(null!);
+  const [githubData, setGithubData] = React.useState<
+    Array<{ date: Date; value: number }>
+  >(null!);
   const [annualCodingMinutes, setAnnualCodingMinutes] =
     React.useState<number>(0);
   const [annualContribution, setAnnualContribution] = React.useState<number>(0);
-
-  const setTitle = (text: string): Object => {
-    return {
-      top: 30,
-      left: "center",
-      text: text,
-      textStyle: {
-        color: textColor,
-      },
-    };
-  };
-  const setVisualMap = (
-    max: number,
-    colorArray: Array<string>,
-    textColor: string
-  ) => {
-    return {
-      min: 0,
-      max: max,
-      type: "continuous",
-      orient: "horizontal",
-      calculable: true,
-      realtime: true,
-      right: isSmallMedia ? "center" : "0%",
-      bottom: "0",
-      inRange: {
-        symbol: "circle",
-        color: colorArray,
-      },
-      outOfRange: {
-        symbol: "circle",
-        color: "#000",
-      },
-      textStyle: {
-        color: textColor,
-      },
-    };
-  };
-  const setCalendar = (startDate: string, endDate: string) => {
-    return {
-      top: isSmallMedia ? 120 : 85,
-      left: isSmallMedia ? "center" : "auto",
-      right: isSmallMedia ? "auto" : "0",
-      orient: isSmallMedia ? "vertical" : "horizontal",
-      width: isSmallMedia ? 110 : 900,
-      cellSize: isSmallMedia ? 12 : 14,
-      range: [startDate, endDate],
-      splitLine: {
-        lineStyle: {
-          color: textColor,
-        },
-      },
-      itemStyle: {
-        borderWidth: 1,
-        borderCap: "round",
-        borderColor: bgColor,
-      },
-      dayLabel: {
-        color: textColor,
-      },
-      monthLabel: {
-        color: textColor,
-      },
-    };
-  };
-  const setSeries = (data: Object): Object => {
-    return {
-      type: "heatmap",
-      coordinateSystem: "calendar",
-      data: data,
-    };
-  };
 
   const initGithubContributions = () => {
     const now = new Date();
@@ -196,62 +73,40 @@ const State: React.FC = () => {
         const contributionCalendar =
           data.data.user.contributionsCollection.contributionCalendar;
         setAnnualContribution(contributionCalendar.totalContributions);
-        let realData: Array<Array<string>> = [];
+        let realData: Array<{ date: Date; value: number }> = [];
         for (const week of contributionCalendar.weeks) {
           for (const day of week.contributionDays) {
-            realData.push([day.date, day.contributionCount]);
+            realData.push({
+              date: new Date(day.date),
+              value: day.contributionCount,
+            });
           }
         }
-        const startDate = realData[0][0];
-        const endDate = realData[realData.length - 1][0];
-        const realGithubTableOptions = {
-          title: setTitle(t("home-profile.githubFrequency")),
-          tooltip: {
-            formatter: (params: any) => {
-              return `${params.value[0]} ${params.value[1]} 次`;
-            },
-          },
-          visualMap: setVisualMap(8, githubItemColorArray, textColor),
-          calendar: setCalendar(startDate, endDate),
-          series: setSeries(realData),
-        };
-        setGithubOptions(realGithubTableOptions);
+        setGithubData(realData);
       });
   };
   const initWakaTimeCodingTime = () => {
-    $.ajax({
-      type: "GET",
-      url: "https://wakatime.com/share/@pionpill/ccb466e3-bddf-4c35-a775-0a57fc221313.json",
-      dataType: "jsonp",
-      success: (response: any) => {
-        let totalMinutes: number = 0;
-        let realData: Array<Array<string>> = response.days.map((item: any) => {
-          totalMinutes += item.total / 60;
-          return [item.date, (item.total / 3600).toPrecision(3)];
-        });
+    fetch(
+      "https://wakatime.com/share/@pionpill/ccb466e3-bddf-4c35-a775-0a57fc221313.json"
+    )
+      .then((response) => {
+        if (!response.ok) return;
+        return response.json();
+      })
+      .then((data) => {
+        let totalMinutes = 0;
+        const result = data.days.map(
+          (item: { date: string; total: number }) => {
+            totalMinutes += item.total / 60;
+            return {
+              date: new Date(item.date),
+              value: Math.round(item.total / 360) / 10,
+            };
+          }
+        );
         setAnnualCodingMinutes(totalMinutes);
-        const startDate = realData[0][0];
-        const endDate = realData[realData.length - 1][0];
-        const realWakatimeTableOptions = {
-          title: setTitle(t("home-profile.codingFrequency")),
-          tooltip: {
-            formatter: (params: any) => {
-              return `${params.value[0]} <br/> ${parseInt(
-                params.value[1]
-              )} h ${parseInt(
-                String(
-                  (Number(params.value[1]) - parseInt(params.value[1])) * 60
-                )
-              )} min`;
-            },
-          },
-          visualMap: setVisualMap(12, wakaTimeItemColorArray, textColor),
-          calendar: setCalendar(startDate, endDate),
-          series: setSeries(realData),
-        };
-        setWakaTimeOptions(realWakatimeTableOptions);
-      },
-    });
+        setWakaTimeData(result);
+      });
   };
 
   React.useEffect(() => {
@@ -302,22 +157,26 @@ const State: React.FC = () => {
         }}
         gap={2}
       >
-        {wakaTimeOptions ? (
-          <CalendarHeatmapChart
-            options={wakaTimeOptions}
-            isSmallMedia={isSmallMedia}
-          />
-        ) : (
-          <Skeleton variant="rectangular" width="100%" height="200px" />
-        )}
-        {githubOptions ? (
-          <CalendarHeatmapChart
-            options={githubOptions}
-            isSmallMedia={isSmallMedia}
-          />
-        ) : (
-          <Skeleton variant="rectangular" width="100%" height="200px" />
-        )}
+        <CalendarChart
+          data={wakaTimeData}
+          darkMode={darkMode}
+          vertical={isSmallMedia}
+          title={t("home-profile.codingFrequency")!}
+          hoverTextFn={(item) =>
+            `${item.date.toLocaleDateString()}: ${item.value}h`
+          }
+        />
+        <CalendarChart
+          data={githubData}
+          darkMode={darkMode}
+          vertical={isSmallMedia}
+          title={t("home-profile.githubFrequency")!}
+          maxValue={10}
+          hoverTextFn={(item) =>
+            `${item.date.toLocaleDateString()}: ${item.value}次`
+          }
+          colorMapFn={() => interpolatePurples}
+        />
       </FlexBox>
     </Wrapper>
   );
