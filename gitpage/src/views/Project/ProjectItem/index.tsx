@@ -7,10 +7,7 @@ import {
   githubReposApi,
   githubReposCommitByWeekApi,
 } from "../../../api/github/githubApi";
-import {
-  githubGQLReposLanguageApi,
-  githubGQLReposLastDateCommitApi,
-} from "../../../api/github/graphApi";
+import { githubGQLReposLanguageApi } from "../../../api/github/graphApi";
 import FlexBox from "../../../components/FlexBox";
 import ProgressLine from "../../../components/ProgressLine";
 import SimpleLineChart from "../../../components/d3/SimpleLineChart";
@@ -159,8 +156,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ icon, project }) => {
             }}
           >
             <Typography variant="body2" sx={{ opacity: 0.8 }}>
-              <Trans i18nKey="project.commitLastYear" />
-              ：{commitSum}
+              <Trans i18nKey="project.commitLastYear" />：{commitSum}
             </Typography>
             <SimpleLineChart data={commitData} />
           </FlexBox>
