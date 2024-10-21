@@ -2,15 +2,14 @@ import { Typography } from "@mui/material";
 import { interpolatePurples } from "d3-scale-chromatic";
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { githubGraphQLApi } from "../../../api/github/githubApi";
-import { queryDailyAndTotalContributionCount } from "../../../api/github/graphQL/pionpill";
+import { githubGQLContributionApi } from "../../../api/github/graphApi";
+import { wakatimeLastYearContributionApi } from "../../../api/wakatimeApi";
 import CalendarChart from "../../../components/d3/CalendarChart";
 import FlexBox from "../../../components/FlexBox";
 import Wrapper from "../../../components/Wrapper";
 import { useSmallMedia } from "../../../hooks/useMedia";
 import useThemeChoice from "../../../hooks/useThemeChoice";
 import { homeTheme } from "../../../styles/theme";
-import { formatDateToGraphQL } from "../../../utils/date";
 
 type DataStateProps = {
   data: string;
@@ -62,12 +61,7 @@ const State: React.FC = () => {
   const [annualContribution, setAnnualContribution] = React.useState<number>(0);
 
   const initGithubContributions = () => {
-    const now = new Date();
-    const startDate = new Date(now.setFullYear(now.getFullYear() - 1));
-    const query = queryDailyAndTotalContributionCount(
-      formatDateToGraphQL(startDate)
-    );
-    githubGraphQLApi(query)
+    githubGQLContributionApi()
       .then((response) => response.json())
       .then((data: any) => {
         const contributionCalendar =
@@ -86,9 +80,7 @@ const State: React.FC = () => {
       });
   };
   const initWakaTimeCodingTime = () => {
-    fetch(
-      "https://wakatime.com/share/@pionpill/ccb466e3-bddf-4c35-a775-0a57fc221313.json"
-    )
+    wakatimeLastYearContributionApi()
       .then((response) => {
         if (!response.ok) return;
         return response.json();

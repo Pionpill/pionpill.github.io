@@ -135,4 +135,4 @@ temp.*
 *.drawio
 package-lock.json
 
-.vscode
+.vscode/

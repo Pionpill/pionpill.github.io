@@ -1,18 +1,10 @@
 import { token } from "../../shared/token";
 
-const graphQLHeader = new Headers();
-graphQLHeader.append(
+const authHeader = new Headers();
+authHeader.append(
   "Authorization",
   `Bearer ghp_${"oatjtY6iYyg"}${token.github_api}`
 );
-
-export const githubGraphQLApi = (query: string): Promise<Response> => {
-  return fetch("https://api.github.com/graphql", {
-    method: "POST",
-    body: JSON.stringify({ query }),
-    headers: graphQLHeader,
-  });
-};
 
 export const githubReposApi = (
   repos: string,
@@ -20,7 +12,7 @@ export const githubReposApi = (
 ): Promise<Response> => {
   return fetch(`https://api.github.com/repos/${user}/${repos}`, {
     method: "GET",
-    headers: graphQLHeader,
+    headers: authHeader,
   });
 };
 
@@ -30,7 +22,7 @@ export const githubReposLangApi = (
 ): Promise<Response> => {
   return fetch(`https://api.github.com/repos/${user}/${repos}/languages`, {
     method: "GET",
-    headers: graphQLHeader,
+    headers: authHeader,
   });
 };
 
@@ -43,7 +35,20 @@ export const githubReposContentApi = (
     `https://api.github.com/repos/${user}/${repos}/contents/${path}`,
     {
       method: "GET",
-      headers: graphQLHeader
+      headers: authHeader
+    }
+  );
+};
+
+export const githubReposCommitByWeekApi = (
+  repos: string,
+  user?: string
+): Promise<Response> => {
+  return fetch(
+    `https://api.github.com/repos/${user || 'pionpill'}/${repos}/stats/commit_activity`,
+    {
+      method: "GET",
+      headers: authHeader,
     }
   );
 };
@@ -54,13 +59,13 @@ export const blogContentApi = (path: string) =>
 export const githubReposCommitApi = (
   repos: string,
   user: string,
-  path: string
+  path?: string
 ): Promise<Response> => {
   return fetch(
-    `https://api.github.com/repos/${user}/${repos}/commits?path=${path}`,
+    `https://api.github.com/repos/${user}/${repos}/commits${path ? `path=${path}` : ''}`,
     {
       method: "GET",
-      headers: graphQLHeader,
+      headers: authHeader,
     }
   );
 };

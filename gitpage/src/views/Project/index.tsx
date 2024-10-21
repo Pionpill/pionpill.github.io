@@ -47,6 +47,7 @@ const Project: React.FC = () => {
       <Banner />
       {config.map(({ titleI18nKey, abstractI18nKey, items }) => (
         <ProjectCategory
+          key={titleI18nKey}
           titleI18nKey={titleI18nKey}
           abstractI18nKey={abstractI18nKey}
           projectItems={items}

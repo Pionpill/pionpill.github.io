@@ -101,7 +101,6 @@ const Content: React.FC = () => {
     obj["commit"]["author"]["date"].substring(0, 10);
 
   const fetchMarkdownContent = async () => {
-    console.log("debug", getBlogFilePath(locationPath));
     const response = await fetch(getBlogFilePath(locationPath));
     const text = await response.text();
     // 设置内容与 meta 信息

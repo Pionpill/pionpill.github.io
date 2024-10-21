@@ -212,6 +212,7 @@
   },
   "project": {
     "title": "程序项目",
+    "commitLastYear": "去年提交数",
     "abstract": "这里展示的均是我的或者我作为主要人员参加的编程项目",
     "internet": "互联网",
     "internetAbstract": "互联网项目，涉及到前后端、数据库等（多数为偏前端项目）",

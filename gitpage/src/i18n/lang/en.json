@@ -212,6 +212,7 @@
   },
   "project": {
     "title": "Application Projects",
+    "commitLastYear": "commit last year",
     "abstract": "Here are my or my programming projects as a key personnel to attend",
     "internet": "Internet",
     "internetAbstract": "Internet projects, involving front-end, back-end, database, etc. (mostly front-end projects)",
