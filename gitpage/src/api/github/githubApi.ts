@@ -62,7 +62,7 @@ export const githubReposCommitApi = (
   path?: string
 ): Promise<Response> => {
   return fetch(
-    `https://api.github.com/repos/${user}/${repos}/commits${path ? `path=${path}` : ''}`,
+    `https://api.github.com/repos/${user}/${repos}/commits?${path ? `path=${path}` : ''}`,
     {
       method: "GET",
       headers: authHeader,
