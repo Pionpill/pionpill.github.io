@@ -15,7 +15,7 @@ const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?
 ```
 
 三个参数分别为:
-- `subscribe`: 订阅函数，返回一个取消订阅函数
+- `subscribe`: 订阅函数，返回一个取消订阅函数。
 - `getSnapshot`: 获取数据的快照
 - `getServerSnapshot`: 获取服务端数据的快照（实验中）
 
@@ -43,6 +43,8 @@ function subscribe(callback) {
 }
 ```
 
+当网络状态更新的时候，组件会自动重新渲染，核心功能在对 `subscribe` 的处理上，下面看下源码。
+
 ## mountSyncExternalStore
 
 看源码（[✨约1586行](https://github.com/facebook/react/blob/main/packages/react/src/ReactContext.js#L1586)）:
@@ -56,7 +58,7 @@ function mountSyncExternalStore<T>(
   const fiber = currentlyRenderingFiber;
   const hook = mountWorkInProgressHook();
 
-  // 优先级与执行函数判断
+  // 1. 优先级与执行函数判断，决定用哪个方法和获取状态快照
   let nextSnapshot;
   const isHydrating = getIsHydrating();
   if (isHydrating) {
@@ -82,7 +84,7 @@ function mountSyncExternalStore<T>(
     }
   }
 
-  // 把当前值和获取快照函数存到 hook 中
+  // 2. 把当前值和获取快照函数存到 hook 中
   hook.memoizedState = nextSnapshot;
   const inst: StoreInstance<T> = {
     value: nextSnapshot,
@@ -90,11 +92,11 @@ function mountSyncExternalStore<T>(
   };
   hook.queue = inst;
 
-  // 放到副作用中执行，subscribeToStore 发起订阅
+  // 3. 发布一个副作用，只有 subscribe 改变时更新（几乎不会改变）
   mountEffect(subscribeToStore.bind(null, fiber, inst, subscribe), [subscribe]);
   fiber.flags |= PassiveEffect;
 
-  // 监听组件 render，只要渲染就会调用 updateStoreInstance
+  // 4. 监听组件 render，确保拿到最新的状态
   pushEffect(
     HookHasEffect | HookPassive,
     updateStoreInstance.bind(null, fiber, inst, nextSnapshot, getSnapshot),
@@ -104,7 +106,13 @@ function mountSyncExternalStore<T>(
 
   return nextSnapshot;
 }
+```
 
+到这里都很简单，获取状态，存到 `hook.memoizedState` 中，并发布一个副作用（这个副作用不太会执行）。关键在 3-4 步的两个方法: `subscribeToStore` 中。
+
+### subscribeToStore
+
+```ts
 function subscribeToStore<T>(
   fiber: Fiber,
   inst: StoreInstance<T>,
@@ -119,6 +127,49 @@ function subscribeToStore<T>(
   return subscribe(handleStoreChange);
 }
 
+function checkIfSnapshotChanged<T>(inst: StoreInstance<T>): boolean {
+  const latestGetSnapshot = inst.getSnapshot;
+  const prevValue = inst.value;
+  try {
+    const nextValue = latestGetSnapshot();
+    return !is(prevValue, nextValue);
+  } catch (error) {
+    return true;
+  }
+}
+```
+
+对于我们外部传入的 `subscribe` 函数，React 会自动传入一个 `handleStoreChange` 方法，一般情况下，当外部状态改变时，都会有这样一段代码：
+
+```ts
+// zustand 源码
+const subscribe = (listener) => {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
+}
+
+// 在 react 中，state, previousState 参数不传也可以
+listeners.forEach((listener) => listener(state, previousState))
+```
+
+这样就可以通知订阅者执行订阅方法，也即外部状态改变时候执行 `handleStoreChange` 方法，如何交给 React 判断是否要更新，如果需要则执行 `forceStoreRerender` 方法（[✨约1586行](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.js#L1891)）：
+
+```ts
+function forceStoreRerender(fiber: Fiber) {
+  const root = enqueueConcurrentRenderForLane(fiber, SyncLane);
+  if (root !== null) {
+    scheduleUpdateOnFiber(root, fiber, SyncLane);
+  }
+}
+```
+
+芜湖，这个方法也会调用 `scheduleUpdateOnFiber` 去安排更新。
+
+### updateStoreInstance
+
+这个也顺带看一下，组件每次更新的时候重新获取一次外部状态判断是否要更新。
+
+```ts
 function updateStoreInstance<T>(
   fiber: Fiber,
   inst: StoreInstance<T>,
@@ -132,21 +183,10 @@ function updateStoreInstance<T>(
     forceStoreRerender(fiber);
   }
 }
-
-function checkIfSnapshotChanged<T>(inst: StoreInstance<T>): boolean {
-  const latestGetSnapshot = inst.getSnapshot;
-  const prevValue = inst.value;
-  try {
-    const nextValue = latestGetSnapshot();
-    return !is(prevValue, nextValue);
-  } catch (error) {
-    return true;
-  }
-}
 ```
 
 逻辑和 `useState` 类似，`subscribe` 最终会作为 `mountState` 的参数，这就很好理解为什么订阅函数的返回值需要取消订阅了。核心的逻辑包括:
-- 用一个 `effect` 来订阅状态 `subscribeToStore` 发起订阅。
+- 用一个 `effect` 来订阅状态 `subscribeToStore` 发起订阅，当外部状态调用 `subscribe` 的参数 `handleStoreChange` 会触发 `scheduleUpdateOnFiber` 去安排更新。
 - 用一个 `useEffect` 来监听组件 `render` ，只要组件渲染就会调用 `updateStoreInstance`。
 
 ## updateSyncExternalStore
@@ -218,8 +258,6 @@ function updateSyncExternalStore<T>(
 }
 ```
 
-总的来说，`useSyncExternalStore` 的处理逻辑更类似 `useEffect`。在组件每次渲染时都会通过 `getSnapshot` 获取新的外部状态快照，如果快照变化，则重新渲染。他们有以下不同:
-- `useSyncExternalStore` 通过 `subscribe` 函数确保外部状态变化时更新，`useEffect` 通过依赖数组
-- `useSyncExternalStore` 每次重新渲染都会执行一次 `getSnapshot` 再比较，`useEffect` 先判断依赖数组是否有变化再比较。
-
-<p class="discuss">这个钩子作者也没用过，欢迎补充实战场景。</p>
+总的来说，`useSyncExternalStore` 用于与外部发布订阅模式的状态关联起来。
+- 如果外部状态调用 `subscribe` 的第一个参数，则可以引起重新渲染（新旧状态不同）。
+- 组件自身重新渲染也会重新判断一次是否需要重新渲染。
