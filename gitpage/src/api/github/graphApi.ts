@@ -4,7 +4,7 @@ import { formatDateToGraphQL } from "../../utils/date";
 const authHeader = new Headers();
 authHeader.append(
   "Authorization",
-  `Bearer ghp_${"oatjtY6iYyg"}${token.github_api}`
+  `Bearer ghp_${"NyAFX9Uivyw"}${token.github_api}`
 );
 
 const githubGraphQLApi = (query: string): Promise<Response> => {

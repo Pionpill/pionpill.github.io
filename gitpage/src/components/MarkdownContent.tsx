@@ -92,7 +92,6 @@ const MarkdownCode: React.FC<CodeProps & { setAlert: Function }> = ({ children, 
         customStyle={{
           width: "100%",
           fontSize: "0.85em",
-          backgroundColor: useThemeChoice("#f6f8fa", "#161618"),
         }}
         language={match[1]}
         PreTag="div"

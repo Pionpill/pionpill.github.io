@@ -3,7 +3,7 @@ import { token } from "../../shared/token";
 const authHeader = new Headers();
 authHeader.append(
   "Authorization",
-  `Bearer ghp_${"oatjtY6iYyg"}${token.github_api}`
+  `Bearer ghp_${"NyAFX9Uivyw"}${token.github_api}`
 );
 
 export const githubReposApi = (
